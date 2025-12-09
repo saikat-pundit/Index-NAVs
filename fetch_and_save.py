@@ -68,11 +68,17 @@ for item in data['data']:
             else:
                 adv_dec_ratio_str = "-"
         
+        percent_change = item.get('percentChange')
+        if percent_change is not None:
+            percent_change_str = f"{percent_change}%"
+        else:
+            percent_change_str = ""
+        
         index_dict[index_name] = {
             'Index Name': index_name,
             'Last': item.get('last'),
             'Change': item.get('variation'),
-            '% Change': item.get('percentChange'),
+            '% Change': percent_change_str,
             'Previous Close': item.get('previousClose'),
             'Adv/Dec Ratio': adv_dec_ratio_str,
             'Year High': item.get('yearHigh'),
