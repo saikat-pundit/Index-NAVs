@@ -39,7 +39,7 @@ target_indices = [
     "NIFTY PSE"
 ]
 
-records = []
+index_dict = {}
 for item in data['data']:
     index_name = item.get('index')
     
@@ -68,7 +68,7 @@ for item in data['data']:
             else:
                 adv_dec_ratio_str = "-"
         
-        records.append({
+        index_dict[index_name] = {
             'Index Name': index_name,
             'Last': item.get('last'),
             'Change': item.get('variation'),
@@ -77,7 +77,12 @@ for item in data['data']:
             'Adv/Dec Ratio': adv_dec_ratio_str,
             'Year High': item.get('yearHigh'),
             'Year Low': item.get('yearLow')
-        })
+        }
+
+records = []
+for index_name in target_indices:
+    if index_name in index_dict:
+        records.append(index_dict[index_name])
 
 df = pd.DataFrame(records)
 df.to_csv('nse_all_indices.csv', index=False)
