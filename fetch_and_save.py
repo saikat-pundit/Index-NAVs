@@ -39,7 +39,7 @@ for item in data['data']:
         adv_dec_ratio_str = f"{adv_dec_ratio:.2f}"  # Format to 2 decimal places
     else:
         if advances > 0:
-            adv_dec_ratio_str = "∞"  # Infinity symbol if advances > 0 and declines = 0
+            adv_dec_ratio_str = "Max"  # Infinity symbol if advances > 0 and declines = 0
         else:
             adv_dec_ratio_str = "-"  # 0/0 case
     
