@@ -17,16 +17,16 @@ data = response.json()
 records = []
 for item in data['data']:
     records.append({
-        'Date': datetime.now().strftime("%Y-%m-%d %H:%M"),
         'Index Name': item.get('index'),
-        'Symbol': item.get('indexSymbol'),
         'Last': item.get('last'),
         'Change': item.get('variation'),
         '% Change': item.get('percentChange'),
-        'Open': item.get('open'),
-        'High': item.get('high'),
-        'Low': item.get('low'),
-        'Previous Close': item.get('previousClose')
+        'Previous Close': item.get('previousClose'),
+        'Advances': item.get('advances'),
+        'Declines': item.get('declines'),
+        'Unchanged': item.get('unchanged'),
+        'Year High': item.get('yearHigh'),
+        'Year Low': item.get('yearLow')
     })
 
 # Save as CSV
