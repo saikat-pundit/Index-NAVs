@@ -14,6 +14,7 @@ data = response.json()
 target_indices = [
     "NIFTY 50",
     "INDIA VIX",
+    "NIFTY 10 YR BENCHMARK G-SEC",
     "NIFTY NEXT 50",
     "NIFTY MIDCAP SELECT",
     "NIFTY MIDCAP 50",
