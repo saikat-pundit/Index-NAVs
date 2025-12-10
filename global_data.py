@@ -2,10 +2,10 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime
 
-# Most reliable INDEX version for GitHub Actions
+# Tickers
 TICKERS = {
     "Dow Jones": "^DJI",
-    "S&P 500": "^GSPC", 
+    "S&P 500": "^GSPC",
     "NASDAQ 100": "^NDX",
     "VIX": "^VIX",
     "US 10-Year Yield": "^TNX",
@@ -13,7 +13,7 @@ TICKERS = {
     "Euro Stoxx 50": "^STOXX50E",
     "FTSE 100": "^FTSE",
     "Gold ETF": "GLD",
-    "Silver ETF": "SLV"
+    "Silver ETF": "SLV",
 }
 
 def fetch_global_data():
@@ -31,20 +31,17 @@ def fetch_global_data():
             print(f"  ⚠️ No data for {name}")
             continue
 
-        last = df["Close"].iloc[-1]
-        prev = df["Close"].iloc[-2]
+        # Get last & previous close as FLOATS
+        last = float(df["Close"].iloc[-1])
+        prev = float(df["Close"].iloc[-2])
 
-        # Compute change
-        change = data["Close"] - prev
+        change = last - prev
+        percent = (change / prev * 100) if prev != 0 else 0
 
-        # Compute percent (safe for Series)
-        percent = (change / prev) * 100
-        percent = percent.fillna(0)
-
-        # Year high/low using longer period
+        # 1-year high/low
         yearly = yf.download(ticker, period="1y", interval="1d", progress=False)
-        high = yearly["High"].max() if not yearly.empty else last
-        low = yearly["Low"].min() if not yearly.empty else last
+        high = float(yearly["High"].max()) if not yearly.empty else last
+        low = float(yearly["Low"].min()) if not yearly.empty else last
 
         records.append({
             "Index Name": name,
@@ -53,12 +50,11 @@ def fetch_global_data():
             "Change": round(change, 2),
             "% Change": f"{percent:+.2f}%",
             "Year High": round(high, 2),
-            "Year Low": round(low, 2)
+            "Year Low": round(low, 2),
         })
 
         print(f"  ✓ {last:.2f} ({percent:+.2f}%)")
 
-    # Save result
     if not records:
         print("\n‼️ ERROR: No data fetched!")
         return
