@@ -14,8 +14,8 @@ TICKERS = {
     "Nikkei 225": "^N225",
     "Euro Stoxx 50": "^STOXX50E",
     "FTSE 100": "^FTSE",
-    "Gold": "GC=F",  # Changed from GC%3DF
-    "Silver": "SI=F",  # Changed from SI%3DF
+    "Gold": "GC%3DF",  # Changed from GC%3DF
+    "Silver": "SI%3DF",  # Changed from SI%3DF
     "Bitcoin": "BTC-USD",
 }
 
