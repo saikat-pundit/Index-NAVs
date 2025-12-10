@@ -6,14 +6,22 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
 }
 
-url = "https://www.nseindia.com/api/allIndices"
+# FIRST API: Fetch all indices data
+url_indices = "https://www.nseindia.com/api/allIndices"
+response_indices = requests.get(url_indices, headers=headers)
+data_indices = response_indices.json()
 
-response = requests.get(url, headers=headers)
-data = response.json()
+# SECOND API: Fetch market status data
+url_market = "https://www.nseindia.com/api/marketStatus"
+response_market = requests.get(url_market, headers=headers)
+data_market = response_market.json()
 
+# Target indices list including GIFT-NIFTY and USDINR
 target_indices = [
     "NIFTY 50",
     "INDIA VIX",
+    "GIFT-NIFTY",
+    "USDINR",
     "NIFTY 10 YR BENCHMARK G-SEC",
     "NIFTY NEXT 50",
     "NIFTY MIDCAP SELECT",
@@ -41,7 +49,9 @@ target_indices = [
 ]
 
 index_dict = {}
-for item in data['data']:
+
+# Process all indices data
+for item in data_indices['data']:
     index_name = item.get('index')
     
     if index_name in target_indices:
@@ -73,7 +83,7 @@ for item in data['data']:
         if percent_change is not None:
             percent_change_str = f"{percent_change}%"
         else:
-            percent_change_str = ""
+            percent_change_str = "-"
         
         index_dict[index_name] = {
             'Index Name': index_name,
@@ -86,10 +96,52 @@ for item in data['data']:
             'Year Low': item.get('yearLow')
         }
 
+# Add GIFT-NIFTY data
+if 'giftnifty' in data_market:
+    gift = data_market['giftnifty']
+    index_dict['GIFT-NIFTY'] = {
+        'Index Name': 'GIFT-NIFTY',
+        'Last': gift.get('LASTPRICE', '-'),
+        'Change': '-',
+        '% Change': '-',
+        'Previous Close': '-',
+        'Adv/Dec Ratio': '-',
+        'Year High': '-',
+        'Year Low': '-'
+    }
+
+# Add USDINR data
+for item in data_market['marketState']:
+    if item.get('market') == 'currencyfuture':
+        index_dict['USDINR'] = {
+            'Index Name': 'USDINR',
+            'Last': item.get('last', '-'),
+            'Change': '-',
+            '% Change': '-',
+            'Previous Close': '-',
+            'Adv/Dec Ratio': '-',
+            'Year High': '-',
+            'Year Low': '-'
+        }
+        break
+
+# Create records in the specified order
 records = []
 for index_name in target_indices:
     if index_name in index_dict:
         records.append(index_dict[index_name])
+    else:
+        # Create empty entry for missing indices
+        records.append({
+            'Index Name': index_name,
+            'Last': '-',
+            'Change': '-',
+            '% Change': '-',
+            'Previous Close': '-',
+            'Adv/Dec Ratio': '-',
+            'Year High': '-',
+            'Year Low': '-'
+        })
 
 df = pd.DataFrame(records)
 df.to_csv('nse_all_indices.csv', index=False)
