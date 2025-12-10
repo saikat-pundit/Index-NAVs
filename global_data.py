@@ -13,8 +13,8 @@ TICKERS = {
     "Nikkei 225": "^N225",
     "Euro Stoxx 50": "^STOXX50E",
     "FTSE 100": "^FTSE",
-    "Gold ETF": "GC%3DF",
-    "Silver ETF": "SLV",
+    "Gold": "GC%3DF",
+    "Silver": "SI%3DF",
 }
 
 def fetch_global_data():
