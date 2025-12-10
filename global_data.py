@@ -1,147 +1,89 @@
 import yfinance as yf
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
+import time
 
-# Ticker mapping with descriptive names
-# Most reliable - INDEXES ONLY (no futures)
 TICKERS = {
-    "Dow Jones": "^DJI",              # Dow Jones Industrial Average
-    "S&P 500": "^GSPC",               # S&P 500 Index
-    "NASDAQ 100": "^NDX",             # NASDAQ 100 Index
-    "VIX": "^VIX",                    # Volatility Index
-    "US 10-Year Yield": "^TNX",       # 10-Year Treasury Yield
-    "Nikkei 225": "^N225",            # Nikkei 225 Index
-    "Euro Stoxx 50": "^STOXX50E",     # Euro Stoxx 50 Index
-    "FTSE 100": "^FTSE",              # FTSE 100 Index
-    "Gold ETF": "GLD",                # SPDR Gold Shares ETF
-    "Silver ETF": "SLV",               # iShares Silver Trust ETF
+    "Dow Jones": "^DJI",
+    "S&P 500": "^GSPC", 
+    "NASDAQ 100": "^NDX",
+    "VIX": "^VIX",
+    "US 10-Year Yield": "^TNX",
+    "Nikkei 225": "^N225",
+    "Euro Stoxx 50": "^STOXX50E",
+    "FTSE 100": "^FTSE",
+    "Gold ETF": "GLD",
+    "Silver ETF": "SLV"
 }
 
+def safe_history(ticker_obj, period):
+    for attempt in range(3):
+        try:
+            return ticker_obj.history(period=period, backend="scraper")
+        except Exception as e:
+            print(f"  Retry {attempt+1}/3 ... ({e})")
+            time.sleep(2)
+    return None
+
 def fetch_global_data():
-    """Fetch global market data and format it properly."""
-    
     print("Fetching global market data...")
     print("="*60)
     
-    # Get ticker symbols for yfinance
-    ticker_symbols = list(TICKERS.values())
-    
-    try:
-        # Download all data at once (more efficient)
-        # Using '1mo' period to get enough data for calculations
-        raw_data = yf.download(
-            ticker_symbols,
-            period="1mo",
-            interval="1d",
-            group_by="ticker",
-            progress=False,
-            auto_adjust=True
-        )
+    records = []
+
+    for name, ticker in TICKERS.items():
+        print(f"Fetching {name} ({ticker})...")
+
+        ticker_obj = yf.Ticker(ticker)
+
+        hist = safe_history(ticker_obj, "1mo")
         
-        if raw_data.empty:
-            print("Error: No data received!")
-            return None
-            
-        records = []
-        
-        # Process each ticker
-        for display_name, ticker in TICKERS.items():
-            try:
-                # Skip duplicate tickers (like Gold/Comex Gold)
-                if display_name in ["Comex Gold", "Comex Silver Futures"]:
-                    # Use the non-duplicate data with different display name
-                    base_name = "Gold" if display_name == "Comex Gold" else "Silver"
-                    continue
-                
-                # Get data for this specific ticker
-                if ticker in raw_data:
-                    ticker_data = raw_data[ticker]
-                else:
-                    # For single column data (like yields)
-                    ticker_data = raw_data.xs(ticker, axis=1, level=0, drop_level=True)
-                
-                # Check if we have data
-                if ticker_data.empty or len(ticker_data) < 2:
-                    print(f"  ⚠️  {display_name}: Insufficient data")
-                    continue
-                
-                # Get latest and previous day data
-                latest = ticker_data.iloc[-1]
-                previous = ticker_data.iloc[-2]
-                
-                # Calculate values
-                last_price = latest.get("Close", latest.get("Adj Close", 0))
-                prev_close = previous.get("Close", previous.get("Adj Close", 0))
-                
-                # Handle potential missing values
-                if pd.isna(last_price) or pd.isna(prev_close):
-                    print(f"  ⚠️  {display_name}: Missing price data")
-                    continue
-                
-                change = last_price - prev_close
-                percent_change = (change / prev_close * 100) if prev_close != 0 else 0
-                
-                # Get year high/low (from the last year of data)
-                year_high = ticker_data["High"].max() if "High" in ticker_data.columns else last_price
-                year_low = ticker_data["Low"].min() if "Low" in ticker_data.columns else last_price
-                
-                # Add to records
-                records.append({
-                    "Index Name": display_name,
-                    "Last": round(last_price, 2),
-                    "Change": round(change, 2),
-                    "% Change": f"{percent_change:.2f}%",
-                    "Previous Close": round(prev_close, 2),
-                    "Year High": round(year_high, 2),
-                    "Year Low": round(year_low, 2)
-                })
-                
-                print(f"  ✓ {display_name}: ${last_price:.2f} ({percent_change:+.2f}%)")
-                
-            except Exception as e:
-                print(f"  ✗ {display_name} error: {str(e)[:50]}")
-                continue
-        
-        if not records:
-            print("No valid records created!")
-            return None
-        
-        # Create DataFrame
-        df = pd.DataFrame(records)
-        
-        # Save to CSV
-        filename = "GLOBAL_DATA.csv"
-        df.to_csv(filename, index=False)
-        
-        # Add timestamp as last row (empty except for timestamp in last column)
-        timestamp = datetime.now().strftime("%d-%b %H:%M")
-        df_timestamp = pd.DataFrame([{
-            "Index Name": "",
-            "Last": "",
-            "Change": "",
-            "% Change": "",
-            "Previous Close": "",
-            "Year High": "Update Time:",
-            "Year Low": timestamp
-        }])
-        
-        # Append timestamp row
-        df_timestamp.to_csv(filename, mode='a', header=False, index=False)
-        
-        print(f"\n" + "="*60)
-        print(f"✅ Data saved to {filename}")
-        print(f"📊 {len(records)} instruments processed")
-        print(f"🕐 Last updated: {timestamp}")
-        
-        # Show preview
-        print("\n📋 Data Preview:")
-        print(df.to_string(index=False))
-        
-        return df
-        
-    except Exception as e:
-        print(f"❌ Fatal error: {e}")
+        if hist is None or hist.empty or len(hist) < 2:
+            print(f"  ⚠️  No data for {name}")
+            continue
+
+        latest = hist.iloc[-1]
+        previous = hist.iloc[-2]
+
+        last_price = latest["Close"]
+        prev_close = previous["Close"]
+
+        change = last_price - prev_close
+        percent_change = (change / prev_close * 100) if prev_close else 0
+
+        year_data = safe_history(ticker_obj, "1y")
+        year_high = year_data["High"].max() if year_data is not None else last_price
+        year_low  = year_data["Low"].min() if year_data is not None else last_price
+
+        records.append({
+            "Index Name": name,
+            "Last": round(last_price, 2),
+            "Change": round(change, 2),
+            "% Change": f"{percent_change:+.2f}%",
+            "Previous Close": round(prev_close, 2),
+            "Year High": round(year_high, 2),
+            "Year Low": round(year_low, 2),
+        })
+
+        print(f"  ✅ ${last_price:.2f} ({percent_change:+.2f}%)")
+
+    if not records:
+        print("‼️ Error: No data received!")
         return None
+
+    df = pd.DataFrame(records)
+    filename = "GLOBAL_DATA.csv"
+    df.to_csv(filename, index=False)
+
+    timestamp = datetime.now().strftime("%d-%b-%Y %H:%M:%S")
+    with open(filename, "a") as f:
+        f.write(f"Update Time:,,,,,{timestamp}\n")
+
+    print(f"\n✅ Data saved to {filename}")
+    print(f"📊 {len(records)} instruments processed")
+    print(f"🕐 Updated: {timestamp}")
+
+    return df
 
 if __name__ == "__main__":
     fetch_global_data()
