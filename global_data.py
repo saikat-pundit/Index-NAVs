@@ -9,10 +9,11 @@ TICKERS = {
     "NASDAQ 100": "^NDX",
     "VIX": "^VIX",
     "US 10-Year Yield": "^TNX",
+    "Dollar Index": "DX-Y.NYB",
     "Nikkei 225": "^N225",
     "Euro Stoxx 50": "^STOXX50E",
     "FTSE 100": "^FTSE",
-    "Gold ETF": "GLD",
+    "Gold ETF": "GC%3DF",
     "Silver ETF": "SLV",
 }
 
