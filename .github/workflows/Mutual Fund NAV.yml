@@ -1,0 +1,31 @@
+name: Daily Mutual Fund NAV Update
+
+on:
+  schedule:
+    - cron: '30 9 * * 1-5'   # At 9:30 AM IST (4:00 AM UTC) Monday-Friday
+  workflow_dispatch:         # Allows manual runs
+
+jobs:
+  update-nav:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pandas requests
+
+      - name: Run NAV script
+        run: python nav_fetch.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add Daily_NAV.csv
+          git commit -m "Auto update NAV $(date)" || exit 0
+          git push
