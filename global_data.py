@@ -15,6 +15,7 @@ TICKERS = {
     "FTSE 100": "^FTSE",
     "Gold": "GC%3DF",
     "Silver": "SI%3DF",
+    "Bitcoin": "BTC-USD",
 }
 
 def fetch_global_data():
