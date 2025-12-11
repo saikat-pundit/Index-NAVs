@@ -113,7 +113,7 @@ records.append({
 os.makedirs('../Data', exist_ok=True)
 # Create DataFrame and save to CSV
 df = pd.DataFrame(records)
-df.to_csv('../Data/etf.csv', index=False)
+df.to_csv('Data/etf.csv', index=False)
 
 # Print success message
 print(f"ETF data saved to etf.csv successfully!")
