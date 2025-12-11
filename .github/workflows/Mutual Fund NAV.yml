@@ -2,8 +2,11 @@ name: Daily Mutual Fund NAV Update
 
 on:
   schedule:
-    - cron: '30 9 * * 1-5'   # At 9:30 AM IST (4:00 AM UTC) Monday-Friday
-  workflow_dispatch:         # Allows manual runs
+    - cron: '0 6 * * 2-6'
+    - cron: '0 9 * * 2-6'
+    - cron: '0 12 * * 2-6'
+    - cron: '0 15 * * 2-6'
+  workflow_dispatch:
 
 jobs:
   update-nav:
