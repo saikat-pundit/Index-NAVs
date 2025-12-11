@@ -68,7 +68,7 @@ def fetch_global_data():
     df_out.to_csv(filename, index=False)
     
     # Add timestamp row
-    timestamp = datetime.now().strftime("%d-%b-%Y %H:%M:%S")
+    timestamp = datetime.now().strftime("%d-%b %H:%M")
     with open(filename, 'a') as f:
         f.write(,,,,f'Update Time:,{timestamp}\n')
     
