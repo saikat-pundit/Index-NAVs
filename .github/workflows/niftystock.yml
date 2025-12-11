@@ -28,10 +28,11 @@ jobs:
           python fetch_and_save.py
           python nifty50_top10.py
           python etf_fetch.py
+          python global_data.py
       - name: Commit and push if changed
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add nse_all_indices.csv nifty50_stocks_top10.csv etf.csv
+          git add nse_all_indices.csv nifty50_stocks_top10.csv etf.csv GLOBAL_DATA.csv
           git commit -m "Auto update $(date)" || exit 0
           git push
