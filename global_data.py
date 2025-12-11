@@ -8,12 +8,14 @@ TICKERS = {
     "S&P 500": "^GSPC",
     "NASDAQ 100": "^NDX",
     "VIX": "^VIX",
+    "Dollar Index": "DX-Y.NYB",
     "US 10-Year Yield": "^TNX",
     "Nikkei 225": "^N225",
     "Euro Stoxx 50": "^STOXX50E",
     "FTSE 100": "^FTSE",
-    "Gold ETF": "GLD",
-    "Silver ETF": "SLV",
+    "Gold Comex": "GC%3DF",
+    "Silver Comex": "SI=F",
+    "Bitcoin": "BTC-USD",
 }
 
 def fetch_global_data():
