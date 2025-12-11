@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-          cache: 'pip'  # ⭐ CRITICAL: Enables dependency caching
+          cache: 'pip'
 
       - name: Install dependencies from requirements.txt
         run: |
