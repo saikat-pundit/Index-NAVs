@@ -47,10 +47,10 @@ Aditya Birla Sun Life Aggressive Hybrid Omni FOF-  Regular -  IDCW,38.6878,11 De
 Aditya Birla Sun Life Aggressive Hybrid Omni FOF- Direct - IDCW,41.9874,11 Dec 2025 08:47:41
 Aditya Birla Sun Life Aggressive Hybrid Omni FOF- Direct Plan - Growth Option,46.229,11 Dec 2025 08:47:41
 Aditya Birla Sun Life Aggressive Hybrid Omni FOF- Regular Plan - Growth Option,43.1336,11 Dec 2025 08:47:41
-Aditya Birla Sun Life Arbitrage Fund - Growth - Direct Plan,29.5191,10 Dec 2025 22:45:07
-Aditya BIRLA SUN LIFE ARBITRAGE FUND - REGULAR PLAN - GROWTH,27.2993,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Arbitrage Fund-DIRECT - IDCW,11.562,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Arbitrage Fund-Regular - IDCW,11.1695,10 Dec 2025 22:45:07
+Aditya Birla Sun Life Arbitrage Fund - Growth - Direct Plan,29.4562,11 Dec 2025 12:12:17
+Aditya BIRLA SUN LIFE ARBITRAGE FUND - REGULAR PLAN - GROWTH,27.2411,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Arbitrage Fund-DIRECT - IDCW,11.5374,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Arbitrage Fund-Regular - IDCW,11.1457,11 Dec 2025 12:12:17
 ADITYA BIRLA SUN LIFE BAL BHAVISHYA YOJNA DIRECT GROWTH,22.66,10 Dec 2025 22:45:07
 ADITYA BIRLA SUN LIFE BAL BHAVISHYA YOJNA REGULAR GROWTH,20.24,10 Dec 2025 22:45:07
 ADITYA BIRLA SUN LIFE BAL BHAVISHYA YOJNA- Direct - IDCW,19.83,10 Dec 2025 22:45:07
@@ -201,10 +201,10 @@ Aditya Birla Sun Life Equity Hybrid'95 Fund - Direct Plan-Growth,1747.22,10 Dec 
 Aditya Birla Sun Life Equity Hybrid'95 Fund - Regular Plan-Growth,1555.37,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Equity Hybrid'95 Fund -DIRECT - IDCW,308.14,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Equity Hybrid'95 Fund -Regular - IDCW,179.8,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Equity Savings Fund - Direct - IDCW,15.96,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Equity Savings Fund - Direct Plan - Growth,25.34,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Equity Savings Fund - Regular - IDCW,13.54,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Equity Savings Fund - Regular Plan - Growth,22.83,10 Dec 2025 22:45:07
+Aditya Birla Sun Life Equity Savings Fund - Direct - IDCW,15.89,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Equity Savings Fund - Direct Plan - Growth,25.23,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Equity Savings Fund - Regular - IDCW,13.48,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Equity Savings Fund - Regular Plan - Growth,22.73,11 Dec 2025 12:12:17
 Aditya Birla Sun Life ESG Integration Strategy Fund-Direct - Payout of IDCW,17.07,10 Dec 2025 22:45:07
 Aditya Birla Sun Life ESG Integration Strategy Fund-Direct Plan-Growth,19.58,10 Dec 2025 22:45:07
 Aditya Birla Sun Life ESG Integration Strategy Fund-Regular - Payout of IDCW,15.91,10 Dec 2025 22:45:07
@@ -258,10 +258,10 @@ Aditya Birla Sun Life Income Fund - Growth - Direct Plan,136.2456,10 Dec 2025 22
 Aditya Birla Sun Life Income Fund - Growth - Regular Plan,126.1014,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Income Fund - Regular - IDCW,11.9147,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Income Fund - Regular - Quarterly IDCW,13.2048,10 Dec 2025 22:45:07
-Aditya Birla Sun Life Income Plus Arbitrage Active FOF- DIRECT - IDCW,25.4247,11 Dec 2025 08:47:41
-Aditya Birla Sun Life Income Plus Arbitrage Active FOF- Direct Plan - Growth Option,40.6031,11 Dec 2025 08:47:41
-Aditya Birla Sun Life Income Plus Arbitrage Active FOF- REGULAR - IDCW,24.0737,11 Dec 2025 08:47:41
-Aditya Birla Sun Life Income Plus Arbitrage Active FOF- Regular Plan - Growth Option,38.387,11 Dec 2025 08:47:41
+Aditya Birla Sun Life Income Plus Arbitrage Active FOF- DIRECT - IDCW,25.4048,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Income Plus Arbitrage Active FOF- Direct Plan - Growth Option,40.5713,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Income Plus Arbitrage Active FOF- REGULAR - IDCW,24.0549,11 Dec 2025 12:12:17
+Aditya Birla Sun Life Income Plus Arbitrage Active FOF- Regular Plan - Growth Option,38.3569,11 Dec 2025 12:12:17
 Aditya Birla Sun Life Infrastructure Fund -  Direct - IDCW,43.14,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Infrastructure Fund -  Regular - IDCW,25.54,10 Dec 2025 22:45:07
 Aditya Birla Sun Life Infrastructure Fund - Growth - Direct Plan,102.93,10 Dec 2025 22:45:07
@@ -2226,7 +2226,23 @@ DSP World Mining Overseas Equity Omni FoF - Regular Plan - IDCW,22.5484,11 Dec 2
 Bharat Bond ETF - April 2030,1560.1853,10 Dec 2025 22:35:00
 BHARAT Bond ETF - April 2032,1307.9882,10 Dec 2025 22:35:00
 BHARAT Bond ETF - April 2033,1270.9232,10 Dec 2025 22:35:00
+BHARAT Bond ETF FOF - April 2032 Direct Growth,13.0969,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2032 Direct Plan Dividend,13.0969,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2032 Regular Plan Dividend,13.0969,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2032 Regular Plan Growth,13.0969,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2033 - Direct Plan - Growth,12.7765,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2033 - Direct Plan - IDCW,12.7765,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2033 - Regular Plan - Growth,12.7765,11 Dec 2025 09:50:53
+BHARAT Bond ETF FOF - April 2033 - Regular Plan - IDCW,12.7765,11 Dec 2025 09:50:53
 BHARAT Bond ETF- April 2031,1393.9777,10 Dec 2025 22:35:00
+Bharat Bond FOF - April 2030 - Direct Plan - Growth Option,15.5629,11 Dec 2025 09:50:53
+BHARAT Bond FOF - April 2030 - Direct Plan - IDCW Option,15.5629,11 Dec 2025 09:50:53
+Bharat Bond FOF - April 2030 - Regular Plan - Growth Option,15.5629,11 Dec 2025 09:50:53
+BHARAT Bond FOF - April 2030 - Regular Plan - IDCW Option,15.5629,11 Dec 2025 09:50:53
+BHARAT Bond FOF - April 2031 - Direct Plan - IDCW Option,13.9413,11 Dec 2025 09:50:53
+BHARAT Bond FOF - April 2031 - Regular Plan - IDCW Option,13.9413,11 Dec 2025 09:50:53
+BHARAT Bond FOF- April 2031- Direct Plan- Growth Option,13.9413,11 Dec 2025 09:50:53
+BHARAT Bond FOF- April 2031- Regular Plan- Growth Option,13.9413,11 Dec 2025 09:50:53
 Edelweiss Aggressive Hybrid Fund  - Direct Plan - IDCW Option,33.59,10 Dec 2025 22:35:00
 Edelweiss Aggressive Hybrid Fund  - Plan B - IDCW Option,64.43,10 Dec 2025 22:35:00
 Edelweiss Aggressive Hybrid Fund - Regular Plan - Growth Option,63.89,10 Dec 2025 22:35:00
@@ -2240,6 +2256,8 @@ Edelweiss Arbitrage Fund - Regular Plan - IDCW Option,14.5808,10 Dec 2025 22:35:
 Edelweiss Arbitrage Fund- Direct Plan- Growth Option,21.3871,10 Dec 2025 22:35:00
 Edelweiss Arbitrage Fund- Regular Plan -Bonus Option,19.9464,10 Dec 2025 22:35:00
 Edelweiss Arbitrage Fund- Regular Plan- Growth Option,19.8692,10 Dec 2025 22:35:00
+Edelweiss ASEAN Equity Off-shore Fund - Direct Plan - Growth Option,35.631,11 Dec 2025 09:50:53
+Edelweiss ASEAN Equity Off-shore Fund - Regular Plan - Growth Option,31.829,11 Dec 2025 09:50:53
 Edelweiss Balanced Advantage Fund - Direct Plan - Monthly - IDCW Option,26.84,10 Dec 2025 22:35:00
 Edelweiss Balanced Advantage Fund - Direct Plan - Quarterly - IDCW Option,29.1,10 Dec 2025 22:35:00
 Edelweiss Balanced Advantage Fund - Regular Plan - Growth Option,51.78,10 Dec 2025 22:35:00
@@ -2298,6 +2316,8 @@ Edelweiss ELSS Tax Saver Fund - Direct Plan - IDCW Option,45.66,10 Dec 2025 22:3
 Edelweiss ELSS Tax Saver Fund - Direct Plan-Growth Option,135.04,10 Dec 2025 22:35:00
 Edelweiss ELSS Tax Saver Fund - Regular Plan - Growth Option,113.45,10 Dec 2025 22:35:00
 Edelweiss ELSS Tax Saver Fund - Regular Plan - IDCW Option,30.37,10 Dec 2025 22:35:00
+Edelweiss Emerging Markets Opportunities Equity Offshore Fund - Direct Plan - Growth Option,22.7262,11 Dec 2025 09:50:53
+Edelweiss Emerging Markets Opportunities Equity Offshore Fund - Regular Plan - Growth Option,20.8454,11 Dec 2025 09:50:53
 Edelweiss Equity Savings Fund - Direct Plan - Bonus Option,28.7352,10 Dec 2025 22:38:35
 Edelweiss Equity Savings Fund - Direct Plan - Growth Option,28.7218,10 Dec 2025 22:38:35
 Edelweiss Equity Savings Fund - Direct Plan - IDCW Option,20.8785,10 Dec 2025 22:38:35
@@ -2305,6 +2325,8 @@ Edelweiss Equity Savings Fund - Direct Plan - Monthly - IDCW Option,16.4886,10 D
 Edelweiss Equity Savings Fund - Regular Plan - Growth Option,25.9188,10 Dec 2025 22:38:35
 Edelweiss Equity Savings Fund - Regular Plan - IDCW Option,17.9135,10 Dec 2025 22:38:35
 Edelweiss Equity Savings Fund - Regular Plan - Monthly - IDCW Option,14.4493,10 Dec 2025 22:38:35
+Edelweiss Europe Dynamic Equity Offshore Fund - Growth Option - Direct Plan,29.5528,11 Dec 2025 09:50:53
+Edelweiss Europe Dynamic Equity Offshore Fund - Growth Option - Regular Plan,26.6973,11 Dec 2025 09:50:53
 Edelweiss Flexi Cap Fund - Direct Plan - Growth Option,45.23,10 Dec 2025 22:35:00
 Edelweiss Flexi Cap Fund - Direct Plan - IDCW Option,37.134,10 Dec 2025 22:35:00
 Edelweiss Flexi Cap Fund - Regular - IDCW Option,31.921,10 Dec 2025 22:35:00
@@ -2313,6 +2335,10 @@ Edelweiss Focused Fund - Direct Plan - Growth,17.475,10 Dec 2025 22:35:00
 Edelweiss Focused Fund - Direct Plan - IDCW,17.475,10 Dec 2025 22:35:00
 Edelweiss Focused Fund - Regular Plan - Growth,16.54,10 Dec 2025 22:35:00
 Edelweiss Focused Fund - Regular Plan - IDCW,16.539,10 Dec 2025 22:35:00
+Edelweiss Gold and Silver ETF FOF - Direct Plan - Growth,27.714,11 Dec 2025 09:50:53
+Edelweiss Gold and Silver ETF FOF - Direct Plan - IDCW,27.714,11 Dec 2025 09:50:53
+Edelweiss Gold and Silver ETF FOF - Regular Plan - Growth,27.353,11 Dec 2025 09:50:53
+Edelweiss Gold and Silver ETF FOF - Regular Plan - IDCW,27.353,11 Dec 2025 09:50:53
 Edelweiss Gold ETF,127.6343,10 Dec 2025 22:38:35
 Edelweiss Government Securities Fund - Direct Plan - Annual Dividend Option,26.0089,10 Dec 2025 22:35:00
 Edelweiss Government Securities Fund - Direct Plan - Growth Option,26.0004,10 Dec 2025 22:35:00
@@ -2325,6 +2351,12 @@ Edelweiss Government Securities Fund - Regular Plan - Growth Option,24.3679,10 D
 Edelweiss Government Securities Fund - Regular Plan - IDCW Option,24.3842,10 Dec 2025 22:35:00
 Edelweiss Government Securities Fund - Regular Plan Monthly - IDCW Option,10.1828,10 Dec 2025 22:35:00
 Edelweiss Government Securities Fund - Regular Plan Weekly - IDCW Option,10.0625,10 Dec 2025 22:35:00
+Edelweiss Greater China Equity Off-shore Fund - Direct Plan - Growth Option,59.17,11 Dec 2025 09:50:53
+Edelweiss Greater China Equity Off-shore Fund - Regular Plan - Growth Option,52.465,11 Dec 2025 09:50:53
+Edelweiss Income Plus Arbitrage Active Fund of Fund - Regular - Dividend- Payout,10.2007,11 Dec 2025 09:50:53
+Edelweiss Income Plus Arbitrage Active Fund of Funds - Direct Plan Growth,10.2129,11 Dec 2025 09:50:53
+Edelweiss Income Plus Arbitrage Active Fund of Funds - Direct-Dividend-Payout,10.2129,11 Dec 2025 09:50:53
+Edelweiss Income Plus Arbitrage Active Fund of Funds - Regular-Growth,10.2007,11 Dec 2025 09:50:53
 Edelweiss Large & Mid Cap Fund - Direct Plan - Growth Option,104.022,10 Dec 2025 22:35:00
 Edelweiss Large & Mid Cap Fund - Regular Plan - Growth Option,87.931,10 Dec 2025 22:35:00
 Edelweiss Large and Mid Cap Fund - Direct Plan - IDCW Option,40.348,10 Dec 2025 22:35:00
@@ -2372,10 +2404,18 @@ Edelweiss Money Market Fund - Institutional Plan - Growth Option,24.98,10 Dec 20
 Edelweiss Money Market Fund - Regular Plan - Annual - IDCW Option,28.9507,10 Dec 2025 22:35:00
 Edelweiss Money Market Fund - Regular Plan - Growth Option,29.1916,10 Dec 2025 22:35:00
 Edelweiss Money Market Fund - Regular Plan - IDCW Option,27.4607,10 Dec 2025 22:35:00
+Edelweiss MSCI India Domestic & World Healthcare 45 Index Fund - Direct Plan - IDCW Option,21.1569,11 Dec 2025 09:50:53
+Edelweiss MSCI India Domestic & World Healthcare 45 Index Fund - Regular Plan - IDCW Option,20.5485,11 Dec 2025 09:50:53
+Edelweiss MSCI India Domestic & World Healthcare 45 Index Fund Direct Plan - Growth,21.1569,11 Dec 2025 09:50:53
+Edelweiss MSCI India Domestic & World Healthcare 45 index Fund Regular Plan - Growth,20.5485,11 Dec 2025 09:50:53
 Edelweiss Multi Asset Allocation Fund - Direct Plan - Growth,12.0323,10 Dec 2025 22:38:35
 Edelweiss Multi Asset Allocation Fund - Direct Plan - IDCW Option,12.0323,10 Dec 2025 22:38:35
 Edelweiss Multi Asset Allocation Fund - Regular Plan - Growth,11.9377,10 Dec 2025 22:38:35
 Edelweiss Multi Asset Allocation Fund - Regular Plan - IDCW Option,11.9377,10 Dec 2025 22:38:35
+Edelweiss Multi Asset Omni Fund of Fund- Direct Plan - Growth,10.8435,11 Dec 2025 09:50:53
+Edelweiss Multi Asset Omni Fund of Fund- Direct Plan - IDCW,10.8435,11 Dec 2025 09:50:53
+Edelweiss Multi Asset Omni Fund of Fund- Regular Plan - Growth,10.8031,11 Dec 2025 09:50:53
+Edelweiss Multi Asset Omni Fund of Fund- Regular Plan - IDCW,10.8031,11 Dec 2025 09:50:53
 Edelweiss Multi Cap Fund - Direct Plan - Growth,15.5353,10 Dec 2025 22:35:00
 Edelweiss Multi Cap Fund - Direct Plan - IDCW,15.5353,10 Dec 2025 22:35:00
 Edelweiss Multi Cap Fund - Regular Plan - Growth,15.0207,10 Dec 2025 22:35:00
@@ -2449,6 +2489,14 @@ Edelweiss Small Cap Fund - Direct Plan - Growth,47.38,10 Dec 2025 22:35:00
 Edelweiss Small Cap Fund - Direct Plan - IDCW Option,41.449,10 Dec 2025 22:35:00
 Edelweiss Small Cap Fund - Regular Plan - Growth,42.622,10 Dec 2025 22:35:00
 Edelweiss Small Cap Fund - Regular Plan - IDCW Option,37.037,10 Dec 2025 22:35:00
+Edelweiss Technology Fund - Direct Plan - Growth,12.7031,11 Dec 2025 09:50:53
+Edelweiss Technology Fund - Direct Plan - IDCW,12.7031,11 Dec 2025 09:50:53
+Edelweiss Technology Fund - Regular Plan - Growth,12.32,11 Dec 2025 09:50:53
+Edelweiss Technology Fund - Regular Plan - IDCW,12.32,11 Dec 2025 09:50:53
+Edelweiss US Technology Equity Fund of Fund- Direct Plan- Growth,35.0555,11 Dec 2025 09:50:53
+Edelweiss US Technology Equity Fund of Fund- Regular Plan- Growth,33.1697,11 Dec 2025 09:50:53
+Edelweiss US Value Equity Offshore Fund - Direct Plan - Growth Option,39.8969,11 Dec 2025 09:50:53
+Edelweiss US Value Equity Offshore Fund - Regular Plan - Growth Option,35.9618,11 Dec 2025 09:50:53
 Franklin Asian Equity Fund - Direct - Growth,38.5476,11 Dec 2025 08:29:10
 Franklin Asian Equity Fund - Direct - IDCW ,17.6511,11 Dec 2025 08:29:10
 Franklin Asian Equity Fund - Growth Plan,35.1381,11 Dec 2025 08:29:10
@@ -2883,6 +2931,8 @@ HDFC Defence Fund - Growth Option,22.546,10 Dec 2025 22:49:44
 HDFC Defence Fund - Growth Option - Direct Plan,23.208,10 Dec 2025 22:49:44
 HDFC Defence Fund - IDCW Option,22.546,10 Dec 2025 22:49:44
 HDFC Defence Fund - IDCW Option - Direct Plan,23.208,10 Dec 2025 22:49:44
+HDFC Developed World Overseas Equity Passive FOF - Direct Plan - Growth Option,18.382,11 Dec 2025 13:30:12
+HDFC Developed World Overseas Equity Passive FOF - Growth Option,18.019,11 Dec 2025 13:30:12
 HDFC Diversified Equity All Cap Active FOF - Direct Plan - Growth Plan,10.1836,10 Dec 2025 22:49:44
 HDFC Diversified Equity All Cap Active FOF - IDCW - Direct Plan,10.1836,10 Dec 2025 22:49:44
 HDFC Diversified Equity All Cap Active FOF - IDCW - Regular Plan,10.1618,10 Dec 2025 22:49:44
@@ -3534,10 +3584,18 @@ ICICI Prudential Diversified Debt Strategy Active FOF  - Direct Plan - Growth,47
 ICICI Prudential Diversified Debt Strategy Active FOF - Direct Plan -  IDCW,42.1777,10 Dec 2025 22:33:07
 ICICI Prudential Diversified Debt Strategy Active FOF - Growth,45.9951,10 Dec 2025 22:33:07
 ICICI Prudential Diversified Debt Strategy Active FOF - IDCW,40.1195,10 Dec 2025 22:33:07
+ICICI Prudential Diversified Equity All Cap Omni FOF - Direct Plan - Growth,32.7699,11 Dec 2025 10:32:29
+ICICI Prudential Diversified Equity All Cap Omni FOF - Direct Plan - IDCW,25.5211,11 Dec 2025 10:32:29
+ICICI Prudential Diversified Equity All Cap Omni FOF - Growth,31.4227,11 Dec 2025 10:32:29
+ICICI Prudential Diversified Equity All Cap Omni FOF - IDCW,24.2952,11 Dec 2025 10:32:29
 ICICI Prudential Dividend Yield Equity Fund Direct Plan Growth Option,60.63,10 Dec 2025 22:33:07
 ICICI Prudential Dividend Yield Equity Fund Direct Plan IDCW Option,27.83,10 Dec 2025 22:33:07
 ICICI Prudential Dividend Yield Equity Fund Growth Option,54.10,10 Dec 2025 22:33:07
 ICICI Prudential Dividend Yield Equity Fund IDCW Option,21.54,10 Dec 2025 22:33:07
+ICICI Prudential Dynamic Asset Allocation Active FOF - Direct Plan - Growth,136.9805,11 Dec 2025 10:32:29
+ICICI Prudential Dynamic Asset Allocation Active FOF - Direct Plan - IDCW,107.4197,11 Dec 2025 10:32:29
+ICICI Prudential Dynamic Asset Allocation Active FOF - Growth,123.4727,11 Dec 2025 10:32:29
+ICICI Prudential Dynamic Asset Allocation Active FOF - IDCW,94.8879,11 Dec 2025 10:32:29
 ICICI Prudential ELSS Tax Saver Fund - Direct Plan - Growth,1058.79,10 Dec 2025 22:33:07
 ICICI Prudential ELSS Tax Saver Fund - Direct Plan - IDCW,46.97,10 Dec 2025 22:33:07
 ICICI Prudential ELSS Tax Saver Fund - Growth,951.50,10 Dec 2025 22:33:07
@@ -3611,6 +3669,14 @@ ICICI Prudential Gilt Fund - Direct Plan - Growth,112.2999,10 Dec 2025 22:33:07
 ICICI Prudential Gilt Fund - Direct Plan - IDCW,18.9580,10 Dec 2025 22:33:07
 ICICI Prudential Gilt Fund - Growth,103.9948,10 Dec 2025 22:33:07
 ICICI Prudential Gilt Fund - IDCW,17.9305,10 Dec 2025 22:33:07
+ICICI Prudential Global Advantage Fund (FOF) - Direct Plan - Growth Option,20.6594,11 Dec 2025 10:32:29
+ICICI Prudential Global Advantage Fund (FOF) - Direct Plan - IDCW,20.6594,11 Dec 2025 10:32:29
+ICICI Prudential Global Advantage Fund (FOF) - Growth Option,19.8093,11 Dec 2025 10:32:29
+ICICI Prudential Global Advantage Fund (FOF) - IDCW,19.8087,11 Dec 2025 10:32:29
+ICICI Prudential Global Stable Equity Fund (FOF) - Direct - Growth,31.63,11 Dec 2025 09:41:58
+ICICI Prudential Global Stable Equity Fund (FOF) - Direct - IDCW,31.64,11 Dec 2025 09:41:58
+ICICI Prudential Global Stable Equity Fund (FOF) - Growth,29.29,11 Dec 2025 09:41:58
+ICICI Prudential Global Stable Equity Fund (FOF) - IDCW,29.29,11 Dec 2025 09:41:58
 ICICI Prudential Gold ETF,109.2659,10 Dec 2025 22:33:07
 ICICI PRUDENTIAL HOUSING OPPORTUNITIES FUND - Direct Plan Growth,17.93,10 Dec 2025 22:33:07
 ICICI PRUDENTIAL HOUSING OPPORTUNITIES FUND - Direct Plan IDCW,16.49,10 Dec 2025 22:33:07
@@ -3692,6 +3758,10 @@ ICICI Prudential Multicap Fund - Direct Plan -  Growth,873.88,10 Dec 2025 22:33:
 ICICI Prudential Multicap Fund - Direct Plan -  IDCW,58.42,10 Dec 2025 22:33:07
 ICICI Prudential Multicap Fund - Growth,780.66,10 Dec 2025 22:33:07
 ICICI Prudential Multicap Fund - IDCW,31.44,10 Dec 2025 22:33:07
+ICICI Prudential NASDAQ 100 Index Fund - Direct Plan - Growth,20.1692,11 Dec 2025 09:41:58
+ICICI Prudential NASDAQ 100 Index Fund - Direct Plan - IDCW,20.1674,11 Dec 2025 09:41:58
+ICICI Prudential NASDAQ 100 Index Fund - Growth,19.7815,11 Dec 2025 09:41:58
+ICICI Prudential NASDAQ 100 Index Fund - IDCW,19.7812,11 Dec 2025 09:41:58
 ICICI Prudential Nifty 10 yr Benchmark G-sec ETF,257.4582,10 Dec 2025 22:33:07
 ICICI Prudential Nifty 100 ETF,29.1814,10 Dec 2025 22:33:07
 ICICI Prudential Nifty 100 Low Volatility 30 ETF,22.8715,10 Dec 2025 22:33:07
@@ -3827,6 +3897,10 @@ ICICI Prudential Overnight fund - Direct Plan - Unclaimed Redemption Transitory 
 ICICI Prudential Overnight Fund - Direct Plan - Weekly IDCW,1000.2836,10 Dec 2025 22:33:07
 ICICI Prudential Overnight Fund - Growth,1420.5357,10 Dec 2025 22:33:07
 ICICI Prudential Overnight Fund - Weekly IDCW,1000.2806,10 Dec 2025 22:33:07
+ICICI Prudential Passive Multi-Asset Fund of Funds - Direct Plan - Growth,16.334,11 Dec 2025 09:41:58
+ICICI Prudential Passive Multi-Asset Fund of Funds - Direct Plan - IDCW,16.3447,11 Dec 2025 09:41:58
+ICICI Prudential Passive Multi-Asset Fund of Funds - Growth,16.0603,11 Dec 2025 09:41:58
+ICICI Prudential Passive Multi-Asset Fund of Funds - IDCW,16.0603,11 Dec 2025 09:41:58
 ICICI Prudential Pharma Healthcare and Diagnostics (P.H.D) Fund - Cumulative Option,39.63,10 Dec 2025 22:33:07
 ICICI Prudential Pharma Healthcare and Diagnostics (P.H.D) Fund - Direct Plan - Cumulative Option,42.83,10 Dec 2025 22:33:07
 ICICI Prudential Pharma Healthcare and Diagnostics (P.H.D) Fund - Direct Plan - IDCW Option,25.87,10 Dec 2025 22:33:07
@@ -3902,10 +3976,17 @@ ICICI Prudential Smallcap Fund - Direct Plan - Growth,95.90,10 Dec 2025 22:33:07
 ICICI Prudential Smallcap Fund - Direct Plan - IDCW,69.49,10 Dec 2025 22:33:07
 ICICI Prudential Smallcap Fund - Growth,85.08,10 Dec 2025 22:33:07
 ICICI Prudential Smallcap Fund - IDCW,34.71,10 Dec 2025 22:33:07
+ICICI Prudential Strategic Metal and Energy Equity Fund of Fund - Direct Plan Growth,23.9912,11 Dec 2025 09:41:58
+ICICI Prudential Strategic Metal and Energy Equity Fund of Fund - Direct Plan IDCW,23.9907,11 Dec 2025 09:41:58
+ICICI Prudential Strategic Metal and Energy Equity Fund of Fund - Growth,23.1219,11 Dec 2025 09:41:58
+ICICI Prudential Strategic Metal and Energy Equity Fund of Fund - IDCW,23.1179,11 Dec 2025 09:41:58
 ICICI Prudential Technology Fund - Direct Plan -  Growth,230.37,11 Dec 2025 09:00:53
 ICICI Prudential Technology Fund - Direct Plan -  IDCW,140.64,11 Dec 2025 09:00:53
 ICICI Prudential Technology Fund - Growth,206.59,11 Dec 2025 09:00:53
 ICICI Prudential Technology Fund - IDCW,64.52,11 Dec 2025 09:00:53
+ICICI Prudential Thematic Advantage Fund (FOF) - Direct Plan - Growth,246.1697,11 Dec 2025 10:32:29
+ICICI Prudential Thematic Advantage Fund (FOF) - Growth,229.5503,11 Dec 2025 10:32:29
+ICICI Prudential Thematic Advantage Fund (FOF) - IDCW,177.9446,11 Dec 2025 10:32:29
 ICICI PRUDENTIAL TRANSPORTATION AND LOGISTICS FUND - Direct Plan - Growth,21.29,10 Dec 2025 22:33:07
 ICICI PRUDENTIAL TRANSPORTATION AND LOGISTICS FUND - Direct Plan - IDCW,19.64,10 Dec 2025 22:33:07
 ICICI PRUDENTIAL TRANSPORTATION AND LOGISTICS FUND - Growth,20.46,10 Dec 2025 22:33:07
@@ -3920,6 +4001,10 @@ ICICI Prudential Ultra Short Term Fund - Growth,28.4799,10 Dec 2025 22:33:07
 ICICI Prudential Ultra Short Term Fund - Monthly IDCW,10.6645,10 Dec 2025 22:33:07
 ICICI Prudential Ultra Short Term Fund - Quarterly IDCW,11.0638,10 Dec 2025 22:33:07
 ICICI Prudential Ultra Short Term Fund - Weekly IDCW,10.0664,10 Dec 2025 22:33:07
+ICICI Prudential US Bluechip Equity Fund - Direct Plan -  Growth,81.37,11 Dec 2025 09:41:58
+ICICI Prudential US Bluechip Equity Fund - Direct Plan -  IDCW,81.36,11 Dec 2025 09:41:58
+ICICI Prudential US Bluechip Equity Fund - Growth,72.63,11 Dec 2025 09:41:58
+ICICI Prudential US Bluechip Equity Fund - IDCW,72.62,11 Dec 2025 09:41:58
 ICICI Prudential Value Fund (erstwhile Value Discovery Fund) - Direct Plan - Growth,544.30,11 Dec 2025 09:00:53
 ICICI Prudential Value Fund (erstwhile Value Discovery Fund) - Direct Plan - IDCW,127.24,11 Dec 2025 09:00:53
 ICICI Prudential Value Fund (erstwhile Value Discovery Fund) - Growth,494.31,11 Dec 2025 09:00:53
@@ -4528,6 +4613,10 @@ Kotak Global Emerging Market overseas Equity Omni FOF - Growth - Direct,32.971,1
 Kotak Global Emerging Market Overseas Equity Omni FOF - Payout of Income Distribution cum capital withdrawal option,30.351,11 Dec 2025 09:09:11
 Kotak Global Emerging Market Overseas Equity Omni FOF - Payout of Income Distribution cum capital withdrawal option - Direct,33.11,11 Dec 2025 09:09:11
 Kotak Global Emerging Market Overseas Equity Omni FOF- Growth,30.349,11 Dec 2025 09:09:11
+Kotak Global Innovation Overseas Equity Omni FOF - Regular Plan -IDCW Option,12.7051,11 Dec 2025 14:27:23
+Kotak Global Innovation Overseas Equity Omni FOF - Regular Plan-Growth,12.7047,11 Dec 2025 14:27:23
+Kotak Global Innovation Overseas Equity Omni FOF- Direct Plan - IDCW Option,13.3846,11 Dec 2025 14:27:23
+Kotak Global Innovation Overseas Equity Omni FOF- Direct Plan -Growth,13.3865,11 Dec 2025 14:27:23
 KOTAK GOLD ETF,106.4924,10 Dec 2025 22:35:06
 Kotak Gold Fund Growth,49.1421,10 Dec 2025 22:35:06
 Kotak Gold Fund Growth - Direct,51.841,10 Dec 2025 22:35:06
@@ -4721,6 +4810,10 @@ Kotak Overnight Fund -Direct Plan-Growth Option,1414.7357,10 Dec 2025 22:35:06
 Kotak Overnight Fund -Regular plan-Growth Option,1405.8672,10 Dec 2025 22:35:06
 Kotak Overnight Fund-Direct Plan- Daily Reinvestment of Income Distribution cum capital withdrawal option,1003.6055,10 Dec 2025 22:35:06
 Kotak Overnight Fund-Regular Plan- Daily Reinvestment of Income Distribution cum capital withdrawal option,1004.7568,10 Dec 2025 22:35:06
+Kotak Pioneer Fund- Direct Plan- Growth Option,34.819,11 Dec 2025 14:27:23
+Kotak Pioneer Fund- Regular Plan- Growth Option,31.635,11 Dec 2025 14:27:23
+Kotak Pioneer Fund- Regular Plan- Reinvestment of Income Distribution cum capital withdrawal option,31.65,11 Dec 2025 14:27:23
+Kotak Pioneer Fund-Direct Plan-Reinvestment of Income Distribution cum capital withdrawal option,34.814,11 Dec 2025 14:27:23
 Kotak Quant Fund - Direct Plan - Growth Option,15.049,10 Dec 2025 22:35:06
 Kotak Quant Fund - Direct plan - IDCW Payout,15.049,10 Dec 2025 22:35:06
 Kotak Quant Fund - Regular Plan - Growth Option,14.933,10 Dec 2025 22:35:06
@@ -5581,6 +5674,8 @@ Navi Liquid Fund-Direct Plan-Growth Option,29.3458,10 Dec 2025 22:50:05
 Navi Liquid Fund-Regular Plan-Growth Option,29.0804,10 Dec 2025 22:50:05
 Navi Liquid Fund-Unclaimed Redemption and Dividend Plan greater than 3 years,10,10 Dec 2025 22:50:05
 Navi Liquid Fund-Unclaimed Redemption and Dividend Plan less than 3 years,29.242,10 Dec 2025 22:50:05
+Navi NASDAQ 100 Fund of Fund- Direct- Growth,20.6863,11 Dec 2025 09:52:36
+Navi NASDAQ 100 Fund of Fund- Regular- Growth,20.547,11 Dec 2025 09:52:36
 Navi Nifty 50 Index Fund-Direct Plan-Growth,16.8745,10 Dec 2025 22:50:05
 Navi Nifty 50 Index Fund-Regular Plan-Growth,16.7239,10 Dec 2025 22:50:05
 NAVI NIFTY 500 MULTICAP 50-25-25 DIRECT PLAN,9.9444,10 Dec 2025 22:50:05
@@ -5599,6 +5694,8 @@ Navi Nifty Smallcap 250 Momentum quality index fund- Direct Plan,10.8676,10 Dec 
 Navi Nifty Smallcap 250 Momentum quality index fund- Regular Plan,10.8126,10 Dec 2025 22:50:05
 Navi NiftyIT Index Fund - Direct Plan- Growth,11.1603,10 Dec 2025 22:50:05
 Navi NiftyIT Index Fund - Regular Plan -Growth,11.0201,10 Dec 2025 22:50:05
+Navi US Total Stock Market Fund of Fund- Direct Plan- Growth,19.3024,11 Dec 2025 09:52:36
+Navi US Total Stock Market Fund of Fund- Regular Plan- Growth,19.3025,11 Dec 2025 09:52:36
 CPSE ETF,89.5042,10 Dec 2025 22:40:47
 Nippon India Active Momentum Fund - Regular Plan- Growth Option,11.6625,10 Dec 2025 22:40:47
 Nippon India Active Momentum Fund- Direct Plan IDCW Option,11.7514,10 Dec 2025 22:40:47
@@ -6460,6 +6557,10 @@ Quant Value Fund - Growth Option  - Direct Plan,20.8123,10 Dec 2025 22:32:10
 Quant Value Fund - Growth Option - Regular Plan,19.4718,10 Dec 2025 22:32:10
 Quant Value Fund - IDCW Option - Direct Plan,19.7744,10 Dec 2025 22:32:10
 Quant Value Fund - IDCW Option- Regular Plan,19.5785,10 Dec 2025 22:32:10
+Quantum Diversified Equity All Cap Active FOF - Direct Plan Growth Option,86.593,11 Dec 2025 09:32:15
+Quantum Diversified Equity All Cap Active FOF - Direct Plan IDCW,86.377,11 Dec 2025 09:32:15
+Quantum Diversified Equity All Cap Active FOF - Regular Plan Growth Option,84.988,11 Dec 2025 09:32:15
+Quantum Diversified Equity All Cap Active FOF - Regular Plan IDCW,84.773,11 Dec 2025 09:32:15
 Quantum Dynamic Bond Fund - Direct Plan Growth Option,22.0488,10 Dec 2025 22:30:42
 Quantum Dynamic Bond Fund - Direct Plan Monthly IDCW,10.2965,10 Dec 2025 22:30:42
 Quantum Dynamic Bond Fund - Regular Plan Growth Option,21.6523,10 Dec 2025 22:30:42
@@ -6485,9 +6586,13 @@ Quantum Liquid Fund - Unclaimed IDCW Plan Above 3 years,10.0000,10 Dec 2025 22:3
 Quantum Liquid Fund - Unclaimed IDCW Plan Below 3 years,11.3510,10 Dec 2025 22:30:42
 Quantum Liquid Fund - Unclaimed Redemption Plan Above 3 years,10.0000,10 Dec 2025 22:30:42
 Quantum Liquid Fund - Unclaimed Redemption Plan Below 3 years,10.9146,10 Dec 2025 22:30:42
+Quantum Multi Asset Active FOF - Direct Plan Growth Option,36.7426,11 Dec 2025 09:32:15
+Quantum Multi Asset Active FOF - Regular Plan Growth Option,35.8526,11 Dec 2025 09:32:15
 Quantum Multi Asset Allocation Fund - Direct Plan Growth Option,12.37,10 Dec 2025 22:30:42
 Quantum Multi Asset Allocation Fund - Regular Plan Growth Option,12.03,10 Dec 2025 22:30:42
 Quantum Nifty 50 ETF,2813.8995,10 Dec 2025 22:30:42
+Quantum Nifty 50 ETF Fund of Fund - Direct Plan - Growth,15.2399,11 Dec 2025 09:32:15
+Quantum Nifty 50 ETF Fund of Fund - Regular Plan - Growth,15.1787,11 Dec 2025 09:32:15
 QUANTUM SMALL CAP FUND - DIRECT PLAN GROWTH OPTION,12.79,10 Dec 2025 22:30:42
 QUANTUM SMALL CAP FUND - REGULAR PLAN GROWTH OPTION,12.39,10 Dec 2025 22:30:42
 Quantum Value Fund - Direct Plan Growth Option,132.03,10 Dec 2025 22:30:42
@@ -7119,6 +7224,10 @@ Sundaram Focused Fund (Formerly Known as Principal Focused Multicap Fund)- Direc
 Sundaram Focused Fund (Formerly Known as Principal Focused Multicap Fund)- Direct Plan - Income Distribution CUM Capital Withdrawal Option (IDCW),45.3128,10 Dec 2025 22:28:53
 Sundaram Focused Fund (Formerly Known as Principal Focused Multicap Fund)- Income Distribution CUM Capital Withdrawal Option (IDCW),41.5116,10 Dec 2025 22:28:53
 Sundaram Focused Fund (Formerly Known as Principal Focused Multicap Fund)-Growth Option,160.2986,10 Dec 2025 22:28:53
+Sundaram Global Brand Theme-Equity Active FOF - Direct Growth,43.7098,11 Dec 2025 15:13:55
+Sundaram Global Brand Theme-Equity Active FOF - Direct IDCW,36.6829,11 Dec 2025 15:13:55
+Sundaram Global Brand Theme-Equity Active FOF - Regular Growth,39.7755,11 Dec 2025 15:13:55
+Sundaram Global Brand Theme-Equity Active FOF - Regular IDCW,32.1538,11 Dec 2025 15:13:55
 Sundaram Infrastructure Advantage Fund Direct Plan - Growth,101.5996,10 Dec 2025 22:28:53
 Sundaram Infrastructure Advantage Fund Direct Plan - Income Distribution cum Capital Withdrawal (IDCW),58.4981,10 Dec 2025 22:28:53
 Sundaram Infrastructure Advantage Fund Regular Plan - Growth,94.8843,10 Dec 2025 22:28:53
