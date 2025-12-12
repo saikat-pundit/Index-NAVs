@@ -119,13 +119,13 @@ for item in data_indices['data']:
         
         index_dict[index_name] = {
             'Index': index_name,
-            'Last': item.get('last'),
-            'Change': item.get('variation'),
-            '% Change': percent_change_str,
-            'Previous Close': item.get('previousClose'),
-            'Adv/Dec Ratio': adv_dec_ratio_str,
-            'Year High': item.get('yearHigh'),
-            'Year Low': item.get('yearLow')
+            'LTP': item.get('last'),
+            'Chng': item.get('variation'),
+            '% Chng': percent_change_str,
+            'Previous': item.get('previousClose'),
+            'Adv:Dec': adv_dec_ratio_str,
+            'Yr Hi': item.get('yearHigh'),
+            'Yr Lo': item.get('yearLow')
         }
 
 # Process GIFT-NIFTY data from MoneyControl API - UPDATED SECTION
@@ -170,13 +170,13 @@ if 'indices' in data_gift_nifty:
     
     index_dict['GIFT-NIFTY'] = {
         'Index': 'GIFT-NIFTY',
-        'Last': lastprice,
-        'Change': change,
-        '% Change': percent_change_str,
-        'Previous Close': prevclose,
-        'Adv/Dec Ratio': '-',  # Not available in MoneyControl API
-        'Year High': yearlyhigh,
-        'Year Low': yearlylow
+        'LTP': lastprice,
+        'Chng': change,
+        '% Chng': percent_change_str,
+        'Previous': prevclose,
+        'Adv:Dec': '-',  # Not available in MoneyControl API
+        'Yr Hi': yearlyhigh,
+        'Yr Lo': yearlylow
     }
 
 # Add USD/INR data from NSE market status
@@ -184,13 +184,13 @@ for item in data_market['marketState']:
     if item.get('market') == 'currencyfuture':
         index_dict['USD/INR'] = {
             'Index': 'USD/INR',
-            'Last': item.get('last', '-'),
-            'Change': '-',
-            '% Change': '-',
-            'Previous Close': '-',
-            'Adv/Dec Ratio': '-',
-            'Year High': '-',
-            'Year Low': '-'
+            'LTP': item.get('last', '-'),
+            'Chng': '-',
+            '% Chng': '-',
+            'Previous': '-',
+            'Adv:Dec': '-',
+            'Yr Hi': '-',
+            'Yr Lo': '-'
         }
         break
 
@@ -213,13 +213,13 @@ if data_ind_5y.get('code') == '200' and 'data' in data_ind_5y:
     
     index_dict['IND 5Y'] = {
         'Index': 'IND 5Y',
-        'Last': current_price,
-        'Change': net_change,
-        '% Change': percent_change_str,
-        'Previous Close': prev_close,
-        'Adv/Dec Ratio': '-',
-        'Year High': wk_high,
-        'Year Low': wk_low
+        'LTP': current_price,
+        'Chng': net_change,
+        '% Chng': percent_change_str,
+        'Previous': prev_close,
+        'Adv:Dec': '-',
+        'Yr Hi': wk_high,
+        'Yr Lo': wk_low
     }
 
 # Process IND 10Y bond data
@@ -241,13 +241,13 @@ if data_ind_10y.get('code') == '200' and 'data' in data_ind_10y:
     
     index_dict['IND 10Y'] = {
         'Index': 'IND 10Y',
-        'Last': current_price,
-        'Change': net_change,
-        '% Change': percent_change_str,
-        'Previous Close': prev_close,
-        'Adv/Dec Ratio': '-',
-        'Year High': wk_high,
-        'Year Low': wk_low
+        'LTP': current_price,
+        'Chng': net_change,
+        '% Chng': percent_change_str,
+        'Previous': prev_close,
+        'Adv:Dec': '-',
+        'Yr Hi': wk_high,
+        'Yr Lo': wk_low
     }
 
 # Process IND 30Y bond data
@@ -269,13 +269,13 @@ if data_ind_30y.get('code') == '200' and 'data' in data_ind_30y:
     
     index_dict['IND 30Y'] = {
         'Index': 'IND 30Y',
-        'Last': current_price,
-        'Change': net_change,
-        '% Change': percent_change_str,
-        'Previous Close': prev_close,
-        'Adv/Dec Ratio': '-',
-        'Year High': wk_high,
-        'Year Low': wk_low
+        'LTP': current_price,
+        'Chng': net_change,
+        '% Chng': percent_change_str,
+        'Previous': prev_close,
+        'Adv:Dec': '-',
+        'Yr Hi': wk_high,
+        'Yr Lo': wk_low
     }
 
 # Add GOLD and SILVER data from Money Control API
@@ -295,13 +295,13 @@ if 'data' in data_commodities and 'list' in data_commodities['data']:
                 # For year high/low, use current price (no historical data available)
                 index_dict[symbol] = {
                     'Index': symbol,
-                    'Last': last_price,
-                    'Change': price_change,
-                    '% Change': f"{price_change_percentage}%",
-                    'Previous Close': round(previous_close, 2),
-                    'Adv/Dec Ratio': '-',
-                    'Year High': '-',
-                    'Year Low': '-'
+                    'LTP': last_price,
+                    'Chng': price_change,
+                    '% Chng': f"{price_change_percentage}%",
+                    'Previous': round(previous_close, 2),
+                    'Adv:Dec': '-',
+                    'Yr Hi': '-',
+                    'Yr Lo': '-'
                 }
             except (ValueError, TypeError) as e:
                 print(f"Error processing {symbol}: {e}")
@@ -316,13 +316,13 @@ for index_name in target_indices:
         # Create empty entry for missing indices
         records.append({
             'Index': index_name,
-            'Last': '-',
-            'Change': '-',
-            '% Change': '-',
-            'Previous Close': '-',
-            'Adv/Dec Ratio': '-',
-            'Year High': '-',
-            'Year Low': '-'
+            'LTP': '-',
+            'Chng': '-',
+            '% Chng': '-',
+            'Previous': '-',
+            'Adv:Dec': '-',
+            'Yr Hi': '-',
+            'Yr Lo': '-'
         })
 
 # Add timestamp row
@@ -332,13 +332,13 @@ current_time = datetime.now(ist).strftime('%d-%b %H:%M')
 # Add timestamp as last row with proper formatting
 records.append({
     'Index': '',
-    'Last': '',
-    'Change': '',
-    '% Change': '',
-    'Previous Close': '',
-    'Adv/Dec Ratio': '',
-    'Year High': 'Updated Time:',
-    'Year Low': current_time
+    'LTP': '',
+    'Chng': '',
+    '% Chng': '',
+    'Previous': '',
+    'Adv:Dec': '',
+    'Yr Hi': 'Updated Time:',
+    'Yr Lo': current_time
 })
 
 # Save to CSV
