@@ -69,12 +69,12 @@ for item in data.get('data', []):
         symbol_dict[symbol] = {
             'SYMBOL': symbol,
             'ASSETS': assets,
-            'LAST': ltP,
-            'CHANGE': chn,
-            '%CHANGE': percent_change_str,
-            'PREVIOUS CLOSE': prev_close,
-            '52w High': wkhi,
-            '52w Low': wklo
+            'LTP': ltP,
+            'CHNG': chn,
+            '%CHNG': percent_change_str,
+            'PREVIOUS': prev_close,
+            'Yr Hi': wkhi,
+            'Yr Lo': wklo
         }
 
 # Create records in the specified order
@@ -87,12 +87,12 @@ for symbol in target_symbols:
         records.append({
             'SYMBOL': symbol,
             'ASSETS': '-',
-            'LAST': '-',
-            'CHANGE': '-',
-            '%CHANGE': '-',
-            'PREVIOUS CLOSE': '-',
-            '52w High': '-',
-            '52w Low': '-'
+            'LTP': '-',
+            'CHNG': '-',
+            '%CHNG': '-',
+            'PREVIOUS': '-',
+            'Yr Hi': '-',
+            'Yr Lo': '-'
         })
 
 # Add timestamp row at the end
