@@ -1,3 +1,5 @@
+# Scripts/global_commodity.py
+
 import requests
 import pandas as pd
 from datetime import datetime
@@ -12,37 +14,24 @@ headers = {
     'Referer': 'https://www.tradingview.com/'
 }
 
-# API URLs for different commodities
-api_urls = {
-    "GOLD": "https://scanner.tradingview.com/symbol?symbol=TVC:GOLD&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "GOLD!": "https://scanner.tradingview.com/symbol?symbol=COMEX:GC1!&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "SILVER": "https://scanner.tradingview.com/symbol?symbol=TVC:SILVER&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "SILVER!": "https://scanner.tradingview.com/symbol?symbol=COMEX:SI1!&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "GOLD:SILVER": "https://scanner.tradingview.com/symbol?symbol=TVC:GOLDSILVER&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "DXY": "https://scanner.tradingview.com/symbol?symbol=TVC:DXY&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "US10Y": "https://scanner.tradingview.com/symbol?symbol=TVC:US10Y&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "BRENT": "https://scanner.tradingview.com/symbol?symbol=FX:UKOIL&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "GOLDINR": "https://scanner.tradingview.com/symbol?symbol=MCX:GOLD1!&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "SILVERINR": "https://scanner.tradingview.com/symbol?symbol=MCX:SILVER1!&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "GOLD ETF": "https://scanner.tradingview.com/symbol?symbol=NSE:GOLDBEES&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance",
-    "SILVER ETF": "https://scanner.tradingview.com/symbol?symbol=NSE:SILVERBEES&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance"
-}
-
-# Target symbols in the required sequence
-target_symbols = [
-    "GOLD",
-    "GOLD!",
-    "SILVER",
-    "SILVER!",
-    "GOLD:SILVER",
-    "DXY",
-    "US10Y",
-    "BRENT",
-    "GOLDINR",
-    "SILVERINR",
-    "GOLD ETF",
-    "SILVER ETF"
+# Commodity definitions with TradingView symbols
+commodity_symbols = [
+    {"name": "GOLD", "symbol": "TVC:GOLD"},
+    {"name": "GOLD!", "symbol": "COMEX:GC1!"},
+    {"name": "SILVER", "symbol": "TVC:SILVER"},
+    {"name": "SILVER!", "symbol": "COMEX:SI1!"},
+    {"name": "GOLD:SILVER", "symbol": "TVC:GOLDSILVER"},
+    {"name": "DXY", "symbol": "TVC:DXY"},
+    {"name": "US10Y", "symbol": "TVC:US10Y"},
+    {"name": "BRENT", "symbol": "FX:UKOIL"},
+    {"name": "GOLDINR", "symbol": "MCX:GOLD1!"},
+    {"name": "SILVERINR", "symbol": "MCX:SILVER1!"},
+    {"name": "GOLD ETF", "symbol": "NSE:GOLDBEES"},
+    {"name": "SILVER ETF", "symbol": "NSE:SILVERBEES"}
 ]
+
+# Base API URL with placeholders
+BASE_API_URL = "https://scanner.tradingview.com/symbol?symbol={symbol}&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance"
 
 # Dictionary to store extracted records
 commodity_data = []
@@ -50,12 +39,12 @@ commodity_data = []
 print("Fetching global commodity data...")
 
 # Process each symbol
-for symbol in target_symbols:
-    if symbol not in api_urls:
-        print(f"Warning: No API URL found for {symbol}")
-        continue
+for commodity in commodity_symbols:
+    symbol_name = commodity["name"]
+    tv_symbol = commodity["symbol"]
     
-    url = api_urls[symbol]
+    # Build the API URL
+    url = BASE_API_URL.format(symbol=tv_symbol)
     
     try:
         response = requests.get(url, headers=headers, timeout=10)
@@ -98,7 +87,7 @@ for symbol in target_symbols:
             
             # Add to records
             commodity_data.append({
-                'Index': symbol,
+                'Index': symbol_name,
                 'LTP': close_formatted,
                 'Chng': abs_change,
                 '% Chng': percent_change,
@@ -107,14 +96,14 @@ for symbol in target_symbols:
                 'Yr Lo': yr_lo_formatted
             })
             
-            print(f"✓ Fetched data for {symbol}")
+            print(f"✓ Fetched data for {symbol_name}")
             
         else:
-            print(f"✗ Failed to fetch {symbol}: HTTP {response.status_code}")
+            print(f"✗ Failed to fetch {symbol_name}: HTTP {response.status_code}")
             
             # Add placeholder data for failed fetch
             commodity_data.append({
-                'Index': symbol,
+                'Index': symbol_name,
                 'LTP': "0.00",
                 'Chng': "0.00",
                 '% Chng': "0.00%",
@@ -124,11 +113,11 @@ for symbol in target_symbols:
             })
             
     except requests.exceptions.RequestException as e:
-        print(f"✗ Error fetching {symbol}: {e}")
+        print(f"✗ Error fetching {symbol_name}: {e}")
         
         # Add placeholder data for error
         commodity_data.append({
-            'Index': symbol,
+            'Index': symbol_name,
             'LTP': "0.00",
             'Chng': "0.00",
             '% Chng': "0.00%",
@@ -137,11 +126,11 @@ for symbol in target_symbols:
             'Yr Lo': "0.00"
         })
     except Exception as e:
-        print(f"✗ Unexpected error for {symbol}: {e}")
+        print(f"✗ Unexpected error for {symbol_name}: {e}")
         
         # Add placeholder data for unexpected error
         commodity_data.append({
-            'Index': symbol,
+            'Index': symbol_name,
             'LTP': "0.00",
             'Chng': "0.00",
             '% Chng': "0.00%",
@@ -180,8 +169,8 @@ print(f"\n{'='*60}")
 print("Global Commodity Data Summary")
 print('='*60)
 print(f"CSV file saved: {csv_path}")
-print(f"Total records: {len(target_symbols)} commodities + 1 timestamp row")
-print(f"Successfully fetched: {len([d for d in commodity_data[:-1] if d['LTP'] != '0.00'])} out of {len(target_symbols)} symbols")
+print(f"Total records: {len(commodity_symbols)} commodities + 1 timestamp row")
+print(f"Successfully fetched: {len([d for d in commodity_data[:-1] if d['LTP'] != '0.00'])} out of {len(commodity_symbols)} symbols")
 print(f"Last update: {current_time} IST")
 print('='*60)
 
