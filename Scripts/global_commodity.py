@@ -169,7 +169,7 @@ commodity_data.append({
 df = pd.DataFrame(commodity_data)
 
 # Ensure Data directory exists
-os.makedirs('../Data', exist_ok=True)
+os.makedirs('Data', exist_ok=True)
 
 # Save to CSV
 csv_path = 'Data/GLOBAL_COMMODITIES.csv'
