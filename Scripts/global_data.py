@@ -165,7 +165,3 @@ os.makedirs('Data', exist_ok=True)
 # Save to CSV with new filename
 csv_path = 'Data/GLOBAL_DATA.csv'
 df.to_csv(csv_path, index=False)
-
-# Display the dataframe (optional)
-print("\nData Preview (first 10 rows):")
-print(df.head(15).to_string(index=False))
