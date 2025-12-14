@@ -1,80 +1,199 @@
-import yfinance as yf
+import requests
 import pandas as pd
 from datetime import datetime
 import pytz
 import os
-# Tickers
-TICKERS = {
-    "Dow Jones": "YM%3DF",
-    "S&P 500": "ES%3DF",
-    "NASDAQ 100": "NQ%3DF",
-    "VIX": "^VIX",
-    "Dollar Index": "DX-Y.NYB",
-    "US10Y": "^TNX",
-    "Nikkei 225": "NIY=F",
-    "Euro Stoxx 50": "^STOXX50E",
-    "DAX": "^GDAXI",
-    "FTSE 100": "^FTSE",
-    "Bitcoin": "BTC-USD",
-    "USD/INR": "INR=X",
-    "USD/JPY": "JPY=X",
+
+# Headers to mimic a browser request
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'application/json',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Referer': 'https://www.tradingview.com/'
 }
 
-def fetch_global_data():
-    print("Fetching global data...\n")
+# Commodity definitions with TradingView symbols
+commodity_symbols = [
+    # Global Indices
+    {"name": "Dow Jones", "symbol": "CBOT_MINI:YM1!"},
+    {"name": "S&P 500", "symbol": "CME_MINI:ES1!"},
+    {"name": "NASDAQ 100", "symbol": "CME_MINI:NQ1!"},
+    {"name": "VIX", "symbol": "CBOE:VX1!"},
+    {"name": "Dollar Index", "symbol": "TVC:DXY"},
+    {"name": "US10Y", "symbol": "TVC:US10Y"},
+    {"name": "Nikkei 225", "symbol": "CME:NKD1!"},
+    {"name": "Euro Stoxx 50", "symbol": "TVC:SX5E"},
+    {"name": "DAX", "symbol": "EUREX:FDAX1!"},
+    {"name": "FTSE 100", "symbol": "TVC:UKX"},
+    {"name": "Bitcoin", "symbol": "CRYPTO:BTCUSD"},
+    {"name": "USD/INR", "symbol": "FX_IDC:USDINR"},
+    {"name": "USD/JPY", "symbol": "OANDA:USDJPY"},
+    
+    # Commodities
+    {"name": "GOLD", "symbol": "TVC:GOLD"},
+    {"name": "GOLD!", "symbol": "COMEX:GC1!"},
+    {"name": "SILVER", "symbol": "TVC:SILVER"},
+    {"name": "SILVER!", "symbol": "COMEX:SI1!"},
+    {"name": "GOLD:SILVER", "symbol": "TVC:GOLDSILVER"},
+    {"name": "BRENT", "symbol": "FX:UKOIL"},
+    {"name": "GOLDINR", "symbol": "MCX:GOLD1!"},
+    {"name": "SILVERINR", "symbol": "MCX:SILVER1!"},
+    {"name": "GOLD ETF", "symbol": "NSE:GOLDBEES"},
+    {"name": "SILVER ETF", "symbol": "NSE:SILVERBEES"}
+]
 
-    records = []
+# Base API URL with placeholders
+BASE_API_URL = "https://scanner.tradingview.com/symbol?symbol={symbol}&fields=close[1],change_abs,price_52_week_high,price_52_week_low,close,change&no_404=true&label-product=symbols-performance"
 
-    for name, ticker in TICKERS.items():
-        print(f"Fetching {name} ({ticker})...")
+# Dictionary to store extracted records
+commodity_data = []
 
-        # MOST STABLE METHOD FOR GITHUB ACTIONS
-        df = yf.download(ticker, period="5d", interval="1d", progress=False)
+print("Fetching global market data...")
+print(f"Total symbols to fetch: {len(commodity_symbols)}")
+print("-" * 60)
 
-        if df.empty or len(df) < 2:
-            print(f"  ⚠️ No data for {name}")
-            continue
-
-        # Get last & previous close as FLOATS
-        last = float(df["Close"].iloc[-1])
-        prev = float(df["Close"].iloc[-2])
-
-        change = last - prev
-        percent = (change / prev * 100) if prev != 0 else 0
-
-        # 1-year high/low
-        yearly = yf.download(ticker, period="1y", interval="1d", progress=False)
-        high = float(yearly["High"].max()) if not yearly.empty else last
-        low = float(yearly["Low"].min()) if not yearly.empty else last
-
-        records.append({
-            "Index": name,
-            "LTP": round(last, 2),
-            "Chng": round(change, 2),
-            "% Chng": f"{percent:+.2f}%",
-            "Previous": round(prev, 2),
-            "Yr Hi": round(high, 2),
-            "Yr Lo": round(low, 2),
+# Process each symbol
+for commodity in commodity_symbols:
+    symbol_name = commodity["name"]
+    tv_symbol = commodity["symbol"]
+    
+    # Build the API URL
+    url = BASE_API_URL.format(symbol=tv_symbol)
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()  # Raise an error for bad status codes
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Extract data fields
+            close = data.get('close', 0)
+            change = data.get('change', 0)
+            change_abs = data.get('change_abs', 0)
+            previous_close = data.get('close[1]', 0)
+            yr_hi = data.get('price_52_week_high', 0)
+            yr_lo = data.get('price_52_week_low', 0)
+            
+            # Format percentage change
+            if change is not None:
+                try:
+                    percent_change = f"{change:.2f}%"
+                except (ValueError, TypeError):
+                    percent_change = "0.00%"
+            else:
+                percent_change = "0.00%"
+            
+            # Format absolute change
+            if change_abs is not None:
+                try:
+                    abs_change = f"{change_abs:.2f}"
+                except (ValueError, TypeError):
+                    abs_change = "0.00"
+            else:
+                abs_change = "0.00"
+            
+            # Format other numeric values
+            close_formatted = f"{close:.2f}" if close is not None else "0.00"
+            previous_formatted = f"{previous_close:.2f}" if previous_close is not None else "0.00"
+            yr_hi_formatted = f"{yr_hi:.2f}" if yr_hi is not None else "0.00"
+            yr_lo_formatted = f"{yr_lo:.2f}" if yr_lo is not None else "0.00"
+            
+            # Add to records
+            commodity_data.append({
+                'Index': symbol_name,
+                'LTP': close_formatted,
+                'Chng': abs_change,
+                '% Chng': percent_change,
+                'Previous': previous_formatted,
+                'Yr Hi': yr_hi_formatted,
+                'Yr Lo': yr_lo_formatted
+            })
+            
+            print(f"✓ {symbol_name:20} | LTP: {close_formatted:>10} | Change: {percent_change:>8}")
+            
+        else:
+            print(f"✗ Failed to fetch {symbol_name}: HTTP {response.status_code}")
+            
+            # Add placeholder data for failed fetch
+            commodity_data.append({
+                'Index': symbol_name,
+                'LTP': "0.00",
+                'Chng': "0.00",
+                '% Chng': "0.00%",
+                'Previous': "0.00",
+                'Yr Hi': "0.00",
+                'Yr Lo': "0.00"
+            })
+            
+    except requests.exceptions.RequestException as e:
+        print(f"✗ Error fetching {symbol_name}: {e}")
+        
+        # Add placeholder data for error
+        commodity_data.append({
+            'Index': symbol_name,
+            'LTP': "0.00",
+            'Chng': "0.00",
+            '% Chng': "0.00%",
+            'Previous': "0.00",
+            'Yr Hi': "0.00",
+            'Yr Lo': "0.00"
+        })
+    except Exception as e:
+        print(f"✗ Unexpected error for {symbol_name}: {e}")
+        
+        # Add placeholder data for unexpected error
+        commodity_data.append({
+            'Index': symbol_name,
+            'LTP': "0.00",
+            'Chng': "0.00",
+            '% Chng': "0.00%",
+            'Previous': "0.00",
+            'Yr Hi': "0.00",
+            'Yr Lo': "0.00"
         })
 
-        print(f"  ✓ {last:.2f} ({percent:+.2f}%)")
+# Add timestamp row at the end
+ist = pytz.timezone('Asia/Kolkata')
+current_time = datetime.now(ist).strftime('%d-%b %H:%M')
 
-    if not records:
-        print("\n‼️ ERROR: No data fetched!")
-        return
-    os.makedirs('Data', exist_ok=True)
-    df_out = pd.DataFrame(records)
-    filename = "Data/GLOBAL_DATA.csv"
-    df_out.to_csv(filename, index=False)
-    
-    # Add timestamp row
-    ist = pytz.timezone('Asia/Kolkata')
-    timestamp = datetime.now(ist).strftime("%d-%b %H:%M")
-    with open(filename, 'a') as f:
-        f.write(f',,,,,Update Time:,{timestamp}\n')
-    
-    timestamp = datetime.now(ist).strftime("%d-%b-%Y %H:%M")
-    print(f"\nSaved to {filename} at {timestamp}")
+# Add Update Time row with time in the last column
+commodity_data.append({
+    'Index': '',
+    'LTP': '',
+    'Chng': '',
+    '% Chng': '',
+    'Previous': '',
+    'Yr Hi': 'Update Time',
+    'Yr Lo': current_time
+})
 
-if __name__ == "__main__":
-    fetch_global_data()
+# Create DataFrame
+df = pd.DataFrame(commodity_data)
+
+# Ensure Data directory exists
+os.makedirs('Data', exist_ok=True)
+
+# Save to CSV with new filename
+csv_path = 'Data/GLOBAL_DATA.csv'
+df.to_csv(csv_path, index=False)
+
+# Print summary
+print(f"\n{'='*80}")
+print("GLOBAL MARKET DATA SUMMARY")
+print('='*80)
+print(f"CSV file saved: {csv_path}")
+print(f"Total records: {len(commodity_symbols)} symbols + 1 timestamp row")
+print(f"Successfully fetched: {len([d for d in commodity_data[:-1] if d['LTP'] != '0.00'])} out of {len(commodity_symbols)} symbols")
+print(f"Last update: {current_time} IST")
+
+# Display categories
+print(f"\nCategories fetched:")
+print(f"- Global Indices: 13")
+print(f"- Commodities: 10")
+print(f"- Total: 23 symbols")
+print('='*80)
+
+# Display the dataframe (optional)
+print("\nData Preview (first 10 rows):")
+print(df.head(15).to_string(index=False))
