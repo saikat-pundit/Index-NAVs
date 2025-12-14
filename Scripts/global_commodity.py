@@ -157,3 +157,12 @@ df = pd.DataFrame(commodity_data)
 
 # Ensure Data directory exists
 os.makedirs('Data', exist_ok=True)
+
+# DELETE THE OLD CSV FILE IF IT EXISTS
+csv_path = 'Data/GLOBAL_COMMODITIES.csv'
+if os.path.exists(csv_path):
+    os.remove(csv_path)
+    print(f"✓ Removed old file: {csv_path}")
+
+# Save to CSV
+df.to_csv(csv_path, index=False)
