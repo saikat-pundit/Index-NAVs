@@ -63,35 +63,18 @@ def process_and_save():
             'Previous': item.get('previous', '')
         })
     
-    if not records:
-        records.append({
-            'Date': '', 'Time': '', 'Country': 'No Data',
-            'Title': '', 'Impact': '', 'Actual': '', 'Expected': '', 'Previous': ''
-        })
-    
-    # Add timestamp with formatted date and time
-    current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
+    # Add timestamp row at the end
+    current_time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
     records.append({
-        'Date': current_time.strftime('%d %b %y'),
-        'Time': current_time.strftime('%H:%M'),
+        'Date': '',
+        'Time': '',
         'Country': '',
         'Title': '',
-        'Impact': 'Updated',
+        'Impact': '',
         'Actual': '',
-        'Expected': '',
-        'Previous': ''
+        'Expected': 'Update Time:',
+        'Previous': current_time
     })
-    
-    # Sort by date
-    if records and len(records) > 1:
-        df = pd.DataFrame(records)
-        try:
-            df['SortDate'] = pd.to_datetime(df['Date'], format='%d %b %y', errors='coerce')
-            df = df.sort_values(['SortDate', 'Time'])
-            df = df.drop('SortDate', axis=1)
-            records = df.to_dict('records')
-        except:
-            pass
     
     # Save to CSV
     os.makedirs('Data', exist_ok=True)
