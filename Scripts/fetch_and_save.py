@@ -27,6 +27,13 @@ target_indices = [
     "NIFTY PSE"
 ]
 
+def format_index_name(index_name):
+    if index_name == "NIFTY INDIA CONSUMPTION":
+        return "CONSUMPTION"
+    elif index_name.startswith("NIFTY ") and index_name not in ["NIFTY 50", "GIFT-NIFTY"]:
+        return index_name.replace("NIFTY ", "")
+    return index_name
+
 index_dict = {}
 
 def format_tv_value(value, is_percent=False):
@@ -46,7 +53,7 @@ def fetch_tradingview_data(symbol_name, tv_symbol):
         if response.status_code == 200:
             data = response.json()
             return {
-                'Index': symbol_name,
+                'Index': format_index_name(symbol_name),
                 'LTP': format_tv_value(data.get('close')),
                 'Chng': format_tv_value(data.get('change_abs')),
                 '% Chng': format_tv_value(data.get('change'), is_percent=True),
@@ -59,26 +66,26 @@ def fetch_tradingview_data(symbol_name, tv_symbol):
         pass
     return None
 
-# Fetch TradingView data
 for index_name, tv_symbol in TV_SYMBOLS.items():
     tv_data = fetch_tradingview_data(index_name, tv_symbol)
     if tv_data:
         index_dict[index_name] = tv_data
 
-# Fetch NSE data
 try:
     data_indices = requests.get("https://www.nseindia.com/api/allIndices", headers=headers, timeout=5).json()
     for item in data_indices.get('data', []):
-        index_name = item.get('index')
-        if index_name in TV_SYMBOLS or index_name not in target_indices:
+        original_index_name = item.get('index')
+        if original_index_name in TV_SYMBOLS or original_index_name not in target_indices:
             continue
+        
+        formatted_index_name = format_index_name(original_index_name)
         
         advances = int(item.get('advances', 0))
         declines = int(item.get('declines', 0))
         adv_dec_ratio = f"{advances/declines:.2f}" if declines != 0 else "Max" if advances > 0 else "-"
         
-        index_dict[index_name] = {
-            'Index': index_name,
+        index_dict[original_index_name] = {
+            'Index': formatted_index_name,
             'LTP': item.get('last', '-'),
             'Chng': item.get('variation', '-'),
             '% Chng': f"{item.get('percentChange', '-')}%" if item.get('percentChange') is not None else '-',
@@ -90,25 +97,23 @@ try:
 except:
     pass
 
-# Create records
 records = []
 for index_name in target_indices:
+    formatted_name = format_index_name(index_name)
     if index_name in index_dict:
         records.append(index_dict[index_name])
     else:
         records.append({
-            'Index': index_name,
+            'Index': formatted_name,
             'LTP': '-', 'Chng': '-', '% Chng': '-', 'Previous': '-',
             'Adv:Dec': '-', 'Yr Hi': '-', 'Yr Lo': '-'
         })
 
-# Add timestamp
 current_time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
 records.append({
     'Index': '', 'LTP': '', 'Chng': '', '% Chng': '', 'Previous': '',
     'Adv:Dec': '', 'Yr Hi': 'Updated Time:', 'Yr Lo': current_time
 })
 
-# Save to CSV
 os.makedirs('Data', exist_ok=True)
 pd.DataFrame(records).to_csv('Data/nse_all_indices.csv', index=False)
