@@ -30,7 +30,7 @@ target_indices = [
 def format_index_name(index_name):
     if index_name == "NIFTY INDIA CONSUMPTION":
         return "CONSUMPTION"
-    elif index_name.startswith("NIFTY ") and index_name not in ["NIFTY 50", "GIFT-NIFTY"]:
+    elif index_name.startswith("NIFTY ") and index_name not in ["NIFTY 50", "NIFTY 500","GIFT-NIFTY"]:
         return index_name.replace("NIFTY ", "")
     return index_name
 
