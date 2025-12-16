@@ -27,11 +27,11 @@ def get_next_tuesday():
 def round_to_nearest_100(price):
     return round(price / 100) * 100
 
-def get_filtered_strike_prices(data, strike_range=10):  # Changed from 20 to 10
+def get_filtered_strike_prices(data, strike_range=10):
     underlying_value = data['records']['underlyingValue']
-    rounded_strike = round_to_nearest_100(underlying_value)  # Changed from round_to_nearest_50
+    rounded_strike = round_to_nearest_100(underlying_value)
     
-    all_strikes = sorted([item['strikePrice'] for item in data['records']['data']])
+    all_strikes = sorted([item['strikePrice'] for item in data['records']['data'] if item['strikePrice'] % 100 == 0])
     
     target_index = all_strikes.index(rounded_strike) if rounded_strike in all_strikes else \
                    min(range(len(all_strikes)), key=lambda i: abs(all_strikes[i] - rounded_strike))
@@ -39,8 +39,7 @@ def get_filtered_strike_prices(data, strike_range=10):  # Changed from 20 to 10
     start_index = max(0, target_index - strike_range)
     end_index = min(len(all_strikes), target_index + strike_range + 1)
     
-    return all_strikes[start_index:end_index], underlying_value, rounded_strike, target_index - start_index
-
+    return all_strikes[start_index:end_index], underlying_value, rounded_strike
 
 def get_option_chain(symbol="NIFTY", expiry=None):
     if expiry is None:
@@ -58,14 +57,13 @@ def get_option_chain(symbol="NIFTY", expiry=None):
     return data, expiry
 
 def create_option_chain_dataframe(data, expiry_date):
-    filtered_strikes, underlying_value, rounded_strike, underlying_index = get_filtered_strike_prices(data)
+    filtered_strikes, underlying_value, rounded_strike = get_filtered_strike_prices(data)
     
-    strike_map = {item['strikePrice']: item for item in data['records']['data']}
+    strike_map = {item['strikePrice']: item for item in data['records']['data'] if item['strikePrice'] % 100 == 0}
     
     option_data = []
     
-    # Add strike prices before underlying row
-    for i, strike in enumerate(filtered_strikes):
+    for strike in filtered_strikes:
         if strike not in strike_map:
             continue
             
@@ -89,8 +87,7 @@ def create_option_chain_dataframe(data, expiry_date):
             'PUT OI': pe_data.get('openInterest', 0)
         })
         
-        # Insert underlying value row after the rounded strike row
-        if i == underlying_index:
+        if strike == rounded_strike:
             option_data.append({
                 'CALL OI': '', 'CALL OI CHNG': '', 'CALL VOLUME': '', 'CALL IV': '',
                 'CALL CHNG': '', 'CALL LTP': '', 'STRIKE': f"{underlying_value}",
@@ -100,7 +97,6 @@ def create_option_chain_dataframe(data, expiry_date):
     
     df = pd.DataFrame(option_data)
     
-    # Add timestamp as last row
     ist = pytz.timezone('Asia/Kolkata')
     current_time = datetime.now(ist).strftime('%d-%b %H:%M')
     
