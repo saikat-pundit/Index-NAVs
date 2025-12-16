@@ -66,7 +66,16 @@ def create_option_chain_dataframe(data, expiry_date):
     for i, strike in enumerate(filtered_strikes):
         if strike not in strike_map:
             continue
-            
+        
+        # Insert underlying row BEFORE the rounded strike
+        if i == underlying_index:
+            option_data.append({
+                'CALL OI': '', 'CALL OI CHNG': '', 'CALL VOLUME': '', 'CALL IV': '',
+                'CALL CHNG': '', 'CALL LTP': '', 'STRIKE': f"{underlying_value}",
+                'PUT LTP': 'Expiry: ' + expiry_date, 'PUT CHNG': '', 'PUT IV': '',
+                'PUT VOLUME': '', 'PUT OI CHNG': '', 'PUT OI': ''
+            })
+        
         item = strike_map[strike]
         ce_data = item.get('CE', {})
         pe_data = item.get('PE', {})
@@ -86,14 +95,6 @@ def create_option_chain_dataframe(data, expiry_date):
             'PUT OI CHNG': pe_data.get('changeinOpenInterest', 0),
             'PUT OI': pe_data.get('openInterest', 0)
         })
-        
-        if i == underlying_index:
-            option_data.append({
-                'CALL OI': '', 'CALL OI CHNG': '', 'CALL VOLUME': '', 'CALL IV': '',
-                'CALL CHNG': '', 'CALL LTP': '', 'STRIKE': f"{underlying_value}",
-                'PUT LTP': 'Expiry: ' + expiry_date, 'PUT CHNG': '', 'PUT IV': '',
-                'PUT VOLUME': '', 'PUT OI CHNG': '', 'PUT OI': ''
-            })
     
     df = pd.DataFrame(option_data)
     
