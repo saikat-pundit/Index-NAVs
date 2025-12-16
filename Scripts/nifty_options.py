@@ -63,19 +63,14 @@ def create_option_chain_dataframe(data, expiry):
         }
         option_data.append(option_row)
     
-    if not option_data:
-        print("No option data found in response")
-        return pd.DataFrame()
-    
     df = pd.DataFrame(option_data)
     
-    if 'STRIKE' in df.columns:
+    if not df.empty and 'STRIKE' in df.columns:
         df = df.sort_values('STRIKE')
     else:
-        print("STRIKE column not found in data")
-        print("Available columns:", df.columns.tolist())
         return pd.DataFrame()
     
+    expiry_date = datetime.strptime(expiry, '%d-%b-%Y')
     expiry_row = {
         'OI': '',
         'OI_CHANGE': '',
@@ -117,13 +112,10 @@ def main():
             else:
                 print("Failed to create option chain dataframe")
         else:
-            print("Invalid or empty API response")
-            if data:
-                print("Response keys:", data.keys())
+            print("Invalid API response structure")
             
     except Exception as e:
         print(f"Error occurred: {str(e)}")
-        print("Full traceback will be shown below")
 
 if __name__ == "__main__":
     main()
