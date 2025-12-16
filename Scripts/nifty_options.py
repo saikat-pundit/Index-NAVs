@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 headers = {
@@ -10,7 +10,25 @@ headers = {
     'Referer': 'https://www.nseindia.com/option-chain'
 }
 
-def get_option_chain(symbol="NIFTY", expiry="23-Dec-2025"):
+def get_nearest_thursday():
+    ist = pytz.timezone('Asia/Kolkata')
+    today = datetime.now(ist)
+    
+    days_ahead = 3 - today.weekday()
+    if days_ahead <= 0:
+        days_ahead += 7
+    
+    expiry_date = today + timedelta(days=days_ahead)
+    
+    if expiry_date.month == today.month:
+        expiry_str = expiry_date.strftime('%d-%b-%Y')
+    else:
+        expiry_str = expiry_date.strftime('%d-%b-%Y')
+    
+    return expiry_str
+
+def get_option_chain(symbol="NIFTY"):
+    expiry = get_nearest_thursday()
     url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
     
     session = requests.Session()
@@ -20,9 +38,9 @@ def get_option_chain(symbol="NIFTY", expiry="23-Dec-2025"):
     response = session.get(url)
     data = response.json()
     
-    return data
+    return data, expiry
 
-def create_option_chain_dataframe(data):
+def create_option_chain_dataframe(data, expiry):
     records = data['records']
     timestamp = records['timestamp']
     underlying_value = records['underlyingValue']
@@ -35,12 +53,12 @@ def create_option_chain_dataframe(data):
         pe_data = item.get('PE', {})
         
         option_row = {
-            'STRIKE': strike_price,
             'OI': pe_data.get('openInterest', 0),
             'OI_CHANGE': pe_data.get('changeinOpenInterest', 0),
             'VOLUME': pe_data.get('totalTradedVolume', 0),
             'CHANGE': pe_data.get('change', 0),
             'LTP': pe_data.get('lastPrice', 0),
+            'STRIKE': strike_price,
             'C_LTP': ce_data.get('lastPrice', 0),
             'C_CHANGE': ce_data.get('change', 0),
             'C_VOLUME': ce_data.get('totalTradedVolume', 0),
@@ -51,41 +69,34 @@ def create_option_chain_dataframe(data):
     
     df = pd.DataFrame(option_data)
     
-    column_order = [
-        'OI', 'OI_CHANGE', 'VOLUME', 'CHANGE', 'LTP',
-        'STRIKE',
-        'C_LTP', 'C_CHANGE', 'C_VOLUME', 'C_OI_CHANGE', 'C_OI'
-    ]
-    
-    df = df[column_order]
-    
     df = df.sort_values('STRIKE')
     
-    timestamp_row = {
-        'OI': f'TIMESTAMP: {timestamp}',
-        'OI_CHANGE': f'UNDERLYING: {underlying_value}',
+    expiry_date = datetime.strptime(expiry, '%d-%b-%Y')
+    expiry_row = {
+        'OI': '',
+        'OI_CHANGE': '',
         'VOLUME': '',
         'CHANGE': '',
         'LTP': '',
-        'STRIKE': '',
-        'C_LTP': '',
-        'C_CHANGE': '',
+        'STRIKE': f'EXPIRY: {expiry}',
+        'C_LTP': f'TIMESTAMP: {timestamp}',
+        'C_CHANGE': f'UNDERLYING: {underlying_value}',
         'C_VOLUME': '',
         'C_OI_CHANGE': '',
         'C_OI': ''
     }
     
-    df = pd.concat([pd.DataFrame([timestamp_row]), df], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([expiry_row])], ignore_index=True)
     
     return df
 
 def main():
     ist = pytz.timezone('Asia/Kolkata')
     
-    data = get_option_chain()
+    data, expiry = get_option_chain()
     
     if data:
-        df = create_option_chain_dataframe(data)
+        df = create_option_chain_dataframe(data, expiry)
         
         import os
         os.makedirs('Data', exist_ok=True)
@@ -94,6 +105,7 @@ def main():
         
         timestamp = datetime.now(ist).strftime('%d-%b %H:%M')
         print(f"Option chain saved to Data/Option.csv")
+        print(f"Expiry: {expiry}")
         print(f"Timestamp: {timestamp} IST")
         print(f"Underlying Value: {data['records']['underlyingValue']}")
     else:
