@@ -9,7 +9,7 @@ headers = {
 }
 
 commodity_symbols = [
-    {"name": "Dow Jones", "symbol": "DJ:DJI"},
+    {"name": "Dow Jones", "symbol": "OANDA:US30USD"},
     {"name": "S&P 500", "symbol": "CME_MINI:ES1!"},
     {"name": "NASDAQ 100", "symbol": "CME_MINI:NQ1!"},
     {"name": "VIX", "symbol": "CBOE:VX1!"},
