@@ -86,21 +86,40 @@ def create_option_chain_dataframe(data, expiry_date):
     
     df = df[column_order]
     
+    # Rename columns to remove underscores
+    column_rename = {
+        'CALL_OI': 'CALL OI',
+        'CALL_CHNG_IN_OI': 'CALL CHNG IN OI',
+        'CALL_VOLUME': 'CALL VOLUME',
+        'CALL_IV': 'CALL IV',
+        'CALL_CHNG': 'CALL CHNG',
+        'CALL_LTP': 'CALL LTP',
+        'STRIKE': 'STRIKE',
+        'PUT_LTP': 'PUT LTP',
+        'PUT_CHNG': 'PUT CHNG',
+        'PUT_IV': 'PUT IV',
+        'PUT_VOLUME': 'PUT VOLUME',
+        'PUT_CHNG_IN_OI': 'PUT CHNG IN OI',
+        'PUT_OI': 'PUT OI'
+    }
+    
+    df = df.rename(columns=column_rename)
+    
     # Add underlying value row
     metadata = pd.DataFrame([{
-        'CALL_OI': '',
-        'CALL_CHNG_IN_OI': '',
-        'CALL_VOLUME': '',
-        'CALL_IV': '',        
-        'CALL_CHNG': '',
-        'CALL_LTP': '',
+        'CALL OI': '',
+        'CALL CHNG IN OI': '',
+        'CALL VOLUME': '',
+        'CALL IV': '',        
+        'CALL CHNG': '',
+        'CALL LTP': '',
         'STRIKE': underlying_value,
-        'PUT_LTP': 'Expiry: ' + expiry_date,
-        'PUT_CHNG': '',
-        'PUT_IV': '',
-        'PUT_VOLUME': '',
-        'PUT_CHNG_IN_OI': '',
-        'PUT_OI': ''
+        'PUT LTP': 'Expiry: ' + expiry_date,
+        'PUT CHNG': '',
+        'PUT IV': '',
+        'PUT VOLUME': '',
+        'PUT CHNG IN OI': '',
+        'PUT OI': ''
     }])
     
     df = pd.concat([metadata, df], ignore_index=True)
@@ -111,19 +130,19 @@ def create_option_chain_dataframe(data, expiry_date):
     
     # Add timestamp as last row
     timestamp_row = pd.DataFrame([{
-        'CALL_OI': '',
-        'CALL_CHNG_IN_OI': '',
-        'CALL_VOLUME': '',
-        'CALL_IV': '',        
-        'CALL_CHNG': '',
-        'CALL_LTP': '',
+        'CALL OI': '',
+        'CALL CHNG IN OI': '',
+        'CALL VOLUME': '',
+        'CALL IV': '',        
+        'CALL CHNG': '',
+        'CALL LTP': '',
         'STRIKE': '',
-        'PUT_LTP': '',
-        'PUT_CHNG': '',
-        'PUT_IV': '',
-        'PUT_VOLUME': '',
-        'PUT_CHNG_IN_OI': 'Update Time',
-        'PUT_OI': current_time
+        'PUT LTP': '',
+        'PUT CHNG': '',
+        'PUT IV': '',
+        'PUT VOLUME': '',
+        'PUT CHNG IN OI': 'Update Time',
+        'PUT OI': current_time
     }])
     
     df = pd.concat([df, timestamp_row], ignore_index=True)
