@@ -74,7 +74,7 @@ def create_option_chain_dataframe(data):
     
     metadata = pd.DataFrame([{
         'PUT_OI': '',
-        'PUT_CHNG_IN_OI': underlying_value,
+        'PUT_CHNG_IN_OI': ''
         'PUT_VOLUME': '',
         'PUT_IV': '',
         'PUT_LTP': '',
