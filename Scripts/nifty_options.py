@@ -104,7 +104,7 @@ def create_option_chain_dataframe(data, expiry_date):
     
     # Get current IST timestamp for footer
     ist = pytz.timezone('Asia/Kolkata')
-    current_time = datetime.now(ist).strftime('%d-%b-%Y %H:%M:%S')
+    current_time = datetime.now(ist).strftime('%d-%b %H:%M')
     
     # Add timestamp as last row
     timestamp_row = pd.DataFrame([{
