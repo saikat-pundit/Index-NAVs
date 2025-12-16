@@ -8,8 +8,8 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
 }
 
-# Specific funds to fetch
-target_funds = [
+# Specific funds to fetch (with full names for API matching)
+target_funds_api = [
     "Aditya Birla Sun Life PSU Equity Fund-Direct Plan-Growth",
     "Axis Focused Fund - Direct Plan - Growth Option",
     "Axis Large & Mid Cap Fund - Direct Plan - Growth",
@@ -32,6 +32,20 @@ target_funds = [
     "SBI MAGNUM GILT FUND - DIRECT PLAN - GROWTH"
 ]
 
+# Function to extract display name (everything before first dash)
+def extract_display_name(full_name):
+    # Split by dash and take the first part, strip whitespace
+    display_name = full_name.split('-')[0].strip()
+    # If there are multiple spaces, collapse them to single space
+    display_name = ' '.join(display_name.split())
+    return display_name
+
+# Create display names for CSV
+display_names = [extract_display_name(fund) for fund in target_funds_api]
+
+# Create a mapping from display name to API name for lookup
+fund_name_mapping = dict(zip(display_names, target_funds_api))
+
 # Set IST timezone
 ist = pytz.timezone('Asia/Kolkata')
 
@@ -53,8 +67,8 @@ url = f"https://www.amfiindia.com/api/nav-history?query_type=all_for_date&from_d
 response = requests.get(url, headers=headers)
 data = response.json()
 
-records = []
-funds_found = 0
+# Create a dictionary to store NAV data for quick lookup
+nav_data = {}
 
 for fund in data['data']:
     for scheme in fund['schemes']:
@@ -62,28 +76,33 @@ for fund in data['data']:
             nav_name = nav['NAV_Name']
             
             # Check if this NAV is in our target list
-            if nav_name in target_funds:
-                records.append({
-                    'Fund Name': nav_name,
+            if nav_name in target_funds_api:
+                # Extract display name
+                display_name = extract_display_name(nav_name)
+                nav_data[display_name] = {
                     'Fund NAV': nav['hNAV_Amt'],
                     'Update Time': nav['hNAV_Upload_display']
-                })
-                funds_found += 1
+                }
 
-# Sort records in the same order as target_funds list
+# Prepare records in the order of display_names
 sorted_records = []
-for fund_name in target_funds:
-    # Find the record for this fund
-    for record in records:
-        if record['Fund Name'] == fund_name:
-            sorted_records.append(record)
-            break
-    else:
-        # If fund not found, add placeholder
+funds_found = 0
+
+for display_name in display_names:
+    # Check if we have data for this fund
+    if display_name in nav_data:
         sorted_records.append({
-            'Fund Name': fund_name,
-            'Fund NAV': 'Not Available',
-            'Update Time': 'Not Available'
+            'Fund Name': display_name,
+            'Fund NAV': nav_data[display_name]['Fund NAV'],
+            'Update Time': nav_data[display_name]['Update Time']
+        })
+        funds_found += 1
+    else:
+        # If fund not found, show '-'
+        sorted_records.append({
+            'Fund Name': display_name,
+            'Fund NAV': '-',
+            'Update Time': '-'
         })
 
 # Add timestamp row with IST
@@ -100,6 +119,14 @@ df = pd.DataFrame(sorted_records)
 df.to_csv('Data/Daily_NAV.csv', index=False)
 
 print(f"NAV data saved successfully for date: {target_date_str}!")
-print(f"Funds found: {funds_found} out of {len(target_funds)}")
+print(f"Funds found: {funds_found} out of {len(display_names)}")
 print(f"Timestamp: {timestamp} IST")
 print(f"File saved to: Data/Daily_NAV.csv")
+
+# Display sample of how names appear in CSV
+print("\nSample of fund names in CSV:")
+print("=" * 50)
+for i, record in enumerate(sorted_records[:5]):  # Show first 5
+    if record['Fund Name']:  # Skip the timestamp row
+        print(f"{record['Fund Name']} - NAV: {record['Fund NAV']}")
+print("=" * 50)
