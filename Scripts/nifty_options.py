@@ -73,17 +73,17 @@ def create_option_chain_dataframe(data):
     df = df[column_order]
     
     metadata = pd.DataFrame([{
-        'PUT_OI': 'UNDERLYING',
+        'PUT_OI': '',
         'PUT_CHNG_IN_OI': underlying_value,
-        'PUT_VOLUME': 'TIMESTAMP',
-        'PUT_IV': timestamp,
+        'PUT_VOLUME': '',
+        'PUT_IV': '',
         'PUT_LTP': '',
         'PUT_CHNG': '',
         'PUT_BID': '',
         'PUT_BID_QTY': '',
         'PUT_ASK': '',
         'PUT_ASK_QTY': '',
-        'STRIKE': '',
+        'STRIKE': underlying_value,
         'CALL_BID': '',
         'CALL_BID_QTY': '',
         'CALL_ASK': '',
