@@ -2,6 +2,7 @@ import requests
 import csv
 import os
 from datetime import datetime
+import pytz
 
 url = "https://oxide.sensibull.com/v1/compute/cache/fii_dii_daily"
 response = requests.get(url)
@@ -9,11 +10,7 @@ data = response.json()
 
 os.makedirs("Data", exist_ok=True)
 
-csv_path = "Data/Cash.csv"
-if os.path.exists(csv_path):
-    os.remove(csv_path)
-
-with open(csv_path, "w", newline="") as f:
+with open("Data/Cash.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Date", "FII Net Buy/Sell", "DII Net Buy/Sell"])
     
@@ -29,3 +26,8 @@ with open(csv_path, "w", newline="") as f:
             dii_val = int(day["cash"]["dii"]["buy_sell_difference"])
             
             writer.writerow([formatted_date, f"{fii_val} Cr.", f"{dii_val} Cr."])
+    
+    # Add timestamp row with IST
+    ist = pytz.timezone('Asia/Kolkata')
+    timestamp = datetime.now(ist).strftime("%d %b %H:%M")
+    writer.writerow(["", "Update Time:", timestamp])
