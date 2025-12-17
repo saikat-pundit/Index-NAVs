@@ -1,3 +1,9 @@
+"""
+IV Calculator Library for Options Trading
+Author: Your Name
+Version: 1.0
+"""
+
 import datetime
 import scipy.stats
 import numpy as np
@@ -11,26 +17,15 @@ from typing import Tuple, List, Dict, Literal, Union, Any
 NORM_CDF = norm.cdf
 NORM_PDF = norm.pdf
 
-HOLIDAYS, CURRENTYEAR, NEXTYEAR = (
-    [
-        "2025-02-26",
-        "2025-03-14",
-        "2025-03-31",
-        "2025-04-10",
-        "2025-04-14",
-        "2025-04-18",
-        "2025-05-01",
-        "2025-08-15",
-        "2025-08-27",
-        "2025-10-02",
-        "2025-10-21",
-        "2025-10-22",
-        "2025-11-05",
-        "2025-12-25"
-    ],
-    str(dt.now().year),
-    str(dt.now().year + 1),
-)
+# Indian Holidays 2025 (Updated)
+HOLIDAYS = [
+    "2025-02-26", "2025-03-14", "2025-03-31", "2025-04-10",
+    "2025-04-14", "2025-04-18", "2025-05-01", "2025-08-15",
+    "2025-08-27", "2025-10-02", "2025-10-21", "2025-10-22",
+    "2025-11-05", "2025-12-25"
+]
+CURRENTYEAR = str(dt.now().year)
+NEXTYEAR = str(dt.now().year + 1)
 
 
 class ExpType(Enum):
@@ -65,7 +60,8 @@ class FromDateType(IntEnum):
 
 
 class CalcIvGreeks:
-    global HOLIDAYS
+    """Main class for calculating Implied Volatility and Greeks"""
+    
     TD64S = "timedelta64[s]"
     IV_LOWER_BOUND = 1e-11
     SECONDS_IN_A_DAY = np.timedelta64(1, "D").astype(TD64S)
@@ -115,7 +111,7 @@ class CalcIvGreeks:
             if self.tryMatchWith == TryMatchWith.NSE
             else 0.0
             if self.tryMatchWith == TryMatchWith.SENSIBULL
-            else CalcIvGreeks.getRiskFreeIntrRate() / 100
+            else self.getRiskFreeIntrRate() / 100
         )
         self.T = self.get_tte()
 
@@ -137,27 +133,30 @@ class CalcIvGreeks:
         self.P0 = AtmStrikePutPrice
         self.F = (
             FuturePrice
-            if self.expiryDateType == ExpType.MONTHLY
+            if hasattr(self, 'expiryDateType') and self.expiryDateType == ExpType.MONTHLY
             else self.C0 - self.P0 + self.K0
         )
         self.T = self.get_tte()
 
     @staticmethod
     def getRiskFreeIntrRate() -> float:
-        return (
-            __import__("pandas")
-            .json_normalize(
-                __import__("requests")
-                .get(
-                    "https://techfanetechnologies.github.io"
-                    + "/risk_free_interest_rate/RiskFreeInterestRate.json"
+        import pandas as pd
+        import requests
+        
+        try:
+            return (
+                pd.json_normalize(
+                    requests.get(
+                        "https://techfanetechnologies.github.io"
+                        + "/risk_free_interest_rate/RiskFreeInterestRate.json"
+                    ).json()
                 )
-                .json()
+                .query('GovernmentSecurityName == "364 day T-bills"')
+                .reset_index()
+                .Percent[0]
             )
-            .query('GovernmentSecurityName == "364 day T-bills"')
-            .reset_index()
-            .Percent[0]
-        )
+        except:
+            return 6.0  # Default 6% if fetch fails
 
     @staticmethod
     def find_atm_strike(all_strikes: List[float], ltp: float) -> float:
@@ -173,7 +172,7 @@ class CalcIvGreeks:
                 np.datetime64(
                     dt.combine(
                         self.dateFuture.date(), datetime.time(15, 30, 0)
-                    )  # noqa: E501
+                    )
                 )
                 - np.datetime64(self.datePast)
             ).astype(self.TD64S) / self.SECONDS_IN_A_DAY
@@ -193,8 +192,8 @@ class CalcIvGreeks:
                         int(
                             timedelta(
                                 hours=8, minutes=30, seconds=0
-                            ).total_seconds()  # noqa: E501
-                        ),  # noqa: E501
+                            ).total_seconds()
+                        ),
                         "s",
                     )
                 ).astype(self.TD64S)
@@ -203,7 +202,7 @@ class CalcIvGreeks:
                     - np.datetime64(
                         dt.combine(
                             self.datePast.date(), datetime.time(0, 0, 0)
-                        )  # noqa: E501
+                        )
                     )
                 ).astype(self.TD64S)
             ) / self.SECONDS_IN_A_DAY
@@ -298,16 +297,13 @@ class CalcIvGreeks:
             * EXP(-0.5 * d * d)
             * (K * (A1 + K * (A2 + K * (A3 + K * (A4 + K * A5)))))
         )
-        # if d > 0:
-        #     ret_val = 1.0 - ret_val
-        # return ret_val
         return np.where(d > 0, 1.0 - ret_val, ret_val)
 
     def BSM(self, sigma: float):
         sqrtT = SQRT(self.T)
         d1 = (
             LOG(self.S / self.K) + (self.r + 0.5 * sigma * sigma) * self.T
-        ) / (  # noqa: E501
+        ) / (
             sigma * sqrtT
         )
         d2 = d1 - sigma * sqrtT
@@ -333,10 +329,9 @@ class CalcIvGreeks:
         if sigma > self.IV_LOWER_BOUND:
             return (
                 LOG(self.S / self.K) + (self.r + sigma**2 / 2) * self.T
-            ) / (  # noqa: E501
+            ) / (
                 sigma * SQRT(self.T)
             )
-        # return np.PINF if self.S > self.K else np.NINF
         return np.inf if self.S > self.K else -np.inf
 
     def BS_d2(self, sigma: float):
@@ -363,7 +358,7 @@ class CalcIvGreeks:
         if sigma > self.IV_LOWER_BOUND:
             return NORM_PDF(self.BS_d1(sigma)) / (
                 self.S * sigma * SQRT(self.T)
-            )  # noqa: E501
+            )
         return 0
 
     def Vega(self, sigma: float) -> float:
@@ -374,43 +369,45 @@ class CalcIvGreeks:
             2 * SQRT(self.T)
         ) - self.r * self.K * EXP(-self.r * self.T) * NORM_CDF(
             self.BS_d2(sigma)
-        )  # noqa: E501
+        )
 
     def ThetaPut(self, sigma: float) -> float:
         return -self.S * sigma * NORM_PDF(self.BS_d1(sigma)) / (
             2 * SQRT(self.T)
         ) + self.r * self.K * EXP(-self.r * self.T) * NORM_CDF(
             -self.BS_d2(sigma)
-        )  # noqa: E501
+        )
 
     def RhoCall(self, sigma: float) -> float:
         return (
             self.K
             * self.T
             * EXP(-self.r * self.T)
-            * NORM_CDF(self.BS_d2(sigma))  # noqa: E501
-        )  # noqa: E501
+            * NORM_CDF(self.BS_d2(sigma))
+        )
 
     def RhoPut(self, sigma: float) -> float:
         return (
             -self.K
             * self.T
             * EXP(-self.r * self.T)
-            * NORM_CDF(-self.BS_d2(sigma))  # noqa: E501
-        )  # noqa: E501
+            * NORM_CDF(-self.BS_d2(sigma))
+        )
 
     def ImplVolWithBrent(self, OptionLtp, PricingFunction):
         try:
             ImplVol = brentq(
                 lambda sigma: OptionLtp - PricingFunction(sigma),
-                0,
-                10,
+                0.001,  # Lower bound
+                5.0,    # Upper bound (500% IV)
+                xtol=1e-12,
+                maxiter=100
             )
             return (
                 ImplVol
                 if ImplVol > self.IV_LOWER_BOUND
-                else self.IV_LOWER_BOUND  # noqa: E501
-            )  # noqa: E501
+                else self.IV_LOWER_BOUND
+            )
         except Exception:
             return self.IV_LOWER_BOUND
 
@@ -441,7 +438,7 @@ class CalcIvGreeks:
             _ = {
                 "CallIV": round(CallIV * 100, 2),
                 "PutIV": round(PutIV * 100, 2),
-            }  # noqa: E501
+            }
         else:
             _ = {}
         return {
@@ -460,3 +457,45 @@ class CalcIvGreeks:
                 "RhoPut": round(self.RhoPut(PutIV) / 1000, 3),
             },
         }
+
+
+# Helper functions for easy usage
+def calculate_single_iv_for_option(
+    spot_price: float,
+    future_price: float,
+    strike: float,
+    call_price: float,
+    put_price: float,
+    expiry_datetime: dt,
+    atm_strike: float,
+    atm_call_price: float,
+    atm_put_price: float,
+    use_call_for_atm_and_above: bool = True
+) -> float:
+    """
+    Calculate single IV for an option
+    
+    Args:
+        use_call_for_atm_and_above: 
+            True: Use CALL IV for strikes >= ATM
+            False: Use PUT IV for strikes < ATM
+    """
+    calculator = CalcIvGreeks(
+        SpotPrice=spot_price,
+        FuturePrice=future_price,
+        AtmStrike=atm_strike,
+        AtmStrikeCallPrice=atm_call_price,
+        AtmStrikePutPrice=atm_put_price,
+        ExpiryDateTime=expiry_datetime,
+        StrikePrice=strike,
+        StrikeCallPrice=call_price if call_price > 0 else 0.01,
+        StrikePutPrice=put_price if put_price > 0 else 0.01,
+        tryMatchWith=TryMatchWith.SENSIBULL
+    )
+    
+    if use_call_for_atm_and_above and strike >= atm_strike:
+        iv = calculator.CallImplVol() * 100
+    else:
+        iv = calculator.PutImplVol() * 100
+    
+    return round(iv, 2) if iv > 0 else 0.0
