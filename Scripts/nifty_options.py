@@ -22,8 +22,8 @@ def is_market_hours():
     current_time = ist_now.time()
     
     # Define market hours
-    market_open = time(9, 30)   # 9:30 AM
-    market_close = time(15, 30) # 3:30 PM
+    market_open = time(9, 15)   # 9:30 AM
+    market_close = time(15, 40) # 3:30 PM
     
     # Check if within market hours (inclusive)
     return market_open <= current_time <= market_close
