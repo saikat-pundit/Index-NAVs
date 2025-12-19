@@ -8,6 +8,64 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from iv_calculator import CalcIvGreeks, TryMatchWith
 
+# Time check function
+def is_market_hours():
+    """Check if current time is within market hours (IST: 9:30 AM to 3:30 PM, Mon-Fri)"""
+    ist = pytz.timezone('Asia/Kolkata')
+    ist_now = datetime.now(ist)
+    
+    # Check if it's a weekday (Monday=0, Sunday=6)
+    if ist_now.weekday() >= 5:  # 5=Saturday, 6=Sunday
+        return False
+    
+    # Get current time
+    current_time = ist_now.time()
+    
+    # Define market hours
+    market_open = time(9, 30)   # 9:30 AM
+    market_close = time(15, 30) # 3:30 PM
+    
+    # Check if within market hours (inclusive)
+    return market_open <= current_time <= market_close
+
+# Add this at the beginning of main()
+def main():
+    # Check if we're in market hours
+    if not is_market_hours():
+        ist = pytz.timezone('Asia/Kolkata')
+        current_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S IST')
+        weekday = datetime.now(ist).strftime('%A')
+        
+        print(f"Current time: {current_time} ({weekday})")
+        print("Script not running - outside market hours (IST: 9:30 AM to 3:30 PM, Mon-Fri)")
+        print("Exiting...")
+        return  # Exit the script
+    
+    # Continue with the rest of the script only if we're in market hours
+    ist = pytz.timezone('Asia/Kolkata')
+    expiry_date = get_next_tuesday()
+    
+    data, expiry = get_option_chain(expiry=expiry_date)
+    
+    if data:
+        df = create_option_chain_dataframe(data, expiry)
+        os.makedirs('Data', exist_ok=True)
+        
+        output_file = 'Data/Option.csv'
+        df.to_csv(output_file, index=False)
+        
+        current_time = datetime.now(ist).strftime('%d-%b %H:%M')
+        
+        print(f"Option chain saved to: {output_file}")
+        print(f"Timestamp: {current_time} IST")
+        print(f"Underlying: {data['records']['underlyingValue']}")
+        print(f"Expiry: {expiry}")
+        print(f"Rows: {len(df)}")
+        
+    else:
+        print("Failed to fetch option chain data")
+
+# Rest of your functions remain the same...
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
     'Accept': 'application/json',
@@ -229,30 +287,6 @@ def create_option_chain_dataframe(data, expiry_date):
     df = pd.concat([df, timestamp_row], ignore_index=True)
     
     return df
-
-def main():
-    ist = pytz.timezone('Asia/Kolkata')
-    expiry_date = get_next_tuesday()
-    
-    data, expiry = get_option_chain(expiry=expiry_date)
-    
-    if data:
-        df = create_option_chain_dataframe(data, expiry)
-        os.makedirs('Data', exist_ok=True)
-        
-        output_file = 'Data/Option.csv'
-        df.to_csv(output_file, index=False)
-        
-        current_time = datetime.now(ist).strftime('%d-%b %H:%M')
-        
-        print(f"Option chain saved to: {output_file}")
-        print(f"Timestamp: {current_time} IST")
-        print(f"Underlying: {data['records']['underlyingValue']}")
-        print(f"Expiry: {expiry}")
-        print(f"Rows: {len(df)}")
-        
-    else:
-        print("Failed to fetch option chain data")
 
 if __name__ == "__main__":
     main()
