@@ -21,11 +21,11 @@ commodity_symbols = [
 def format_value(value, key, name):
     if value is None: return "0"
     try:
-        if key == '% Chng': return f"{float(value):.2f}%"
-        if name in ["GOLDINR", "SILVERINR"] and key in ['LTP', 'Chng', 'Previous', 'Yr Hi', 'Yr Lo']:
+        if key == '%': return f"{float(value):.2f}%"
+        if name in ["GOLDINR", "SILVERINR"] and key in ['LTP', 'Chng', 'Prev.', 'Yr Hi', 'Yr Lo']:
             val = float(value)
             return str(int(val))
-        if key in ['LTP', 'Chng', 'Previous', 'Yr Hi', 'Yr Lo']:
+        if key in ['LTP', 'Chng', 'Prev.', 'Yr Hi', 'Yr Lo']:
             return f"{float(value):.2f}"
         return str(float(value))
     except: return "0"
@@ -38,21 +38,21 @@ for c in commodity_symbols:
             'Index': c["name"],
             'LTP': format_value(data.get('close'), 'LTP', c["name"]),
             'Chng': format_value(data.get('change_abs'), 'Chng', c["name"]),
-            '% Chng': format_value(data.get('change'), '% Chng', c["name"]),
-            'Previous': format_value(data.get('close[1]'), 'Previous', c["name"]),
+            '%': format_value(data.get('change'), '%', c["name"]),
+            'Prev.': format_value(data.get('close[1]'), 'Prev.', c["name"]),
             'Yr Hi': format_value(data.get('price_52_week_high'), 'Yr Hi', c["name"]),
             'Yr Lo': format_value(data.get('price_52_week_low'), 'Yr Lo', c["name"])
         })
     except:
         commodity_data.append({
             'Index': c["name"],
-            'LTP': "0", 'Chng': "0", '% Chng': "0.00%",
-            'Previous': "0", 'Yr Hi': "0", 'Yr Lo': "0"
+            'LTP': "0", 'Chng': "0", '%': "0.00%",
+            'Prev.': "0", 'Yr Hi': "0", 'Yr Lo': "0"
         })
 
 commodity_data.append({
-    'Index': '', 'LTP': '', 'Chng': '', '% Chng': '',
-    'Previous': '', 'Yr Hi': 'Update Time', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
+    'Index': '', 'LTP': '', 'Chng': '', '%': '',
+    'Prev.': '', 'Yr Hi': 'Update Time', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
 })
 
 os.makedirs('Data', exist_ok=True)
