@@ -20,8 +20,8 @@ for item in data.get('data', []):
             'SYMBOL': symbol,
             'LTP': item.get('ltP', '-'),
             'CHNG': item.get('chn', '-'),
-            '%CHNG': percent,
-            'PREVIOUS': item.get('prevClose', '-'),
+            '%': percent,
+            'Prev.': item.get('prevClose', '-'),
             'Yr Hi': item.get('wkhi', '-'),
             'Yr Lo': item.get('wklo', '-')
         }
@@ -33,13 +33,13 @@ for symbol in target_symbols:
     else:
         records.append({
             'SYMBOL': symbol,
-            'LTP': '-', 'CHNG': '-', '%CHNG': '-',
-            'PREVIOUS': '-', 'Yr Hi': '-', 'Yr Lo': '-'
+            'LTP': '-', 'CHNG': '-', '%': '-',
+            'Prev.': '-', 'Yr Hi': '-', 'Yr Lo': '-'
         })
 
 records.append({
-    'SYMBOL': '', 'LTP': '', 'CHNG': '', '%CHNG': '',
-    'PREVIOUS': '', 'Yr Hi': 'Update Time', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
+    'SYMBOL': '', 'LTP': '', 'CHNG': '', '%': '',
+    'Prev.': '', 'Yr Hi': 'Update Time', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
 })
 
 os.makedirs('Data', exist_ok=True)
