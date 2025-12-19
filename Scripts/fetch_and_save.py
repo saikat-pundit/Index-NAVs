@@ -12,13 +12,13 @@ def format_index_name(name):
 def format_value(value, key, index_name):
     if value == '-' or value is None: return '-'
     try:
-        if key in ['% Chng', 'Adv:Dec']: return f"{float(value):.2f}%" if key == '% Chng' else f"{float(value):.2f}"
+        if key in ['%', 'Adv:Dec']: return f"{float(value):.2f}%" if key == '%' else f"{float(value):.2f}"
         if index_name in ["INDIA VIX", "USD/INR", "IND 5Y", "IND 10Y", "IND 30Y"]:
-            return f"{float(value):.2f}" if key in ['LTP', 'Chng', 'Previous', 'Yr Hi', 'Yr Lo'] else str(float(value))
-        if index_name in ["GIFT-NIFTY", "GOLD", "SILVER"] and key in ['LTP', 'Chng', 'Previous', 'Yr Hi', 'Yr Lo']:
+            return f"{float(value):.2f}" if key in ['LTP', 'Chng', 'Prev.', 'Yr Hi', 'Yr Lo'] else str(float(value))
+        if index_name in ["GIFT-NIFTY", "GOLD", "SILVER"] and key in ['LTP', 'Chng', 'Prev.', 'Yr Hi', 'Yr Lo']:
             val = float(value)
             return str(int(val)) if not val.is_integer() else str(int(val))
-        if key in ['Chng', 'LTP', 'Previous', 'Yr Hi', 'Yr Lo']:
+        if key in ['Chng', 'LTP', 'Prev.', 'Yr Hi', 'Yr Lo']:
             val = float(value)
             return str(int(val)) if not val.is_integer() else str(int(val))
         return str(float(value))
@@ -31,7 +31,7 @@ for name, symbol in TV_SYMBOLS.items():
         data = requests.get(url, headers=headers, timeout=5).json()
         index_dict[name] = {
             'Index': format_index_name(name), 'LTP': data.get('close'), 'Chng': data.get('change_abs'),
-            '% Chng': data.get('change'), 'Previous': data.get('close[1]'), 'Adv:Dec': '-',
+            '%': data.get('change'), 'Prev.': data.get('close[1]'), 'Adv:Dec': '-',
             'Yr Hi': data.get('price_52_week_high'), 'Yr Lo': data.get('price_52_week_low')
         }
     except: pass
@@ -45,7 +45,7 @@ try:
         adv_dec = f"{adv/dec:.2f}" if dec != 0 else "Max" if adv > 0 else "-"
         index_dict[name] = {
             'Index': format_index_name(name), 'LTP': item.get('last'), 'Chng': item.get('variation'),
-            '% Chng': item.get('percentChange'), 'Previous': item.get('previousClose'), 'Adv:Dec': adv_dec,
+            '%': item.get('percentChange'), 'Prev.': item.get('previousClose'), 'Adv:Dec': adv_dec,
             'Yr Hi': item.get('yearHigh'), 'Yr Lo': item.get('yearLow')
         }
 except: pass
@@ -57,9 +57,9 @@ for idx in target_indices:
         rec = {k: format_value(v, k, idx) for k, v in index_dict[idx].items()}
         rec['Index'] = formatted_name
     else:
-        rec = {'Index': formatted_name, 'LTP': '-', 'Chng': '-', '% Chng': '-', 'Previous': '-', 'Adv:Dec': '-', 'Yr Hi': '-', 'Yr Lo': '-'}
+        rec = {'Index': formatted_name, 'LTP': '-', 'Chng': '-', '%': '-', 'Prev.': '-', 'Adv:Dec': '-', 'Yr Hi': '-', 'Yr Lo': '-'}
     records.append(rec)
 
-records.append({'Index': '', 'LTP': '', 'Chng': '', '% Chng': '', 'Previous': '', 'Adv:Dec': '', 'Yr Hi': 'Updated Time:', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')})
+records.append({'Index': '', 'LTP': '', 'Chng': '', '%': '', 'Prev.': '', 'Adv:Dec': '', 'Yr Hi': 'Updated Time:', 'Yr Lo': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')})
 os.makedirs('Data', exist_ok=True)
 pd.DataFrame(records).to_csv('Data/nse_all_indices.csv', index=False)
