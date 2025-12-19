@@ -46,13 +46,13 @@ for item in raw_data:
         'Title': item.get('title', ''),
         'Impact': impact_to_stars(item.get('impact', '')),
         'Actual': item.get('actual', ''),
-        'Expected': item.get('expected', ''),
-        'Previous': item.get('previous', '')
+        'Exp.': item.get('expected', ''),
+        'Prev.': item.get('previous', '')
     })
 
 records.append({
     'Date': '', 'Time': '', 'Country': '', 'Title': '', 'Impact': '', 'Actual': '',
-    'Expected': 'Update Time:', 'Previous': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
+    'Exp.': 'Update Time:', 'Prev.': datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%b %H:%M')
 })
 
 os.makedirs('Data', exist_ok=True)
