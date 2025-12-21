@@ -23,7 +23,7 @@ def format_date(date_str):
         return ''
 
 def clean_text(text):
-    return text.replace(',', ' ') if text else ''  # Changed to replace with space
+    return text.replace(',', ' ').replace('\n', ' ').replace('\r', ' ').strip() if text else ''
 
 def fetch_emails():
     user, pwd = os.getenv('YANDEX_EMAIL'), os.getenv('YANDEX_APP_PASSWORD')
@@ -58,7 +58,7 @@ def fetch_emails():
                 try: body = msg.get_payload(decode=True).decode('utf-8', errors='ignore')
                 except: body = msg.get_payload(decode=True).decode('latin-1', errors='ignore')
             
-            body_clean = clean_text(body[:200].replace('\n', ' ').strip())
+            body_clean = clean_text(body[:200])
             emails_data.append([date_time, from_short, subject, body_clean])
         
         os.makedirs('Data', exist_ok=True)
