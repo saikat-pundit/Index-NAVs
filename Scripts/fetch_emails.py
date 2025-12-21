@@ -1,4 +1,4 @@
-import imaplib, email, csv, os, sys, pytz
+import imaplib, email, csv, os, sys, re, pytz
 from datetime import datetime
 from email.header import decode_header
 
@@ -10,6 +10,17 @@ def decode_text(text):
         part.decode(enc if enc else 'utf-8', errors='ignore') if isinstance(part, bytes) else str(part)
         for part, enc in decode_header(text)
     )
+
+def extract_email(from_str):
+    match = re.search(r'<([^>]+)>', from_str)
+    return match.group(1).split('@')[0] if match else from_str.split('@')[0] if '@' in from_str else from_str
+
+def format_date(date_str):
+    try:
+        date_obj = email.utils.parsedate_to_datetime(date_str).astimezone(IST)
+        return date_obj.strftime('%d %b %H:%M')  # 06 Nov 16:29 format
+    except:
+        return ''
 
 def fetch_emails():
     user, pwd = os.getenv('YANDEX_EMAIL'), os.getenv('YANDEX_APP_PASSWORD')
@@ -24,18 +35,13 @@ def fetch_emails():
         email_ids = messages[0].split()[-100:]  # Last 100 emails
         
         emails_data = []
-        for eid in email_ids:
+        for eid in reversed(email_ids):  # Start with newest
             _, msg_data = mail.fetch(eid, '(RFC822)')
             msg = email.message_from_bytes(msg_data[0][1])
             
-            date_str = msg.get('Date', '')
-            try:
-                date_obj = email.utils.parsedate_to_datetime(date_str).astimezone(IST)
-                date_time = date_obj.strftime('%Y-%m-%d %H:%M:%S')
-            except:
-                date_time = ''
-            
-            from_ = decode_text(msg.get('From', ''))
+            date_time = format_date(msg.get('Date', ''))
+            from_raw = decode_text(msg.get('From', ''))
+            from_short = extract_email(from_raw)
             subject = decode_text(msg.get('Subject', ''))
             
             body = ''
@@ -49,7 +55,7 @@ def fetch_emails():
                 try: body = msg.get_payload(decode=True).decode('utf-8', errors='ignore')
                 except: body = msg.get_payload(decode=True).decode('latin-1', errors='ignore')
             
-            emails_data.append([date_time, from_, subject, body[:200].replace('\n', ' ').strip()])
+            emails_data.append([date_time, from_short, subject, body[:200].replace('\n', ' ').strip()])
         
         os.makedirs('Data', exist_ok=True)
         with open('Data/email.csv', 'w', newline='', encoding='utf-8') as f:
@@ -57,7 +63,7 @@ def fetch_emails():
             writer.writerow(['Date-Time', 'From', 'Subject', 'Body_Preview'])
             writer.writerows(emails_data)
         
-        print(f"✅ Saved {len(emails_data)} emails")
+        print(f"✅ Saved {len(emails_data)} emails (newest first)")
         mail.close()
         mail.logout()
         
