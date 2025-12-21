@@ -18,7 +18,7 @@ def extract_email(from_str):
 def format_date(date_str):
     try:
         date_obj = email.utils.parsedate_to_datetime(date_str).astimezone(IST)
-        return date_obj.strftime('%d %b %H:%M')  # 06 Nov 16:29 format
+        return date_obj.strftime('%d %b %H:%M')
     except:
         return ''
 
@@ -32,10 +32,10 @@ def fetch_emails():
         mail.select('INBOX')
         
         _, messages = mail.search(None, 'ALL')
-        email_ids = messages[0].split()[-10:]  # Last 100 emails
+        email_ids = messages[0].split()[-100:]
         
         emails_data = []
-        for eid in reversed(email_ids):  # Start with newest
+        for eid in reversed(email_ids):
             _, msg_data = mail.fetch(eid, '(RFC822)')
             msg = email.message_from_bytes(msg_data[0][1])
             
@@ -58,6 +58,12 @@ def fetch_emails():
             emails_data.append([date_time, from_short, subject, body[:200].replace('\n', ' ').strip()])
         
         os.makedirs('Data', exist_ok=True)
+        
+        old_csv = 'Data/email.csv'
+        if os.path.exists(old_csv):
+            os.remove(old_csv)
+            print(f"🗑️ Deleted old file")
+        
         with open('Data/email.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(['Date-Time', 'From', 'Subject', 'Body_Preview'])
