@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta, time, date
 import pytz
 import os
 import sys
@@ -8,41 +8,112 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from iv_calculator import CalcIvGreeks, TryMatchWith
 
-# Time check function
+# Define holidays
+HOLIDAYS = [
+    "2025-02-26", "2025-03-14", "2025-03-31", "2025-04-10",
+    "2025-04-14", "2025-04-18", "2025-05-01", "2025-08-15",
+    "2025-08-27", "2025-10-02", "2025-10-21", "2025-10-22",
+    "2025-11-05", "2025-12-25", "2026-01-26", "2026-03-03", 
+    "2026-03-26", "2026-03-31", "2026-04-03", "2026-04-14", 
+    "2026-05-01", "2026-05-28", "2026-06-26", "2026-09-14", 
+    "2026-10-02", "2026-10-20", "2026-11-10", "2026-11-24", 
+    "2026-12-25"
+]
+
+# Convert holiday strings to date objects for easier comparison
+HOLIDAY_DATES = [datetime.strptime(holiday, "%Y-%m-%d").date() for holiday in HOLIDAYS]
+
+def is_market_day():
+    """Check if current day is a trading day (weekday and not a holiday)"""
+    ist = pytz.timezone('Asia/Kolkata')
+    ist_now = datetime.now(ist)
+    current_date = ist_now.date()
+    
+    # Check if it's a weekend
+    if ist_now.weekday() >= 5:  # 5=Saturday, 6=Sunday
+        return False
+    
+    # Check if it's a holiday
+    if current_date in HOLIDAY_DATES:
+        return False
+    
+    return True
+
 def is_market_hours():
-    """Check if current time is within market hours (IST: 9:30 AM to 3:30 PM, Mon-Fri)"""
+    """Check if current time is within market hours (IST: 9:15 AM to 3:40 PM)"""
     ist = pytz.timezone('Asia/Kolkata')
     ist_now = datetime.now(ist)
     
-    # Check if it's a weekday (Monday=0, Sunday=6)
-    if ist_now.weekday() >= 5:  # 5=Saturday, 6=Sunday
+    # First check if it's a market day
+    if not is_market_day():
         return False
     
     # Get current time
     current_time = ist_now.time()
     
-    # Define market hours
-    market_open = time(9, 15)   # 9:30 AM
-    market_close = time(15, 40) # 3:30 PM
+    # Define market hours with buffer
+    market_open = time(9, 15)   # 9:15 AM (15 mins buffer)
+    market_close = time(15, 40) # 3:40 PM (10 mins buffer)
     
     # Check if within market hours (inclusive)
     return market_open <= current_time <= market_close
 
-# Add this at the beginning of main()
-def main():
-    # Check if we're in market hours
-    if not is_market_hours():
-        ist = pytz.timezone('Asia/Kolkata')
-        current_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S IST')
-        weekday = datetime.now(ist).strftime('%A')
-        
-        print(f"Current time: {current_time} ({weekday})")
-        print("Script not running - outside market hours (IST: 9:30 AM to 3:30 PM, Mon-Fri)")
-        print("Exiting...")
-        return  # Exit the script
-    
-    # Continue with the rest of the script only if we're in market hours
+def get_market_status_message():
+    """Get detailed message about why market is closed"""
     ist = pytz.timezone('Asia/Kolkata')
+    ist_now = datetime.now(ist)
+    current_date = ist_now.date()
+    current_time_str = ist_now.strftime('%Y-%m-%d %H:%M:%S IST')
+    weekday = ist_now.strftime('%A')
+    
+    # Check weekend
+    if ist_now.weekday() >= 5:
+        return f"Market closed - {weekday} (Weekend)", False
+    
+    # Check holiday
+    if current_date in HOLIDAY_DATES:
+        # Find holiday name if available in original list
+        holiday_str = ""
+        for holiday in HOLIDAYS:
+            if holiday.startswith(str(current_date)):
+                holiday_str = f" ({holiday})"
+                break
+        return f"Market closed - {weekday}{holiday_str} (Holiday)", False
+    
+    # Check market hours
+    market_open = time(9, 15)
+    market_close = time(15, 40)
+    current_time = ist_now.time()
+    
+    if current_time < market_open:
+        time_to_open = datetime.combine(current_date, market_open) - datetime.combine(current_date, current_time)
+        hours, remainder = divmod(time_to_open.seconds, 3600)
+        minutes = remainder // 60
+        return f"Market opens in {hours}h {minutes}m at 9:15 AM", False
+    
+    if current_time > market_close:
+        return f"Market closed at 3:30 PM today", False
+    
+    return f"Market open - {weekday}", True
+
+def main():
+    # Get market status with detailed message
+    status_message, is_open = get_market_status_message()
+    ist = pytz.timezone('Asia/Kolkata')
+    current_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S IST')
+    
+    print(f"Current time: {current_time}")
+    print(f"Status: {status_message}")
+    
+    # Exit if market is not open
+    if not is_open:
+        print("Script not running - outside trading hours")
+        print("Exiting...")
+        return
+    
+    # Continue with the rest of the script only if market is open
+    print("Fetching option chain data...")
+    
     expiry_date = get_next_tuesday()
     
     data, expiry = get_option_chain(expiry=expiry_date)
@@ -85,16 +156,20 @@ def get_future_price(symbol="NIFTY"):
         return 0
 
 def get_next_tuesday():
+    """Get the next Tuesday expiry date, skipping holidays"""
     ist = pytz.timezone('Asia/Kolkata')
     now = datetime.now(ist)
     today = now.date()
-    days_ahead = 1 - today.weekday()
     
+    # Start from today and find next Tuesday
+    days_ahead = 1 - today.weekday()  # Tuesday is weekday 1
     if days_ahead < 0 or (days_ahead == 0 and now.hour >= 16):
         days_ahead += 7
     
-    next_tuesday = today + timedelta(days=days_ahead)
-    return next_tuesday.strftime('%d-%b-%Y').upper()
+    next_tuesday_date = today + timedelta(days=days_ahead)
+    
+    # Convert to string format for API
+    return next_tuesday_date.strftime('%d-%b-%Y').upper()
 
 def round_to_nearest_100(price):
     return round(price / 100) * 100
