@@ -58,7 +58,7 @@ class FromDateType(IntEnum):
 
 
 class CalcIvGreeks:
-    """Main class for calculating Implied Volatility and Greeks"""
+    """Main class for calculating Implied Volatility and Greeks using Black-76 model"""
     
     TD64S = "timedelta64[s]"
     IV_LOWER_BOUND = 1e-11
@@ -66,7 +66,6 @@ class CalcIvGreeks:
 
     def __init__(
         self,
-        SpotPrice: float,
         FuturePrice: float,
         AtmStrike: float,
         AtmStrikeCallPrice: float,
@@ -79,6 +78,7 @@ class CalcIvGreeks:
         FromDateTime: Union[dt, None] = None,
         tryMatchWith: TryMatchWith = TryMatchWith.SENSIBULL,
         dayCountType: DayCountType = DayCountType.CALENDARDAYS,
+        interestRate: float = 0.0,  # Interest rate for discounting only
     ) -> None:
         self.dateFuture = ExpiryDateTime
         self.datePast = dt.now() if FromDateTime is None else FromDateTime
@@ -89,33 +89,26 @@ class CalcIvGreeks:
         )
         self.dayCountType = dayCountType
         self.tryMatchWith = tryMatchWith
-        self.F = (
-            FuturePrice
-            if ExpiryDateType == ExpType.MONTHLY
-            else AtmStrikeCallPrice - AtmStrikePutPrice + AtmStrike
-        )
+        self.F = FuturePrice  # Futures price is primary input for Black-76
         self.K0 = AtmStrike
         self.C0 = AtmStrikeCallPrice
         self.P0 = AtmStrikePutPrice
-        self.S = SpotPrice if self.tryMatchWith == TryMatchWith.NSE else self.F
+        self.r = interestRate / 100  # Interest rate only for discounting
+        
+        # For Black-76, we use futures price directly (not spot)
+        self.S = self.F  # Black-76: use F instead of S*exp(rT)
+        
         if StrikePrice is not None:
             self.K = StrikePrice
         if StrikeCallPrice is not None:
             self.C = StrikeCallPrice
         if StrikePutPrice is not None:
             self.P = StrikePutPrice
-        self.r = (
-            0.1
-            if self.tryMatchWith == TryMatchWith.NSE
-            else 0.0
-            if self.tryMatchWith == TryMatchWith.SENSIBULL
-            else self.getRiskFreeIntrRate() / 100
-        )
+        
         self.T = self.get_tte()
 
     def update(
         self,
-        SpotPrice: float,
         FuturePrice: float,
         AtmStrike: float,
         AtmStrikeCallPrice: float,
@@ -125,15 +118,12 @@ class CalcIvGreeks:
         if FromDateTime is not None:
             self.datePast = FromDateTime
             self.datePastType = FromDateType.FIXED
-        self.S = SpotPrice if self.tryMatchWith == TryMatchWith.NSE else self.F
+        
+        self.F = FuturePrice
+        self.S = self.F  # Update S to current futures price
         self.K0 = AtmStrike
         self.C0 = AtmStrikeCallPrice
         self.P0 = AtmStrikePutPrice
-        self.F = (
-            FuturePrice
-            if hasattr(self, 'expiryDateType') and self.expiryDateType == ExpType.MONTHLY
-            else self.C0 - self.P0 + self.K0
-        )
         self.T = self.get_tte()
 
     @staticmethod
@@ -298,99 +288,83 @@ class CalcIvGreeks:
         return np.where(d > 0, 1.0 - ret_val, ret_val)
 
     def BSM(self, sigma: float):
+        """Black-76 model d1 and d2 calculation"""
         sqrtT = SQRT(self.T)
-        d1 = (
-            LOG(self.S / self.K) + (self.r + 0.5 * sigma * sigma) * self.T
-        ) / (
-            sigma * sqrtT
-        )
+        # Black-76 formula: d1 = [ln(F/K) + (σ²/2)T] / (σ√T)
+        d1 = (LOG(self.F / self.K) + (0.5 * sigma * sigma) * self.T) / (sigma * sqrtT)
         d2 = d1 - sigma * sqrtT
         cndd1, cndd2 = self.CND(d1), self.CND(d2)
         expRT = EXP(-self.r * self.T)
         return expRT, cndd1, cndd2
 
     def BS_CallPutPrice(self, sigma: float):
+        """Black-76 call and put pricing"""
         expRT, cndd1, cndd2 = self.BSM(sigma)
-        BS_CallPrice = self.S * cndd1 - self.K * expRT * cndd2
-        BS_PutPrice = self.K * expRT * (1.0 - cndd2) - self.S * (1.0 - cndd1)
+        # Black-76: Call = exp(-rT)[F*N(d1) - K*N(d2)]
+        BS_CallPrice = expRT * (self.F * cndd1 - self.K * cndd2)
+        # Black-76: Put = exp(-rT)[K*N(-d2) - F*N(-d1)]
+        BS_PutPrice = expRT * (self.K * (1.0 - cndd2) - self.F * (1.0 - cndd1))
         return BS_CallPrice, BS_PutPrice
 
     def BS_CallPrice(self, sigma: float):
         expRT, cndd1, cndd2 = self.BSM(sigma)
-        return self.S * cndd1 - self.K * expRT * cndd2
+        return expRT * (self.F * cndd1 - self.K * cndd2)
 
     def BS_PutPrice(self, sigma: float):
         expRT, cndd1, cndd2 = self.BSM(sigma)
-        return self.K * expRT * (1.0 - cndd2) - self.S * (1.0 - cndd1)
+        return expRT * (self.K * (1.0 - cndd2) - self.F * (1.0 - cndd1))
 
     def BS_d1(self, sigma: float):
+        """Black-76 d1 calculation"""
         if sigma > self.IV_LOWER_BOUND:
-            return (
-                LOG(self.S / self.K) + (self.r + sigma**2 / 2) * self.T
-            ) / (
-                sigma * SQRT(self.T)
-            )
-        return np.inf if self.S > self.K else -np.inf
+            # Black-76: d1 = [ln(F/K) + (σ²/2)T] / (σ√T)
+            return (LOG(self.F / self.K) + (sigma**2 / 2) * self.T) / (sigma * SQRT(self.T))
+        return np.inf if self.F > self.K else -np.inf
 
     def BS_d2(self, sigma: float):
         return self.BS_d1(sigma) - (sigma * SQRT(self.T))
 
     def BS_CallPricing(self, sigma: float):
-        return NORM_CDF(self.BS_d1(sigma)) * self.S - NORM_CDF(
-            self.BS_d2(sigma)
-        ) * self.K * EXP(-self.r * self.T)
+        """Black-76 call pricing"""
+        return EXP(-self.r * self.T) * (NORM_CDF(self.BS_d1(sigma)) * self.F - NORM_CDF(self.BS_d2(sigma)) * self.K)
 
     def BS_PutPricing(self, sigma: float):
-        return (
-            NORM_CDF(-self.BS_d2(sigma)) * self.K * EXP(-self.r * self.T)
-            - NORM_CDF(-self.BS_d1(sigma)) * self.S
-        )
+        """Black-76 put pricing"""
+        return EXP(-self.r * self.T) * (NORM_CDF(-self.BS_d2(sigma)) * self.K - NORM_CDF(-self.BS_d1(sigma)) * self.F)
 
     def DeltaCall(self, sigma: float):
-        return NORM_CDF(self.BS_d1(sigma))
+        """Black-76 call delta = exp(-rT) * N(d1)"""
+        return EXP(-self.r * self.T) * NORM_CDF(self.BS_d1(sigma))
 
     def DeltaPut(self, sigma: float):
-        return NORM_CDF(self.BS_d1(sigma)) - 1
+        """Black-76 put delta = exp(-rT) * [N(d1) - 1]"""
+        return EXP(-self.r * self.T) * (NORM_CDF(self.BS_d1(sigma)) - 1)
 
     def Gamma(self, sigma: float) -> float:
+        """Black-76 gamma = exp(-rT) * N'(d1) / (F * σ * √T)"""
         if sigma > self.IV_LOWER_BOUND:
-            return NORM_PDF(self.BS_d1(sigma)) / (
-                self.S * sigma * SQRT(self.T)
-            )
+            return EXP(-self.r * self.T) * NORM_PDF(self.BS_d1(sigma)) / (self.F * sigma * SQRT(self.T))
         return 0
 
     def Vega(self, sigma: float) -> float:
-        return NORM_PDF(self.BS_d1(sigma)) * self.S * SQRT(self.T)
+        """Black-76 vega = exp(-rT) * F * √T * N'(d1)"""
+        return EXP(-self.r * self.T) * NORM_PDF(self.BS_d1(sigma)) * self.F * SQRT(self.T)
 
     def ThetaCall(self, sigma: float) -> float:
-        return -self.S * sigma * NORM_PDF(self.BS_d1(sigma)) / (
-            2 * SQRT(self.T)
-        ) - self.r * self.K * EXP(-self.r * self.T) * NORM_CDF(
-            self.BS_d2(sigma)
-        )
+        """Black-76 call theta"""
+        return -EXP(-self.r * self.T) * (self.F * sigma * NORM_PDF(self.BS_d1(sigma)) / (2 * SQRT(self.T))) - self.r * self.BS_CallPricing(sigma)
 
     def ThetaPut(self, sigma: float) -> float:
-        return -self.S * sigma * NORM_PDF(self.BS_d1(sigma)) / (
-            2 * SQRT(self.T)
-        ) + self.r * self.K * EXP(-self.r * self.T) * NORM_CDF(
-            -self.BS_d2(sigma)
-        )
+        """Black-76 put theta"""
+        return -EXP(-self.r * self.T) * (self.F * sigma * NORM_PDF(self.BS_d1(sigma)) / (2 * SQRT(self.T))) + self.r * self.BS_PutPricing(sigma)
 
     def RhoCall(self, sigma: float) -> float:
-        return (
-            self.K
-            * self.T
-            * EXP(-self.r * self.T)
-            * NORM_CDF(self.BS_d2(sigma))
-        )
+        """Black-76 call rho = -T * CallPrice"""
+        return -self.T * self.BS_CallPricing(sigma)
 
     def RhoPut(self, sigma: float) -> float:
-        return (
-            -self.K
-            * self.T
-            * EXP(-self.r * self.T)
-            * NORM_CDF(-self.BS_d2(sigma))
-        )
+        """Black-76 put rho = -T * PutPrice"""
+        return -self.T * self.BS_PutPricing(sigma)
 
     def ImplVolWithBrent(self, OptionLtp, PricingFunction):
         try:
@@ -420,6 +394,7 @@ class CalcIvGreeks:
         StrikePrice: Union[float, None] = None,
         StrikeCallPrice: Union[float, None] = None,
         StrikePutPrice: Union[float, None] = None,
+        useOtmLiquidity: bool = True,
     ) -> Dict:
         if StrikePrice is not None:
             self.K = StrikePrice
@@ -428,10 +403,24 @@ class CalcIvGreeks:
         if StrikePutPrice is not None:
             self.P = StrikePutPrice
         self.refreshNow()
+        
+        # Calculate both call and put IV
         CallIV = round(self.CallImplVol(), 6)
         PutIV = round(self.PutImplVol(), 6)
-        StrikeIV = CallIV if self.K >= self.K0 else PutIV
-        Delta = round(self.DeltaCall(StrikeIV), 2)
+        
+        # Use OTM option's IV (more liquid and accurate)
+        if useOtmLiquidity:
+            # For strikes >= ATM, use call IV (OTM call)
+            # For strikes < ATM, use put IV (OTM put)
+            StrikeIV = CallIV if self.K >= self.K0 else PutIV
+        else:
+            # Use average or other method if needed
+            StrikeIV = (CallIV + PutIV) / 2
+        
+        # Calculate Greeks using unified IV
+        Delta = round(self.DeltaCall(StrikeIV), 4)
+        
+        # Format results
         if self.tryMatchWith == TryMatchWith.NSE:
             _ = {
                 "CallIV": round(CallIV * 100, 2),
@@ -439,19 +428,21 @@ class CalcIvGreeks:
             }
         else:
             _ = {}
+            
         return {
             **{
                 "Strike": self.K,
                 "ImplVol": round(StrikeIV * 100, 2),
+                "FuturesPrice": round(self.F, 2),
             },
             **_,
             **{
                 "CallDelta": Delta,
-                "PutDelta": round(Delta - 1, 2),
-                "Theta": round((self.ThetaPut(StrikeIV) / 365), 2),
-                "Vega": round((self.Vega(StrikeIV) / 100), 2),
-                "Gamma": round(self.Gamma(StrikeIV), 4),
-                "RhoCall": round(self.RhoCall(CallIV) / 1000, 3),
-                "RhoPut": round(self.RhoPut(PutIV) / 1000, 3),
+                "PutDelta": round(Delta - EXP(-self.r * self.T), 4),  # Black-76 put delta
+                "Theta": round((self.ThetaPut(StrikeIV) / 365), 4),  # Daily theta
+                "Vega": round((self.Vega(StrikeIV) / 100), 4),  # Vega per 1% vol change
+                "Gamma": round(self.Gamma(StrikeIV), 6),  # Gamma
+                "RhoCall": round(self.RhoCall(CallIV) / 100, 4),  % per 1% rate change
+                "RhoPut": round(self.RhoPut(PutIV) / 100, 4),
             },
         }
