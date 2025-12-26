@@ -76,7 +76,7 @@ class CalcIvGreeks:
         StrikePutPrice: Union[float, None] = None,
         ExpiryDateType: ExpType = ExpType.MONTHLY,
         FromDateTime: Union[dt, None] = None,
-        tryMatchWith: TryMatchWith = TryMatchWith.SENSIBULL,
+        tryMatchWith: TryMatchWith = TryMatchWith.CUSTOM,  # Changed default to CUSTOM
         dayCountType: DayCountType = DayCountType.CALENDARDAYS,
         interestRate: float = 0.0,  # Interest rate for discounting only
     ) -> None:
@@ -95,8 +95,8 @@ class CalcIvGreeks:
         self.P0 = AtmStrikePutPrice
         self.r = interestRate / 100  # Interest rate only for discounting
         
-        # For Black-76, we use futures price directly (not spot)
-        self.S = self.F  # Black-76: use F instead of S*exp(rT)
+        # For Black-76: Always use futures price, regardless of tryMatchWith
+        self.S = self.F  # Black-76: F is used in place of S*exp(rT)
         
         if StrikePrice is not None:
             self.K = StrikePrice
@@ -442,7 +442,7 @@ class CalcIvGreeks:
                 "Theta": round((self.ThetaPut(StrikeIV) / 365), 4),  # Daily theta
                 "Vega": round((self.Vega(StrikeIV) / 100), 4),  # Vega per 1% vol change
                 "Gamma": round(self.Gamma(StrikeIV), 6),  # Gamma
-                "RhoCall": round(self.RhoCall(CallIV) / 100, 4),  % per 1% rate change
+                "RhoCall": round(self.RhoCall(CallIV) / 100, 4),  # % per 1% rate change
                 "RhoPut": round(self.RhoPut(PutIV) / 100, 4),
             },
         }
