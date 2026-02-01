@@ -91,7 +91,7 @@ def main():
     # Calculate target date for NAV fetch
     if today.weekday() == 0:  # Monday
         target_date = today - timedelta(days=3)
-    elif today.weekday() == 6:  # Sunday (shouldn't happen due to check above)
+    elif today.weekday() == 5:  # Sunday (shouldn't happen due to check above)
         target_date = today - timedelta(days=2)
     else:  # Tuesday to Friday
         target_date = today - timedelta(days=1)
