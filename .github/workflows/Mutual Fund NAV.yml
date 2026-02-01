@@ -1,7 +1,15 @@
 name: Daily Mutual Fund NAV Update
 
 on:
-  
+  schedule:
+    - cron: '30 18 * * 1-5'   
+    - cron: '0 22 * * 1-5'
+    - cron: '30 0 * * 2-6'
+    - cron: '0 4 * * 2-6'
+    - cron: '30 6 * * 2-6'
+    - cron: '0 10 * * 2-6'
+    - cron: '30 12 * * 2-6'
+    - cron: '0 16 * * 2-6'
   workflow_dispatch:
 
 jobs:
