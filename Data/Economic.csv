@@ -1,7 +1,7 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
+19 Jan,07:30,China,Retail Sales YoY DEC,★★,0.90%,1.20%,1.30%
 19 Jan,07:30,China,GDP Growth Rate YoY Q4,★★,4.50%,4.40%,4.80%
 19 Jan,07:30,China,Industrial Production YoY DEC,★★,5.20%,5.00%,4.80%
-19 Jan,07:30,China,Retail Sales YoY DEC,★★,0.90%,1.20%,1.30%
 22 Jan,19:00,USA,Initial Jobless Claims JAN/17,★★,200K,212K,199K
 23 Jan,08:30,Japan,BoJ Interest Rate Decision,★★,0.75%,0.75%,0.75%
 26 Jan,00:00,India,Market Holiday - Republic Day,★,,,
@@ -14,8 +14,10 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 05 Feb,19:00,USA,Initial Jobless Claims JAN/31,★★,,210K,209K
 06 Feb,10:00,India,RBI Interest Rate Decision,★★★,,5.25%,5.25%
 06 Feb,19:00,USA,Non Farm Payrolls JAN,★★,,70K,50K
+10 Feb,19:00,USA,Retail Sales YoY DEC,★★,,,3.30%
 11 Feb,19:00,USA,Inflation Rate YoY JAN,★★,,,2.70%
+12 Feb,20:30,USA,Existing Home Sales JAN,★★,,,4.35M
 12 Feb,16:00,India,Inflation Rate YoY JAN,★★,,,1.33%
 12 Feb,19:00,USA,Initial Jobless Claims FEB/07,★★,,,
-12 Feb,20:30,USA,Existing Home Sales JAN,★★,,,4.35M
-,,,,,,Update Time:,02-Feb 13:30
+13 Feb,12:00,India,WPI Inflation YoY JAN,★★,,,0.83%
+,,,,,,Update Time:,02-Feb 13:36
