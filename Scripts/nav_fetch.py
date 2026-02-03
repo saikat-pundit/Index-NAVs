@@ -26,7 +26,7 @@ target_funds = [
     "ICICI Prudential Corporate Bond Fund - Direct Plan - Growth",
     "ICICI Prudential Gilt Fund - Direct Plan - Growth",
     "ICICI Prudential Nifty 50 Index Fund - Direct Plan Cumulative Option",
-    "ICICI PRUDENTIAL SILVER ETF FUND OF FUND - Direct Plan - Growth",
+    "ICICI Prudential Silver ETF FOF - Direct Plan - Growth",
     "ICICI Prudential Technology Fund - Direct Plan -  Growth",
     "Mahindra Manulife Consumption Fund - Direct Plan -Growth",
     "Mirae Asset Arbitrage Fund Direct Growth",
