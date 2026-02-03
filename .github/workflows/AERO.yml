@@ -2,8 +2,7 @@ name: AERO ZIP
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 0 * * *'
+  
 jobs:
   generate-zips:
     runs-on: ubuntu-latest
