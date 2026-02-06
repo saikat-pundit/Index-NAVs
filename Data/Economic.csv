@@ -9,7 +9,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 01 Feb,11:00,India,Union Budget 2026,★★★,,,
 05 Feb,18:45,Euro,ECB Interest Rate Decision,★★,2.15%,2.15%,2.15%
 05 Feb,19:00,USA,Initial Jobless Claims JAN/31,★★,	231K,	212K,209K
-06 Feb,10:00,India,RBI Interest Rate Decision,★★★,,5.25%,5.25%
+06 Feb,10:00,India,RBI Interest Rate Decision,★★★,5.25%,5.25%,5.25%
 06 Feb,19:00,USA,Non Farm Payrolls JAN,★★,,70K,50K
 10 Feb,19:00,USA,Retail Sales YoY DEC,★★,,,3.30%
 11 Feb,19:00,USA,Inflation Rate YoY JAN,★★,,,2.70%
@@ -23,4 +23,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 19 Feb,00:30,USA,FOMC Minutes,★★★,,,
 20 Feb,20:30,USA,New Home Sales DEC,★★,,,
 20 Feb,20:30,USA,New Home Sales NOV,★★,,,0.737M
-,,,,,,Update Time:,06-Feb 10:30
+,,,,,,Update Time:,06-Feb 10:40
