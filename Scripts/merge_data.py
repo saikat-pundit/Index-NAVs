@@ -3,6 +3,7 @@ import gdown
 import glob
 import os
 import shutil
+import sys  # Added to force-fail the script if things go wrong
 
 # 1. Configuration
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1llUw5NLQXunAc3CsP51K1Hn0D8nK4X-j"
@@ -86,52 +87,61 @@ def main():
 
     print(f"Downloading folder from Google Drive...")
     
-    # 3. Download files using gdown (handles public drive folders)
-    # Note: If the folder is huge, this might take time.
+    # 3. Download files
     try:
-        gdown.download_folder(url=DRIVE_FOLDER_URL, output=OUTPUT_DIR, quiet=False, use_cookies=False)
+        # Added quiet=False to see download progress in logs
+        downloaded = gdown.download_folder(url=DRIVE_FOLDER_URL, output=OUTPUT_DIR, quiet=False, use_cookies=False)
+        
+        # Check if download actually returned anything
+        if downloaded is None or len(downloaded) == 0:
+            print("❌ Error: gdown returned no files. Download likely failed.")
+            sys.exit(1) # Fail the script
+            
     except Exception as e:
-        print(f"Error downloading folder: {e}")
-        return
+        print(f"❌ Critical Error downloading folder: {e}")
+        sys.exit(1) # Fail the script
 
     # 4. Process CSVs
-    all_files = glob.glob(os.path.join(OUTPUT_DIR, "*.csv"))
+    all_files = glob.glob(os.path.join(OUTPUT_DIR, "**/*.csv"), recursive=True)
     
     if not all_files:
-        print("No CSV files found in the downloaded folder.")
-        return
+        print("❌ Error: Download finished, but NO .csv files were found in the folder.")
+        # Debug: list what was actually downloaded
+        print("Files found in directory:")
+        for root, dirs, files in os.walk(OUTPUT_DIR):
+             for file in files:
+                 print(os.path.join(root, file))
+        sys.exit(1) # Fail the script
 
-    print(f"Found {len(all_files)} CSV files. Processing...")
+    print(f"✅ Found {len(all_files)} CSV files. Processing...")
     
     processed_dfs = []
 
     for filename in all_files:
         try:
-            # Read CSV
             df = pd.read_csv(filename)
-            
-            # 5. Rearrange Columns
-            # reindex(columns=...) does two things:
-            # a. Reorders the columns to match the list.
-            # b. If a column is missing in the file, it adds it with NaN (blank) values.
-            # c. If the file has extra columns not in the list, they are dropped.
             df_reordered = df.reindex(columns=TARGET_COLUMNS)
-            
             processed_dfs.append(df_reordered)
             print(f"Processed: {os.path.basename(filename)}")
-            
         except Exception as e:
-            print(f"Failed to process {filename}: {e}")
+            print(f"⚠️ Warning: Failed to process {filename}: {e}")
 
     # 6. Merge and Save
     if processed_dfs:
         print("Merging all files...")
         final_df = pd.concat(processed_dfs, ignore_index=True)
+        final_df.to_csv(MERGED_FILENAME, index=False, sep=';')
         
-        final_df.to_csv(MERGED_FILENAME, index=False, sep=';') # Using semi-colon separator based on your input style, change to ',' if needed
-        print(f"Success! Saved merged file to: {MERGED_FILENAME}")
+        # Verify file exists
+        if os.path.exists(MERGED_FILENAME):
+            print(f"🎉 Success! Saved merged file to: {MERGED_FILENAME}")
+            print(f"File size: {os.path.getsize(MERGED_FILENAME)} bytes")
+        else:
+            print("❌ Error: Code finished but file was not found on disk.")
+            sys.exit(1)
     else:
-        print("No dataframes to merge.")
+        print("❌ Error: No dataframes were successfully processed.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
