@@ -11,7 +11,7 @@ df = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTBuDewVgTDoc_
 
 # Filter to get only rows from Y2:Z12
 # Fixed indexing: 0 is the first data row (Excel row 2)
-data = df.iloc[0:17][[df.columns[24], df.columns[25]]]  
+data = df.iloc[0:15][[df.columns[24], df.columns[25]]]  
 data.columns = ['ZIP_FILE_NAME', 'DRIVE_LINKS']
 
 def get_filename(file_id):
