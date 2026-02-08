@@ -27,7 +27,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run CSV Processing Script
-        run: python merge_data.py
+        run: python Scripts/merge_data.py
 
       - name: Get Current Date
         id: date
