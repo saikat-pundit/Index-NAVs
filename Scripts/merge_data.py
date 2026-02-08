@@ -3,7 +3,7 @@ import gdown
 import glob
 import os
 import shutil
-import sys  # Added to force-fail the script if things go wrong
+import sys
 
 # 1. Configuration
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1llUw5NLQXunAc3CsP51K1Hn0D8nK4X-j"
@@ -80,64 +80,64 @@ TARGET_COLUMNS = [
 ]
 
 def main():
-    # 2. Setup environment
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR)
 
     print(f"Downloading folder from Google Drive...")
-    
-    # 3. Download files
     try:
-        # Added quiet=False to see download progress in logs
-        downloaded = gdown.download_folder(url=DRIVE_FOLDER_URL, output=OUTPUT_DIR, quiet=False, use_cookies=False)
-        
-        # Check if download actually returned anything
-        if downloaded is None or len(downloaded) == 0:
-            print("❌ Error: gdown returned no files. Download likely failed.")
-            sys.exit(1) # Fail the script
-            
+        # Download folder
+        gdown.download_folder(url=DRIVE_FOLDER_URL, output=OUTPUT_DIR, quiet=False, use_cookies=False)
     except Exception as e:
-        print(f"❌ Critical Error downloading folder: {e}")
-        sys.exit(1) # Fail the script
+        print(f"❌ Error downloading: {e}")
+        sys.exit(1)
 
-    # 4. Process CSVs
-    all_files = glob.glob(os.path.join(OUTPUT_DIR, "**/*.csv"), recursive=True)
+    # Find ALL files (ignoring extension since they might be missing)
+    all_files = [
+        os.path.join(dp, f) 
+        for dp, dn, filenames in os.walk(OUTPUT_DIR) 
+        for f in filenames
+    ]
     
     if not all_files:
-        print("❌ Error: Download finished, but NO .csv files were found in the folder.")
-        # Debug: list what was actually downloaded
-        print("Files found in directory:")
-        for root, dirs, files in os.walk(OUTPUT_DIR):
-             for file in files:
-                 print(os.path.join(root, file))
-        sys.exit(1) # Fail the script
+        print("❌ Error: No files found in the folder.")
+        sys.exit(1)
 
-    print(f"✅ Found {len(all_files)} CSV files. Processing...")
+    print(f"✅ Found {len(all_files)} files. Processing...")
     
     processed_dfs = []
 
     for filename in all_files:
         try:
-            df = pd.read_csv(filename)
+            # TRY READING AS EXCEL FIRST (Logs showed format=xlsx)
+            # engine='openpyxl' helps read xlsx even if extension is missing/wrong
+            df = pd.read_excel(filename, engine='openpyxl')
+            print(f"📖 Read as Excel: {os.path.basename(filename)}")
+        except Exception:
+            try:
+                # If Excel fails, try CSV
+                df = pd.read_csv(filename)
+                print(f"📖 Read as CSV: {os.path.basename(filename)}")
+            except Exception as e:
+                print(f"⚠️ Could not read {filename} (Skipping): {e}")
+                continue
+
+        # Reorder columns
+        try:
             df_reordered = df.reindex(columns=TARGET_COLUMNS)
             processed_dfs.append(df_reordered)
-            print(f"Processed: {os.path.basename(filename)}")
         except Exception as e:
-            print(f"⚠️ Warning: Failed to process {filename}: {e}")
+            print(f"⚠️ Error reordering {filename}: {e}")
 
-    # 6. Merge and Save
+    # Merge
     if processed_dfs:
         print("Merging all files...")
         final_df = pd.concat(processed_dfs, ignore_index=True)
         final_df.to_csv(MERGED_FILENAME, index=False, sep=';')
         
-        # Verify file exists
         if os.path.exists(MERGED_FILENAME):
             print(f"🎉 Success! Saved merged file to: {MERGED_FILENAME}")
-            print(f"File size: {os.path.getsize(MERGED_FILENAME)} bytes")
         else:
-            print("❌ Error: Code finished but file was not found on disk.")
             sys.exit(1)
     else:
         print("❌ Error: No dataframes were successfully processed.")
