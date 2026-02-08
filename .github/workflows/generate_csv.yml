@@ -1,12 +1,7 @@
-name: Generate and Release CSV
+name: Generate CSV Artifact
 
 on:
-  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
-  # push:            # Uncomment this to run automatically on every push
-  #   branches: [ "main" ]
-
-permissions:
-  contents: write # Required to create releases
+  workflow_dispatch:
 
 jobs:
   build-and-release:
@@ -26,18 +21,12 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run CSV Processing Script
+      - name: Run Processing Script
         run: python Scripts/merge_data.py
 
-      - name: Get Current Date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_OUTPUT
-
-      - name: Create Release and Upload CSV
-        uses: softprops/action-gh-release@v1
+      - name: Upload CSV as Artifact
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: data-export-${{ steps.date.outputs.date }}
-          name: CSV Data Export ${{ steps.date.outputs.date }}
-          files: merged_output.csv
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: merged-csv-data
+          path: merged_output.csv
+          retention-days: 5
