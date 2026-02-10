@@ -1,10 +1,10 @@
 name: Update AERO CSV
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
 
 permissions:
-  contents: write # REQUIRED to commit the file back to the repo
+  contents: write
 
 jobs:
   build-and-commit:
@@ -29,16 +29,12 @@ jobs:
 
       - name: Commit and Push AERO.csv
         run: |
-          # Configure Git to identify as the GitHub Action bot
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # Add the specific file
+          # Force add the file in Data folder
           git add Data/AERO.csv
           
-          # Commit if there are changes
-          # The "|| exit 0" prevents the workflow from failing if there are no changes to commit
-          git commit -m "Auto-update: Generated AERO.csv from Google Drive JSON data" || exit 0
-          
-          # Push changes back to the repository
+          # Commit and Push
+          git commit -m "Auto-update: Generated AERO.csv from Google Drive Data" || exit 0
           git push
