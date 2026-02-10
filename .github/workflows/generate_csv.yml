@@ -1,10 +1,13 @@
-name: Generate CSV Artifact
+name: Update AERO CSV
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write # REQUIRED to commit the file back to the repo
 
 jobs:
-  build-and-release:
+  build-and-commit:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +27,18 @@ jobs:
       - name: Run Processing Script
         run: python Scripts/merge_data.py
 
-      - name: Upload CSV as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: merged-csv-data
-          path: merged_output.csv
-          retention-days: 5
+      - name: Commit and Push AERO.csv
+        run: |
+          # Configure Git to identify as the GitHub Action bot
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Add the specific file
+          git add Data/AERO.csv
+          
+          # Commit if there are changes
+          # The "|| exit 0" prevents the workflow from failing if there are no changes to commit
+          git commit -m "Auto-update: Generated AERO.csv from Google Drive JSON data" || exit 0
+          
+          # Push changes back to the repository
+          git push
