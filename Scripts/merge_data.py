@@ -4,13 +4,15 @@ import glob
 import os
 import shutil
 import sys
+import json
 
 # 1. Configuration
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1llUw5NLQXunAc3CsP51K1Hn0D8nK4X-j"
-OUTPUT_DIR = "downloaded_data"
-MERGED_FILENAME = "merged_output.csv"
+DOWNLOAD_DIR = "downloaded_json_files"
+OUTPUT_DIR = "Data"
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
 
-# The specific column order you requested
+# The specific column order
 TARGET_COLUMNS = [
     "statusCode", "refId", "message", "payload__electorDetailDto__name",
     "payload__electorDetailDto__bloDoc1back", "payload__electorDetailDto__relationOldStateCd",
@@ -80,64 +82,70 @@ TARGET_COLUMNS = [
 ]
 
 def main():
-    if os.path.exists(OUTPUT_DIR):
-        shutil.rmtree(OUTPUT_DIR)
-    os.makedirs(OUTPUT_DIR)
+    # 1. Clean and Setup Directories
+    if os.path.exists(DOWNLOAD_DIR):
+        shutil.rmtree(DOWNLOAD_DIR)
+    os.makedirs(DOWNLOAD_DIR)
+    
+    # Ensure Data/ folder exists
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
 
     print(f"Downloading folder from Google Drive...")
     try:
         # Download folder
-        gdown.download_folder(url=DRIVE_FOLDER_URL, output=OUTPUT_DIR, quiet=False, use_cookies=False)
+        gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False)
     except Exception as e:
         print(f"❌ Error downloading: {e}")
         sys.exit(1)
 
-    # Find ALL files (ignoring extension since they might be missing)
+    # 2. Find JSON files (searching recursively)
     all_files = [
         os.path.join(dp, f) 
-        for dp, dn, filenames in os.walk(OUTPUT_DIR) 
-        for f in filenames
+        for dp, dn, filenames in os.walk(DOWNLOAD_DIR) 
+        for f in filenames if f.endswith('.json')
     ]
     
     if not all_files:
-        print("❌ Error: No files found in the folder.")
+        print("❌ Error: No .json files found in the folder.")
         sys.exit(1)
 
-    print(f"✅ Found {len(all_files)} files. Processing...")
+    print(f"✅ Found {len(all_files)} JSON files. Processing...")
     
     processed_dfs = []
 
     for filename in all_files:
         try:
-            # TRY READING AS EXCEL FIRST (Logs showed format=xlsx)
-            # engine='openpyxl' helps read xlsx even if extension is missing/wrong
-            df = pd.read_excel(filename, engine='openpyxl')
-            print(f"📖 Read as Excel: {os.path.basename(filename)}")
-        except Exception:
-            try:
-                # If Excel fails, try CSV
-                df = pd.read_csv(filename)
-                print(f"📖 Read as CSV: {os.path.basename(filename)}")
-            except Exception as e:
-                print(f"⚠️ Could not read {filename} (Skipping): {e}")
-                continue
-
-        # Reorder columns
-        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            # 3. JSON Normalization
+            # This converts nested JSON (e.g., {"payload": {"elector": {"name": "X"}}})
+            # into flat columns (e.g., "payload__elector__name")
+            df = pd.json_normalize(data, sep='__')
+            
+            # 4. Reorder Columns
+            # This aligns the flat columns with your target list
             df_reordered = df.reindex(columns=TARGET_COLUMNS)
+            
             processed_dfs.append(df_reordered)
+            print(f"Processed: {os.path.basename(filename)}")
+            
         except Exception as e:
-            print(f"⚠️ Error reordering {filename}: {e}")
+            print(f"⚠️ Warning: Failed to process {filename}: {e}")
 
-    # Merge
+    # 5. Merge and Save
     if processed_dfs:
         print("Merging all files...")
         final_df = pd.concat(processed_dfs, ignore_index=True)
-        final_df.to_csv(MERGED_FILENAME, index=False, sep=';')
         
-        if os.path.exists(MERGED_FILENAME):
-            print(f"🎉 Success! Saved merged file to: {MERGED_FILENAME}")
+        final_df.to_csv(OUTPUT_FILE, index=False, sep=';')
+        
+        if os.path.exists(OUTPUT_FILE):
+            print(f"🎉 Success! Saved merged file to: {OUTPUT_FILE}")
+            print(f"File size: {os.path.getsize(OUTPUT_FILE)} bytes")
         else:
+            print("❌ Error: Code finished but file was not found on disk.")
             sys.exit(1)
     else:
         print("❌ Error: No dataframes were successfully processed.")
