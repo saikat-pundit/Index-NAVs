@@ -38,7 +38,7 @@ def main():
     # 2. Download folder from Google Drive
     print(f"Connecting to Google Drive...")
     try:
-        gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False)
+        gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
     except Exception as e:
         print(f"❌ Error downloading: {e}")
         sys.exit(1)
