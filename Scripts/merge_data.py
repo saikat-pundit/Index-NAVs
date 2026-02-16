@@ -11,7 +11,7 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
 
-# The specific column order you need
+# The specific column order required for the CSV
 TARGET_COLUMNS = [
     "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
     "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
@@ -27,7 +27,7 @@ TARGET_COLUMNS = [
 ]
 
 def main():
-    # 1. Setup Directories
+    # 1. Setup Directories: Clean old downloads and create output folder
     if os.path.exists(DOWNLOAD_DIR):
         shutil.rmtree(DOWNLOAD_DIR)
     os.makedirs(DOWNLOAD_DIR)
@@ -35,67 +35,71 @@ def main():
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
 
-    # 2. Download from Drive
-    print(f"Downloading folder from Google Drive...")
+    # 2. Download folder from Google Drive
+    print(f"Connecting to Google Drive...")
     try:
-        # Note: gdown folder download requires the folder to be accessible/public or auth configured
         gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False)
     except Exception as e:
         print(f"❌ Error downloading: {e}")
         sys.exit(1)
 
-    # 3. Find ALL files
+    # 3. Collect all files from the downloaded folder
     all_files = []
     for root, dirs, files in os.walk(DOWNLOAD_DIR):
         for name in files:
             all_files.append(os.path.join(root, name))
 
     if not all_files:
-        print("❌ Error: No files found in the download directory.")
+        print("❌ Error: No files were found in the download directory.")
         sys.exit(1)
 
     processed_dfs = []
 
+    # 4. Process each file
+    print(f"Processing {len(all_files)} files...")
     for filename in all_files:
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
-            # 4. Extract list and normalize
-            # We target the list directly
+            # Access the specific list in the JSON structure
             elector_list = data.get('payload', {}).get('electorDetailDto', [])
             
             if not isinstance(elector_list, list) or len(elector_list) == 0:
                 continue
 
-            # 5. Create DataFrame and Prefix Columns
-            # We prefix with 'payload__electorDetailDto__' to match your TARGET_COLUMNS
+            # Convert the list of dictionaries to a DataFrame
             df = pd.DataFrame(elector_list)
+            
+            # Apply the prefix to match TARGET_COLUMNS
             df = df.add_prefix('payload__electorDetailDto__')
 
-            # 6. Reindex to ensure all TARGET_COLUMNS exist (fills missing with NaN)
-            df_reordered = df.reindex(columns=TARGET_COLUMNS)
+            # Reorder columns and fill missing ones with empty strings
+            df_reordered = df.reindex(columns=TARGET_COLUMNS).fillna('')
             
             processed_dfs.append(df_reordered)
-            print(f"✅ Processed: {os.path.basename(filename)} ({len(df)} rows)")
 
         except json.JSONDecodeError:
-            pass # Skip non-json files quietly
+            # Skip non-JSON files (like system files)
+            continue
         except Exception as e:
-            print(f"⚠️ Error processing {os.path.basename(filename)}: {e}")
+            print(f"⚠️ Warning: Could not process {os.path.basename(filename)}: {e}")
 
-    # 7. Merge and Save
+    # 5. Combine and Save to CSV
     if processed_dfs:
-        print(f"\nMerging {len(processed_dfs)} files...")
         final_df = pd.concat(processed_dfs, ignore_index=True)
         
-        # Save using comma or semicolon based on your preference; you used ';' in original
-        final_df.to_csv(OUTPUT_FILE, index=False, sep=';', encoding='utf-8-sig')
+        # Save as COMMA SEPARATED using sep=','
+        # utf-8-sig helps Excel handle special characters/languages correctly
+        final_df.to_csv(OUTPUT_FILE, index=False, sep=',', encoding='utf-8-sig')
         
-        print(f"🚀 Success! Saved merged file to: {OUTPUT_FILE}")
-        print(f"Total Records: {len(final_df)}")
+        print("-" * 30)
+        print(f"🎉 SUCCESS!")
+        print(f"File Saved: {OUTPUT_FILE}")
+        print(f"Total Rows: {len(final_df)}")
+        print("-" * 30)
     else:
-        print("❌ Error: No valid data was extracted.")
+        print("❌ Error: No valid data found to export.")
 
 if __name__ == "__main__":
     main()
