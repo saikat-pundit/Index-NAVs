@@ -9,25 +9,10 @@ import json
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1llUw5NLQXunAc3CsP51K1Hn0D8nK4X-j"
 DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
-
-# The specific column order required for the CSV
-TARGET_COLUMNS = [
-    "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
-    "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
-    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__relationType", 
-    "payload__electorDetailDto__progenyLinked", "payload__electorDetailDto__progLimitExceed", 
-    "payload__electorDetailDto__docAnomaly", "payload__electorDetailDto__anomalies", 
-    "payload__electorDetailDto__lastSirState", "payload__electorDetailDto__lastSirAc", 
-    "payload__electorDetailDto__lastSirPart", "payload__electorDetailDto__lastSirSerialNo", 
-    "payload__electorDetailDto__recommendedByBlo", "payload__electorDetailDto__deoApproval", 
-    "payload__electorDetailDto__deoRemarks", "payload__electorDetailDto__miobApproval", 
-    "payload__electorDetailDto__miobRemarks", "payload__electorDetailDto__roobApproval", 
-    "payload__electorDetailDto__roobRemarks"
-]
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_MERGED.csv")
 
 def main():
-    # 1. Setup Directories: Clean old downloads and create output folder
+    # 1. Setup Directories
     if os.path.exists(DOWNLOAD_DIR):
         shutil.rmtree(DOWNLOAD_DIR)
     os.makedirs(DOWNLOAD_DIR)
@@ -35,71 +20,73 @@ def main():
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
 
-    # 2. Download folder from Google Drive
+    # 2. Download from Drive (with bypass for 50+ files)
     print(f"Connecting to Google Drive...")
     try:
-        gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
+        gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, 
+                              use_cookies=False, remaining_ok=True)
     except Exception as e:
         print(f"❌ Error downloading: {e}")
         sys.exit(1)
 
-    # 3. Collect all files from the downloaded folder
-    all_files = []
-    for root, dirs, files in os.walk(DOWNLOAD_DIR):
-        for name in files:
-            all_files.append(os.path.join(root, name))
+    # 3. Find all files
+    all_files = [os.path.join(root, f) for root, dirs, files in os.walk(DOWNLOAD_DIR) for f in files]
 
     if not all_files:
-        print("❌ Error: No files were found in the download directory.")
+        print("❌ Error: No files found.")
         sys.exit(1)
 
     processed_dfs = []
 
-    # 4. Process each file
-    print(f"Processing {len(all_files)} files...")
+    # 4. Simple Merge: Load everything "as is"
+    print(f"Merging {len(all_files)} files...")
     for filename in all_files:
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
-            # Access the specific list in the JSON structure
-            elector_list = data.get('payload', {}).get('electorDetailDto', [])
-            
-            if not isinstance(elector_list, list) or len(elector_list) == 0:
-                continue
+            # We target the list directly to ensure each entry in the list becomes a row
+            # But we use record_path to keep the top-level info (statusCode, etc.) attached
+            if 'payload' in data and 'electorDetailDto' in data['payload']:
+                # This flattens the list while keeping top-level keys as columns
+                df = pd.json_normalize(
+                    data, 
+                    record_path=['payload', 'electorDetailDto'],
+                    meta=['statusCode', 'refId', 'message'],
+                    errors='ignore'
+                )
+            else:
+                # If the structure is different, just flatten the whole object
+                df = pd.json_normalize(data)
 
-            # Convert the list of dictionaries to a DataFrame
-            df = pd.DataFrame(elector_list)
-            
-            # Apply the prefix to match TARGET_COLUMNS
-            df = df.add_prefix('payload__electorDetailDto__')
+            processed_dfs.append(df)
 
-            # Reorder columns and fill missing ones with empty strings
-            df_reordered = df.reindex(columns=TARGET_COLUMNS).fillna('')
-            
-            processed_dfs.append(df_reordered)
+        except Exception:
+            continue # Skip files that aren't valid JSON
 
-        except json.JSONDecodeError:
-            # Skip non-JSON files (like system files)
-            continue
-        except Exception as e:
-            print(f"⚠️ Warning: Could not process {os.path.basename(filename)}: {e}")
-
-    # 5. Combine and Save to CSV
+    # 5. Combine, Remove Duplicates, and Save
     if processed_dfs:
-        final_df = pd.concat(processed_dfs, ignore_index=True)
+        # Sort=False keeps columns in the order they appear
+        final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
         
-        # Save as COMMA SEPARATED using sep=','
-        # utf-8-sig helps Excel handle special characters/languages correctly
+        # Remove duplicates
+        initial_count = len(final_df)
+        final_df = final_df.drop_duplicates()
+        
+        # Save to CSV
         final_df.to_csv(OUTPUT_FILE, index=False, sep=',', encoding='utf-8-sig')
         
         print("-" * 30)
         print(f"🎉 SUCCESS!")
         print(f"File Saved: {OUTPUT_FILE}")
-        print(f"Total Rows: {len(final_df)}")
+        print(f"Original Rows: {initial_count}")
+        print(f"Unique Rows: {len(final_df)}")
         print("-" * 30)
+        
+        # Cleanup
+        shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ Error: No valid data found to export.")
+        print("❌ No valid data found.")
 
 if __name__ == "__main__":
     main()
