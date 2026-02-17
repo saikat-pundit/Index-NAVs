@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # Fetches all history so that git pull can work correctly
+          fetch-depth: 0 
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -22,6 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install pandas gdown  # Added gdown/pandas directly to ensure they are there
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Processing Script
@@ -32,9 +36,21 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # Force add the file in Data folder
+          # Stage the file
           git add Data/AERO.csv
           
-          # Commit and Push
-          git commit -m "Auto-update: Generated AERO.csv from Google Drive Data" || exit 0
-          git push
+          # Check if there are actually changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          # Commit changes locally
+          git commit -m "Auto-update: Generated AERO.csv from Google Drive Data"
+          
+          # 1. Fetch latest changes from remote
+          # 2. Rebase local commit on top of remote changes to avoid conflict
+          git pull --rebase origin main
+          
+          # 3. Push to the repository
+          git push origin main
