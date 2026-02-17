@@ -9,7 +9,7 @@ import json
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1llUw5NLQXunAc3CsP51K1Hn0D8nK4X-j"
 DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_MERGED.csv")
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
 
 def main():
     # 1. Setup Directories
