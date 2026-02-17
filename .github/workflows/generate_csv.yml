@@ -1,4 +1,4 @@
-name: Update AERO CSV
+name: Pending Hearing CSV
 
 on:
   workflow_dispatch:
