@@ -4,14 +4,14 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 06 Feb,10:00,India,RBI Interest Rate Decision,★★★,5.25%,5.25%,5.25%
 10 Feb,19:00,USA,Retail Sales YoY DEC,★★,2.4%,,3.30%
 11 Feb,19:00,USA,Non Farm Payrolls JAN,★★,130K,70K,48K
-12 Feb,19:00,USA,Initial Jobless Claims FEB/07,★★,227K,222K,232K
 12 Feb,16:00,India,Inflation Rate YoY JAN,★★,2.75%,2.40%,1.33%
+12 Feb,19:00,USA,Initial Jobless Claims FEB/07,★★,227K,222K,232K
 12 Feb,20:30,USA,Existing Home Sales JAN,★★,3.91M,4.18M,4.27M
 13 Feb,19:00,USA,Inflation Rate YoY JAN,★★,2.40%,2.50%,2.70%
 16 Feb,12:00,India,WPI Inflation YoY JAN,★★,1.81%,1.25%,0.83%
 18 Feb,19:00,USA,Housing Starts DEC,★★,,1.33M,
-18 Feb,19:45,USA,Industrial Production YoY JAN,★★,,,2.00%
 18 Feb,19:00,USA,Housing Starts NOV,★★,,,1.246M
+18 Feb,19:45,USA,Industrial Production YoY JAN,★★,,,2.00%
 19 Feb,00:30,USA,FOMC Minutes,★★★,,,
 19 Feb,19:00,USA,Initial Jobless Claims FEB/14,★★,,225K,227K
 20 Feb,20:30,USA,New Home Sales DEC,★★,,0.735M,
@@ -22,4 +22,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 28 Feb,16:00,India,Industrial Production YoY JAN,★★,,,7.80%
 28 Feb,19:00,USA,Initial Jobless Claims FEB/28,★★,,,
 04 Mar,07:00,China,NBS Manufacturing PMI FEB,★★,,,49.3
-,,,,,,Update Time:,18-Feb 06:30
+,,,,,,Update Time:,18-Feb 06:40
