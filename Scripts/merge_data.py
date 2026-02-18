@@ -14,7 +14,7 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
 TARGET_COLUMNS = [
     "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
     "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
-    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__relationType", 
+    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__categoryType" ,"payload__electorDetailDto__relationType", 
     "payload__electorDetailDto__progenyLinked", "payload__electorDetailDto__progLimitExceed", 
     "payload__electorDetailDto__docAnomaly", "payload__electorDetailDto__anomalies", 
     "payload__electorDetailDto__lastSirState", "payload__electorDetailDto__lastSirAc", 
