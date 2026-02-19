@@ -11,88 +11,89 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
-# ONLY these columns will be exported to the CSV
 TARGET_COLUMNS = [
-    "name", "epicNo", "acNo", "partNo", "partSerialNo", 
-    "categoryType", "relationType", "progenyLinked", 
-    "progLimitExceed", "docAnomaly", "anomalies", 
-    "lastSirState", "lastSirAc", "lastSirPart", "lastSirSerialNo", 
-    "recommendedByBlo", "deoApproval", "deoRemarks", 
-    "miobApproval", "miobRemarks", "roobApproval", "roobRemarks"
+    "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
+    "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
+    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__categoryType", 
+    "payload__electorDetailDto__relationType", "payload__electorDetailDto__progenyLinked", 
+    "payload__electorDetailDto__progLimitExceed", 
+    "payload__electorDetailDto__docAnomaly", "payload__electorDetailDto__anomalies", 
+    "payload__electorDetailDto__lastSirState", "payload__electorDetailDto__lastSirAc", 
+    "payload__electorDetailDto__lastSirPart", "payload__electorDetailDto__lastSirSerialNo", 
+    "payload__electorDetailDto__recommendedByBlo", "payload__electorDetailDto__deoApproval", 
+    "payload__electorDetailDto__deoRemarks", "payload__electorDetailDto__miobApproval", 
+    "payload__electorDetailDto__miobRemarks", "payload__electorDetailDto__roobApproval", 
+    "payload__electorDetailDto__roobRemarks"
 ]
 
 def main():
-    # 1. Setup
-    if os.path.exists(DOWNLOAD_DIR): shutil.rmtree(DOWNLOAD_DIR)
-    os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    # 1. Setup Directories
+    if os.path.exists(DOWNLOAD_DIR):
+        shutil.rmtree(DOWNLOAD_DIR)
+    os.makedirs(DOWNLOAD_DIR)
+    
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
 
     # 2. Download from Drive
-    print(f"Downloading files...")
+    print(f"Downloading data...")
     try:
         gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
     except Exception as e:
         print(f"❌ Download failed: {e}")
         sys.exit(1)
 
-    # 3. Identify Files (No extension restriction)
-    all_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(DOWNLOAD_DIR) for f in filenames if not f.startswith('.')]
+    # 3. Collect Files
+    all_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(DOWNLOAD_DIR) for f in filenames]
 
     processed_dfs = []
-    ignored_files = []
 
-    print(f"Processing {len(all_files)} files...")
-
-    # 4. Extract and Filter
+    # 4. Extract and Normalize
     for filename in all_files:
-        fname = os.path.basename(filename)
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
             elector_list = data.get('payload', {}).get('electorDetailDto', [])
-            
-            if elector_list and isinstance(elector_list, list):
-                # Flatten the JSON
-                df = pd.json_normalize(elector_list, sep='__')
-                
-                # Reindex ensures only TARGET_COLUMNS exist. 
-                # If a column is missing in the JSON, it's added as empty.
-                df_filtered = df.reindex(columns=TARGET_COLUMNS)
-                processed_dfs.append(df_filtered)
-            else:
-                ignored_files.append(f"{fname}: Empty or missing 'electorDetailDto'")
+            if not elector_list:
+                continue
 
-        except (json.JSONDecodeError, ValueError):
-            ignored_files.append(f"{fname}: Not a valid JSON")
-        except Exception as e:
-            ignored_files.append(f"{fname}: {str(e)}")
+            df = pd.DataFrame(elector_list)
+            df = df.add_prefix('payload__electorDetailDto__')
+            df_reordered = df.reindex(columns=TARGET_COLUMNS).fillna('')
+            processed_dfs.append(df_reordered)
 
-    # 5. Merge and Save
+        except (json.JSONDecodeError, Exception):
+            continue
+
+    # 5. Merge and Remove Duplicates
     if processed_dfs:
-        # Concatenate all valid results
-        final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
-
-        # Final check to ensure columns are in the EXACT order requested
-        final_df = final_df[TARGET_COLUMNS]
-
-        # Save to CSV
-        final_df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8-sig')
+        final_df = pd.concat(processed_dfs, ignore_index=True)
         
-        print("\n" + "="*50)
-        print(f"✅ SUCCESS: {len(processed_dfs)} files merged into CSV.")
-        print(f"📊 Total Records: {len(final_df)}")
-        print(f"📋 Columns Exported: {len(TARGET_COLUMNS)}")
-        print("="*50)
+        initial_count = len(final_df)
 
-        if ignored_files:
-            print(f"\n⚠️  DIAGNOSTIC - {len(ignored_files)} FILES IGNORED:")
-            for note in ignored_files[:10]:
-                print(f" - {note}")
+        # --- DUPLICATE REMOVAL LOGIC ---
+        # Option A: Remove rows where the EPIC number is the same (Safest for voter data)
+        final_df = final_df.drop_duplicates(subset=['payload__electorDetailDto__epicNo'], keep='first')
         
+        # Option B: Use this instead if you only want to remove 100% identical rows:
+        # final_df = final_df.drop_duplicates(keep='first')
+        
+        removed_count = initial_count - len(final_df)
+
+        # 6. Save to CSV (Comma Separated)
+        final_df.to_csv(OUTPUT_FILE, index=False, sep=',', encoding='utf-8-sig')
+        
+        print("-" * 35)
+        print(f"✅ Success! File: {OUTPUT_FILE}")
+        print(f"Total Rows: {len(final_df)}")
+        print(f"Duplicates Removed: {removed_count}")
+        print("-" * 35)
+        
+        # Cleanup: Delete the download folder to keep workspace clean
         shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ No data extracted. Please check the JSON structure of your files.")
+        print("❌ No valid data found.")
 
 if __name__ == "__main__":
     main()
