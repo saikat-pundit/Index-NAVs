@@ -4,7 +4,6 @@ import os
 import shutil
 import sys
 import json
-import re
 
 # --- CONFIGURATION ---
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1Kmm-SqnMGL0V2tLXQc4GyEGGKYtD_XUf"
@@ -12,6 +11,7 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
+# ONLY these columns will be exported to the CSV
 TARGET_COLUMNS = [
     "name", "epicNo", "acNo", "partNo", "partSerialNo", 
     "categoryType", "relationType", "progenyLinked", 
@@ -21,54 +21,13 @@ TARGET_COLUMNS = [
     "miobApproval", "miobRemarks", "roobApproval", "roobRemarks"
 ]
 
-def deep_scan_har(filepath):
-    all_records = []
-    try:
-        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
-            har_data = json.load(f)
-        
-        entries = har_data.get('log', {}).get('entries', [])
-        
-        for entry in entries:
-            text = entry.get('response', {}).get('content', {}).get('text', '')
-            if not text or "electorDetailDto" not in text:
-                continue
-
-            extracted_list = None
-            
-            # METHOD 1: Standard JSON Load
-            try:
-                data = json.loads(text)
-                extracted_list = data.get('payload', {}).get('electorDetailDto', [])
-            except:
-                # METHOD 2: Handle Escaped JSON (The \" issue)
-                try:
-                    # Remove backslash escapes if they are literal strings
-                    fixed_text = text.replace('\\"', '"').replace('\\\\', '\\')
-                    data = json.loads(fixed_text)
-                    extracted_list = data.get('payload', {}).get('electorDetailDto', [])
-                except:
-                    # METHOD 3: Regex extraction (The "Brute Force" method)
-                    # This finds the list even if the surrounding JSON is totally broken
-                    match = re.search(r'\"electorDetailDto\"\s*:\s*(\[.*?\])(?=\s*\}|\s*,)', text, re.DOTALL)
-                    if match:
-                        try:
-                            extracted_list = json.loads(match.group(1))
-                        except:
-                            pass
-
-            if extracted_list and isinstance(extracted_list, list):
-                all_records.extend(extracted_list)
-        
-        return all_records, None
-    except Exception as e:
-        return None, str(e)
-
 def main():
+    # 1. Setup
     if os.path.exists(DOWNLOAD_DIR): shutil.rmtree(DOWNLOAD_DIR)
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+    # 2. Download from Drive
     print(f"Downloading files...")
     try:
         gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
@@ -76,39 +35,64 @@ def main():
         print(f"❌ Download failed: {e}")
         sys.exit(1)
 
+    # 3. Identify Files (No extension restriction)
     all_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(DOWNLOAD_DIR) for f in filenames if not f.startswith('.')]
-    master_list = []
+
+    processed_dfs = []
+    ignored_files = []
 
     print(f"Processing {len(all_files)} files...")
 
+    # 4. Extract and Filter
     for filename in all_files:
-        records, error = deep_scan_har(filename)
-        if records:
-            print(f"  ✅ SUCCESS: Found {len(records)} records in {os.path.basename(filename)}")
-            master_list.extend(records)
-        else:
-            print(f"  ⚠️  FAILED: No records found in {os.path.basename(filename)}")
+        fname = os.path.basename(filename)
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                data = json.load(f)
 
-    if master_list:
-        df = pd.json_normalize(master_list, sep='__')
-        final_df = df.reindex(columns=TARGET_COLUMNS)
-        
-        initial_len = len(final_df)
-        final_df = final_df.drop_duplicates(subset=['epicNo'], keep='first')
-        
+            elector_list = data.get('payload', {}).get('electorDetailDto', [])
+            
+            if elector_list and isinstance(elector_list, list):
+                # Flatten the JSON
+                df = pd.json_normalize(elector_list, sep='__')
+                
+                # Reindex ensures only TARGET_COLUMNS exist. 
+                # If a column is missing in the JSON, it's added as empty.
+                df_filtered = df.reindex(columns=TARGET_COLUMNS)
+                processed_dfs.append(df_filtered)
+            else:
+                ignored_files.append(f"{fname}: Empty or missing 'electorDetailDto'")
+
+        except (json.JSONDecodeError, ValueError):
+            ignored_files.append(f"{fname}: Not a valid JSON")
+        except Exception as e:
+            ignored_files.append(f"{fname}: {str(e)}")
+
+    # 5. Merge and Save
+    if processed_dfs:
+        # Concatenate all valid results
+        final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
+
+        # Final check to ensure columns are in the EXACT order requested
+        final_df = final_df[TARGET_COLUMNS]
+
+        # Save to CSV
         final_df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8-sig')
         
         print("\n" + "="*50)
-        print(f"✅ FINAL SUCCESS")
-        print(f"Total Records Found: {initial_len}")
-        print(f"Total Unique Rows:    {len(final_df)}")
-        print(f"Duplicates Removed:   {initial_len - len(final_df)}")
-        print(f"Output: {OUTPUT_FILE}")
+        print(f"✅ SUCCESS: {len(processed_dfs)} files merged into CSV.")
+        print(f"📊 Total Records: {len(final_df)}")
+        print(f"📋 Columns Exported: {len(TARGET_COLUMNS)}")
         print("="*50)
+
+        if ignored_files:
+            print(f"\n⚠️  DIAGNOSTIC - {len(ignored_files)} FILES IGNORED:")
+            for note in ignored_files[:10]:
+                print(f" - {note}")
         
         shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ CRITICAL ERROR: Could not extract data. The 'text' field format is unrecognized.")
+        print("❌ No data extracted. Please check the JSON structure of your files.")
 
 if __name__ == "__main__":
     main()
