@@ -11,13 +11,14 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
-# These will be moved to the FRONT of the CSV for easy reading.
-# ALL other columns found in the JSON will follow these automatically.
+# These will be moved to the FRONT. 
+# They must match the names generated after normalization.
 PRIORITY_COLUMNS = [
-    "payload__electorDetailDto__name", 
-    "payload__electorDetailDto__epicNo", 
-    "payload__electorDetailDto__acNo", 
-    "payload__electorDetailDto__partNo"
+    "name", 
+    "epicNo", 
+    "acNo", 
+    "partNo",
+    "partSerialNo"
 ]
 
 def main():
@@ -35,60 +36,59 @@ def main():
         print(f"❌ Download failed: {e}")
         sys.exit(1)
 
-    # 3. Collect and Flatten Files
+    # 3. Collect ALL Files (No extension check)
     all_files = []
     for dp, dn, filenames in os.walk(DOWNLOAD_DIR):
         for f in filenames:
-            if f.endswith('.json'):
+            # Skip hidden system files like .DS_Store
+            if not f.startswith('.'):
                 all_files.append(os.path.join(dp, f))
 
     processed_dfs = []
-    print(f"Processing {len(all_files)} files...")
+    print(f"Processing {len(all_files)} files found in folder...")
 
+    # 4. Extract and Flatten
     for filename in all_files:
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
-            # Use record_path to dig into the list, and sep='__' to create readable headers
-            # errors='ignore' ensures that if a key is missing in one file, it doesn't crash
-            df = pd.json_normalize(
-                data, 
-                record_path=['payload', 'electorDetailDto'], 
-                sep='__'
-            )
+            # Extract the list from the snippet structure
+            elector_list = data.get('payload', {}).get('electorDetailDto', [])
             
-            # Add a prefix so you know exactly where the data came from in the JSON tree
-            df = df.add_prefix('payload__electorDetailDto__')
-            
-            if not df.empty:
-                processed_dfs.append(df)
+            if elector_list:
+                # Normalize flattens nested keys if they exist
+                df = pd.json_normalize(elector_list, sep='__')
+                
+                if not df.empty:
+                    processed_dfs.append(df)
+            else:
+                print(f"⚠️  No 'electorDetailDto' list found in: {os.path.basename(filename)}")
 
+        except (json.JSONDecodeError, ValueError):
+            # This skips files that aren't actually JSON (like logs or binaries)
+            continue
         except Exception as e:
             print(f"Skipping {os.path.basename(filename)}: {e}")
             continue
 
-    # 4. Merge and Handle Jumbled Headers
+    # 5. Merge and Handle Jumbled Headers
     if processed_dfs:
-        # pd.concat aligns columns by name. If File A has 'Age' and File B doesn't, 
-        # File B's 'Age' cells will simply be empty (NaN).
+        # Aligns all columns. If one file has a header others don't, it fills with empty values.
         final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
 
-        # 5. Smart Reordering (Show Priority first, then everything else)
+        # 6. Reorder: Priority first, then EVERYTHING else
         all_cols = list(final_df.columns)
-        
-        # Identify columns that exist in our priority list
         existing_priority = [c for c in PRIORITY_COLUMNS if c in all_cols]
-        # Identify every other column found in the JSONs
         other_cols = [c for c in all_cols if c not in existing_priority]
         
-        # Combine them: Priority first + Every other header found
         final_df = final_df[existing_priority + other_cols]
 
-        # 6. Deduplicate and Save
-        if 'payload__electorDetailDto__epicNo' in final_df.columns:
-            final_df = final_df.drop_duplicates(subset=['payload__electorDetailDto__epicNo'], keep='first')
+        # 7. Deduplicate
+        if 'epicNo' in final_df.columns:
+            final_df = final_df.drop_duplicates(subset=['epicNo'], keep='first')
         
+        # Save to CSV
         final_df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8-sig')
         
         print("-" * 40)
@@ -100,7 +100,7 @@ def main():
         # Cleanup
         shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ No data was extracted. Check your JSON structure.")
+        print("❌ No data was extracted. Ensure the files in Drive are valid JSON format.")
 
 if __name__ == "__main__":
     main()
