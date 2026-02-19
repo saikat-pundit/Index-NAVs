@@ -4,7 +4,6 @@ import os
 import shutil
 import sys
 import json
-import re
 
 # --- CONFIGURATION ---
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1Kmm-SqnMGL0V2tLXQc4GyEGGKYtD_XUf"
@@ -12,6 +11,7 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
+# Strictly these columns will be exported
 TARGET_COLUMNS = [
     "name", "epicNo", "acNo", "partNo", "partSerialNo", 
     "categoryType", "relationType", "progenyLinked", 
@@ -21,39 +21,43 @@ TARGET_COLUMNS = [
     "miobApproval", "miobRemarks", "roobApproval", "roobRemarks"
 ]
 
-def repair_and_load_json(filepath):
-    """Attempts to extract the voter list even if the JSON file is broken/truncated."""
+def extract_from_har(filepath):
+    """Parses HAR file and extracts the JSON text from the response content."""
+    extracted_records = []
     try:
-        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
-            content = f.read()
-
-        # Regex Strategy: Find everything between "electorDetailDto":[ and the last ]
-        # This bypasses broken headers or missing closing braces at the end of the file
-        match = re.search(r'\"electorDetailDto\"\s*:\s*(\[.*\])', content, re.DOTALL)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            har_data = json.load(f)
         
-        if match:
-            json_string = match.group(1)
-            # Try to parse the extracted list
-            try:
-                return json.loads(json_string), None
-            except json.JSONDecodeError:
-                # If it's still broken (truncated), try to force-close the brackets
-                try:
-                    return json.loads(json_string + "]"), None
-                except:
-                    pass
-                return None, "Truncated list could not be repaired"
+        entries = har_data.get('log', {}).get('entries', [])
         
-        return None, "Could not find 'electorDetailDto' list in file"
+        for entry in entries:
+            url = entry.get('request', {}).get('url', '')
+            # Filter for the specific API call that contains the voter data
+            if "findEligibleElectors" in url:
+                content_text = entry.get('response', {}).get('content', {}).get('text', '')
+                
+                if content_text:
+                    try:
+                        # The 'text' inside a HAR is usually a stringified JSON
+                        data = json.loads(content_text)
+                        elector_list = data.get('payload', {}).get('electorDetailDto', [])
+                        if isinstance(elector_list, list):
+                            extracted_records.extend(elector_list)
+                    except json.JSONDecodeError:
+                        continue
+                        
+        return extracted_records, None
     except Exception as e:
         return None, str(e)
 
 def main():
+    # 1. Setup Workspace
     if os.path.exists(DOWNLOAD_DIR): shutil.rmtree(DOWNLOAD_DIR)
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    print(f"Downloading files from Drive...")
+    # 2. Download from Drive
+    print(f"Downloading .har files from Drive...")
     try:
         gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
     except Exception as e:
@@ -61,42 +65,39 @@ def main():
         sys.exit(1)
 
     all_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(DOWNLOAD_DIR) for f in filenames if not f.startswith('.')]
-    processed_dfs = []
-    failed_details = []
+    all_extracted_data = []
 
-    print(f"Repairing and analyzing {len(all_files)} files...")
+    print(f"Processing {len(all_files)} files...")
 
+    # 3. Process each file
     for filename in all_files:
-        fname = os.path.basename(filename)
-        # Use the repair function instead of standard json.load
-        elector_list, error = repair_and_load_json(filename)
-        
-        if elector_list and isinstance(elector_list, list):
-            df = pd.json_normalize(elector_list, sep='__')
-            # Ensure only the columns you want exist
-            df_filtered = df.reindex(columns=TARGET_COLUMNS)
-            processed_dfs.append(df_filtered)
-        else:
-            failed_details.append(f"{fname}: {error}")
+        records, error = extract_from_har(filename)
+        if records:
+            all_extracted_data.extend(records)
+        elif error:
+            print(f"⚠️  Skipping {os.path.basename(filename)}: {error}")
 
-    if processed_dfs:
-        final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
-        final_df = final_df[TARGET_COLUMNS] 
+    # 4. Merge and Filter
+    if all_extracted_data:
+        # Convert to DataFrame
+        df = pd.json_normalize(all_extracted_data, sep='__')
+        
+        # Lock to your TARGET_COLUMNS
+        # reindex ensures if a column is missing in the HAR, it's created as empty
+        final_df = df.reindex(columns=TARGET_COLUMNS)
+        
+        # Save to CSV
         final_df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8-sig')
         
         print("\n" + "="*50)
-        print(f"✅ SUCCESS: {len(processed_dfs)} files recovered/processed.")
-        print(f"📊 Total Records: {len(final_df)}")
+        print(f"✅ SUCCESS: Data extracted from .har files.")
+        print(f"📊 Total Records Found: {len(final_df)}")
+        print(f"📋 File Saved: {OUTPUT_FILE}")
         print("="*50)
-
-        if failed_details:
-            print(f"\n⚠️  REMAINING ISSUES ({len(failed_details)} files):")
-            for issue in failed_details:
-                print(f" - {issue}")
         
         shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ No data could be recovered. The files might be severely corrupted.")
+        print("❌ No voter data found. Ensure the HAR files contain 'findEligibleElectors' requests.")
 
 if __name__ == "__main__":
     main()
