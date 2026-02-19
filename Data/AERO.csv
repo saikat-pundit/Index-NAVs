@@ -1,4 +1,67 @@
 ﻿payload__electorDetailDto__name,payload__electorDetailDto__epicNo,payload__electorDetailDto__acNo,payload__electorDetailDto__partNo,payload__electorDetailDto__partSerialNo,payload__electorDetailDto__categoryType,payload__electorDetailDto__relationType,payload__electorDetailDto__progenyLinked,payload__electorDetailDto__progLimitExceed,payload__electorDetailDto__docAnomaly,payload__electorDetailDto__anomalies,payload__electorDetailDto__lastSirState,payload__electorDetailDto__lastSirAc,payload__electorDetailDto__lastSirPart,payload__electorDetailDto__lastSirSerialNo,payload__electorDetailDto__recommendedByBlo,payload__electorDetailDto__deoApproval,payload__electorDetailDto__deoRemarks,payload__electorDetailDto__miobApproval,payload__electorDetailDto__miobRemarks,payload__electorDetailDto__roobApproval,payload__electorDetailDto__roobRemarks
+Sriti Mondal,UWX2299501,260,216,354,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Kanta Das,WB/39/271/036737,260,216,789,na,,0,false,,false,S25,271,72,720,N,,,,,N,Inadmissible documents ERO to review the case
+JAMIL ANSARI,FKH3464492,260,89,38,progeny,FTHR,12,true,1,true,S25,260,224,431,Y,Y,Verified,,,N,Submitted documents need to be reviewed
+Archana Bhagat,UWX1652189,260,89,160,na,,,,,false,,,,,N,S,,,,,
+Aparna Bhagat ( Gupta ),FKH3464518,260,89,178,na,,,,,false,,,,,N,S,,,,,
+Mamtaj Begum,FKH3463510,260,89,182,progeny,FTHR,5,true,1,true,S25,284,116,883,Y,Y,Document verified,N,Linkage not established,,
+Puja Shaw,UWX1570191,260,89,215,na,,,,,false,,,,,N,S,,,,,
+Gautam Kumar Pal,DZD2850774,260,89,359,progeny,GMTH,0,false,,true,S25,277,91,344,Y,Y,Document verified,N,Linkage not established,,
+Jayshree Khanddwal,UWX1150846,260,89,543,na,,,,,false,S18,15,85,1163,N,S,,,,,
+NITU SINGH,UWX2483824,260,89,623,na,,,,,false,S04,172,168,1076,N,S,,,,,
+Bebi Sing,FKH3610821,260,89,627,na,,,,,false,S25,271,27,746,N,S,,,,,
+Asha Sing,FKH3610847,260,89,629,na,,,,,false,S25,271,27,746,N,S,,,,,
+Saroj Kumar Singh,UWX2023364,260,89,633,na,,,,,false,S04,243,129,591,N,S,,,,,
+Mina Sing,UWX2591402,260,89,639,na,,,,,false,S25,271,27,746,N,S,,,,,
+SANTOSH MUKHERJEE,UWX2270247,260,213,108,na,,0,false,,false,,,,,N,S,,,,Y,
+Namita Chakraborty,WB/39/271/042794,260,213,152,na,,,,,false,S25,271,15,104,N,S,,,,Y,
+Sirshendu Chatterjee,UWX1752880,260,213,154,progeny,FTHR,0,false,,true,S25,271,15,299,Y,Y,Verified OK,N,Linkage with parent not established.,,
+Gauranga Chanda,FKH1967165,260,213,156,na,,,,,false,,,,,N,S,,,,Y,
+Nitai Chanda,FKH2928745,260,213,157,na,,,,,false,,,,,N,S,,,,Y,
+Ruidas Dutta,FKH2929719,260,213,180,na,,,,,false,,,,,N,S,,,,Y,
+Debnarayan Dutta,FKH3454907,260,213,184,na,,0,false,,false,,,,,N,S,,,,Y,
+Rita Dalui,UWX1603109,260,213,190,na,,,,,false,,,,,N,S,,,,Y,
+Sankar Dalui,UWX1603091,260,213,191,na,,,,,false,,,,,N,S,,,,Y,
+Dipa Dalui (Makal),UWX1849033,260,213,192,na,,0,false,,false,,,,,N,S,,,,Y,
+Subhash Dalui,FKH3062759,260,213,193,na,,,,,false,,,,,N,S,,,,Y,
+JAYASHRI DALUI,UWX2379881,260,213,194,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+DEBASHRI DALUI,UWX2553600,260,213,195,na,,,,,false,,,,,N,S,,,,Y,
+Robi Tikadar,UWX1712744,260,213,212,na,,0,false,,false,,,,,N,S,,,,Y,
+SAJAL ROY,UWX0734236,260,213,319,na,,0,false,,false,,,,,N,S,,,,Y,
+ARPITA DEY ROY,UWX2287803,260,213,322,na,,,,,false,,,,,N,S,,,,Y,
+Badal Chandra Dey,UWX1712686,260,213,332,na,,0,false,,false,,,,,N,S,,,,Y,
+Tonmoy Dey,UWX1712603,260,213,334,na,,,,,false,,,,,N,S,,,,Y,
+Rajesh Mondal,UWX1982040,260,213,367,na,,0,false,,false,,,,,N,S,,,,Y,
+Swapan Byapari,FKH2928935,260,213,422,na,,0,false,,false,,,,,N,S,,,,,
+Suchitra Barman,UWX1982073,260,213,431,na,,,,,false,,,,,N,S,,,,Y,
+Archana Biswas,UWX0734988,260,213,502,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Kamal Kanti Biswas,UWX1298231,260,213,509,na,,,,,false,,,,,N,S,,,,Y,
+ARUP BAIRAGI,UWX2452555,260,213,548,progeny,FTHR,0,false,,true,S25,271,15,368,Y,Y,Verified OK,Y,,,
+Sunil Mondal,UEC1478684,260,213,612,na,,0,false,,false,,,,,N,S,,,,N,"Cancelled passport not admissible, Inadmissible documents ERO to review the case"
+MITA BANERJEE,UWX2382570,260,213,622,na,,0,false,,false,,,,,N,S,,,,Y,
+PALAS MONDAL,UWX2479301,260,213,650,na,,,,,false,,,,,N,S,,,,Y,
+MRITYUNJAY MONDAL,UWX1712645,260,213,686,na,,0,false,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
+Nilima Mondal,UWX1712736,260,213,691,na,,0,false,,false,S24,377,219,959,N,S,,,,N,Inadmissible documents ERO to review the case
+Latika Mondal,UWX1812353,260,213,698,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Sukdeb Mondal,UWX1752856,260,213,709,na,,,,,false,,,,,N,S,,,,Y,
+Basudeb Mondal,UWX1752864,260,213,710,na,,,,,false,,,,,N,S,,,,Y,
+Bisaka Mondal,UWX1752872,260,213,711,na,,,,,false,,,,,N,S,,,,Y,
+UTTAM MONDAL,FKH2928992,260,213,712,na,,,,,false,,,,,N,S,,,,Y,
+Pradhan Mandal,BXX3247400,260,213,721,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+CHANDRA DALUI,UWX2524361,260,213,821,na,,0,false,,false,,,,,N,S,,,,Y,
+Anita Roy,UWX1812411,260,213,904,na,,,,,false,,,,,N,S,,,,Y,
+Krishna Sarkar,UWX2610095,260,213,938,na,,,,,false,,,,,N,S,,,,Y,
+SWAPAN SARKAR,UWX2105807,260,213,941,na,,0,false,,false,,,,,N,S,,,,Y,
+MUKUNDA SARKAR,UWX1602978,260,213,945,na,,0,false,,false,,,,,N,S,,,,Y,
+Tapas Kumar Sarkar,FKH1205335,260,213,951,na,,,,,false,,,,,N,S,,,,Y,
+SUDIPTA HALDER,UWX2436210,260,213,971,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Sujit Kumar Halder,UWX2093979,260,213,972,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Tagari Haldar,UWX1483114,260,213,986,progeny,MTHR,0,false,,true,S25,271,10,123,Y,Y,Verified OK,N,Document for linkage not found.,,
+POLY HOWLI,UWX2477032,260,213,1004,na,,,,,false,,,,,N,S,,,,Y,
+biswajit kumar howli,IMW2175388,260,213,1005,na,,,,,false,,,,,N,S,,,,Y,
+Sayan Baidya,UWX2593473,260,213,1011,progeny,FTHR,0,false,,true,S25,271,15,343,Y,Y,Verified OK,N,Mother's document for linkage not found.,,
+HRIDOY DUTTA,UWX2609279,260,213,1017,na,,,,,false,,,,,N,S,,,,Y,
+CHINMOY Dey,UWX2623759,260,213,1027,na,,0,false,,false,,,,,N,S,,,,Y,
 Kanhai Das,UWX1386093,260,214,21,na,,,,,false,,,,,N,S,,,,Y,
 Jayakrishnan Nair,UWX1982230,260,214,32,na,,0,false,,false,,,,,N,S,,,,Y,
 Ripan Paik,UWX1385822,260,214,45,na,,,,,false,,,,,N,S,,,,Y,
@@ -12,150 +75,59 @@ Gopal Barui,UWX2512507,260,214,302,na,,,,,false,,,,,N,S,,,,Y,
 Anita Shaw,UWX0737510,260,214,308,na,,,,,false,,,,,N,S,,,,Y,
 Surjakanta Mondal,UWX1603422,260,214,319,na,,0,false,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
 Biswajit Mondal,UWX1603448,260,214,330,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Rita Saha,UWX1713155,260,214,332,na,,,,,false,S25,100,166,118,N,S,,,,Y,
+Rita Saha,UWX1713155,260,214,332,na,,,,,false,S25,100,166,118,N,Y,Document Verified,Y,,Y,
 Jaydeb Saha,FKH2890713,260,214,342,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Dipali Haldar,UWX1812718,260,214,511,progeny,GMTH,0,false,,true,S25,271,15,793,Y,Y,Document verified,,,,
+Dipali Haldar,UWX1812718,260,214,511,progeny,GMTH,0,false,,true,S25,271,15,793,Y,Y,Document verified,N,Linkage not established.,,
 Ashis Haldar,UWX1812692,260,214,513,na,,,,,false,,,,,N,S,,,,Y,
 Basanta Pattanayek,UWX1982172,260,214,578,na,,,,,false,,,,,N,S,,,,N,Name/ DOB mismatch submit other document
 Kalipada Mondal,IMW1845478,260,214,650,na,,,,,false,,,,,N,S,,,,Y,
 Malati Pramanik,UWX1603570,260,214,787,na,,0,false,,false,S25,270,146,419,N,S,,,,Y,
 Deba Mondal,UWX2584183,260,214,804,na,,0,false,,false,,,,,N,S,,,,Y,
 Sagar Roy,UWX2022572,260,214,925,progeny,FTHR,0,false,,true,S25,271,15,1113,Y,Y,Document verified,N,Father's name mismatch with document.,,
-Haripada Das,WB/39/271/036067,260,215,120,progeny,GFTH,0,false,,true,S25,271,247,784,Y,Y,Document verified,Y,,,
-SANGITA PATRA,UWX2383594,260,215,134,na,,,,,false,S25,256,183,260,N,S,,,,N,Parent linkage documents not submitted.
-PARUL PAL,UWX2383545,260,215,150,na,,,,,false,S25,246,69,136,N,S,,,,N,DOB mismatch as per birth certificate. Parent linkage documents not submitted.
-RAKHI BASAK,UWX2383610,260,215,151,na,,,,,false,S25,271,13,540,N,S,,,,N,Parent linkage documents not submitted.
-Swarup Debnath,UWX2383404,260,215,186,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Arup Debnath,UWX2383420,260,215,187,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-MANDIRA NAG,UWX2308419,260,215,189,na,,,,,false,S25,270,33,120,N,S,,,,N,Parent linkage documents not submitted.
-Shambhu Pal,UWX1386267,260,215,205,na,,,,,false,S25,271,13,104,N,S,,,,Y,
-Manik Pal (Kumbhakar),UWX1483940,260,215,213,na,,0,false,,false,S25,234,101,37,N,S,,,,N,Inadmissible documents ERO to review the case
-RIMI PAL,UWX2320588,260,215,220,na,,,,,false,S25,270,33,640,N,S,,,,N,Parent linkage documents not submitted.
-RIYA PAL,UWX2480861,260,215,224,na,,0,false,,false,S25,271,13,97,N,S,,,,,
-PRIYA PAL,UWX2480887,260,215,225,progeny,FTHR,0,false,,true,S25,234,101,39,Y,Y,Verified OK,Y,,,
-Lakshami Basak,UWX1982271,260,215,228,na,,,,,false,S25,271,13,540,N,S,,,,N,Inadmissible documents ERO to review the case
-SUTAPAN DAS,UWX2105591,260,215,235,na,,,,,false,S25,271,247,784,N,S,,,,N,Parent linkage documents not submitted.
-Sayan Bachhar,UWX2528602,260,215,240,na,,,,,false,S25,271,13,122,N,S,,,,N,Parent linkage documents not submitted.
-Kalpana Biswas,WB/39/271/036127,260,215,285,na,,,,,false,S25,271,13,136,N,S,,,,Y,
-SHIFALI MONDAL,UWX2436608,260,215,352,na,,,,,false,,,,,N,S,,,,Y,
-JHUMUR MONDAL,UWX2383396,260,215,362,na,,0,false,,false,S25,186,119,137,N,S,,,,N,Inadmissible documents ERO to review the case
-Suraj Roy,UWX2030856,260,215,391,na,,,,,false,S25,112,239,944,N,S,,,,N,Parent linkage documents not submitted.
-PUJA ROY,UWX2436657,260,215,392,na,,,,,false,S25,112,239,944,N,S,,,,N,Parent linkage documents not submitted.
-Bishnu Roy,UWX1982412,260,215,400,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-RIMPA ROY,UWX2093813,260,215,416,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Laxmi Sarkar,UWX1713320,260,215,438,na,,0,false,,false,S25,271,13,230,N,S,,,,N,Inadmissible documents ERO to review the case
-Sukumar Mondal,UWX1484021,260,215,465,na,,,,,false,,,,,N,S,,,,,
-Sukdev Saha,UWX1189448,260,215,478,progeny,FTHR,0,false,,true,S25,271,13,219,Y,Y,Verified OK,N,Father's name mismatch,,
-Kanika Saha,UWX1189430,260,215,479,na,,0,false,,false,S25,271,13,219,N,S,,,,N,Inadmissible documents ERO to review the case
-Bishakha Saha,FKH2928166,260,215,480,na,,0,false,,false,S25,271,13,219,N,S,,,,N,Inadmissible documents ERO to review the case
-Lakshmi Saha,UWX1813054,260,215,493,progeny,FTHR,0,false,,true,S25,271,13,219,Y,Y,Verified OK,N,Linked persons title mismatch,,
-MUNNA SAHA,UWX2315026,260,215,494,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Parent linkage documents not submitted.
-Susmita Bahadur,UWX2528743,260,215,496,na,,0,false,,false,S25,271,13,280,N,S,,,,N,Parent linkage documents not submitted.
-URMILA SINGH,UWX2487080,260,215,503,na,,,,,false,S25,188,47,109,N,S,,,,N,Parent linkage documents not submitted.
-Purnima Karmakar,YAJ1814383,260,215,523,na,,0,false,,false,S25,269,99,320,N,S,,,,N,Inadmissible documents ERO to review the case
-Mitu Halder,UWX1483932,260,215,561,na,,,,,false,S25,271,14,871,N,S,,,,N,Parent linkage documents not submitted.
-SUMIT DAS,UWX2105617,260,215,569,na,,,,,false,S25,271,247,784,N,S,,,,,
-Shubhankar Debnath,UWX2515708,260,215,571,na,,,,,false,S25,270,33,120,N,S,,,,N,Both parents linkage documents not submitted.
-Subhajit Mirdha,UWX2583334,260,215,577,na,,0,false,,false,S25,101,207,528,N,S,,,,,
-ABIR BACHAR,UWX2601631,260,215,587,na,,,,,false,S25,271,13,120,N,S,,,,Y,
-PALLABI MONDAL,UWX2382729,260,215,589,na,,0,false,,false,S25,101,223,935,N,S,,,,N,Parent linkage documents not submitted.
-BROJESH KUMAR MONDAL,UWX2567931,260,215,595,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Sujal Karmakar,UWX1484260,260,215,609,na,,0,false,,false,S25,271,13,493,N,S,,,,N,Parent linkage documents not submitted. Wrong name in SIR list
-Dipankar Mondal,UWX1484146,260,215,860,na,,0,false,,false,S25,272,54,794,N,S,,,,N,Parent linkage documents not submitted.
-Subhasree Mistry (Mridha),UWX1713486,260,215,866,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Shanti Mridha,UWX1484294,260,215,869,na,,0,false,,false,S25,101,224,1017,N,S,,,,N,Inadmissible documents ERO to review the case
-SEEMA BASAK,UWX2487593,260,215,934,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SANJITA SAHA,UWX1603968,260,215,970,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Parent linkage documents not submitted.
-JIKO SAHA,UWX2383578,260,215,971,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Inadmissible documents ERO to review the case
-SIMA BASU,UWX2615946,260,215,991,na,,,,,false,S25,266,89,95,N,S,,,,N,Both parents linkage documents not submitted.
-Rita Kar,UWX2007763,260,211,23,na,,,,,false,,,,,N,S,,,,Y,
-Kusum Routh,NSR1777168,260,211,28,na,,0,false,,false,,,,,N,S,,,,Y,
-SUBHA KARMAKAR,UWX2546786,260,211,165,na,,0,false,,false,S25,271,12,693,N,S,,,,N,Parent linkage documents not submitted.
-Kartick Dhali,UWX1379429,260,211,218,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Manoranjan Joyardar,FKH2925600,260,211,281,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Istaranjan Joardar,UWX1187863,260,211,285,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Nirmalendu Joardar,UWX1385475,260,211,333,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-HRIDAY NAG,UWX2078798,260,211,423,na,,,,,false,,,,,N,S,,,,Y,
-Gurudas Nag,UWX1601947,260,211,425,na,,,,,false,,,,,N,S,,,,Y,
-Chandu Pahariya,UWX1297241,260,211,478,progeny,FTHR,0,false,,true,S25,271,10,233,Y,Y,Verified OK,Y,,,
-Biplab Majhi,UWX1482041,260,211,485,na,,0,false,,false,S25,271,10,237,N,S,,,,N,Inadmissible documents ERO to review the case
-Antara Bhattacharya,UWX1981703,260,211,556,na,,,,,false,S25,19,80,741,N,S,,,,N,Parent linkage documents not submitted.
-Tarak Bhattacharja,UWX1482132,260,211,557,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Biswajay Mukherjee,UWX1811843,260,211,565,na,,,,,false,,,,,N,S,,,,Y,
-ISIKA MUKHOPADHYAY,UWX2378271,260,211,568,na,,0,false,,false,S25,249,121,108,N,S,,,,N,Parent linkage documents not submitted.
-Sukumar Mondal,UWX1297357,260,211,589,na,,,,,false,S25,65,63,263,N,S,,,,N,Inadmissible documents ERO to review the case
-TANMAY MONDAL,UWX2078855,260,211,593,na,,,,,false,S25,271,197,467,N,S,,,,Y,
-DIP MONDAL,UWX2327252,260,211,594,na,,,,,false,S25,271,197,467,N,S,,,,Y,
-Biplab Mistri,FKH3314713,260,211,655,na,,,,,false,,,,,N,S,,,,Y,
-MAMONI ROUTH,UWX2262079,260,211,683,na,,0,false,,false,,,,,N,S,,,,Y,
-APARNA ROY,UWX2460053,260,211,719,na,,,,,false,S25,270,33,456,N,S,,,,N,Parent linkage documents not submitted.
-Promath Roy,UWX1297175,260,211,727,na,,,,,false,,,,,N,S,,,,Y,
-CHANDAN SHAW,UWX2561389,260,211,793,na,,,,,false,S04,96,202,287,N,S,,,,N,Inadmissible documents ERO to review the case
-Sudip Singh,UWX2021947,260,211,800,na,,,,,false,S25,269,92,128,N,S,,,,N,Inadmissible documents ERO to review the case
-DIPA SINGH,UWX2377992,260,211,803,na,,,,,false,S25,269,92,128,N,S,,,,N,Parent linkage documents not submitted.
-Sukla Haldar,UWX1297282,260,211,859,na,,,,,false,S25,77,143,444,N,S,,,,Y,
-Tapas Halder,UWX1981729,260,211,882,na,,,,,false,S25,271,10,243,N,S,,,,N,Parent linkage documents not submitted.
-TAPAN HALDER,UWX2104834,260,211,892,na,,,,,false,S25,271,10,243,N,S,,,,N,Parent linkage documents not submitted.
-PRADIP MONDAL,UWX2399988,260,211,895,na,,0,false,,false,S25,271,10,411,N,S,,,,N,Submitted documents need to be reviewed
-Apurba Roy,UWX2596930,260,211,916,na,,,,,false,S25,270,33,456,N,S,,,,N,Parent linkage documents not submitted.
-Rina Deb,UWX1482561,260,211,1013,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SWAPAN KUMAR SENGUPTA,FKH2890689,260,210,6,na,,,,,false,,,,,N,S,,,,Y,
-Suman Ganguly,UWX1711936,260,210,14,na,,,,,false,,,,,N,S,,,,Y,
-SAGAR MONDAL,UWX2286318,260,210,157,na,,,,,false,,,,,N,S,,,,Y,
-Rajkumari Mondal,XCZ1104850,260,210,164,na,,,,,false,,,,,N,S,,,,Y,
-Kamala Mondal,UWX2021780,260,210,229,na,,,,,false,,,,,N,S,,,,Y,
-Nupur Matubbar,UWX1187491,260,210,277,na,,,,,false,,,,,N,S,,,,Y,
-Sajal Mitra,UWX1711746,260,210,289,progeny,GMTH,0,false,,true,S25,270,34,681,Y,Y,Document verified,,,,
-Nitu Mistry,UWX0729988,260,210,305,na,,,,,false,,,,,N,S,,,,Y,
-KAMALESH MONDAL,UWX2435782,260,210,311,na,,,,,false,,,,,N,S,,,,Y,
-PIU ROY,UWX2376754,260,210,372,na,,,,,false,,,,,N,S,,,,,
-Jagadish Sharma,UWX1601616,260,210,397,na,,,,,false,S25,275,204,205,N,S,,,,,
-Uttam Sutradhar,UWX1481951,260,210,398,progeny,FTHR,0,false,,true,S25,282,114,666,Y,Y,Document verified,,,,
-Kanu Sarkar,UWX1711670,260,210,456,na,,,,,false,,,,,N,S,,,,Y,
-MAHANANDA MONDAL,UWX2376747,260,210,478,na,,,,,false,,,,,N,S,,,,Y,
-MOUSUMI SAHA MITRA,UWX2078723,260,210,481,na,,,,,false,,,,,N,S,,,,,
-Manojit Singh,FKH2932457,260,210,552,progeny,FTHR,0,false,,true,S25,271,14,812,Y,S,,,,,
-Bishwajit Singh,FKH2932465,260,210,553,progeny,FTHR,0,false,,true,S25,271,14,812,Y,S,,,,,
-Aparna Hazra,UWX1741396,260,210,554,progeny,FTHR,0,false,,true,S25,269,136,717,Y,Y,Document verified,,,,
-Sanjib Majumder,UWX1703776,260,210,624,progeny,FTHR,0,false,,true,S25,277,11,336,Y,S,,,,,
-Saheb Majumder,UWX1643873,260,210,647,progeny,FTHR,0,false,,true,S25,277,11,336,Y,S,,,,,
 Nilatpol Dey,UWX1455039,260,86,18,na,,,,,false,,,,,N,S,,,,,
-Swapan Dey,UWX2148641,260,86,20,na,,,,,false,,,,,N,S,,,,,
-Dilip Goenka,FKH2533230,260,86,32,na,,,,,false,,,,,N,S,,,,,
 Prativa Goenka,UWX1149145,260,86,35,na,,,,,false,,,,,N,S,,,,,
-Tarak Nath Das,UWX1785880,260,86,87,na,,,,,false,,,,,N,S,,,,,
+Tarak Nath Das,UWX1785880,260,86,87,na,,,,,false,,,,,N,Y,Document verified,,,,
 Bishwajit Das,UWX1048362,260,86,93,na,,,,,false,,,,,N,S,,,,,
-Prabhasrajan Das,WB/39/271/081117,260,86,102,na,,,,,false,,,,,N,S,,,,,
-Bandana Das,UWX2148609,260,86,111,na,,,,,false,,,,,N,S,,,,,
-Malati Das,UWX2148625,260,86,112,na,,0,false,,false,S25,271,28,104,N,S,,,,,
-Nanda Das,WB/39/271/081450,260,86,119,na,,,,,false,,,,,N,S,,,,,
 Abhijit Das,UWX1262732,260,86,120,na,,,,,false,,,,,N,S,,,,,
-Bipattaran Das,FKH2952695,260,86,122,na,,,,,false,,,,,N,S,,,,,
 Tania Das,UWX1569367,260,86,124,na,,,,,false,,,,,N,S,,,,,
 Atanu Das,FKH3697745,260,86,126,na,,,,,false,,,,,N,S,,,,,
 TARAKNATH DAS,UWX2575587,260,86,128,na,,,,,false,,,,,N,S,,,,,
 Kalpana Das,WB/39/271/081259,260,86,133,na,,,,,false,,,,,N,S,,,,,
-Biswanath Das,UWX2505543,260,86,142,na,,0,false,,false,,,,,N,S,,,,,
-Gopal Das,UWX2148559,260,86,144,na,,,,,false,,,,,N,S,,,,,
 Kalpana Jadab,UWX0277897,260,86,268,na,,0,false,,false,,,,,N,S,,,,,
 Ashok Pal,FKH3697794,260,86,391,na,,,,,false,,,,,N,S,,,,,
 Anita Shaw,UWX0278911,260,86,416,progeny,FTHR,0,false,,true,S25,271,28,450,Y,Y,Document verified,N,Submitted documents need to be reviewed,,
 Sumit Shaw,UWX1785971,260,86,417,na,,,,,false,,,,,N,S,,,,,
 Pinki Shaw,UWX1149202,260,86,426,na,,,,,false,,,,,N,S,,,,,
-Ramashis Shaw,FKH1811231,260,86,430,na,,,,,false,S25,271,28,455,N,S,,,,,
 Rohit Shaw,FKH3697802,260,86,431,na,,,,,false,,,,,N,S,,,,,
-SONI PASWAN DAS,UWX1455195,260,86,635,na,,,,,false,,,,,N,S,,,,,
 Tagari Mondal,UWX1110329,260,86,648,na,,,,,false,,,,,N,S,,,,,
 Ranjit Rajbanshi,UWX2320455,260,86,679,na,,,,,false,,,,,N,S,,,,,
 Malati Rajbanshi,UWX1262955,260,86,680,progeny,MTHR,0,false,,true,S25,271,268,1025,Y,Y,Document verified,N,Mother's document uploaded,,
 Shanti Rajbanshi,FKH2953941,260,86,684,na,,,,,false,,,,,N,S,,,,,
 Birju Rajbanshi,UWX1048487,260,86,685,progeny,GMTH,0,false,,true,S25,271,28,770,Y,Y,Document verified,N,Linkage not established,,
-Asha Shaw,ZSG2001816,260,86,740,na,,,,,false,,,,,N,S,,,,,
-Gouri Shaw,UWX2148278,260,86,741,na,,,,,false,,,,,N,S,,,,,
-Kiran Show,UWX1591106,260,86,793,na,,,,,false,,,,,N,S,,,,,
 Gayatri Shaw,UWX1048545,260,86,821,na,,,,,false,,,,,N,S,,,,,
-Rita Sing,FKH2953792,260,86,862,na,,,,,false,,,,,N,S,,,,,
+Rita Sing,FKH2953792,260,86,862,na,,,,,false,,,,,N,Y,Document verified,,,,
 KRITI SHAW,UWX2612315,260,86,892,na,,,,,false,,,,,N,S,,,,,
+SONI PASWAN DAS,UWX1455195,260,86,635,na,,,,,false,,,,,N,,,,,,
+SRAWANI GUPTA,UWX2135002,260,207,63,na,,0,false,,false,S25,271,70,846,N,,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
+Sonu Prasad Gupta,UWX1151216,260,207,66,na,,0,false,,false,S25,271,70,846,N,,,,,N,"Parent linkage documents not submitted, Inadmissible documents ERO to review the case"
+Moumita Dhaki,UWX1295906,260,207,166,na,,,,,false,S25,271,86,257,N,,,,,N,Parent linkage documents not submitted.
+Sumitra Das,UWX1351915,260,207,245,na,,0,false,,false,S25,258,99,308,N,,,,,N,Inadmissible documents ERO to review the case
+Anita Das,UWX1810647,260,207,272,na,,,,,false,S25,271,15,470,N,,,,,N,Inadmissible documents ERO to review the case
+Etikana Bej,UUD2039444,260,207,275,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Prabhat Das,UWX1066745,260,207,330,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Tumpa Biswas (Das),UWX1186907,260,207,336,na,,0,false,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Tanmay Das,UWX2323426,260,207,338,na,,0,false,,false,,,,,N,,,,,N,"Birth certificate not admissible as registration more than one year. Provide other documents, Parent linkage documents not submitted."
+Tushar Mistri,UWX2525889,260,207,353,na,,,,,false,,,,,N,,,,,N,Both parents linkage documents not submitted.
+CHANDANA DAS,UWX2456929,260,207,357,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Rita De (Das),UWX1711167,260,207,389,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted. other than adhaar card
+SONAI DEY,UWX2435436,260,207,410,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Mithu Debnath,UWX1980895,260,207,477,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Tapashi Roy Choudhury,UWX1600683,260,207,827,na,,0,false,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+LAXMAN LUITEL,UWX2456838,260,207,835,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+SUKLA DAS,UWX2582484,260,207,957,na,,,,,false,,,,,N,,,,,N,Both parents linkage documents not submitted.
+CHUMKI DAS,UWX2586436,260,207,959,na,,,,,false,S25,271,93,440,N,,,,,N,Both parents linkage documents not submitted.
+Antara Ghosh,UWX2592467,260,207,960,na,,,,,false,S25,271,12,67,N,,,,,N,Both parents linkage documents not submitted.
+RANJAN DAS,UWX2595767,260,207,962,na,,,,,false,,,,,N,,,,,N,Both parents linkage documents not submitted.
 Prosanta Mal,UWX1186121,260,206,1,na,,,,,false,,,,,N,,,,,,
 Anju Barui (Mistri),UWX1600014,260,206,2,na,,,,,false,,,,,N,,,,,,
 Dhirendra Chandra Ojha,FKH3626082,260,206,7,na,,,,,false,,,,,N,,,,,,
@@ -193,6 +165,25 @@ Mana Das,FKH3694031,260,206,811,na,,,,,false,,,,,N,,,,,,
 Purnima Singh,UWX2533438,260,206,1027,na,,0,false,,false,,,,,N,,,,,,
 TUMPA CHOWDHURY,UWX2280675,260,209,514,progeny,FTHR,0,false,,true,S25,271,14,526,Y,,,,,,
 Sanjay Barui,UWX0729061,260,209,712,progeny,FTHR,0,false,,true,S25,271,14,473,Y,,,,,,
+SWAPAN KUMAR SENGUPTA,FKH2890689,260,210,6,na,,,,,false,,,,,N,S,,,,Y,
+Suman Ganguly,UWX1711936,260,210,14,na,,,,,false,,,,,N,S,,,,Y,
+SAGAR MONDAL,UWX2286318,260,210,157,na,,,,,false,,,,,N,S,,,,Y,
+Rajkumari Mondal,XCZ1104850,260,210,164,na,,,,,false,,,,,N,S,,,,Y,
+Nupur Matubbar,UWX1187491,260,210,277,na,,,,,false,,,,,N,S,,,,Y,
+Sajal Mitra,UWX1711746,260,210,289,progeny,GMTH,0,false,,true,S25,270,34,681,Y,Y,Document verified,,,,
+Nitu Mistry,UWX0729988,260,210,305,na,,,,,false,,,,,N,S,,,,Y,
+KAMALESH MONDAL,UWX2435782,260,210,311,na,,,,,false,,,,,N,S,,,,Y,
+PIU ROY,UWX2376754,260,210,372,na,,,,,false,,,,,N,S,,,,,
+Jagadish Sharma,UWX1601616,260,210,397,na,,,,,false,S25,275,204,205,N,S,,,,,
+Uttam Sutradhar,UWX1481951,260,210,398,progeny,FTHR,0,false,,true,S25,282,114,666,Y,Y,Document verified,,,,
+Kanu Sarkar,UWX1711670,260,210,456,na,,,,,false,,,,,N,S,,,,Y,
+MAHANANDA MONDAL,UWX2376747,260,210,478,na,,,,,false,,,,,N,S,,,,Y,
+MOUSUMI SAHA MITRA,UWX2078723,260,210,481,na,,,,,false,,,,,N,S,,,,,
+Manojit Singh,FKH2932457,260,210,552,progeny,FTHR,0,false,,true,S25,271,14,812,Y,Y,Document verified,,,,
+Bishwajit Singh,FKH2932465,260,210,553,progeny,FTHR,0,false,,true,S25,271,14,812,Y,Y,Document verified,,,,
+Aparna Hazra,UWX1741396,260,210,554,progeny,FTHR,0,false,,true,S25,269,136,717,Y,Y,Document verified,,,,
+Sanjib Majumder,UWX1703776,260,210,624,progeny,FTHR,0,false,,true,S25,277,11,336,Y,Y,Document verified,,,,
+Saheb Majumder,UWX1643873,260,210,647,progeny,FTHR,0,false,,true,S25,277,11,336,Y,Y,Document verified,,,,
 Yasmin Bibi,FKH3011111,260,89,28,self,,,,,true,,,,,Y,,,,,,
 Amar Singh,UWX1150572,260,89,105,na,,,,,false,,,,,N,,,,,,
 SWATI DEBI,UWX2302255,260,89,127,na,,,,,false,,,,,N,,,,,,
@@ -220,6 +211,42 @@ SRABANI SINGH SAMADDAR,UWX1969971,260,122,687,na,,0,false,,false,,,,,N,,,,,,
 Kumud Sarkar,FKH2916849,260,122,697,na,,,,,false,,,,,N,,,,,,
 Santi Sarkar,UWX1578178,260,122,704,na,,0,false,,false,,,,,N,,,,,,
 Suchitra Saha,WB/39/271/000618,260,122,719,na,,0,false,,false,,,,,N,,,,,,
+Priti Kundu,UWX1484542,260,216,38,na,,,,,false,S25,169,140,217,N,S,,,,N,Inadmissible documents ERO to review the case
+Dipak Kargupta,UWX1741420,260,216,45,na,,,,,false,,,,,N,S,,,,Y,
+Nripa Das (Barui),UWX1713635,260,216,192,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+PRIYA ROY,UWX2553006,260,216,320,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+ANWESHA BHUIYA,UWX2487551,260,216,321,na,,,,,false,,,,,N,S,,,,Y,
+DIPIKA BHUIYA,UWX2079101,260,216,322,na,,,,,false,,,,,N,S,,,,Y,
+Pronob Bhuiya,UWX1812437,260,216,323,na,,,,,false,,,,,N,S,,,,Y,
+Maya Rani Bhunia,UWX1848969,260,216,324,na,,,,,false,,,,,N,S,,,,N,birth certificate not admissible registration date more than one year DOB
+Gopal Bhunia,UWX1848993,260,216,325,na,,,,,false,,,,,N,S,,,,N,birth certificate not admissible registration date more than one year DOB
+Gouri Bhattacharya,FKH3692837,260,216,328,na,,,,,false,S25,271,19,109,N,S,,,,Y,
+GOURI SARKAR,UWL2036614,260,216,332,na,,,,,false,,,,,N,S,,,,N,Parent birth certificate DOB is more than one year from registration date provide other document of parent
+Susuma Mondal,UWX1386549,260,216,351,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+SUMAN KUMAR MONDAL,UWX2486223,260,216,355,na,,0,false,,false,,,,,N,S,,,,N,Both Parent linkage documents not submitted.
+Subrata Malo,UWX2541415,260,216,390,progeny,GMTH,0,false,,true,S25,271,205,462,Y,Y,DOCUMENTS  VERIFIED,N,Valid document require for linkage.,,
+Biswajit Mistri,UWX1484575,260,216,399,na,,,,,false,S25,19,80,749,N,S,,,,N,Parent linkage documents not submitted.
+Namita Mistri,UWX1190016,260,216,400,na,,0,false,,false,S25,19,80,742,N,S,,,,N,Inadmissible documents ERO to review the case
+Khushi Yadav,UWX1713577,260,216,420,progeny,FTHR,0,false,,true,S25,271,13,646,Y,Y,DOCUMENTS  VERIFIED,Y,,,
+Sampa Chakraborty,UWX0746511,260,216,475,progeny,FTHR,0,false,,true,S25,271,13,941,Y,Y,Document verified,N,Linkage document not found.,,
+Manjuri Kuri,UWX1299098,260,216,688,na,,0,false,,false,S25,271,219,191,N,S,,,,N,Inadmissible documents ERO to review the case
+Kanika Kuri,FKH3454204,260,216,703,na,,0,false,,false,S25,186,91,82,N,S,,,,N,Inadmissible documents ERO to review the case
+Sarajit Kuri,UWX1299197,260,216,730,na,,,,,false,S25,271,13,18,N,S,,,,N,Inadmissible documents ERO to review the case
+Anjali Kuri,UWX1299189,260,216,731,na,,0,false,,false,S25,277,19,487,N,S,,,,N,Inadmissible documents ERO to review the case
+Sridhan Roy,UWX1604271,260,216,744,na,,,,,false,,,,,N,S,,,,Y,
+Shibam Datta,UWX2525806,260,216,746,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Tarun Kuri,UWX1484708,260,216,756,na,,,,,false,,,,,N,S,,,,Y,
+Minati Kuri,FKH2890549,260,216,759,na,,0,false,,false,S25,269,2,214,N,S,,,,N,Inadmissible documents ERO to review the case
+Sukumar Das,FKH2928588,260,216,776,na,,,,,false,S25,199,79,136,N,S,,,,Y,
+Jyotsna Das,FKH2928596,260,216,777,na,,,,,false,S25,199,75,137,N,S,,,,Y,
+Susanta Das,UWX1190164,260,216,778,na,,,,,false,S25,199,75,136,N,S,,,,N,Inadmissible documents ERO to review the case
+Bibek Dey,UWX2527224,260,216,792,na,,0,false,,false,S25,271,13,1089,N,S,,,,N,Parent linkage documents not submitted.
+Sandha Debnath,UWX1299155,260,216,793,na,,,,,false,S25,271,30,20,N,S,,,,N,Inadmissible documents ERO to review the case
+Avijit Debnath,UWX1190123,260,216,795,na,,,,,false,S25,271,30,20,N,S,,,,N,Inadmissible documents ERO to review the case
+Sulekha Debnath,UWX1299221,260,216,799,na,,0,false,,false,S25,271,12,332,N,S,,,,N,Inadmissible documents ERO to review the case
+Papiya Mondal,UWX1982586,260,216,826,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted. Inadmissible documents ERO to review the case. DOB and date of registration more than one year in birth certificate
+ANIRBAN MONDAL,UWX2575843,260,216,828,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
+Bisaka Roy (Das),UWX1484716,260,216,855,na,,,,,false,S25,89,153,246,N,S,,,,N,Inadmissible documents ERO to review the case
 Batasi Kora (Munda),FKH3641313,260,211,1,na,,,,,false,,,,,N,,,,,,
 Amitosh Kar,UWX2007755,260,211,22,na,,,,,false,,,,,N,,,,,,
 Susanta Karmakar,UWX1712199,260,211,69,na,,,,,false,,,,,N,,,,,,
@@ -269,6 +296,30 @@ AKASH KAR,UWX2620706,260,211,933,na,,,,,false,,,,,N,,,,,,
 JOY DUTTA,UWX2623171,260,211,935,na,,,,,false,,,,,N,,,,,,
 RAKHI GOSWAMI,UWX1602655,260,211,1049,na,,,,,false,,,,,N,,,,,,
 Sudeb Dutta,UWX0732511,260,211,1054,na,,0,false,,false,,,,,N,,,,,,
+BABLU KARMAKAR,UWX2078236,260,206,19,na,,,,,false,,,,,N,S,,,,N,name different in document submitted. Inadmissible documents ERO to review the case
+Jagadish Gomasta,FKH2931475,260,206,35,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Dipu Dutta,FKH3610342,260,206,92,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Rupa Dutta,WB/10/065/060586,260,206,94,na,,,,,false,S25,53,65,232,N,Y,,,,N,Inadmissible documents ERO to review the case
+RANA DUTTA,UWX2496198,260,206,105,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Panchu Gopal Das,FKH3455896,260,206,119,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+SEEMA KUMARI ROY,UWX2373991,260,206,353,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Dhriti Roy Sana,YAJ1519685,260,206,360,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Sunil Baksi,UWX1461896,260,206,363,na,,,,,false,S25,271,3,269,N,S,,,,N,Inadmissible documents ERO to review the case
+KASHINATH BAIRAGGYA,UWX0717132,260,206,372,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+BISWAJIT Das,FKH3316320,260,206,468,na,,0,false,,false,S25,271,11,287,N,Y,Document verified,,,Y,
+Ramesh Mondal,UWX1810258,260,206,530,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+MAKHAN HOWLADAR,FKH2890127,260,206,582,na,,,,,false,S25,189,72,888,N,S,,,,,
+ANKITA DAS,UWX2435238,260,206,590,progeny,FTHR,0,false,,true,S25,80,214,260,Y,Y,Verified OK,N,Father's name mismatch.,,
+Kakali Haldar,FKH3316361,260,206,606,progeny,GFTH,10,true,,true,S25,256,75,686,Y,Y,Verified OK,,,N,Submitted documents need to be reviewed
+SANTANU KUMAR AIN,FKH2931590,260,206,658,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Sipra Acharya,UWX1600204,260,206,666,progeny,GFTH,12,true,,true,S25,104,23,167,Y,Y,Verified OK,,,N,Submitted documents need to be reviewed
+Subol Goldar,HXN2393692,260,206,708,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Tarun Kumar Das,FKH2931202,260,206,838,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Sahadev Biswas,UWX1736172,260,206,931,na,,,,,false,S25,128,87,565,N,S,,,,N,Inadmissible documents ERO to review the case
+Krishnapada Biswas,XZP0965111,260,206,932,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Tejan Mondal,UWX2316313,260,206,951,na,,,,,false,S25,95,185,441,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
+Sukhen Mandal,UWX0719211,260,206,1037,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Subhajit Mirdha,UWX2583334,260,215,577,na,,0,false,,false,S25,101,207,528,N,,,,,,
 Sanjay Gharami,FKH2927184,260,215,26,na,,,,,false,,,,,N,,,,,,
 Pinki Mondal,UWX1603661,260,215,37,na,,,,,false,,,,,N,,,,,,
 ANUP SINHA,UWX2316495,260,215,45,na,,,,,false,,,,,N,,,,,,
@@ -294,43 +345,14 @@ Debi Mondal,UWX1604057,260,215,711,na,,,,,false,,,,,N,,,,,,
 Haradhan Debnath,FKH2927333,260,215,739,na,,,,,false,,,,,N,,,,,,
 Chandrabati Sana,FKH3625464,260,215,762,na,,,,,false,,,,,N,,,,,,
 Sarmistha Paul(Biswas),UWX1484229,260,215,840,na,,,,,false,,,,,N,,,,,,
-SUSMITA DAS,UWX2376549,260,209,36,na,,0,false,,false,S25,270,32,591,N,S,,,,N,Parent linkage documents not submitted.
-Rakhi Ghosh,UWX1601194,260,209,155,na,,,,,false,,,,,N,S,,,,Y,
-Monisa Ghosh,UWX1711548,260,209,159,progeny,MTHR,0,false,,true,S25,197,93,748,Y,Y,Verified OK,,,,
-Pratibha Talukdar,UWX1296714,260,209,217,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Keshab Talukdar,UWX1296748,260,209,218,na,,,,,false,,,,,N,S,,,,Y,
-Sankar Das,UWX1481852,260,209,259,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Mukta Das,UWX1517986,260,209,381,na,,,,,false,,,,,N,S,,,,Y,
-Santu Das,UWX1481738,260,209,411,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Mili Das,UWX1481845,260,209,420,na,,0,false,,false,S25,82,10,85,N,S,,,,N,Inadmissible documents ERO to review the case
-Bittu Das,UWX2057305,260,209,481,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SABUJ DAS,UWX2078632,260,209,495,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-BISWAJIT KARMAKAR,UWX1601111,260,209,533,progeny,GMTH,0,false,,true,S25,271,3,652,Y,Y,Document verified,N,Linkage not established,,
-Samir Majumdar,UWX1187293,260,209,539,na,,,,,false,,,,,N,S,,,,Y,
-Indrojit Karmokar,UWX1601038,260,209,541,progeny,GMTH,0,false,,true,S25,271,3,652,Y,Y,Document verified,N,Linkage not established,,
-Iti Tikadar,UWX2536241,260,209,580,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-SISHIR BHOWMICK,UWX2477818,260,209,654,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SARMISTHA BARUI,UWX2576189,260,209,717,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-ASHISH MONDAL,UWX2435741,260,209,745,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Paritosh Mondal,UWX2021681,260,209,747,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Dipankar Mondal,UWX1981091,260,209,748,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-BIKKY DAS,UWX2621282,260,209,776,na,,0,false,,false,S25,270,32,591,N,S,,,,N,Parent linkage documents not submitted.
-JAMIL ANSARI,FKH3464492,260,89,38,progeny,FTHR,12,true,1,true,S25,260,224,431,Y,Y,Verified,,,N,Submitted documents need to be reviewed
-Archana Bhagat,UWX1652189,260,89,160,na,,,,,false,,,,,N,S,,,,,
-Aparna Bhagat ( Gupta ),FKH3464518,260,89,178,na,,,,,false,,,,,N,S,,,,,
-Mamtaj Begum,FKH3463510,260,89,182,progeny,FTHR,5,true,1,true,S25,284,116,883,Y,Y,Document verified,N,Linkage not established,,
-Puja Shaw,UWX1570191,260,89,215,na,,,,,false,,,,,N,S,,,,,
-Subodh Samant,FKH3464286,260,89,253,na,,,,,false,,,,,N,S,,,,,
-NAZIBUL HOSSAIN,FKH1649367,260,89,283,na,,,,,false,S25,271,27,45,N,S,,,,,
-Gautam Kumar Pal,DZD2850774,260,89,359,progeny,GMTH,0,false,,true,S25,277,91,344,Y,Y,Document verified,N,Linkage not established,,
-Krishna Niogi,FKH3463916,260,89,447,na,,,,,false,,,,,N,S,,,,,
-Arpita Majumdar (Ghosh),UWX1420504,260,89,474,na,,,,,false,,,,,N,S,,,,,
-Jayshree Khanddwal,UWX1150846,260,89,543,na,,,,,false,S18,15,85,1163,N,S,,,,,
-NITU SINGH,UWX2483824,260,89,623,na,,,,,false,S04,172,168,1076,N,S,,,,,
-Bebi Sing,FKH3610821,260,89,627,na,,,,,false,S25,271,27,746,N,S,,,,,
-Asha Sing,FKH3610847,260,89,629,na,,,,,false,S25,271,27,746,N,S,,,,,
-Saroj Kumar Singh,UWX2023364,260,89,633,na,,,,,false,S04,243,129,591,N,S,,,,,
-Mina Sing,UWX2591402,260,89,639,na,,,,,false,S25,271,27,746,N,S,,,,,
+ANKITA MONDAL,UWX2456945,260,123,58,na,,,,,false,,,,,N,,,,,N,"ADHAR CARD, ADMIT CARD ,Madhyamik passed certificate self, Submitted . No linkage with parents. Produced documents need to  
+be reviewed."
+MAYANA KALINDI,UWX2429025,260,123,70,na,,,,,false,S25,246,194,28,N,,,,,N,"Illegible sir, cast certificate  Submitted . No linkage with parents  Produced documents need to be reviewed."
+Mintu Kumar Datta,UWX1271931,260,123,143,na,,,,,false,,,,,N,,,,,N,"Passport, adhar card self Submitted . No linkage with parents .Produced documents need to be reviewed."
+Ajit Kumar Dutta,UWX1089838,260,123,145,na,,,,,false,,,,,N,,,,,N,Mark sheet & Adhar Submitted.  Produced documents need to be reviewed
+PRAMIT PAUL,UWX2478964,260,123,197,na,,,,,false,,,,,N,,,,,N,"Mark sheet & Admit card Madhyamik Self Submitted, No linkage with parents. Produced  documents need to be reviewed"
+Sanjit Kumar Lahiri,FKH2503944,260,123,283,na,,,,,false,,,,,N,,,,,N,Provisional  PPO self Adhar card self submitted.  Produced documents need to be reviewed
+CHATTU GHOSH,UWX2477727,260,123,438,na,,,,,false,,,,,N,,,,,N," Birth certificate self , adhar card,, No linkage with parents, Produced documents need to be reviewed,"
 Mamata Goenka,UWX1149152,260,86,36,na,,,,,false,,,,,N,,,,,,
 Koushila Shaw,UWX2030757,260,86,278,na,,,,,false,,,,,N,,,,,,
 Sunita Shaw,UWX1785948,260,86,327,na,,,,,false,,,,,N,,,,,,
@@ -344,29 +366,51 @@ Chandana Rajbanshi,UWX1785997,260,86,674,na,,,,,false,,,,,N,,,,,,
 Mamata Kumari Sharma,UWX1149293,260,86,726,na,,,,,false,,,,,N,,,,,,
 Manorama Kumari Shaw,UWX1750934,260,86,833,na,,,,,false,,,,,N,,,,,,
 Tuni Singh,UWX2320414,260,86,886,na,,,,,false,,,,,N,,,,,,
-Nandita Karmakar,UWX1481563,260,208,44,na,,,,,false,S25,279,199,3,N,S,,,,N,Parent linkage documents not submitted.
-Sadhana Chakraborty Karmakar,UWX1981000,260,208,58,progeny,GFTH,0,false,,true,S25,93,135,319,Y,Y,Verified OK,Y,,,
-Pradip Mistri,UWX1711357,260,208,114,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-ROHIT CHOURASIA,UWX2435535,260,208,150,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Malina Dutta,FKH3639671,260,208,166,na,,,,,false,,,,,N,S,,,,Y,
-Sikha Das,UWX1187053,260,208,209,na,,,,,false,S25,271,15,653,N,S,,,,N,Inadmissible documents ERO to review the case
-Barna Dey,UWX2537538,260,208,210,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Gaurav Agarwal,UWX1169911,260,208,246,na,,,,,false,,,,,N,S,,,,Y,
-Laxmi Pal,UWX1981042,260,208,290,na,,,,,false,S25,270,127,727,N,S,,,,N,Inadmissible documents ERO to review the case Parent linkage documents not submitted.
-Tapas Banerjee,UWX1066919,260,208,297,na,,,,,false,,,,,N,S,,,,Y,
-Badal Banerjee,UWX0725101,260,208,298,na,,,,,false,,,,,N,S,,,,Y,
-MRITYUNJOY BALMIKI,UWX2376044,260,208,308,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Nabanita Mukherjee(Chatterjee),BXX3298023,260,208,334,na,,,,,false,,,,,N,S,,,,Y,
-PAYEL MADHU,UWX2376069,260,208,346,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-MITALI ROY,UWX2435592,260,208,449,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Sumit Sarkar,FKH2926749,260,208,487,na,,0,false,,false,,,,,N,S,,,,Y,
-Jally Saha,FKH3654233,260,208,494,na,,,,,false,,,,,N,S,,,,Y,
-Prasenjit Saha,UWX1296235,260,208,503,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Shyamali Sen,UWX1296144,260,208,545,progeny,GMTH,0,false,,true,S25,273,137,445,Y,Y,Verified OK,,,,
-Swapan Senapati,FKH2966836,260,208,547,na,,,,,false,,,,,N,S,,,,Y,
-Swarnalata Senapati,FKH1209824,260,208,548,na,,,,,false,,,,,N,S,,,,Y,
-Chandan Halder,UWX0725945,260,208,588,na,,,,,false,,,,,N,S,,,,Y,
-SAYAN SENAPATI,UWX2596658,260,208,627,na,,,,,false,,,,,N,S,,,,N,Mother documents not provided
+DEBJYOTI GOSWAMI GOSWAMI,FKH1648864,260,122,132,progeny,GFTH,0,false,,true,S25,249,191,555,Y,Y,Document verified,N,Father's document not found,,
+Suprava Goswami,FKH1651827,260,122,133,na,,0,false,,false,,,,,N,S,,,,N,"PPO Book of Husband, self Adhar Card submitted. No linkage with parents .Submitted documents need to be reviewed."
+BISWANATH CHAKRABORTY,UWX2069979,260,122,244,progeny,GMTH,0,false,,true,S25,250,124,825,Y,Y,Document verified,N,Linkage not established,,
+KHUKU DUTTA,UWX2553568,260,122,327,na,,0,false,,false,,,,,N,S,,,,N,"self Adhar card, Father's Passport Submitted ,Documents need to be reviewed"
+Ruma Dey(Ghosh),UWX1331685,260,122,357,progeny,GMTH,0,false,,true,S25,271,56,46,Y,Y,Document verified,N,Linkage not established,,
+Sasanka Mandal,UWX1053644,260,122,538,progeny,FTHR,0,false,,true,S25,271,3,316,Y,Y,Document verified,N,Linkage not established,,
+SUDIP RUDRA,UWX2477669,260,122,644,progeny,FTHR,0,false,,true,S25,271,3,415,Y,Y,Document verified,N,Father's name mismatch with list.,,
+Ashish Ray,FKH3623667,260,122,651,na,,0,false,,false,S25,222,37,61,N,S,,,,N," Last SIR grand mother, Adhar card self Submitted  No linkage with parents. Documents need to be reviewed,"
+BAPI ROY,UWX2069896,260,122,683,na,,,,,false,,,,,N,S,,,,N,"Admit card self, Adhar card self Submitted . No linkage with parents,Produced documents need to be reviewed."
+MEGHA ROY,UWX2531846,260,122,684,na,,0,false,,false,,,,,N,S,,,,N,"Birth certificate, Admit Card Self Submitted. Produced  documents need to be reviewed."
+Anna Sarkar,FKH2916856,260,122,698,na,,,,,false,S25,269,1,736,N,S,,,,N,"Last SIR father, Dhar card self Submitted.  No linkage with parents .Produced documents need to be reviewed."
+Khokan Sarkar,UWX1085240,260,122,699,na,,,,,false,S25,269,1,736,N,S,,,,N,"Last SIR 2002 Grand father ,Adhar card self Submitted.  No linkage with parents.Produced  documents need to be reviewed"
+Moyna Saha,UWX1792175,260,122,721,na,,0,false,,false,,,,,N,S,,,,N,"Admit card self, Adhar card self Submitted .No linkage with parents, Produced documents need to be reviewed."
+Sumita Halder,UWX1577972,260,122,746,na,,0,false,,false,S25,277,201,775,N,Y,verified,,,N,"Adhar card self, Admit card, Last sir of Guardian Submitted ,Produced documents need to be reviewed"
+Rita Kar,UWX2007763,260,211,23,na,,,,,false,,,,,N,S,,,,Y,
+Kusum Routh,NSR1777168,260,211,28,na,,0,false,,false,,,,,N,S,,,,Y,
+SUBHA KARMAKAR,UWX2546786,260,211,165,na,,0,false,,false,S25,271,12,693,N,S,,,,N,Parent linkage documents not submitted.
+Kartick Dhali,UWX1379429,260,211,218,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Manoranjan Joyardar,FKH2925600,260,211,281,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Istaranjan Joardar,UWX1187863,260,211,285,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Nirmalendu Joardar,UWX1385475,260,211,333,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+HRIDAY NAG,UWX2078798,260,211,423,na,,,,,false,,,,,N,S,,,,Y,
+Gurudas Nag,UWX1601947,260,211,425,na,,,,,false,,,,,N,S,,,,Y,
+Chandu Pahariya,UWX1297241,260,211,478,progeny,FTHR,0,false,,true,S25,271,10,233,Y,Y,Verified OK,Y,,,
+Biplab Majhi,UWX1482041,260,211,485,na,,0,false,,false,S25,271,10,237,N,S,,,,N,Inadmissible documents ERO to review the case
+Antara Bhattacharya,UWX1981703,260,211,556,na,,,,,false,S25,19,80,741,N,S,,,,N,Parent linkage documents not submitted.
+Tarak Bhattacharja,UWX1482132,260,211,557,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Biswajay Mukherjee,UWX1811843,260,211,565,na,,,,,false,,,,,N,S,,,,Y,
+ISIKA MUKHOPADHYAY,UWX2378271,260,211,568,na,,0,false,,false,S25,249,121,108,N,S,,,,N,Parent linkage documents not submitted.
+Sukumar Mondal,UWX1297357,260,211,589,na,,,,,false,S25,65,63,263,N,S,,,,N,Inadmissible documents ERO to review the case
+TANMAY MONDAL,UWX2078855,260,211,593,na,,,,,false,S25,271,197,467,N,S,,,,Y,
+DIP MONDAL,UWX2327252,260,211,594,na,,,,,false,S25,271,197,467,N,S,,,,Y,
+Biplab Mistri,FKH3314713,260,211,655,na,,,,,false,,,,,N,S,,,,Y,
+MAMONI ROUTH,UWX2262079,260,211,683,na,,0,false,,false,,,,,N,S,,,,Y,
+APARNA ROY,UWX2460053,260,211,719,na,,,,,false,S25,270,33,456,N,S,,,,N,Parent linkage documents not submitted.
+Promath Roy,UWX1297175,260,211,727,na,,,,,false,,,,,N,S,,,,Y,
+CHANDAN SHAW,UWX2561389,260,211,793,na,,,,,false,S04,96,202,287,N,S,,,,N,Inadmissible documents ERO to review the case
+Sudip Singh,UWX2021947,260,211,800,na,,,,,false,S25,269,92,128,N,S,,,,N,Inadmissible documents ERO to review the case
+DIPA SINGH,UWX2377992,260,211,803,na,,,,,false,S25,269,92,128,N,S,,,,N,Parent linkage documents not submitted.
+Sukla Haldar,UWX1297282,260,211,859,na,,,,,false,S25,77,143,444,N,S,,,,Y,
+Tapas Halder,UWX1981729,260,211,882,na,,,,,false,S25,271,10,243,N,S,,,,N,Parent linkage documents not submitted.
+TAPAN HALDER,UWX2104834,260,211,892,na,,,,,false,S25,271,10,243,N,S,,,,N,Parent linkage documents not submitted.
+PRADIP MONDAL,UWX2399988,260,211,895,na,,0,false,,false,S25,271,10,411,N,S,,,,N,Submitted documents need to be reviewed
+Apurba Roy,UWX2596930,260,211,916,na,,,,,false,S25,270,33,456,N,S,,,,N,Parent linkage documents not submitted.
+Rina Deb,UWX1482561,260,211,1013,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
 Manik Dutta,UWX1404672,260,214,12,na,,,,,false,,,,,N,,,,,,
 SUMAN MONDAL,UWX2436350,260,214,73,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
 Sumanta Mondal,UWX1385988,260,214,86,na,,0,false,,false,,,,,N,,,,,N,Inadmissible documents ERO to review the case
@@ -378,6 +422,26 @@ Ashok Khan,UWX1812841,260,214,539,progeny,FTHR,0,false,,true,S25,271,15,63,Y,,,N
 Sancharita Mondal,UWX1752922,260,214,647,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
 Shova Mondal,IMW1845494,260,214,648,na,,,,,false,,,,,N,,,,,,
 Pradip Bar,THC2505261,260,214,811,na,,,,,false,,,,,N,,,,,,
+Santana Das,UWX0721001,260,207,232,na,,,,,false,,,,,N,Y,Document verified,,,N,Parent linkage documents not submitted.
+Parnashi Das,UWX1481258,260,207,257,na,,,,,false,S25,271,12,57,N,S,,,,N,Parent linkage documents not submitted.
+Munmun Das,UWX2534493,260,207,279,na,,0,false,,false,S25,271,20,123,N,Y,Document verified,,,N,Both parents linkage documents not submitted.
+SAGAR DAS,UWX2222388,260,207,281,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Shyamal Das,WB/39/271/624547,260,207,355,na,,0,false,,false,,,,,N,Y,Document verified,,,Y,
+Santu Dey,FKH3453685,260,207,376,na,,0,false,,false,S25,271,86,257,N,S,,,,N,Inadmissible documents ERO to review the case
+Shambhunath Pradhan,FKH3692258,260,207,541,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Purnima Pal,UWX1295922,260,207,580,na,,,,,false,,,,,N,S,,,,N,Name not visible provide clear or different document
+Sandhya Pal,FKH3691995,260,207,582,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Nilu Pal,UWX1066729,260,207,583,na,,,,,false,,,,,N,S,,,,N,Name not visible in LIC document provide some other document
+Rina Pal,UWX2021467,260,207,594,na,,0,false,,false,,,,,N,Y,Document verified,,,Y,
+Manab Bapari,FKH2926145,260,207,609,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Shibu Basak,UWX1066620,260,207,615,progeny,GMTH,0,false,,true,S25,271,12,402,Y,Y,Verified OK,N,Linkage not established,,
+Mita Biswas,UWX1810878,260,207,633,na,,0,false,,false,S25,281,46,292,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
+Nirod Biswas,FKH2926616,260,207,652,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Mithun Roy,FKH3073723,260,207,813,progeny,FTHR,0,false,,true,S27,41,225,355,Y,Y,Verified OK,N,Linkage not established,,
+Kalpana Sarkar(Das),UWX1295781,260,207,859,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Kakali Saha,FKH3315090,260,207,878,na,,,,,false,S25,271,215,956,N,S,,,,,
+Joyasri Singh,UWX1168251,260,207,907,progeny,MTHR,0,false,,true,S25,271,208,455,Y,Y,Verified OK,N,Illegible document. Linkage not established.,,
+Payel Biswas,UWX2616241,260,207,969,na,,,,,false,S25,294,134,546,N,S,,,,N,Both parents linkage documents not submitted.
 Jaydeb Kar,WB/39/271/099456,260,208,24,na,,0,false,,false,,,,,N,,,,,,
 Ajay Kar,UWX1811041,260,208,29,na,,,,,false,,,,,N,,,,,,
 Suniti Mistri,UWX1600956,260,208,57,na,,,,,false,,,,,N,,,,,,
@@ -398,72 +462,42 @@ Satindra Hazra,UWX0725861,260,208,570,na,,,,,false,,,,,N,,,,,,
 Kajal Halder,FKH2926772,260,208,592,na,,,,,false,,,,,N,,,,,,
 Shambhunath Halder,UWX1066786,260,208,603,na,,,,,false,,,,,N,,,,,,
 mahendra singh,ZZS1310846,260,208,619,na,,,,,false,,,,,N,,,,,,
-Mantu (Bag) Khan,UWX1483478,260,213,102,progeny,FTHR,0,false,,true,S25,271,255,892,Y,Y,Verified OK,,,,
-SANTOSH MUKHERJEE,UWX2270247,260,213,108,na,,0,false,,false,,,,,N,S,,,,Y,
-Namita Chakraborty,WB/39/271/042794,260,213,152,na,,,,,false,S25,271,15,104,N,S,,,,Y,
-Sirshendu Chatterjee,UWX1752880,260,213,154,progeny,FTHR,0,false,,true,S25,271,15,299,Y,Y,Verified OK,,,,
-Gauranga Chanda,FKH1967165,260,213,156,na,,,,,false,,,,,N,S,,,,Y,
-Nitai Chanda,FKH2928745,260,213,157,na,,,,,false,,,,,N,S,,,,Y,
-Ruidas Dutta,FKH2929719,260,213,180,na,,,,,false,,,,,N,S,,,,Y,
-Debnarayan Dutta,FKH3454907,260,213,184,na,,0,false,,false,,,,,N,S,,,,Y,
-Rita Dalui,UWX1603109,260,213,190,na,,,,,false,,,,,N,S,,,,Y,
-Sankar Dalui,UWX1603091,260,213,191,na,,,,,false,,,,,N,S,,,,Y,
-Dipa Dalui (Makal),UWX1849033,260,213,192,na,,0,false,,false,,,,,N,S,,,,Y,
-Subhash Dalui,FKH3062759,260,213,193,na,,,,,false,,,,,N,S,,,,Y,
-JAYASHRI DALUI,UWX2379881,260,213,194,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-DEBASHRI DALUI,UWX2553600,260,213,195,na,,,,,false,,,,,N,S,,,,Y,
-Robi Tikadar,UWX1712744,260,213,212,na,,0,false,,false,,,,,N,S,,,,Y,
-Ujjal Das,UWX1189091,260,213,285,progeny,MTHR,0,false,,true,S25,271,15,134,Y,Y,Verified OK,,,,
-SAJAL ROY,UWX0734236,260,213,319,na,,0,false,,false,,,,,N,S,,,,Y,
-ARPITA DEY ROY,UWX2287803,260,213,322,na,,,,,false,,,,,N,S,,,,Y,
-Badal Chandra Dey,UWX1712686,260,213,332,na,,0,false,,false,,,,,N,S,,,,Y,
-Tonmoy Dey,UWX1712603,260,213,334,na,,,,,false,,,,,N,S,,,,Y,
-Rajesh Mondal,UWX1982040,260,213,367,na,,0,false,,false,,,,,N,S,,,,Y,
-Swapan Byapari,FKH2928935,260,213,422,na,,0,false,,false,,,,,N,S,,,,,
-Suchitra Barman,UWX1982073,260,213,431,na,,,,,false,,,,,N,S,,,,Y,
-Archana Biswas,UWX0734988,260,213,502,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Kamal Kanti Biswas,UWX1298231,260,213,509,na,,,,,false,,,,,N,S,,,,Y,
-ARUP BAIRAGI,UWX2452555,260,213,548,progeny,FTHR,0,false,,true,S25,271,15,368,Y,Y,Verified OK,,,,
-Sunil Mondal,UEC1478684,260,213,612,na,,0,false,,false,,,,,N,S,,,,N,"Cancelled passport not admissible, Inadmissible documents ERO to review the case"
-MITA BANERJEE,UWX2382570,260,213,622,na,,0,false,,false,,,,,N,S,,,,Y,
-PALAS MONDAL,UWX2479301,260,213,650,na,,,,,false,,,,,N,S,,,,Y,
-MRITYUNJAY MONDAL,UWX1712645,260,213,686,na,,0,false,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Nilima Mondal,UWX1712736,260,213,691,na,,0,false,,false,S24,377,219,959,N,S,,,,N,Inadmissible documents ERO to review the case
-Latika Mondal,UWX1812353,260,213,698,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Sukdeb Mondal,UWX1752856,260,213,709,na,,,,,false,,,,,N,S,,,,Y,
-Basudeb Mondal,UWX1752864,260,213,710,na,,,,,false,,,,,N,S,,,,Y,
-Bisaka Mondal,UWX1752872,260,213,711,na,,,,,false,,,,,N,S,,,,Y,
-UTTAM MONDAL,FKH2928992,260,213,712,na,,,,,false,,,,,N,S,,,,Y,
-Pradhan Mandal,BXX3247400,260,213,721,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-CHANDRA DALUI,UWX2524361,260,213,821,na,,0,false,,false,,,,,N,S,,,,Y,
-Anita Roy,UWX1812411,260,213,904,na,,,,,false,,,,,N,S,,,,Y,
-Krishna Sarkar,UWX2610095,260,213,938,na,,,,,false,,,,,N,S,,,,Y,
-SWAPAN SARKAR,UWX2105807,260,213,941,na,,0,false,,false,,,,,N,S,,,,Y,
-MUKUNDA SARKAR,UWX1602978,260,213,945,na,,0,false,,false,,,,,N,S,,,,Y,
-Tapas Kumar Sarkar,FKH1205335,260,213,951,na,,,,,false,,,,,N,S,,,,Y,
-SUDIPTA HALDER,UWX2436210,260,213,971,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Sujit Kumar Halder,UWX2093979,260,213,972,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Tagari Haldar,UWX1483114,260,213,986,progeny,MTHR,0,false,,true,S25,271,10,123,Y,Y,Verified OK,,,,
-POLY HOWLI,UWX2477032,260,213,1004,na,,,,,false,,,,,N,S,,,,Y,
-biswajit kumar howli,IMW2175388,260,213,1005,na,,,,,false,,,,,N,S,,,,Y,
-Sayan Baidya,UWX2593473,260,213,1011,progeny,FTHR,0,false,,true,S25,271,15,343,Y,Y,Verified OK,,,,
-HRIDOY DUTTA,UWX2609279,260,213,1017,na,,,,,false,,,,,N,S,,,,Y,
-CHINMOY Dey,UWX2623759,260,213,1027,na,,0,false,,false,,,,,N,S,,,,Y,
-Supriya Adhikari,FKH1640689,260,123,40,na,,,,,false,,,,,N,S,,,,Y,
-ANKITA MONDAL,UWX2456945,260,123,58,na,,,,,false,,,,,N,S,,,,N,"ADHAR CARD, ADMIT CARD ,Madhyamik passed certificate self, Submitted . No linkage with parents. Produced documents need to  
-be reviewed."
-MAYANA KALINDI,UWX2429025,260,123,70,na,,,,,false,S25,246,194,28,N,S,,,,N,"Illegible sir, cast certificate  Submitted . No linkage with parents  Produced documents need to be reviewed."
-Santu Kumar Dutta,FKH3690229,260,123,142,na,,,,,false,,,,,N,S,,,,Y,
-Mintu Kumar Datta,UWX1271931,260,123,143,na,,,,,false,,,,,N,S,,,,N,"Passport, adhar card self Submitted . No linkage with parents .Produced documents need to be reviewed."
-Mrinalini Dutta,FKH3449113,260,123,144,na,,,,,false,,,,,N,S,,,,Y,
-Ajit Kumar Dutta,UWX1089838,260,123,145,na,,,,,false,,,,,N,S,,,,N,Mark sheet & Adhar Submitted.  Produced documents need to be reviewed
-Partha Paul,IHM2041838,260,123,196,na,,,,,false,,,,,N,S,,,,Y,
-PRAMIT PAUL,UWX2478964,260,123,197,na,,,,,false,,,,,N,S,,,,N,"Mark sheet & Admit card Madhyamik Self Submitted, No linkage with parents. Produced  documents need to be reviewed"
-Sanjay Lahiri,FKH2503936,260,123,282,na,,0,false,,false,,,,,N,S,,,,N," DOB not written in Enumeration form, ADhar card submitted. Submitted documents need to be reviewed"
-Sanjit Kumar Lahiri,FKH2503944,260,123,283,na,,,,,false,,,,,N,S,,,,N,Provisional  PPO self Adhar card self submitted.  Produced documents need to be reviewed
-Nanda Singh,UWX1272103,260,123,316,na,,,,,false,,,,,N,S,,,,N," Birth certificate, passport Submitted. No linkage with Parents .Produced  documents need to be reviewed."
-CHATTU GHOSH,UWX2477727,260,123,438,na,,,,,false,,,,,N,S,,,,N," Birth certificate self , adhar card,, No linkage with parents, Produced documents need to be reviewed,"
-Mina Dewan,UWX1578608,260,123,456,na,,,,,false,S25,104,142,204,N,S,,,,N,"illegible sir,adhar card self Submitted . Produced documents need to be reviewed."
+SUSMITA DAS,UWX2376549,260,209,36,na,,0,false,,false,S25,270,32,591,N,S,,,,N,Parent linkage documents not submitted.
+Rakhi Ghosh,UWX1601194,260,209,155,na,,,,,false,,,,,N,S,,,,Y,
+Monisa Ghosh,UWX1711548,260,209,159,progeny,MTHR,0,false,,true,S25,197,93,748,Y,Y,Verified OK,N,Linkage not established.,,
+Pratibha Talukdar,UWX1296714,260,209,217,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Keshab Talukdar,UWX1296748,260,209,218,na,,,,,false,,,,,N,S,,,,Y,
+Sankar Das,UWX1481852,260,209,259,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Mukta Das,UWX1517986,260,209,381,na,,,,,false,,,,,N,S,,,,Y,
+Santu Das,UWX1481738,260,209,411,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Mili Das,UWX1481845,260,209,420,na,,0,false,,false,S25,82,10,85,N,S,,,,N,Inadmissible documents ERO to review the case
+Bittu Das,UWX2057305,260,209,481,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+SABUJ DAS,UWX2078632,260,209,495,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+BISWAJIT KARMAKAR,UWX1601111,260,209,533,progeny,GMTH,0,false,,true,S25,271,3,652,Y,Y,Document verified,N,Linkage not established,,
+Samir Majumdar,UWX1187293,260,209,539,na,,,,,false,,,,,N,S,,,,Y,
+Indrojit Karmokar,UWX1601038,260,209,541,progeny,GMTH,0,false,,true,S25,271,3,652,Y,Y,Document verified,N,Linkage not established,,
+Iti Tikadar,UWX2536241,260,209,580,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
+SISHIR BHOWMICK,UWX2477818,260,209,654,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+SARMISTHA BARUI,UWX2576189,260,209,717,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
+ASHISH MONDAL,UWX2435741,260,209,745,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Paritosh Mondal,UWX2021681,260,209,747,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Dipankar Mondal,UWX1981091,260,209,748,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+BIKKY DAS,UWX2621282,260,209,776,na,,0,false,,false,S25,270,32,591,N,S,,,,N,Parent linkage documents not submitted.
+Sadhana Chakraborty Karmakar,UWX1981000,260,208,58,progeny,GFTH,0,false,,true,S25,93,135,319,Y,Y,Verified OK,Y,,,
+Malina Dutta,FKH3639671,260,208,166,na,,,,,false,,,,,N,S,,,,Y,
+Gaurav Agarwal,UWX1169911,260,208,246,na,,,,,false,,,,,N,S,,,,Y,
+Laxmi Pal,UWX1981042,260,208,290,na,,,,,false,S25,270,127,727,N,S,,,,N,Inadmissible documents ERO to review the case Parent linkage documents not submitted.
+Tapas Banerjee,UWX1066919,260,208,297,na,,,,,false,,,,,N,S,,,,Y,
+Badal Banerjee,UWX0725101,260,208,298,na,,,,,false,,,,,N,S,,,,Y,
+Nabanita Mukherjee(Chatterjee),BXX3298023,260,208,334,na,,,,,false,,,,,N,Y,Document verified,,,Y,
+Sumit Sarkar,FKH2926749,260,208,487,na,,0,false,,false,,,,,N,Y,Document verified,,,Y,
+Jally Saha,FKH3654233,260,208,494,na,,,,,false,,,,,N,S,,,,Y,
+Prasenjit Saha,UWX1296235,260,208,503,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Shyamali Sen,UWX1296144,260,208,545,progeny,GMTH,0,false,,true,S25,273,137,445,Y,Y,Verified OK,,,,
+Swapan Senapati,FKH2966836,260,208,547,na,,,,,false,,,,,N,S,,,,Y,
+Swarnalata Senapati,FKH1209824,260,208,548,na,,,,,false,,,,,N,S,,,,Y,
+Chandan Halder,UWX0725945,260,208,588,na,,,,,false,,,,,N,S,,,,Y,
+SAYAN SENAPATI,UWX2596658,260,208,627,na,,,,,false,,,,,N,S,,,,N,Mother documents not provided
 Nitya Gopal Adhikary,UWX1981844,260,212,7,na,,,,,false,,,,,N,,,,,,
 RINKI KSHETRAPAL,UWX2436137,260,212,82,na,,,,,false,,,,,N,,,,,,
 Kantu Kshetrapal,FKH2512697,260,212,85,na,,,,,false,,,,,N,,,,,,
@@ -477,44 +511,68 @@ Amar Ghosh,FKH2925220,260,212,716,na,,,,,false,,,,,N,,,,,,
 Ranajit Biswas,FKH3564929,260,212,789,na,,,,,false,,,,,N,,,,,,
 Champa Majhi,UWX1602572,260,212,842,na,,,,,false,,,,,N,,,,,,
 Romapada Maiti,UWX2581866,260,212,894,na,,,,,false,,,,,N,,,,,,
-Priti Kundu,UWX1484542,260,216,38,na,,,,,false,S25,169,140,217,N,S,,,,N,Inadmissible documents ERO to review the case
-Dipak Kargupta,UWX1741420,260,216,45,na,,,,,false,,,,,N,S,,,,Y,
-Nripa Das (Barui),UWX1713635,260,216,192,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-PRIYA ROY,UWX2553006,260,216,320,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-ANWESHA BHUIYA,UWX2487551,260,216,321,na,,,,,false,,,,,N,S,,,,Y,
-DIPIKA BHUIYA,UWX2079101,260,216,322,na,,,,,false,,,,,N,S,,,,Y,
-Pronob Bhuiya,UWX1812437,260,216,323,na,,,,,false,,,,,N,S,,,,Y,
-Maya Rani Bhunia,UWX1848969,260,216,324,na,,,,,false,,,,,N,S,,,,N,birth certificate not admissible registration date more than one year DOB
-Gopal Bhunia,UWX1848993,260,216,325,na,,,,,false,,,,,N,S,,,,N,birth certificate not admissible registration date more than one year DOB
-Gouri Bhattacharya,FKH3692837,260,216,328,na,,,,,false,S25,271,19,109,N,S,,,,Y,
-GOURI SARKAR,UWL2036614,260,216,332,na,,,,,false,,,,,N,S,,,,N,Parent birth certificate DOB is more than one year from registration date provide other document of parent
-Susuma Mondal,UWX1386549,260,216,351,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Sriti Mondal,UWX2299501,260,216,354,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SUMAN KUMAR MONDAL,UWX2486223,260,216,355,na,,0,false,,false,,,,,N,S,,,,N,Both Parent linkage documents not submitted.
-Subrata Malo,UWX2541415,260,216,390,progeny,GMTH,0,false,,true,S25,271,205,462,Y,Y,DOCUMENTS  VERIFIED,,,,
-Biswajit Mistri,UWX1484575,260,216,399,na,,,,,false,S25,19,80,749,N,S,,,,N,Parent linkage documents not submitted.
-Namita Mistri,UWX1190016,260,216,400,na,,0,false,,false,S25,19,80,742,N,S,,,,N,Inadmissible documents ERO to review the case
-Khushi Yadav,UWX1713577,260,216,420,progeny,FTHR,0,false,,true,S25,271,13,646,Y,Y,DOCUMENTS  VERIFIED,Y,,,
-Sampa Chakraborty,UWX0746511,260,216,475,progeny,FTHR,0,false,,true,S25,271,13,941,Y,Y,Document verified,,,,
-Manjuri Kuri,UWX1299098,260,216,688,na,,0,false,,false,S25,271,219,191,N,S,,,,N,Inadmissible documents ERO to review the case
-Kanika Kuri,FKH3454204,260,216,703,na,,0,false,,false,S25,186,91,82,N,S,,,,N,Inadmissible documents ERO to review the case
-Sarajit Kuri,UWX1299197,260,216,730,na,,,,,false,S25,271,13,18,N,S,,,,N,Inadmissible documents ERO to review the case
-Anjali Kuri,UWX1299189,260,216,731,na,,0,false,,false,S25,277,19,487,N,S,,,,N,Inadmissible documents ERO to review the case
-Sridhan Roy,UWX1604271,260,216,744,na,,,,,false,,,,,N,S,,,,Y,
-Shibam Datta,UWX2525806,260,216,746,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Tarun Kuri,UWX1484708,260,216,756,na,,,,,false,,,,,N,S,,,,Y,
-Minati Kuri,FKH2890549,260,216,759,na,,0,false,,false,S25,269,2,214,N,S,,,,N,Inadmissible documents ERO to review the case
-Sukumar Das,FKH2928588,260,216,776,na,,,,,false,S25,199,79,136,N,S,,,,Y,
-Jyotsna Das,FKH2928596,260,216,777,na,,,,,false,S25,199,75,137,N,S,,,,Y,
-Susanta Das,UWX1190164,260,216,778,na,,,,,false,S25,199,75,136,N,S,,,,N,Inadmissible documents ERO to review the case
-Kanta Das,WB/39/271/036737,260,216,789,na,,0,false,,false,S25,271,72,720,N,S,,,,N,Inadmissible documents ERO to review the case
-Bibek Dey,UWX2527224,260,216,792,na,,0,false,,false,S25,271,13,1089,N,S,,,,N,Parent linkage documents not submitted.
-Sandha Debnath,UWX1299155,260,216,793,na,,,,,false,S25,271,30,20,N,S,,,,N,Inadmissible documents ERO to review the case
-Avijit Debnath,UWX1190123,260,216,795,na,,,,,false,S25,271,30,20,N,S,,,,N,Inadmissible documents ERO to review the case
-Sulekha Debnath,UWX1299221,260,216,799,na,,0,false,,false,S25,271,12,332,N,S,,,,N,Inadmissible documents ERO to review the case
-Papiya Mondal,UWX1982586,260,216,826,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted. Inadmissible documents ERO to review the case. DOB and date of registration more than one year in birth certificate
-ANIRBAN MONDAL,UWX2575843,260,216,828,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Bisaka Roy (Das),UWX1484716,260,216,855,na,,,,,false,S25,89,153,246,N,S,,,,N,Inadmissible documents ERO to review the case
+Haripada Das,WB/39/271/036067,260,215,120,progeny,GFTH,0,false,,true,S25,271,247,784,Y,Y,Document verified,Y,,,
+SANGITA PATRA,UWX2383594,260,215,134,na,,,,,false,S25,256,183,260,N,S,,,,N,Parent linkage documents not submitted.
+PARUL PAL,UWX2383545,260,215,150,na,,,,,false,S25,246,69,136,N,S,,,,N,DOB mismatch as per birth certificate. Parent linkage documents not submitted.
+RAKHI BASAK,UWX2383610,260,215,151,na,,,,,false,S25,271,13,540,N,S,,,,N,Parent linkage documents not submitted.
+Swarup Debnath,UWX2383404,260,215,186,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Arup Debnath,UWX2383420,260,215,187,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+MANDIRA NAG,UWX2308419,260,215,189,na,,,,,false,S25,270,33,120,N,S,,,,N,Parent linkage documents not submitted.
+Shambhu Pal,UWX1386267,260,215,205,na,,,,,false,S25,271,13,104,N,S,,,,Y,
+Manik Pal (Kumbhakar),UWX1483940,260,215,213,na,,0,false,,false,S25,234,101,37,N,S,,,,N,Inadmissible documents ERO to review the case
+RIMI PAL,UWX2320588,260,215,220,na,,,,,false,S25,270,33,640,N,S,,,,N,Parent linkage documents not submitted.
+RIYA PAL,UWX2480861,260,215,224,na,,0,false,,false,S25,271,13,97,N,Y,Document verified,,,,
+PRIYA PAL,UWX2480887,260,215,225,progeny,FTHR,0,false,,true,S25,234,101,39,Y,Y,Verified OK,Y,,,
+Lakshami Basak,UWX1982271,260,215,228,na,,,,,false,S25,271,13,540,N,S,,,,N,Inadmissible documents ERO to review the case
+SUTAPAN DAS,UWX2105591,260,215,235,na,,,,,false,S25,271,247,784,N,S,,,,N,Parent linkage documents not submitted.
+Sayan Bachhar,UWX2528602,260,215,240,na,,,,,false,S25,271,13,122,N,S,,,,N,Parent linkage documents not submitted.
+Kalpana Biswas,WB/39/271/036127,260,215,285,na,,,,,false,S25,271,13,136,N,S,,,,Y,
+SHIFALI MONDAL,UWX2436608,260,215,352,na,,,,,false,,,,,N,S,,,,Y,
+JHUMUR MONDAL,UWX2383396,260,215,362,na,,0,false,,false,S25,186,119,137,N,S,,,,N,Inadmissible documents ERO to review the case
+Suraj Roy,UWX2030856,260,215,391,na,,,,,false,S25,112,239,944,N,S,,,,N,Parent linkage documents not submitted.
+PUJA ROY,UWX2436657,260,215,392,na,,,,,false,S25,112,239,944,N,S,,,,N,Parent linkage documents not submitted.
+Bishnu Roy,UWX1982412,260,215,400,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+RIMPA ROY,UWX2093813,260,215,416,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Laxmi Sarkar,UWX1713320,260,215,438,na,,0,false,,false,S25,271,13,230,N,S,,,,N,Inadmissible documents ERO to review the case
+Sukumar Mondal,UWX1484021,260,215,465,na,,,,,false,,,,,N,S,,,,,
+Sukdev Saha,UWX1189448,260,215,478,progeny,FTHR,0,false,,true,S25,271,13,219,Y,Y,Verified OK,N,Father's name mismatch,,
+Kanika Saha,UWX1189430,260,215,479,na,,0,false,,false,S25,271,13,219,N,S,,,,N,Inadmissible documents ERO to review the case
+Bishakha Saha,FKH2928166,260,215,480,na,,0,false,,false,S25,271,13,219,N,S,,,,N,Inadmissible documents ERO to review the case
+Lakshmi Saha,UWX1813054,260,215,493,progeny,FTHR,0,false,,true,S25,271,13,219,Y,Y,Verified OK,N,Linked persons title mismatch,,
+MUNNA SAHA,UWX2315026,260,215,494,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Parent linkage documents not submitted.
+Susmita Bahadur,UWX2528743,260,215,496,na,,0,false,,false,S25,271,13,280,N,S,,,,N,Parent linkage documents not submitted.
+URMILA SINGH,UWX2487080,260,215,503,na,,,,,false,S25,188,47,109,N,S,,,,N,Parent linkage documents not submitted.
+Purnima Karmakar,YAJ1814383,260,215,523,na,,0,false,,false,S25,269,99,320,N,S,,,,N,Inadmissible documents ERO to review the case
+Mitu Halder,UWX1483932,260,215,561,na,,,,,false,S25,271,14,871,N,S,,,,N,Parent linkage documents not submitted.
+SUMIT DAS,UWX2105617,260,215,569,na,,,,,false,S25,271,247,784,N,S,,,,,
+Shubhankar Debnath,UWX2515708,260,215,571,na,,,,,false,S25,270,33,120,N,S,,,,N,Both parents linkage documents not submitted.
+ABIR BACHAR,UWX2601631,260,215,587,na,,,,,false,S25,271,13,120,N,Y,Document verified,,,Y,
+PALLABI MONDAL,UWX2382729,260,215,589,na,,0,false,,false,S25,101,223,935,N,S,,,,N,Parent linkage documents not submitted.
+BROJESH KUMAR MONDAL,UWX2567931,260,215,595,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
+Sujal Karmakar,UWX1484260,260,215,609,na,,0,false,,false,S25,271,13,493,N,S,,,,N,Parent linkage documents not submitted. Wrong name in SIR list
+Dipankar Mondal,UWX1484146,260,215,860,na,,0,false,,false,S25,272,54,794,N,Y,Verified,,,N,Parent linkage documents not submitted.
+Subhasree Mistry (Mridha),UWX1713486,260,215,866,na,,0,false,,false,,,,,N,Y,Verified,,,N,Parent linkage documents not submitted.
+Shanti Mridha,UWX1484294,260,215,869,na,,0,false,,false,S25,101,224,1017,N,S,,,,N,Inadmissible documents ERO to review the case
+SEEMA BASAK,UWX2487593,260,215,934,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+SANJITA SAHA,UWX1603968,260,215,970,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Parent linkage documents not submitted.
+JIKO SAHA,UWX2383578,260,215,971,na,,0,false,,false,S25,270,32,533,N,S,,,,N,Inadmissible documents ERO to review the case
+SIMA BASU,UWX2615946,260,215,991,na,,,,,false,S25,266,89,95,N,S,,,,N,Both parents linkage documents not submitted.
+Sbapan Kumar Kundu,FKH3691623,260,212,20,na,,,,,false,,,,,N,Y,verified,,,Y,
+MAHADEB KSHETRAPAL,UWX2436145,260,212,83,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
+Bikash Saha,UWX2514594,260,212,151,na,,,,,false,,,,,N,Y,verified,,,Y,
+Debojoyati Pradhan,UWX1188408,260,212,283,na,,,,,false,,,,,N,Y,verified,,,Y,
+Rabindranath Pradhan,UWX1188390,260,212,284,na,,,,,false,,,,,N,Y,verified,,,Y,
+Soumojyati Prodhan,UWX1602432,260,212,285,na,,,,,false,,,,,N,Y,verified,,,Y,
+Sanhita Prodhan,UWX1812056,260,212,286,na,,,,,false,,,,,N,Y,verified,,,Y,
+Mala Basu,UWX2022101,260,212,316,na,,,,,false,S25,270,40,454,N,S,,,,N,Inadmissible documents ERO to review the case
+JAI KISHAN,ZIP1435700,260,212,422,na,,,,,false,,,,,N,S,,,,Y,
+Saktipada Saha,FKH1489947,260,212,430,na,,,,,false,,,,,N,Y,verified,,,Y,
+Sumitra Roy,UWX2022119,260,212,435,na,,0,false,,false,S25,278,140,466,N,S,,,,N,Inadmissible documents ERO to review the case
+Uma Poddar,UWX2563245,260,212,519,na,,,,,false,,,,,N,Y,verified,,,Y,
+JUTHIKA GARAI,UWX2489292,260,212,560,na,,,,,false,S25,271,175,880,N,S,,,,N,Inadmissible documents ERO to review the case
+Jhuma Chakraborty,FKH2925162,260,212,572,na,,,,,false,,,,,N,S,,,,Y,
+Prabhati Das,FKH3755592,260,212,677,na,,0,false,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
+Purnima Sarkar,FKH3250065,260,212,881,na,,,,,false,S25,271,13,135,N,S,,,,N,Inadmissible documents ERO to review the case
 NANDA MAHATO,UWX2429074,260,123,15,na,,,,,false,,,,,N,,,,,,
 KABITA SHAW,UWX2429066,260,123,32,na,,,,,false,,,,,N,,,,,,
 Tuku Kalindi,FKH2917102,260,123,313,na,,,,,false,,,,,N,,,,,,
@@ -530,46 +588,16 @@ Debraj Mohanty,UWX1160654,260,123,482,na,,,,,false,,,,,N,,,,,,
 Purnima Samadder,UWX1578707,260,123,547,na,,,,,false,,,,,N,,,,,,
 CHANDAN KUMAR MISHRA,UWX2091593,260,123,581,na,,,,,false,,,,,N,,,,,,
 Parbati Mahato,FKH2335586,260,123,583,na,,,,,false,,,,,N,,,,,,
-SRAWANI GUPTA,UWX2135002,260,207,63,na,,0,false,,false,S25,271,70,846,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
-Sonu Prasad Gupta,UWX1151216,260,207,66,na,,0,false,,false,S25,271,70,846,N,S,,,,N,"Parent linkage documents not submitted, Inadmissible documents ERO to review the case"
-Moumita Dhaki,UWX1295906,260,207,166,na,,,,,false,S25,271,86,257,N,S,,,,N,Parent linkage documents not submitted.
-Santana Das,UWX0721001,260,207,232,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Sumitra Das,UWX1351915,260,207,245,na,,0,false,,false,S25,258,99,308,N,S,,,,N,Inadmissible documents ERO to review the case
-Parnashi Das,UWX1481258,260,207,257,na,,,,,false,S25,271,12,57,N,S,,,,N,Parent linkage documents not submitted.
-Anita Das,UWX1810647,260,207,272,na,,,,,false,S25,271,15,470,N,S,,,,N,Inadmissible documents ERO to review the case
-Etikana Bej,UUD2039444,260,207,275,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Munmun Das,UWX2534493,260,207,279,na,,0,false,,false,S25,271,20,123,N,S,,,,N,Both parents linkage documents not submitted.
-SAGAR DAS,UWX2222388,260,207,281,na,,,,,false,,,,,N,S,,,,Y,
-Prabhat Das,UWX1066745,260,207,330,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Tumpa Biswas (Das),UWX1186907,260,207,336,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Tanmay Das,UWX2323426,260,207,338,na,,0,false,,false,,,,,N,S,,,,N,"Birth certificate not admissible as registration more than one year. Provide other documents, Parent linkage documents not submitted."
-Tushar Mistri,UWX2525889,260,207,353,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Shyamal Das,WB/39/271/624547,260,207,355,na,,0,false,,false,,,,,N,S,,,,Y,
-CHANDANA DAS,UWX2456929,260,207,357,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Santu Dey,FKH3453685,260,207,376,na,,0,false,,false,S25,271,86,257,N,S,,,,N,Inadmissible documents ERO to review the case
-Rita De (Das),UWX1711167,260,207,389,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted. other than adhaar card
-SONAI DEY,UWX2435436,260,207,410,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Mithu Debnath,UWX1980895,260,207,477,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Shambhunath Pradhan,FKH3692258,260,207,541,na,,,,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Purnima Pal,UWX1295922,260,207,580,na,,,,,false,,,,,N,S,,,,N,Name not visible provide clear or different document
-Sandhya Pal,FKH3691995,260,207,582,na,,,,,false,,,,,N,S,,,,Y,
-Nilu Pal,UWX1066729,260,207,583,na,,,,,false,,,,,N,S,,,,N,Name not visible in LIC document provide some other document
-Rina Pal,UWX2021467,260,207,594,na,,0,false,,false,,,,,N,S,,,,Y,
-Manab Bapari,FKH2926145,260,207,609,na,,,,,false,,,,,N,S,,,,Y,
-Shibu Basak,UWX1066620,260,207,615,progeny,GMTH,0,false,,true,S25,271,12,402,Y,Y,Verified OK,N,Linkage not established,,
-Mita Biswas,UWX1810878,260,207,633,na,,0,false,,false,S25,281,46,292,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
-Nirod Biswas,FKH2926616,260,207,652,na,,,,,false,,,,,N,S,,,,Y,
-Mithun Roy,FKH3073723,260,207,813,progeny,FTHR,0,false,,true,S27,41,225,355,Y,Y,Verified OK,N,Linkage not established,,
-Tapashi Roy Choudhury,UWX1600683,260,207,827,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-LAXMAN LUITEL,UWX2456838,260,207,835,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Kalpana Sarkar(Das),UWX1295781,260,207,859,na,,,,,false,,,,,N,S,,,,Y,
-Kakali Saha,FKH3315090,260,207,878,na,,,,,false,S25,271,215,956,N,S,,,,,
-Joyasri Singh,UWX1168251,260,207,907,progeny,MTHR,0,false,,true,S25,271,208,455,Y,Y,Verified OK,N,Illegible document. Linkage not established.,,
-SUKLA DAS,UWX2582484,260,207,957,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-CHUMKI DAS,UWX2586436,260,207,959,na,,,,,false,S25,271,93,440,N,S,,,,N,Both parents linkage documents not submitted.
-Antara Ghosh,UWX2592467,260,207,960,na,,,,,false,S25,271,12,67,N,S,,,,N,Both parents linkage documents not submitted.
-RANJAN DAS,UWX2595767,260,207,962,na,,,,,false,,,,,N,S,,,,N,Both parents linkage documents not submitted.
-Payel Biswas,UWX2616241,260,207,969,na,,,,,false,S25,294,134,546,N,S,,,,N,Both parents linkage documents not submitted.
+DIPTI OJHA,UWX2572451,260,206,9,na,,,,,false,S25,271,10,1142,N,,,,,N,Parent linkage documents not submitted.
+Suman Dey,UWX1810159,260,206,234,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Basanti Biswas,IMW1405190,260,206,365,na,,,,,false,S25,271,251,376,N,,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
+Sampa Mistri,AQT1803626,260,206,488,na,,,,,false,S25,277,219,487,N,,,,,N,Parent linkage documents not submitted.
+MUKTA ROY,UWX2435337,260,206,533,na,,,,,false,S25,91,308,431,N,,,,,N,Parent linkage documents not submitted.
+Shilpa Chakarborty roy,WIT1665348,260,206,549,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+SUPARNA MITRA,UWX2612273,260,206,635,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Barnali Roy Jowerder,UWX1980705,260,206,650,na,,0,false,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+RUMI SINGH,UWX2480093,260,206,1026,na,,0,false,,false,S25,271,117,623,N,,,,,N,Inadmissible documents ERO to review the case
+Mini Mandal Some,UWX0719229,260,206,1038,na,,,,,false,S25,265,320,1173,N,,,,,N,"Inadmissible documents ERO to review the case, "
 Sajal Kumar Chanda,UWX1298025,260,213,159,na,,,,,false,S25,271,15,107,N,,,,,Y,
 Kajal Chanda,UWX1483239,260,213,160,na,,,,,false,S25,271,15,107,N,,,,,Y,
 RADHIKA ROY,IMW2173102,260,213,610,na,,,,,false,S25,90,167,216,N,,,,,N,Inadmissible documents ERO to review the case
@@ -637,6 +665,7 @@ Bipadtaran Mondal,UWX1603612,260,214,862,na,,,,,false,,,,,N,,,,,,
 Krishnapada Mandal,UWX1068352,260,214,863,na,,,,,false,,,,,N,,,,,,
 Sarathi Mondal,UWX1068360,260,214,864,na,,,,,false,,,,,N,,,,,,
 Gaji Munda,UWX2007904,260,214,870,na,,,,,false,,,,,N,,,,,,
+Jharna Das,FKH1486661,260,212,219,na,,,,,false,S25,271,10,545,N,,,,,N,Inadmissible documents ERO to review the case
 Jhunu Kuri,FKH2931707,260,209,11,na,,,,,false,,,,,N,,,,,,
 Jyotsna Kar,UWX1296771,260,209,24,na,,,,,false,,,,,N,,,,,,
 Biplab Kar,UWX0726083,260,209,28,na,,,,,false,,,,,N,,,,,,
@@ -791,6 +820,13 @@ LOTIKA MONDAL,UWX2623544,260,213,1030,na,,,,,false,,,,,N,,,,,,
 Swapan Roy,UWX2021970,260,211,733,progeny,FTHR,0,false,,true,S25,271,10,340,Y,,,Y,,,
 Chand Bisra (Soren),UWX1602176,260,211,822,progeny,FTHR,0,false,,true,S25,271,10,389,Y,,,N,No document found,,
 Patit Paban Mondal,UWX1067214,260,211,847,progeny,FTHR,0,false,,true,S25,269,92,463,Y,,,,,,
+Supriya Adhikari,FKH1640689,260,123,40,na,,,,,false,,,,,N,Y,verified,,,Y,
+Santu Kumar Dutta,FKH3690229,260,123,142,na,,,,,false,,,,,N,Y,verified,,,Y,
+Mrinalini Dutta,FKH3449113,260,123,144,na,,,,,false,,,,,N,Y,verified,,,Y,
+Partha Paul,IHM2041838,260,123,196,na,,,,,false,,,,,N,Y,verified,,,Y,
+Sanjay Lahiri,FKH2503936,260,123,282,na,,0,false,,false,,,,,N,S,,,,N," DOB not written in Enumeration form, ADhar card submitted. Submitted documents need to be reviewed"
+Nanda Singh,UWX1272103,260,123,316,na,,,,,false,,,,,N,S,,,,N," Birth certificate, passport Submitted. No linkage with Parents .Produced  documents need to be reviewed."
+Mina Dewan,UWX1578608,260,123,456,na,,,,,false,S25,104,142,204,N,S,,,,N,"illegible sir,adhar card self Submitted . Produced documents need to be reviewed."
 Gorapada Chanda,UWX1295872,260,207,131,na,,,,,false,,,,,N,,,,,,
 Kaili Chaudhuri,UWX0513259,260,207,147,na,,0,false,,false,,,,,N,,,,,,
 Kanika Darji,UWX2021285,260,207,180,na,,,,,false,,,,,N,,,,,,
@@ -814,6 +850,11 @@ Uttam Bairagi,UWX1295963,260,207,685,na,,,,,false,,,,,N,,,,,,
 Sanjoy Mondal,UWX1810670,260,207,750,na,,,,,false,,,,,N,,,,,,
 SOMENATH SARKAR,UWX2280097,260,207,754,na,,,,,false,,,,,N,,,,,,
 Mina Debi Sonakar,UWX2543171,260,207,838,na,,,,,false,,,,,N,,,,,,
+SOUMEN SARKAR,UWX2350171,260,122,46,na,,,,,false,,,,,N,,,,,N,Birth certificate & Adhar Card (self)Submitted. Documents need to be reviewed
+Malati Chakraborty,UWX2025807,260,122,161,na,,0,false,,false,S25,269,113,43,N,,,,,N,"Last SIR Mother, Adhar card self Submitted . No linkage with parents, Produced documents need to be reviewed."
+SUPTI BISWAS,UWX1461854,260,122,455,na,,0,false,,false,,,,,N,,,,,N,"cast certificate, Admit card (self) Submitted. Documents need to be reviewed"
+Baneswar Rajak,FKH3385648,260,122,640,na,,0,false,,false,,,,,N,,,,,N,"Cast certificate, Adhar Card self Submitted, no linkage with parents. Documents need to be reviewed."
+Laxmi Halder,UWX0415257,260,122,742,na,,0,false,,false,S25,277,201,775,N,,,,,N,"Last SIR 2002 Father, Passport self,adhar card self Submitted, Produced documents need to be reviewed"
 Gopal Chakraborty,UWX1981521,260,210,25,na,,,,,false,S25,137,183,406,N,,,,,N,Inadmissible documents ERO to review the case
 SANTU BANERJEE,UWX2552149,260,210,63,na,,,,,false,,,,,N,,,,,N,Both parents linkage documents not submitted.
 MINA SARKAR,UWX2286243,260,210,79,na,,,,,false,S25,261,100,70,N,,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
@@ -834,39 +875,14 @@ Tarak Hazra,UWX1811421,260,210,605,na,,,,,false,S25,282,168,366,N,,,,,N,Inadmiss
 SHRABANI NANDI,UWX2564839,260,210,628,na,,,,,false,S24,60,14,805,N,,,,,N,Inadmissible documents ERO to review the case
 Souvik Sakar,UWX2591089,260,210,660,na,,,,,false,S25,82,264,785,N,,,,,,
 Pradipkumar Mondal,UWX2591014,260,210,661,na,,,,,false,S25,106,159,631,N,,,,,N,Both parents linkage documents not submitted.
-DIPTI OJHA,UWX2572451,260,206,9,na,,,,,false,S25,271,10,1142,N,S,,,,N,Parent linkage documents not submitted.
-BABLU KARMAKAR,UWX2078236,260,206,19,na,,,,,false,,,,,N,S,,,,N,name different in document submitted. Inadmissible documents ERO to review the case
-Jagadish Gomasta,FKH2931475,260,206,35,na,,,,,false,,,,,N,S,,,,Y,
-Dipu Dutta,FKH3610342,260,206,92,na,,,,,false,,,,,N,S,,,,Y,
-Rupa Dutta,WB/10/065/060586,260,206,94,na,,,,,false,S25,53,65,232,N,Y,,,,N,Inadmissible documents ERO to review the case
-RANA DUTTA,UWX2496198,260,206,105,na,,,,,false,,,,,N,S,,,,Y,
-Panchu Gopal Das,FKH3455896,260,206,119,na,,,,,false,,,,,N,S,,,,Y,
-Suman Dey,UWX1810159,260,206,234,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SEEMA KUMARI ROY,UWX2373991,260,206,353,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Dhriti Roy Sana,YAJ1519685,260,206,360,na,,,,,false,,,,,N,S,,,,Y,
-Sunil Baksi,UWX1461896,260,206,363,na,,,,,false,S25,271,3,269,N,S,,,,N,Inadmissible documents ERO to review the case
-Basanti Biswas,IMW1405190,260,206,365,na,,,,,false,S25,271,251,376,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
-KASHINATH BAIRAGGYA,UWX0717132,260,206,372,na,,,,,false,,,,,N,S,,,,Y,
-BISWAJIT Das,FKH3316320,260,206,468,na,,0,false,,false,S25,271,11,287,N,S,,,,Y,
-Sampa Mistri,AQT1803626,260,206,488,na,,,,,false,S25,277,219,487,N,S,,,,N,Parent linkage documents not submitted.
-Ramesh Mondal,UWX1810258,260,206,530,na,,,,,false,,,,,N,S,,,,Y,
-MUKTA ROY,UWX2435337,260,206,533,na,,,,,false,S25,91,308,431,N,S,,,,N,Parent linkage documents not submitted.
-Shilpa Chakarborty roy,WIT1665348,260,206,549,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-MAKHAN HOWLADAR,FKH2890127,260,206,582,na,,,,,false,S25,189,72,888,N,S,,,,,
-ANKITA DAS,UWX2435238,260,206,590,progeny,FTHR,0,false,,true,S25,80,214,260,Y,Y,Verified OK,N,Father's name mismatch.,,
-Kakali Haldar,FKH3316361,260,206,606,progeny,GFTH,10,true,,true,S25,256,75,686,Y,Y,Verified OK,,,N,Submitted documents need to be reviewed
-SUPARNA MITRA,UWX2612273,260,206,635,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Barnali Roy Jowerder,UWX1980705,260,206,650,na,,0,false,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-SANTANU KUMAR AIN,FKH2931590,260,206,658,na,,,,,false,,,,,N,S,,,,Y,
-Sipra Acharya,UWX1600204,260,206,666,progeny,GFTH,12,true,,true,S25,104,23,167,Y,Y,Verified OK,,,N,Submitted documents need to be reviewed
-Subol Goldar,HXN2393692,260,206,708,na,,,,,false,,,,,N,S,,,,Y,
-Tarun Kumar Das,FKH2931202,260,206,838,na,,,,,false,,,,,N,S,,,,Y,
-Sahadev Biswas,UWX1736172,260,206,931,na,,,,,false,S25,128,87,565,N,S,,,,N,Inadmissible documents ERO to review the case
-Krishnapada Biswas,XZP0965111,260,206,932,na,,,,,false,,,,,N,S,,,,Y,
-Tejan Mondal,UWX2316313,260,206,951,na,,,,,false,S25,95,185,441,N,S,,,,N,"Inadmissible documents ERO to review the case, Parent linkage documents not submitted."
-RUMI SINGH,UWX2480093,260,206,1026,na,,0,false,,false,S25,271,117,623,N,S,,,,N,Inadmissible documents ERO to review the case
-Sukhen Mandal,UWX0719211,260,206,1037,na,,,,,false,,,,,N,S,,,,Y,
-Mini Mandal Some,UWX0719229,260,206,1038,na,,,,,false,S25,265,320,1173,N,S,,,,N,"Inadmissible documents ERO to review the case, "
+Nandita Karmakar,UWX1481563,260,208,44,na,,,,,false,S25,279,199,3,N,,,,,N,Parent linkage documents not submitted.
+Pradip Mistri,UWX1711357,260,208,114,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+ROHIT CHOURASIA,UWX2435535,260,208,150,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+Sikha Das,UWX1187053,260,208,209,na,,,,,false,S25,271,15,653,N,,,,,N,Inadmissible documents ERO to review the case
+Barna Dey,UWX2537538,260,208,210,na,,,,,false,,,,,N,,,,,N,Both parents linkage documents not submitted.
+MRITYUNJOY BALMIKI,UWX2376044,260,208,308,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+PAYEL MADHU,UWX2376069,260,208,346,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
+MITALI ROY,UWX2435592,260,208,449,na,,,,,false,,,,,N,,,,,N,Parent linkage documents not submitted.
 Shampa Kuri,UWX0577189,260,216,30,na,,0,false,,false,,,,,N,,,,,,
 Shushila Ray,FKH2927614,260,216,82,na,,0,false,,false,,,,,N,,,,,,
 DEVI GHOSH,UWX2109585,260,216,98,na,,,,,false,,,,,N,,,,,,
@@ -891,39 +907,3 @@ Piyali Sikdar,UWX1713619,260,216,583,na,,0,false,,false,,,,,N,,,,,,
 Bikas Sikdar,UWX2582492,260,216,668,na,,,,,false,,,,,N,,,,,,
 Suchitra Kuri(Kuri),FKH3315769,260,216,707,na,,,,,false,,,,,N,,,,,,
 Dilip Debnath,WB/39/271/036017,260,216,800,na,,,,,false,,,,,N,,,,,,
-SOUMEN SARKAR,UWX2350171,260,122,46,na,,,,,false,,,,,N,S,,,,N,Birth certificate & Adhar Card (self)Submitted. Documents need to be reviewed
-DEBJYOTI GOSWAMI GOSWAMI,FKH1648864,260,122,132,progeny,GFTH,0,false,,true,S25,249,191,555,Y,Y,Document verified,N,Father's document not found,,
-Suprava Goswami,FKH1651827,260,122,133,na,,0,false,,false,,,,,N,S,,,,N,"PPO Book of Husband, self Adhar Card submitted. No linkage with parents .Submitted documents need to be reviewed."
-Malati Chakraborty,UWX2025807,260,122,161,na,,0,false,,false,S25,269,113,43,N,S,,,,N,"Last SIR Mother, Adhar card self Submitted . No linkage with parents, Produced documents need to be reviewed."
-BISWANATH CHAKRABORTY,UWX2069979,260,122,244,progeny,GMTH,0,false,,true,S25,250,124,825,Y,Y,Document verified,N,Linkage not established,,
-KHUKU DUTTA,UWX2553568,260,122,327,na,,0,false,,false,,,,,N,S,,,,N,"self Adhar card, Father's Passport Submitted ,Documents need to be reviewed"
-Ruma Dey(Ghosh),UWX1331685,260,122,357,progeny,GMTH,0,false,,true,S25,271,56,46,Y,Y,Document verified,N,Linkage not established,,
-SUPTI BISWAS,UWX1461854,260,122,455,na,,0,false,,false,,,,,N,S,,,,N,"cast certificate, Admit card (self) Submitted. Documents need to be reviewed"
-Sasanka Mandal,UWX1053644,260,122,538,progeny,FTHR,0,false,,true,S25,271,3,316,Y,Y,Document verified,N,Linkage not established,,
-Baneswar Rajak,FKH3385648,260,122,640,na,,0,false,,false,,,,,N,S,,,,N,"Cast certificate, Adhar Card self Submitted, no linkage with parents. Documents need to be reviewed."
-SUDIP RUDRA,UWX2477669,260,122,644,progeny,FTHR,0,false,,true,S25,271,3,415,Y,Y,Document verified,N,Father's name mismatch with list.,,
-Ashish Ray,FKH3623667,260,122,651,na,,0,false,,false,S25,222,37,61,N,S,,,,N," Last SIR grand mother, Adhar card self Submitted  No linkage with parents. Documents need to be reviewed,"
-BAPI ROY,UWX2069896,260,122,683,na,,,,,false,,,,,N,S,,,,N,"Admit card self, Adhar card self Submitted . No linkage with parents,Produced documents need to be reviewed."
-MEGHA ROY,UWX2531846,260,122,684,na,,0,false,,false,,,,,N,S,,,,N,"Birth certificate, Admit Card Self Submitted. Produced  documents need to be reviewed."
-Anna Sarkar,FKH2916856,260,122,698,na,,,,,false,S25,269,1,736,N,S,,,,N,"Last SIR father, Dhar card self Submitted.  No linkage with parents .Produced documents need to be reviewed."
-Khokan Sarkar,UWX1085240,260,122,699,na,,,,,false,S25,269,1,736,N,S,,,,N,"Last SIR 2002 Grand father ,Adhar card self Submitted.  No linkage with parents.Produced  documents need to be reviewed"
-Moyna Saha,UWX1792175,260,122,721,na,,0,false,,false,,,,,N,S,,,,N,"Admit card self, Adhar card self Submitted .No linkage with parents, Produced documents need to be reviewed."
-Laxmi Halder,UWX0415257,260,122,742,na,,0,false,,false,S25,277,201,775,N,S,,,,N,"Last SIR 2002 Father, Passport self,adhar card self Submitted, Produced documents need to be reviewed"
-Sumita Halder,UWX1577972,260,122,746,na,,0,false,,false,S25,277,201,775,N,S,,,,N,"Adhar card self, Admit card, Last sir of Guardian Submitted ,Produced documents need to be reviewed"
-Sbapan Kumar Kundu,FKH3691623,260,212,20,na,,,,,false,,,,,N,S,,,,Y,
-MAHADEB KSHETRAPAL,UWX2436145,260,212,83,na,,,,,false,,,,,N,S,,,,N,Parent linkage documents not submitted.
-Bikash Saha,UWX2514594,260,212,151,na,,,,,false,,,,,N,S,,,,Y,
-Jharna Das,FKH1486661,260,212,219,na,,,,,false,S25,271,10,545,N,S,,,,N,Inadmissible documents ERO to review the case
-Debojoyati Pradhan,UWX1188408,260,212,283,na,,,,,false,,,,,N,S,,,,Y,
-Rabindranath Pradhan,UWX1188390,260,212,284,na,,,,,false,,,,,N,S,,,,Y,
-Soumojyati Prodhan,UWX1602432,260,212,285,na,,,,,false,,,,,N,S,,,,Y,
-Sanhita Prodhan,UWX1812056,260,212,286,na,,,,,false,,,,,N,S,,,,Y,
-Mala Basu,UWX2022101,260,212,316,na,,,,,false,S25,270,40,454,N,S,,,,N,Inadmissible documents ERO to review the case
-JAI KISHAN,ZIP1435700,260,212,422,na,,,,,false,,,,,N,S,,,,Y,
-Saktipada Saha,FKH1489947,260,212,430,na,,,,,false,,,,,N,S,,,,Y,
-Sumitra Roy,UWX2022119,260,212,435,na,,0,false,,false,S25,278,140,466,N,S,,,,N,Inadmissible documents ERO to review the case
-Uma Poddar,UWX2563245,260,212,519,na,,,,,false,,,,,N,S,,,,Y,
-JUTHIKA GARAI,UWX2489292,260,212,560,na,,,,,false,S25,271,175,880,N,S,,,,N,Inadmissible documents ERO to review the case
-Jhuma Chakraborty,FKH2925162,260,212,572,na,,,,,false,,,,,N,S,,,,Y,
-Prabhati Das,FKH3755592,260,212,677,na,,0,false,,false,,,,,N,S,,,,N,Inadmissible documents ERO to review the case
-Purnima Sarkar,FKH3250065,260,212,881,na,,,,,false,S25,271,13,135,N,S,,,,N,Inadmissible documents ERO to review the case
