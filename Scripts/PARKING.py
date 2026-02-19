@@ -11,9 +11,15 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
-# These will appear as the first few columns. 
-# ALL other headers found in the JSONs will automatically follow these.
-PRIORITY_COLUMNS = ["source_json_file", "name", "epicNo", "acNo", "partNo", "partSerialNo"]
+# ONLY these columns will be exported to the CSV
+TARGET_COLUMNS = [
+    "name", "epicNo", "acNo", "partNo", "partSerialNo", 
+    "categoryType", "relationType", "progenyLinked", 
+    "progLimitExceed", "docAnomaly", "anomalies", 
+    "lastSirState", "lastSirAc", "lastSirPart", "lastSirSerialNo", 
+    "recommendedByBlo", "deoApproval", "deoRemarks", 
+    "miobApproval", "miobRemarks", "roobApproval", "roobRemarks"
+]
 
 def main():
     # 1. Setup
@@ -21,83 +27,72 @@ def main():
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # 2. Download
-    print(f"Downloading from Google Drive...")
+    # 2. Download from Drive
+    print(f"Downloading files...")
     try:
         gdown.download_folder(url=DRIVE_FOLDER_URL, output=DOWNLOAD_DIR, quiet=False, use_cookies=False, remaining_ok=True)
     except Exception as e:
         print(f"❌ Download failed: {e}")
         sys.exit(1)
 
-    # 3. Identify Files
-    all_files = []
-    for dp, dn, filenames in os.walk(DOWNLOAD_DIR):
-        for f in filenames:
-            if not f.startswith('.'):
-                all_files.append(os.path.join(dp, f))
+    # 3. Identify Files (No extension restriction)
+    all_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(DOWNLOAD_DIR) for f in filenames if not f.startswith('.')]
 
     processed_dfs = []
     ignored_files = []
 
-    print(f"Scanning {len(all_files)} files...")
+    print(f"Processing {len(all_files)} files...")
 
-    # 4. Extract EVERYTHING
+    # 4. Extract and Filter
     for filename in all_files:
         fname = os.path.basename(filename)
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
-            # Look for the list of voters
             elector_list = data.get('payload', {}).get('electorDetailDto', [])
             
             if elector_list and isinstance(elector_list, list):
-                # Flatten the JSON. This creates columns for every key found.
+                # Flatten the JSON
                 df = pd.json_normalize(elector_list, sep='__')
                 
-                # Tag the source
-                df['source_json_file'] = fname
-                processed_dfs.append(df)
+                # Reindex ensures only TARGET_COLUMNS exist. 
+                # If a column is missing in the JSON, it's added as empty.
+                df_filtered = df.reindex(columns=TARGET_COLUMNS)
+                processed_dfs.append(df_filtered)
             else:
-                reason = "List 'electorDetailDto' is empty" if 'payload' in data else "Non-standard JSON structure"
-                ignored_files.append(f"{fname}: {reason}")
+                ignored_files.append(f"{fname}: Empty or missing 'electorDetailDto'")
 
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, ValueError):
             ignored_files.append(f"{fname}: Not a valid JSON")
         except Exception as e:
-            ignored_files.append(f"{fname}: Error -> {str(e)}")
+            ignored_files.append(f"{fname}: {str(e)}")
 
-    # 5. Merge and Reveal All Headers
+    # 5. Merge and Save
     if processed_dfs:
-        # pd.concat merges all unique headers found across all files.
-        # If File A has 'age' and File B has 'gender', the result has BOTH.
+        # Concatenate all valid results
         final_df = pd.concat(processed_dfs, ignore_index=True, sort=False)
 
-        # Reorder to keep it clean, but include 100% of discovered columns
-        all_cols = list(final_df.columns)
-        existing_priority = [c for c in PRIORITY_COLUMNS if c in all_cols]
-        other_cols = [c for c in all_cols if c not in existing_priority]
-        
-        # This list contains EVERY column found
-        final_df = final_df[existing_priority + other_cols]
+        # Final check to ensure columns are in the EXACT order requested
+        final_df = final_df[TARGET_COLUMNS]
 
-        # 6. Save
+        # Save to CSV
         final_df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8-sig')
         
         print("\n" + "="*50)
-        print(f"✅ SUCCESS: {len(processed_dfs)} files merged.")
+        print(f"✅ SUCCESS: {len(processed_dfs)} files merged into CSV.")
         print(f"📊 Total Records: {len(final_df)}")
-        print(f"📋 Total Headers: {len(final_df.columns)} (All headers preserved)")
+        print(f"📋 Columns Exported: {len(TARGET_COLUMNS)}")
         print("="*50)
 
         if ignored_files:
-            print(f"\n⚠️  REASON FOR MISSING DATA ({len(ignored_files)} files ignored):")
-            for note in ignored_files[:15]:
+            print(f"\n⚠️  DIAGNOSTIC - {len(ignored_files)} FILES IGNORED:")
+            for note in ignored_files[:10]:
                 print(f" - {note}")
         
         shutil.rmtree(DOWNLOAD_DIR)
     else:
-        print("❌ No data could be extracted from any file.")
+        print("❌ No data extracted. Please check the JSON structure of your files.")
 
 if __name__ == "__main__":
     main()
