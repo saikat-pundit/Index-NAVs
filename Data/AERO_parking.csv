@@ -1,5 +1,11 @@
 ﻿payload__electorDetailDto__name,payload__electorDetailDto__epicNo,payload__electorDetailDto__acNo,payload__electorDetailDto__partNo,payload__electorDetailDto__partSerialNo,payload__electorDetailDto__categoryType,payload__electorDetailDto__relationType,payload__electorDetailDto__progenyLinked,payload__electorDetailDto__progLimitExceed,payload__electorDetailDto__docAnomaly,payload__electorDetailDto__anomalies,payload__electorDetailDto__lastSirState,payload__electorDetailDto__lastSirAc,payload__electorDetailDto__lastSirPart,payload__electorDetailDto__lastSirSerialNo,payload__electorDetailDto__recommendedByBlo,payload__electorDetailDto__deoApproval,payload__electorDetailDto__deoRemarks,payload__electorDetailDto__miobApproval,payload__electorDetailDto__miobRemarks,payload__electorDetailDto__roobApproval,payload__electorDetailDto__roobRemarks
-Jumpa Das,UWX0304550,260,206,201,na,,,,,false,S25,271,266,181,N,Y,Documents Verified,,,N,Inadmissible documents ERO to review the case
+Sandhya Dutta Roy,FKH3624897,260,212,193,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,SUITABLE DOCUMENTS REQUIRE,,
+Ramkrishna Pal,UWX1297464,260,212,754,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,Valid documents require for linkage,,
+Nilima Das,FKH3691805,260,212,763,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,Valid documents requires for linkage,,
+Barna Majhi,UWX1812171,260,212,825,progeny,MTHR,0,false,,true,S25,271,16,560,Y,Y,Document verified,N,Illegible electoral roll,,
+Tapan Majhi,UWX1297498,260,212,828,progeny,FTHR,0,false,,true,S25,271,10,1108,Y,Y,Verified OK,N,Illegible electoral roll. ,,
+Lakshmi Narayuan Majhi,UWX1746973,260,212,829,progeny,FTHR,0,false,,true,S25,271,10,1108,Y,Y,Verified OK,N,Illegible electoral roll,,
+Souravi Mahaldar,FKH3456522,260,209,290,na,,,,,false,S25,95,94,303,N,Y,Documents Verified,N,Submitted documents need to be reviewed,Y,
 MD ALI REZA,FKH1651751,260,89,2,self,,0,false,1,true,S25,271,27,16,Y,Y,Verified,Y,,N,Submitted documents need to be reviewed
 Murtaza Alam,FKH3463585,260,89,7,self,,0,false,1,true,S25,271,27,187,Y,Y,Verified,N,Electors Name differs,N,Submitted documents need to be reviewed
 Mafuja Begam,FKH2952216,260,89,8,progeny,FTHR,4,true,1,true,S25,268,26,852,Y,Y,Verified,N,Link not established,,
@@ -22,42 +28,6 @@ Sanjida Parvin,UWX1089473,260,89,205,self,,0,false,1,true,S27,25,181,102,Y,Y,Ver
 SK ISLAM,FKH2353860,260,89,259,self,,0,false,1,true,S25,271,27,281,Y,Y,Verified,Y,,N,Submitted documents need to be reviewed
 MAHAMMAD MAKSUD,FKH1652254,260,89,280,self,,,,1,true,S25,271,27,290,Y,Y,Verified,Y,,N,Submitted documents need to be reviewed
 MAMATAJ BEGUM,FKH1652759,260,89,285,self,,0,false,1,true,S25,271,27,287,Y,Y,Verified,Y,,N,Submitted documents need to be reviewed
-Alpana Chattapadhyay,FKH2915213,260,122,103,progeny,FTHR,0,false,,true,S25,271,26,604,Y,Y,Document verified,N,Link not established.,,
-Rupa Gorai,FKH2916906,260,122,124,progeny,GMTH,0,false,,true,S25,270,16,677,Y,Y,Document verified,N,Linkage not established.,,
-Purnima Chakraborty,UWX1578079,260,122,174,progeny,FTHR,0,false,,true,S25,271,17,70,Y,Y,Document verified,N,Linkage not established.,,
-Sasti Das,UWX1461789,260,122,254,progeny,FTHR,0,false,,true,S25,271,3,178,Y,Y,Document verified,N,only adhar submitted,,
-Dipak Das,UWX1085232,260,122,263,progeny,FTHR,0,false,,true,S25,271,3,187,Y,Y,Document verified,N,only adhar submitted,,
-Shashikanta Das,FKH3314754,260,211,330,progeny,FTHR,0,false,,true,S25,271,10,130,Y,Y,Document verified,N,Illegible SIR 2002,,
-MAITRY DEY,FKH2925550,260,211,351,progeny,FTHR,0,false,,true,S25,177,41,150,Y,Y,Verified OK,N,Father's document require,,
-Krishnau Paik,UWX1981562,260,211,440,progeny,FTHR,0,false,,true,S25,271,11,168,Y,Y,Document verified,N,Linkage not established,,
-Debdas Mondal,UWX1297308,260,211,572,progeny,FTHR,0,false,,true,S25,269,85,728,Y,Y,Document verified,N,Father's name differs,,
-HARISHANKAR MISTRI,UWX2286581,260,211,673,progeny,FTHR,0,false,,true,S25,271,13,823,Y,Y,Document verified,N,Name differs of father not established with suitable documents,,
-Bibhuti Bachhar,WB/39/271/036707,260,215,245,na,,,,,false,S25,271,13,120,N,Y,Documents Verified,Y,,N,DOB mismatch with SIR sheet 2002 pls review
-Manotosh Biswas,FKH2928315,260,215,265,na,,,,,false,S25,271,13,142,N,Y,Documents Verified,Y,,N,Inadmissible documents ERO to review the case of self adhaar is not eligible for mapping father of mr monotosh is mr manoj
-Dipankar Biswas,FKH3315397,260,215,266,na,,,,,false,S25,271,13,142,N,Y,Documents Verified,Y,,N,Inadmissible documents ERO to review the case adhaar cannot map the person to mr manoj as father please submit other document
-Rajib Majumdar,UWX1068725,260,215,336,na,,,,,false,S25,271,13,161,N,Y,Document Verified,Y,,N,Parent linkage documents not submitted. Please review the case adhaar not applicable neither SIR extract 2002 sati majumder
-RAJU SHOW,UWX2318962,260,215,471,progeny,FTHR,0,false,,true,S04,96,60,929,Y,Y,Document verified,N,SIR 2002 ILLEGIBLE,,
-Satish Majumdar,WB/39/271/036195,260,215,562,na,,,,,false,S25,271,13,161,N,Y,Documents Verified,Y,,N,DOB does not match with abstract of 2002 SIR pls 
-Shrabani Mistri,UWX1189687,260,215,911,progeny,FTHR,0,false,,true,S25,271,13,503,Y,Y,Document verified,N,Linked document not available,,
-TUMPA SHIL,UWX0744326,260,215,940,progeny,GMTH,7,true,,true,S25,267,58,375,Y,Y,Document verified,N,Link not established,,
-Usha Singh,UWX1842723,260,86,440,progeny,FTHR,6,true,,true,S25,181,238,519,Y,Y,Document verified,N,Linkage not established.,,
-Asha Shaw,ZSG2001816,260,86,740,na,,,,,false,,,,,N,Y,Document verified,N,One of the parents document not found.,,
-Renu Shaw,UWX1048552,260,86,773,progeny,FTHR,0,false,,true,S25,271,28,852,Y,Y,Document verified,N,Father's name differs. documents need to be reviewed,,
-Kiran Show,UWX1591106,260,86,793,na,,,,,false,,,,,N,Y,Document verified,N,One of the parents document require.,,
-Sandhya Dutta Roy,FKH3624897,260,212,193,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,SUITABLE DOCUMENTS REQUIRE,,
-Ramkrishna Pal,UWX1297464,260,212,754,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,Valid documents require for linkage,,
-Nilima Das,FKH3691805,260,212,763,progeny,MTHR,7,true,,true,S25,271,10,1060,Y,Y,Document verified,N,Valid documents requires for linkage,,
-Barna Majhi,UWX1812171,260,212,825,progeny,MTHR,0,false,,true,S25,271,16,560,Y,Y,Document verified,N,Illegible electoral roll,,
-Tapan Majhi,UWX1297498,260,212,828,progeny,FTHR,0,false,,true,S25,271,10,1108,Y,Y,Verified OK,N,Illegible electoral roll. ,,
-Lakshmi Narayuan Majhi,UWX1746973,260,212,829,progeny,FTHR,0,false,,true,S25,271,10,1108,Y,Y,Verified OK,N,Illegible electoral roll,,
-SNEHA CHATTERJEE,UWX2429041,260,123,103,progeny,FTHR,0,false,,true,S25,271,25,102,Y,Y,Verified,N,No self documents uploaded and hence no linkage established,,
-Arati Das,FKH2916666,260,123,450,na,,,,,false,S25,271,3,740,N,Y,,N,Submitted documents need to be reviewed,Y,
-Amit Kumar Mistri,UWX1160621,260,123,532,na,,,,,false,S25,271,3,794,N,Y,,N,Submitted documents need to be reviewed,Y,
-Bittu Mistri,UWX1697523,260,123,533,na,,,,,false,S25,271,3,794,N,Y,Documents Verified,N,Sufficient SIR Documents not available,N,Last SIR  Mother Adhar card (self) Submitted .No linkage with parents. Produced documents need to be reviewed
-Sabita Mistri,UWX2464261,260,123,534,na,,,,,false,S25,271,3,794,N,Y,Documents Verified,N,Sufficient SIR Documents not available,N,Submitted documents need to be reviewed
-SANJU DUYARI,UWX2436483,260,214,18,progeny,FTHR,0,false,,true,S25,271,15,1036,Y,Y,Document verified,N,Linked document to be uploaded,,
-Sushant Mistri,FKH3692977,260,214,121,progeny,FTHR,0,false,,true,S25,271,15,483,Y,Y,Document verified,N,Linkage document to be uploaded,,
-Souravi Mahaldar,FKH3456522,260,209,290,na,,,,,false,S25,95,94,303,N,Y,Documents Verified,N,Submitted documents need to be reviewed,Y,
 KALPANA MONDAL,IMW2432458,260,210,81,na,,,,1,false,,,,,N,Y,Document verified,Y,,N,Submitted documents need to be reviewed
 Shankari Baidya,FKH2373777,260,210,128,progeny,MTHR,0,false,,true,S25,271,97,189,Y,Y,Document verified,N,Illegible documents,,
 Suman Routh,UWX1601665,260,210,205,progeny,FTHR,0,false,,true,S25,271,53,684,Y,Y,Document verified,N,Documents are illegible,,
@@ -77,6 +47,37 @@ Purnima Das,UWX1646355,260,213,211,progeny,FTHR,0,false,,true,S25,270,32,584,Y,Y
 Senjit Das,FKH3693223,260,213,250,progeny,FTHR,0,false,,true,S25,271,15,130,Y,Y,Document verified,N,Submitted documents need to be reviewed,,
 Shankar Budhui,UWX1068022,260,213,412,progeny,FTHR,7,true,,true,S25,271,15,336,Y,Y,Verified OK,N,Linkage can not be ascertained,,
 Jayanta Mistri,FKH3693140,260,213,865,progeny,FTHR,0,false,,true,S25,271,15,473,Y,Y,Verified OK,N,Illegible SIR 2002,,
-SUBRATA PATRA,UWX2537454,260,207,550,progeny,FTHR,0,false,,true,S25,271,12,360,Y,Y,Verified OK,N,Father's name as per Birth cert is Sadhan Patra and SIR 2002 Sadhucharan.,,
+Bibhuti Bachhar,WB/39/271/036707,260,215,245,na,,,,,false,S25,271,13,120,N,Y,Documents Verified,Y,,N,DOB mismatch with SIR sheet 2002 pls review
+Manotosh Biswas,FKH2928315,260,215,265,na,,,,,false,S25,271,13,142,N,Y,Documents Verified,Y,,N,Inadmissible documents ERO to review the case of self adhaar is not eligible for mapping father of mr monotosh is mr manoj
+Dipankar Biswas,FKH3315397,260,215,266,na,,,,,false,S25,271,13,142,N,Y,Documents Verified,Y,,N,Inadmissible documents ERO to review the case adhaar cannot map the person to mr manoj as father please submit other document
+Rajib Majumdar,UWX1068725,260,215,336,na,,,,,false,S25,271,13,161,N,Y,Document Verified,Y,,N,Parent linkage documents not submitted. Please review the case adhaar not applicable neither SIR extract 2002 sati majumder
+RAJU SHOW,UWX2318962,260,215,471,progeny,FTHR,0,false,,true,S04,96,60,929,Y,Y,Document verified,N,SIR 2002 ILLEGIBLE,,
+Satish Majumdar,WB/39/271/036195,260,215,562,na,,,,,false,S25,271,13,161,N,Y,Documents Verified,Y,,N,DOB does not match with abstract of 2002 SIR pls 
+Shrabani Mistri,UWX1189687,260,215,911,progeny,FTHR,0,false,,true,S25,271,13,503,Y,Y,Document verified,N,Linked document not available,,
+TUMPA SHIL,UWX0744326,260,215,940,progeny,GMTH,7,true,,true,S25,267,58,375,Y,Y,Document verified,N,Link not established,,
+SNEHA CHATTERJEE,UWX2429041,260,123,103,progeny,FTHR,0,false,,true,S25,271,25,102,Y,Y,Verified,N,No self documents uploaded and hence no linkage established,,
+Arati Das,FKH2916666,260,123,450,na,,,,,false,S25,271,3,740,N,Y,,N,Submitted documents need to be reviewed,Y,
+Amit Kumar Mistri,UWX1160621,260,123,532,na,,,,,false,S25,271,3,794,N,Y,,N,Submitted documents need to be reviewed,Y,
+Bittu Mistri,UWX1697523,260,123,533,na,,,,,false,S25,271,3,794,N,Y,Documents Verified,N,Sufficient SIR Documents not available,N,Last SIR  Mother Adhar card (self) Submitted .No linkage with parents. Produced documents need to be reviewed
+Sabita Mistri,UWX2464261,260,123,534,na,,,,,false,S25,271,3,794,N,Y,Documents Verified,N,Sufficient SIR Documents not available,N,Submitted documents need to be reviewed
+SANJU DUYARI,UWX2436483,260,214,18,progeny,FTHR,0,false,,true,S25,271,15,1036,Y,Y,Document verified,N,Linked document to be uploaded,,
+Sushant Mistri,FKH3692977,260,214,121,progeny,FTHR,0,false,,true,S25,271,15,483,Y,Y,Document verified,N,Linkage document to be uploaded,,
 Prolay Dey,FKH2515591,260,216,200,progeny,FTHR,0,false,,true,S25,271,13,721,Y,Y,Document verified,N,ILLEGIBLE SIR 2002,,
 ANUGRAH SINGH,UWX1335587,260,216,422,progeny,FTHR,0,false,,true,S04,229,283,326,Y,Y,DOCUMENTS  VERIFIED,N,Illegible SIR 2003,,
+Alpana Chattapadhyay,FKH2915213,260,122,103,progeny,FTHR,0,false,,true,S25,271,26,604,Y,Y,Document verified,N,Link not established.,,
+Rupa Gorai,FKH2916906,260,122,124,progeny,GMTH,0,false,,true,S25,270,16,677,Y,Y,Document verified,N,Linkage not established.,,
+Purnima Chakraborty,UWX1578079,260,122,174,progeny,FTHR,0,false,,true,S25,271,17,70,Y,Y,Document verified,N,Linkage not established.,,
+Sasti Das,UWX1461789,260,122,254,progeny,FTHR,0,false,,true,S25,271,3,178,Y,Y,Document verified,N,only adhar submitted,,
+Dipak Das,UWX1085232,260,122,263,progeny,FTHR,0,false,,true,S25,271,3,187,Y,Y,Document verified,N,only adhar submitted,,
+Usha Singh,UWX1842723,260,86,440,progeny,FTHR,6,true,,true,S25,181,238,519,Y,Y,Document verified,N,Linkage not established.,,
+Malati Rajbanshi,UWX1262955,260,86,680,progeny,MTHR,0,false,,true,S25,271,268,1025,Y,Y,Document verified,N,Mother's document uploaded,,
+Asha Shaw,ZSG2001816,260,86,740,na,,,,,false,,,,,N,Y,Document verified,N,One of the parents document not found.,,
+Renu Shaw,UWX1048552,260,86,773,progeny,FTHR,0,false,,true,S25,271,28,852,Y,Y,Document verified,N,Father's name differs. documents need to be reviewed,,
+Kiran Show,UWX1591106,260,86,793,na,,,,,false,,,,,N,Y,Document verified,N,One of the parents document require.,,
+Shashikanta Das,FKH3314754,260,211,330,progeny,FTHR,0,false,,true,S25,271,10,130,Y,Y,Document verified,N,Illegible SIR 2002,,
+MAITRY DEY,FKH2925550,260,211,351,progeny,FTHR,0,false,,true,S25,177,41,150,Y,Y,Verified OK,N,Father's document require,,
+Krishnau Paik,UWX1981562,260,211,440,progeny,FTHR,0,false,,true,S25,271,11,168,Y,Y,Document verified,N,Linkage not established,,
+Debdas Mondal,UWX1297308,260,211,572,progeny,FTHR,0,false,,true,S25,269,85,728,Y,Y,Document verified,N,Father's name differs,,
+HARISHANKAR MISTRI,UWX2286581,260,211,673,progeny,FTHR,0,false,,true,S25,271,13,823,Y,Y,Document verified,N,Name differs of father not established with suitable documents,,
+Jumpa Das,UWX0304550,260,206,201,na,,,,,false,S25,271,266,181,N,Y,Documents Verified,,,N,Inadmissible documents ERO to review the case
+SUBRATA PATRA,UWX2537454,260,207,550,progeny,FTHR,0,false,,true,S25,271,12,360,Y,Y,Verified OK,N,Father's name as per Birth cert is Sadhan Patra and SIR 2002 Sadhucharan.,,
