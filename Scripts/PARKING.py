@@ -73,12 +73,8 @@ def main():
         initial_count = len(final_df)
 
         # --- DUPLICATE REMOVAL LOGIC ---
-        if 'payload__electorDetailDto__epicNo' in final_df.columns:
-            final_df = final_df.drop_duplicates(subset=['payload__electorDetailDto__epicNo'], keep='first')
-        else:
-            final_df = final_df.drop_duplicates(keep='first')
-        
-        removed_count = initial_count - len(final_df)
+        # Keeping all rows (no duplicates removed)
+        removed_count = 0
 
         # 6. Save to CSV (Comma Separated)
         final_df.to_csv(OUTPUT_FILE, index=False, sep=',', encoding='utf-8-sig')
