@@ -11,21 +11,6 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO_parking.csv")
 
-TARGET_COLUMNS = [
-    "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
-    "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
-    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__categoryType", 
-    "payload__electorDetailDto__relationType", "payload__electorDetailDto__progenyLinked", 
-    "payload__electorDetailDto__progLimitExceed", 
-    "payload__electorDetailDto__docAnomaly", "payload__electorDetailDto__anomalies", 
-    "payload__electorDetailDto__lastSirState", "payload__electorDetailDto__lastSirAc", 
-    "payload__electorDetailDto__lastSirPart", "payload__electorDetailDto__lastSirSerialNo", 
-    "payload__electorDetailDto__recommendedByBlo", "payload__electorDetailDto__deoApproval", 
-    "payload__electorDetailDto__deoRemarks", "payload__electorDetailDto__miobApproval", 
-    "payload__electorDetailDto__miobRemarks", "payload__electorDetailDto__roobApproval", 
-    "payload__electorDetailDto__roobRemarks"
-]
-
 def main():
     # 1. Setup Directories
     if os.path.exists(DOWNLOAD_DIR):
@@ -54,30 +39,44 @@ def main():
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
-            elector_list = data.get('payload', {}).get('electorDetailDto', [])
-            if not elector_list:
-                continue
-
-            df = pd.DataFrame(elector_list)
-            df = df.add_prefix('payload__electorDetailDto__')
-            df_reordered = df.reindex(columns=TARGET_COLUMNS).fillna('')
-            processed_dfs.append(df_reordered)
+            if filename.lower().endswith('.har'):
+                # Handle .har files
+                entries = data.get('log', {}).get('entries', [])
+                for entry in entries:
+                    content_text = entry.get('response', {}).get('content', {}).get('text', '')
+                    if content_text:
+                        try:
+                            # The text is an escaped JSON string, load it again
+                            inner_data = json.loads(content_text)
+                            elector_list = inner_data.get('payload', {}).get('electorDetailDto', [])
+                            if elector_list:
+                                df = pd.DataFrame(elector_list)
+                                df = df.add_prefix('payload__electorDetailDto__')
+                                processed_dfs.append(df)
+                        except json.JSONDecodeError:
+                            continue
+            else:
+                # Handle standard .json files
+                elector_list = data.get('payload', {}).get('electorDetailDto', [])
+                if elector_list:
+                    df = pd.DataFrame(elector_list)
+                    df = df.add_prefix('payload__electorDetailDto__')
+                    processed_dfs.append(df)
 
         except (json.JSONDecodeError, Exception):
             continue
 
     # 5. Merge and Remove Duplicates
     if processed_dfs:
-        final_df = pd.concat(processed_dfs, ignore_index=True)
+        final_df = pd.concat(processed_dfs, ignore_index=True).fillna('')
         
         initial_count = len(final_df)
 
         # --- DUPLICATE REMOVAL LOGIC ---
-        # Option A: Remove rows where the EPIC number is the same (Safest for voter data)
-        final_df = final_df.drop_duplicates(subset=['payload__electorDetailDto__epicNo'], keep='first')
-        
-        # Option B: Use this instead if you only want to remove 100% identical rows:
-        # final_df = final_df.drop_duplicates(keep='first')
+        if 'payload__electorDetailDto__epicNo' in final_df.columns:
+            final_df = final_df.drop_duplicates(subset=['payload__electorDetailDto__epicNo'], keep='first')
+        else:
+            final_df = final_df.drop_duplicates(keep='first')
         
         removed_count = initial_count - len(final_df)
 
