@@ -11,21 +11,6 @@ DOWNLOAD_DIR = "downloaded_files"
 OUTPUT_DIR = "Data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "AERO.csv")
 
-TARGET_COLUMNS = [
-    "payload__electorDetailDto__name", "payload__electorDetailDto__epicNo", 
-    "payload__electorDetailDto__acNo", "payload__electorDetailDto__partNo", 
-    "payload__electorDetailDto__partSerialNo", "payload__electorDetailDto__categoryType", 
-    "payload__electorDetailDto__relationType", "payload__electorDetailDto__progenyLinked", 
-    "payload__electorDetailDto__progLimitExceed", 
-    "payload__electorDetailDto__docAnomaly", "payload__electorDetailDto__anomalies", 
-    "payload__electorDetailDto__lastSirState", "payload__electorDetailDto__lastSirAc", 
-    "payload__electorDetailDto__lastSirPart", "payload__electorDetailDto__lastSirSerialNo", 
-    "payload__electorDetailDto__recommendedByBlo", "payload__electorDetailDto__deoApproval", 
-    "payload__electorDetailDto__deoRemarks", "payload__electorDetailDto__miobApproval", 
-    "payload__electorDetailDto__miobRemarks", "payload__electorDetailDto__roobApproval", 
-    "payload__electorDetailDto__roobRemarks"
-]
-
 def main():
     # 1. Setup Directories
     if os.path.exists(DOWNLOAD_DIR):
@@ -60,15 +45,13 @@ def main():
 
             df = pd.DataFrame(elector_list)
             df = df.add_prefix('payload__electorDetailDto__')
-            df_reordered = df.reindex(columns=TARGET_COLUMNS).fillna('')
-            processed_dfs.append(df_reordered)
-
+            processed_dfs.append(df)
         except (json.JSONDecodeError, Exception):
             continue
 
     # 5. Merge and Remove Duplicates
     if processed_dfs:
-        final_df = pd.concat(processed_dfs, ignore_index=True)
+        final_df = pd.concat(processed_dfs, ignore_index=True).fillna('')
         
         initial_count = len(final_df)
 
