@@ -31,25 +31,28 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Run both scripts  # Fixed: no space before dash
+      - name: Run scripts (continue on failure)
         env:
           YANDEX_EMAIL: ${{ secrets.YANDEX_EMAIL }}
           YANDEX_APP_PASSWORD: ${{ secrets.YANDEX_APP_PASSWORD }}
         run: |
-          python Scripts/nseindices.py
-          python Scripts/nifty50_top10.py
-          python Scripts/etf_fetch.py
-          python Scripts/global_data.py
-          python Scripts/global_commodity.py
-          python Scripts/eco.py
-          python Scripts/cash.py
-          python Scripts/nifty_options.py
-          python Scripts/fetch_emails.py
-          python Scripts/BSE.py
+          python Scripts/nseindices.py || true
+          python Scripts/nifty50_top10.py || true
+          python Scripts/etf_fetch.py || true
+          python Scripts/global_data.py || true
+          python Scripts/global_commodity.py || true
+          python Scripts/eco.py || true
+          python Scripts/cash.py || true
+          python Scripts/nifty_options.py || true
+          python Scripts/fetch_emails.py || true
+          python Scripts/BSE.py || true
+
       - name: Commit and push if changed
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add Data/nse_all_indices.csv Data/nifty50_stocks_top10.csv Data/etf.csv Data/GLOBAL_DATA.csv Data/GLOBAL_COMMODITIES.csv Data/Economic.csv Data/Cash.csv Data/Option.csv Data/email.csv Data/BSE.csv
+          # Safely add all CSVs in the Data folder. 
+          # || true ensures git doesn't crash if the folder is somehow empty
+          git add Data/*.csv || true 
           git commit -m "Auto update $(date)" || exit 0
           git push
