@@ -12,7 +12,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 19 Feb,19:00,USA,Initial Jobless Claims FEB/14,★★,	206K,225K,229K
 20 Feb,20:30,USA,New Home Sales DEC,★★,0.745M,0.73M,
 20 Feb,20:30,USA,New Home Sales NOV,★★,0.758M,,0.737M
-26 Feb,19:00,USA,Initial Jobless Claims FEB/21,★★,,215K,206K
+26 Feb,19:00,USA,Initial Jobless Claims FEB/21,★★,212K,	215K,208K
 27 Feb,16:00,India,India Fiscal Year GDP Growth,★★★,,,6.50%
 27 Feb,16:00,India,GDP Growth Rate YoY Q4,★★★,,7.20%,8.20%
 28 Feb,16:00,India,Industrial Production YoY JAN,★★,,,7.80%
@@ -23,4 +23,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 10 Mar,19:30,USA,Existing Home Sales FEB,★★,,,3.91M
 11 Mar,18:00,USA,Inflation Rate YoY FEB,★★,,,2.40%
 12 Mar,16:00,USA,Inflation Rate YoY FEB,★★,,,2.13%
-,,,,,,Update Time:,26-Feb 19:30
+,,,,,,Update Time:,26-Feb 19:40
