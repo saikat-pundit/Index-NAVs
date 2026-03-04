@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: '3.10'
       
+      - name: Install Deno (JavaScript runtime)
+        run: |
+          curl -fsSL https://deno.land/install.sh | sh
+          echo "$HOME/.deno/bin" >> $GITHUB_PATH
+      
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -44,8 +49,6 @@ jobs:
           if [ -n "$COOKIE_SECRET" ]; then
             echo "✅ YOUTUBE_COOKIES_BASE64 secret is set"
             echo "secret_exists=true" >> $GITHUB_OUTPUT
-            # Show first 20 chars for verification (safe)
-            echo "Secret starts with: ${COOKIE_SECRET:0:20}..."
           else
             echo "⚠️ YOUTUBE_COOKIES_BASE64 secret is NOT set"
             echo "secret_exists=false" >> $GITHUB_OUTPUT
@@ -56,7 +59,7 @@ jobs:
         env:
           YOUTUBE_COOKIES_BASE64: ${{ secrets.YOUTUBE_COOKIES_BASE64 }}
         run: |
-          echo "🔐 Using cookie authentication"
+          echo "🔐 Using cookie authentication with Deno"
           python Scripts/convert_audio.py "${{ github.event.inputs.youtube_url }}"
       
       - name: Run conversion without cookies
@@ -72,32 +75,3 @@ jobs:
           path: audio_output/
           retention-days: 30
           if-no-files-found: warn
-      
-      - name: Display success message
-        if: success()
-        run: |
-          echo "🎉 Audio conversion completed successfully!"
-          echo "📥 Download the files from the Artifacts section above"
-      
-      - name: Display failure help
-        if: failure()
-        run: |
-          echo "=========================================="
-          echo "❌ Conversion failed!"
-          echo "=========================================="
-          echo ""
-          echo "🔧 Troubleshooting steps:"
-          echo ""
-          echo "1. Cookie issues:"
-          echo "   - Your YOUTUBE_COOKIES_BASE64 secret is set but may be expired"
-          echo "   - Export fresh cookies from incognito window"
-          echo "   - Update the secret with new base64 value"
-          echo ""
-          echo "2. Try without cookies first:"
-          echo "   - Rerun workflow with 'use_cookies' set to false"
-          echo "   - Some public videos work without cookies"
-          echo ""
-          echo "3. Check video URL:"
-          echo "   - Make sure the video exists and is not age-restricted"
-          echo "   - Try a different YouTube URL"
-          echo "=========================================="
