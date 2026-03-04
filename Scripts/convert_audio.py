@@ -1,42 +1,38 @@
 import os
 import sys
 import yt_dlp
+import base64
 from pathlib import Path
 
-def create_cookies_file_from_env():
-    """Create cookies.txt from environment variable"""
-    cookie_value = os.environ.get('YOUTUBE_COOKIE')
+def setup_cookies():
+    """Setup cookies from environment variable or file"""
+    # Check if cookies base64 is in environment
+    cookies_base64 = os.environ.get('YOUTUBE_COOKIES_BASE64')
     
-    if cookie_value:
-        print("✅ Found YouTube cookie in environment")
-        
-        # Create cookies.txt in Netscape format
-        with open('cookies.txt', 'w') as f:
-            f.write("# Netscape HTTP Cookie File\n")
-            # Format: domain\tTRUE\tpath\tsecure\texpiry\tname\tvalue
-            # Using a far future expiry (2030-01-01)
-            f.write(f".youtube.com\tTRUE\t/\tTRUE\t1893456000\t__Secure-1PAPISID\t{cookie_value}\n")
-            
-            # Also add related cookies that often work together
-            f.write(f".youtube.com\tTRUE\t/\tTRUE\t1893456000\t__Secure-1PSID\t\n")
-            f.write(f".youtube.com\tTRUE\t/\tTRUE\t1893456000\t__Secure-1PSIDCC\t\n")
-        
-        print("✅ cookies.txt created from environment variable")
-        return True
+    if cookies_base64:
+        try:
+            # Decode base64 to cookies.txt
+            cookies_content = base64.b64decode(cookies_base64).decode('utf-8')
+            with open('cookies.txt', 'w') as f:
+                f.write(cookies_content)
+            print("✅ Cookies restored from GitHub Secret")
+            return True
+        except Exception as e:
+            print(f"⚠️ Error decoding cookies: {e}")
     
-    # Check if cookies.txt already exists
+    # Check if cookies.txt exists locally
     if os.path.exists('cookies.txt'):
-        print("✅ Using existing cookies.txt")
+        print("✅ Using local cookies.txt file")
         return True
     
-    print("⚠️ No cookies found")
+    print("⚠️ No cookies found. Authentication may fail.")
     return False
 
 def download_and_convert(youtube_url):
     """Download YouTube video and convert to 32kbps M4A"""
     
-    # Create cookies file if env var exists
-    has_cookies = create_cookies_file_from_env()
+    # Setup cookies
+    has_cookies = setup_cookies()
     
     # Configure yt-dlp options
     ydl_opts = {
@@ -50,13 +46,24 @@ def download_and_convert(youtube_url):
         'quiet': False,
         'no_warnings': False,
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'extractor_args': {'youtube': {'player_client': ['android', 'web']}}
+        'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+        # Add delays to avoid rate limiting
+        'sleep_interval': 5,
+        'max_sleep_interval': 10,
+        'sleep_interval_requests': 1,
     }
     
     # Add cookies if available
     if has_cookies:
         ydl_opts['cookiefile'] = 'cookies.txt'
-        print("🔑 Using cookies for authentication")
+        # Count cookies for verification
+        try:
+            with open('cookies.txt', 'r') as f:
+                cookie_count = sum(1 for line in f 
+                                 if line.strip() and not line.startswith('#'))
+            print(f"📊 Loaded {cookie_count} cookies for authentication")
+        except:
+            pass
     
     try:
         # Create output directory
@@ -72,14 +79,22 @@ def download_and_convert(youtube_url):
         # List all files
         print("\n📁 Files created:")
         for file in Path("audio_output").iterdir():
-            print(f"  - {file.name}")
+            file_size = file.stat().st_size / (1024 * 1024)  # Convert to MB
+            print(f"  - {file.name} ({file_size:.2f} MB)")
             
     except Exception as e:
         print(f"\n❌ Error: {str(e)}")
+        
+        if "Sign in to confirm" in str(e):
+            print("\n🔑 Authentication failed. Possible reasons:")
+            print("   1. Cookies have expired - need to refresh")
+            print("   2. YouTube is blocking the request")
+            print("   3. Need to add more delay between requests")
+        
         sys.exit(1)
     finally:
-        # Clean up cookies file (optional)
-        if os.path.exists('cookies.txt') and os.environ.get('YOUTUBE_COOKIE'):
+        # Clean up temporary cookies file if created from secret
+        if os.environ.get('YOUTUBE_COOKIES_BASE64') and os.path.exists('cookies.txt'):
             os.remove('cookies.txt')
             print("🧹 Cleaned up temporary cookies file")
 
