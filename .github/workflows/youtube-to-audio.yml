@@ -41,6 +41,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install yt-dlp
       
+      - name: Enable remote components for yt-dlp
+        run: |
+          # Configure yt-dlp to download required JavaScript components
+          mkdir -p ~/.yt-dlp
+          echo '{"enable_remote_ejs": true}' > ~/.yt-dlp/config.json
+          
+          # Alternative: Set environment variable
+          echo "YTDLP_REMOTE_EJS=github" >> $GITHUB_ENV
+      
       - name: Verify secret exists
         id: check_secret
         env:
@@ -58,14 +67,9 @@ jobs:
         if: ${{ github.event.inputs.use_cookies == 'true' && steps.check_secret.outputs.secret_exists == 'true' }}
         env:
           YOUTUBE_COOKIES_BASE64: ${{ secrets.YOUTUBE_COOKIES_BASE64 }}
+          YTDLP_REMOTE_EJS: github
         run: |
-          echo "🔐 Using cookie authentication with Deno"
-          python Scripts/convert_audio.py "${{ github.event.inputs.youtube_url }}"
-      
-      - name: Run conversion without cookies
-        if: ${{ github.event.inputs.use_cookies == 'false' || steps.check_secret.outputs.secret_exists == 'false' }}
-        run: |
-          echo "⚠️ Running without cookie authentication"
+          echo "🔐 Using cookie authentication with Deno and remote components"
           python Scripts/convert_audio.py "${{ github.event.inputs.youtube_url }}"
       
       - name: Upload audio artifacts
