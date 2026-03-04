@@ -7,14 +7,14 @@ on:
         description: 'YouTube Video URL'
         required: true
         type: string
-      use_cookies:
-        description: 'Use cookies? (Add cookies.txt to repo root)'
-        required: false
-        default: 'false'
+      use_cookie:
+        description: 'Use cookie authentication?'
+        required: true
+        default: 'true'
         type: choice
         options:
-          - 'false'
           - 'true'
+          - 'false'
 
 jobs:
   convert-audio:
@@ -36,24 +36,16 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ffmpeg
     
-    - name: Check for cookies file
-      id: check_cookies
-      run: |
-        if [ -f "cookies.txt" ] && [ "${{ github.event.inputs.use_cookies }}" = "true" ]; then
-          echo "cookies_found=true" >> $GITHUB_OUTPUT
-          echo "✅ Cookies file found"
-        else
-          echo "cookies_found=false" >> $GITHUB_OUTPUT
-          echo "ℹ️ No cookies file found or cookies not enabled"
-        fi
-    
-    - name: Run conversion script
+    - name: Run conversion script with cookie
+      if: ${{ github.event.inputs.use_cookie == 'true' }}
       env:
-        COOKIES_FOUND: ${{ steps.check_cookies.outputs.cookies_found }}
+        YOUTUBE_COOKIE: ${{ secrets.YOUTUBE_COOKIE }}
       run: |
-        if [ "$COOKIES_FOUND" = "true" ]; then
-          echo "Using cookies for authentication..."
-        fi
+        python Scripts/convert_audio.py "${{ github.event.inputs.youtube_url }}"
+    
+    - name: Run conversion script without cookie
+      if: ${{ github.event.inputs.use_cookie == 'false' }}
+      run: |
         python Scripts/convert_audio.py "${{ github.event.inputs.youtube_url }}"
     
     - name: Upload audio artifacts
@@ -63,22 +55,15 @@ jobs:
         path: audio_output/
         retention-days: 30
     
-    - name: Instructions if failed
+    - name: Debug information
       if: failure()
       run: |
         echo "=========================================="
-        echo "❌ Conversion failed!"
+        echo "Debug Information:"
         echo "=========================================="
-        echo "To fix this issue:"
+        echo "Python version: $(python --version)"
+        echo "yt-dlp version: $(yt-dlp --version)"
+        echo "FFmpeg version: $(ffmpeg -version | head -n1)"
         echo ""
-        echo "Option 1: Use cookies (recommended)"
-        echo "1. Install browser extension 'Get cookies.txt'"
-        echo "2. Log into YouTube in your browser"
-        echo "3. Export cookies to cookies.txt file"
-        echo "4. Add cookies.txt to your repository root"
-        echo "5. Re-run workflow with 'use_cookies' set to 'true'"
-        echo ""
-        echo "Option 2: Try a different video"
-        echo "- Some videos are region-restricted or age-restricted"
-        echo "- Try a different YouTube URL"
+        echo "Cookie used: ${{ github.event.inputs.use_cookie }}"
         echo "=========================================="
