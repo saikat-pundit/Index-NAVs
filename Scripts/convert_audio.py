@@ -2,6 +2,7 @@ import os
 import sys
 import yt_dlp
 import base64
+import json
 from pathlib import Path
 
 def setup_cookies():
@@ -34,10 +35,13 @@ def download_and_convert(youtube_url):
     
     has_cookies = setup_cookies()
     
-    # Configure yt-dlp options - FIXED VERSION
+    # Enable remote components for JavaScript challenges
+    os.environ['YTDLP_REMOTE_EJS'] = 'github'
+    
+    # Configure yt-dlp options
     ydl_opts = {
-        # Better format selection - try different audio formats
-        'format': 'bestaudio[ext=m4a]/bestaudio/best',
+        # Use simple audio format that works without PO tokens
+        'format': 'bestaudio[ext=m4a]/bestaudio[ext=webm]/bestaudio',
         
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -49,24 +53,25 @@ def download_and_convert(youtube_url):
         'quiet': False,
         'no_warnings': False,
         
-        # User agent to avoid detection
+        # User agent
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         
-        # Use only clients that work well with cookies
-        'extractor_args': {'youtube': {'player_client': ['web', 'web_creator']}},
+        # Use only clients that work well without PO tokens
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['web', 'android'],  # android works without PO tokens
+                'skip': ['web_creator'],  # Skip clients that need PO tokens
+            }
+        },
         
         # Add delays to avoid rate limiting
         'sleep_interval': 5,
         'max_sleep_interval': 10,
         'sleep_interval_requests': 1,
         
-        # Allow fallback to other formats
-        'ignoreerrors': False,
-        'nooverwrites': True,
-        'continuedl': True,
-        
-        # Enable JavaScript runtime (Deno should be installed)
-        'extractor_args': {'youtube': {'player_client': ['web', 'web_creator']}},
+        # Enable remote components
+        'allow_remote_ejs': True,
+        'remote_ejs_source': 'github',
     }
     
     # Add cookies if available
@@ -76,21 +81,28 @@ def download_and_convert(youtube_url):
     try:
         Path("audio_output").mkdir(parents=True, exist_ok=True)
         
-        # First, list available formats for debugging
-        with yt_dlp.YoutubeDL({'quiet': True, 'cookiefile': 'cookies.txt' if has_cookies else None}) as ydl:
+        # First, check available formats
+        with yt_dlp.YoutubeDL({
+            'quiet': True, 
+            'cookiefile': 'cookies.txt' if has_cookies else None,
+            'extractor_args': {'youtube': {'player_client': ['android']}}  # Use android for listing
+        }) as ydl:
+            print("\n📋 Checking available formats...")
             info = ydl.extract_info(youtube_url, download=False)
-            print("\n📋 Available formats:")
-            formats_found = False
-            for f in info.get('formats', []):
-                if f.get('acodec') != 'none':  # Only show formats with audio
-                    print(f"  - Format: {f.get('format_id')}, Quality: {f.get('quality')}, "
-                          f"Codec: {f.get('acodec')}, Size: {f.get('filesize')}")
-                    formats_found = True
             
-            if not formats_found:
-                print("  ⚠️ No audio formats found!")
+            audio_formats = []
+            for f in info.get('formats', []):
+                if f.get('acodec') != 'none' and f.get('vcodec') == 'none':
+                    audio_formats.append(f)
+                    print(f"  - Format: {f.get('format_id')}, Quality: {f.get('quality') or f.get('abr')}kbps")
+            
+            if audio_formats:
+                # Use the best audio format available
+                best_audio = max(audio_formats, key=lambda x: x.get('abr', 0) or 0)
+                print(f"\n✅ Selected format: {best_audio.get('format_id')} with {best_audio.get('abr')}kbps")
+                ydl_opts['format'] = best_audio.get('format_id')
         
-        # Now download with the configured options
+        # Download with the selected format
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             print(f"\n🔄 Processing URL: {youtube_url}")
             ydl.download([youtube_url])
@@ -106,14 +118,16 @@ def download_and_convert(youtube_url):
     except Exception as e:
         print(f"\n❌ Error: {str(e)}")
         
-        if "Requested format is not available" in str(e):
-            print("\n🔧 FIX: Trying alternative format...")
-            # Try with different format selection
+        if "n challenge" in str(e):
+            print("\n🔧 Trying without JavaScript challenges...")
+            # Fallback to android client only
+            ydl_opts['extractor_args'] = {'youtube': {'player_client': ['android']}}
             ydl_opts['format'] = 'worstaudio/worst'
+            
             try:
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     ydl.download([youtube_url])
-                print("\n✅ Success with alternative format!")
+                print("\n✅ Success with android client!")
             except Exception as e2:
                 print(f"\n❌ Still failing: {e2}")
         
