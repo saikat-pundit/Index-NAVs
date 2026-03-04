@@ -6,7 +6,7 @@ from pathlib import Path
 def download_and_convert(youtube_url):
     """Download YouTube video and convert to 32kbps M4A"""
     
-    # Configure yt-dlp options for audio extraction
+    # Configure yt-dlp options with cookie support
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -17,6 +17,8 @@ def download_and_convert(youtube_url):
         'outtmpl': 'audio_output/%(title)s.%(ext)s',
         'quiet': False,
         'no_warnings': False,
+        # Try to use cookies if available
+        'cookiefile': 'cookies.txt' if os.path.exists('cookies.txt') else None,
     }
     
     try:
