@@ -9,7 +9,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 06 Mar,19:00,USA,Non Farm Payrolls FEB,★★,-92K,59K,126K
 06 Mar,19:00,USA,Retail Sales YoY JAN,★★,3.20%,,2.40%
 10 Mar,19:30,USA,Existing Home Sales FEB,★★,4.09M,3.89M,4.02M
-11 Mar,18:00,USA,Inflation Rate YoY FEB,★★,,2.50%,2.40%
+11 Mar,18:00,USA,Inflation Rate YoY FEB,★★,2.40%,2.40%,2.40%
 12 Mar,16:00,India,Inflation Rate YoY FEB,★★,,3.10%,2.13%
 12 Mar,18:00,USA,Housing Starts JAN,★★,,1.340M,1.404M
 12 Mar,18:00,USA,Initial Jobless Claims MAR/07,★★,,215K,213K
@@ -20,4 +20,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 19 Mar,18:00,USA,Initial Jobless Claims MAR/14,★★,,,
 19 Mar,18:45,Euro,ECB Interest Rate Decision,★★,,,2.15%
 19 Mar,19:30,USA,New Home Sales JAN,★★,,,0.745M
-,,,,,,Update Time:,11-Mar 19:40
+,,,,,,Update Time:,11-Mar 19:50
