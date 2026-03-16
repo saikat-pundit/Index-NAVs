@@ -1,7 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-26 Feb,19:00,USA,Initial Jobless Claims FEB/21,★★,212K,	215K,208K
-27 Feb,16:00,India,India Fiscal Year GDP Growth,★★★,7.60%,,6.50%
-27 Feb,16:00,India,GDP Growth Rate YoY Q4,★★★,7.80%,7.20%,8.20%
 02 Mar,16:00,India,Industrial Production YoY JAN,★★,4.80%,6.50%,8.00%
 03 Mar,00:00,India,Market Holiday - Holi,★,,,
 04 Mar,07:00,China,NBS Manufacturing PMI FEB,★★,49,49.1,49.3
@@ -13,11 +10,16 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 12 Mar,16:00,India,Inflation Rate YoY FEB,★★,3.21%,3.10%,2.75%
 12 Mar,18:00,USA,Housing Starts JAN,★★,1.487M,1.35M,1.387M
 12 Mar,18:00,USA,Initial Jobless Claims MAR/07,★★,213K,215K,213K
-16 Mar,12:00,India,WPI Inflation YoY FEB,★★,,,1.81%
+16 Mar,12:00,India,WPI Inflation YoY FEB,★★,,2.00%,1.81%
 16 Mar,18:45,USA,Industrial Production YoY FEB,★,,,2.30%
-18 Mar,23:30,USA,Fed Interest Rate Decision,★★★,,,3.75%
-19 Mar,08:30,Japan,BoJ Interest Rate Decision,★★,,,0.75%
-19 Mar,18:00,USA,Initial Jobless Claims MAR/14,★★,,,
-19 Mar,18:45,Euro,ECB Interest Rate Decision,★★,,,2.15%
-19 Mar,19:30,USA,New Home Sales JAN,★★,,,0.745M
-,,,,,,Update Time:,14-Mar 05:28
+18 Mar,23:30,USA,Fed Interest Rate Decision,★★★,,3.75%,3.75%
+19 Mar,08:30,Japan,BoJ Interest Rate Decision,★★,,0.75%,0.75%
+19 Mar,18:00,USA,Initial Jobless Claims MAR/14,★★,,211K,213K
+19 Mar,18:45,Euro,ECB Interest Rate Decision,★★,,2.15%,2.15%
+19 Mar,19:30,USA,New Home Sales JAN,★★,,0.725M,0.745M
+26 Mar,00:00,India,Market Holiday - Shri Ram Navami,★,,,
+26 Mar,18:00,USA,Initial Jobless Claims MAR/21,★★,,,
+28 Mar,16:00,India,Industrial Production YoY FEB,★★,,,4.80%
+31 Mar,00:00,India,Markets Closed - Shri Mahavir Jayanti,★,,,
+31 Mar,07:00,China,NBS Manufacturing PMI MAR,★★,,,49
+,,,,,,Update Time:,16-Mar 06:00
