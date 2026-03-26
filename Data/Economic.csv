@@ -11,7 +11,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 19 Mar,18:45,Euro,ECB Interest Rate Decision,★★,2.15%,2.15%,2.15%
 19 Mar,19:30,USA,New Home Sales JAN,★★,0.587M,	0.72M,0.712M
 26 Mar,00:00,India,Market Holiday - Shri Ram Navami,★,,,
-26 Mar,18:00,USA,Initial Jobless Claims MAR/21,★★,,210K,205K
+26 Mar,18:00,USA,Initial Jobless Claims MAR/21,★★,	210K,210K,205K
 30 Mar,16:00,India,Industrial Production YoY FEB,★★,,,4.80%
 31 Mar,00:00,India,Markets Closed - Shri Mahavir Jayanti,★,,,
 31 Mar,07:00,China,NBS Manufacturing PMI MAR,★★,,,49
@@ -21,4 +21,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 03 Apr,18:00,USA,Non Farm Payrolls MAR,★★,,,-92K
 08 Apr,10:00,India,RBI Interest Rate Decision,★★★,,,5.25%
 08 Apr,23:30,USA,FOMC Minutes,★★★,,,
-,,,,,,Update Time:,26-Mar 19:40
+,,,,,,Update Time:,26-Mar 19:50
