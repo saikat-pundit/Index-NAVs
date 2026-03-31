@@ -10,7 +10,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 26 Mar,18:00,USA,Initial Jobless Claims MAR/21,★★,	210K,210K,205K
 30 Mar,16:00,India,Industrial Production YoY FEB,★★,5.20%,4.20%,4.80%
 31 Mar,00:00,India,Markets Closed - Shri Mahavir Jayanti,★,,,
-31 Mar,07:00,China,NBS Manufacturing PMI MAR,★★,,50,49
+31 Mar,07:00,China,NBS Manufacturing PMI MAR,★★,50.4,50.1,49
 01 Apr,18:00,USA,Retail Sales YoY FEB,★★,,,3.2%
 02 Apr,18:00,USA,Initial Jobless Claims MAR/28,★★,,215K,210K
 03 Apr,00:00,India,Market Holiday - Good Friday,★,,,
@@ -22,4 +22,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 13 Apr,19:30,USA,Existing Home Sales MAR,★★,,,4.09M
 15 Apr,12:00,India,WPI Inflation YoY MAR,★★,,,2.13%
 15 Apr,16:00,India,Inflation Rate YoY MAR,★★,,,3.21%
-,,,,,,Update Time:,31-Mar 07:40
+,,,,,,Update Time:,31-Mar 07:50
