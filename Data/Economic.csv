@@ -1,9 +1,9 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 18 Mar,23:30,USA,Fed Interest Rate Decision,★★★,3.75%,3.75%,3.75%
-19 Mar,19:30,USA,New Home Sales JAN,★★,0.587M,	0.72M,0.712M
 19 Mar,08:30,Japan,BoJ Interest Rate Decision,★★,0.75%,0.75%,0.75%
 19 Mar,18:00,USA,Initial Jobless Claims MAR/14,★★,205K,215K,213K
 19 Mar,18:45,Euro,ECB Interest Rate Decision,★★,2.15%,2.15%,2.15%
+19 Mar,19:30,USA,New Home Sales JAN,★★,0.587M,	0.72M,0.712M
 26 Mar,00:00,India,Market Holiday - Shri Ram Navami,★,,,
 26 Mar,18:00,USA,Initial Jobless Claims MAR/21,★★,	210K,210K,205K
 30 Mar,16:00,India,Industrial Production YoY FEB,★★,5.20%,4.20%,4.80%
@@ -23,4 +23,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 16 Apr,07:30,China,Industrial Production YoY MAR,★★,,,6.30%
 16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,,,
 16 Apr,18:45,USA,Industrial Production YoY MAR,★,,,1.40%
-,,,,,,Update Time:,03-Apr 01:36
+,,,,,,Update Time:,03-Apr 02:22
