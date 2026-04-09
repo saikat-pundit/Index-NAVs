@@ -10,8 +10,8 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 03 Apr,18:00,USA,Non Farm Payrolls MAR,★★,        178K,60K,-133K
 08 Apr,10:00,India,RBI Interest Rate Decision,★★★,5.25%,5.25%,5.25%
 08 Apr,23:30,USA,FOMC Minutes,★★★,,,
-09 Apr,18:00,USA,Initial Jobless Claims APR/04,★★,,200K,202K
-10 Apr,18:00,USA,Inflation Rate YoY MAR,★★,,3.40%,2.40%
+09 Apr,18:00,USA,Initial Jobless Claims APR/04,★★,219K,	210K,203K
+10 Apr,18:00,USA,Inflation Rate YoY MAR,★★,,3.30%,2.40%
 13 Apr,19:30,USA,Existing Home Sales MAR,★★,,,4.09M
 14 Apr,12:00,India,WPI Inflation YoY MAR,★★,,,2.13%
 15 Apr,16:00,India,Inflation Rate YoY MAR,★★,,,3.21%
@@ -20,4 +20,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,,,
 16 Apr,18:45,USA,Industrial Production YoY MAR,★,,,1.40%
 21 Apr,18:00,USA,Retail Sales YoY MAR,★★,,,3.70%
-,,,,,,Update Time:,09-Apr 18:50
+,,,,,,Update Time:,09-Apr 19:00
