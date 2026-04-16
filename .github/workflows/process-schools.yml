@@ -36,7 +36,8 @@ jobs:
         tag_name: "school_docs_latest"
         github_token: ${{ github.token }}
       continue-on-error: true
-    
+    - name: Remove old zip files
+      run: rm -f *.zip
     - name: Upload zip files as release
       uses: softprops/action-gh-release@v1
       with:
