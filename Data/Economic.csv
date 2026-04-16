@@ -13,8 +13,8 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 15 Apr,12:00,India,WPI Inflation YoY MAR,★★,3.88%,3.00%,2.13%
 16 Apr,07:30,China,GDP Growth Rate YoY Q1,★★,5%,4.8%,4.5%
 16 Apr,07:30,China,Industrial Production YoY MAR,★★,5.7%,5.5%,6.3%
-16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,,	215K,219K
-16 Apr,18:45,USA,Industrial Production YoY MAR,★,,,1.40%
+16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,207K,	215K,218K
+16 Apr,18:45,USA,Industrial Production YoY MAR,★,0.7%,,1.20%
 21 Apr,18:00,USA,Retail Sales YoY MAR,★★,,,3.70%
 23 Apr,18:00,USA,	Initial Jobless Claims APR/18,★★,,,
 28 Apr,08:30,Japan,BoJ Interest Rate Decision,★★,,,1.00%
@@ -25,4 +25,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 30 Apr,18:00,USA,	Initial Jobless Claims APR/25,★★,,,
 30 Apr,07:00,China,NBS Manufacturing PMI APR,★★,,,50.4
 30 Apr,17:45,Euro,ECB Interest Rate Decision,★★,,,
-,,,,,,Update Time:,16-Apr 18:50
+,,,,,,Update Time:,16-Apr 19:00
