@@ -1,20 +1,20 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 16 Apr,07:30,China,GDP Growth Rate YoY Q1,★★,5%,4.8%,4.5%
-16 Apr,07:30,China,Industrial Production YoY MAR,★★,5.7%,5.5%,6.3%
-16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,207K,	215K,218K
 16 Apr,18:45,USA,Industrial Production YoY MAR,★,0.7%,,1.20%
+16 Apr,18:00,USA,Initial Jobless Claims APR/11,★★,207K,	215K,218K
+16 Apr,07:30,China,Industrial Production YoY MAR,★★,5.7%,5.5%,6.3%
 21 Apr,18:00,USA,Retail Sales YoY MAR,★★,4.0%,,4.0%
 23 Apr,18:00,USA,Initial Jobless Claims APR/18,★★,214K,212K,208K
-28 Apr,08:30,Japan,BoJ Interest Rate Decision,★★,0.75%,0.75%,0.75%
 28 Apr,16:00,India,Industrial Production YoY MAR,★★,4.1%,3.7%,5.1%
+28 Apr,08:30,Japan,BoJ Interest Rate Decision,★★,0.75%,0.75%,0.75%
+29 Apr,23:30,USA,Fed Interest Rate Decision,★★★,3.75%,3.75%,3.75%
 29 Apr,18:00,USA,Housing Starts FEB,★★,1.356M,,1.398M
 29 Apr,18:00,USA,Housing Starts MAR,★★,1.502M,1.40M,1.356M
-29 Apr,23:30,USA,Fed Interest Rate Decision,★★★,3.75%,3.75%,3.75%
-30 Apr,07:00,China,NBS Manufacturing PMI APR,★★,50.3,50.1,50.4
-30 Apr,17:45,Euro,ECB Interest Rate Decision,★★,2.15%,2.15%,2.15%
 30 Apr,18:00,USA,Initial Jobless Claims APR/25,★★,189K,215K,215K
+30 Apr,17:45,Euro,ECB Interest Rate Decision,★★,2.15%,2.15%,2.15%
+30 Apr,07:00,China,NBS Manufacturing PMI APR,★★,50.3,50.1,50.4
 01 May,00:00,India,Market Holiday - Maharashtra Day,★,,,
 04 May,08:00,India,2026 Legislative Assembly Election Result,★★★,,,
-05 May,19:30,USA,New Home Sales MAR,★★,,,
 05 May,19:30,USA,New Home Sales FEB,★★,,,
-,,,,,,Update Time:,01-May 11:50
+05 May,19:30,USA,New Home Sales MAR,★★,,,
+,,,,,,Update Time:,01-May 12:00
