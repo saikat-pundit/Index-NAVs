@@ -13,7 +13,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 05 May,19:30,USA,New Home Sales MAR,★★,0.682M,0.65M,0.635M
 05 May,19:30,USA,New Home Sales FEB,★★,	0.635M,,0.583M
 07 May,18:00,USA,Initial Jobless Claims MAY/02,★★,200K,205K,190K
-08 May,18:00,USA,Non Farm Payrolls APR,★★,,60K,178K
+08 May,18:00,USA,Non Farm Payrolls APR,★★,115K,62K,185K
 11 May,19:30,USA,Existing Home Sales APR,★★,,,3.98M
 12 May,16:00,India,Inflation Rate YoY APR,★★,,,3.40%
 12 May,18:00,USA,Inflation Rate YoY APR,★★,,,3.3%
@@ -24,4 +24,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 18 May,07:30,China,Industrial Production YoY APR,★★,,,5.70%
 20 May,23:30,USA,FOMC Minutes,★★★,,,
 21 May,18:00,USA,Housing Starts APR,★★,,,1.502M
-,,,,,,Update Time:,08-May 19:00
+,,,,,,Update Time:,08-May 19:10
