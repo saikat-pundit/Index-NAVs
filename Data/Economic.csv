@@ -14,7 +14,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 07 May,18:00,USA,Initial Jobless Claims MAY/02,★★,200K,205K,190K
 08 May,18:00,USA,Non Farm Payrolls APR,★★,115K,62K,185K
 11 May,19:30,USA,Existing Home Sales APR,★★,4.02M,4.05M,4.01M
-12 May,16:00,India,Inflation Rate YoY APR,★★,,3.80%,3.40%
+12 May,16:00,India,Inflation Rate YoY APR,★★,3.48%,3.80%,3.40%
 12 May,18:00,USA,Inflation Rate YoY APR,★★,,3.40%,3.3%
 14 May,12:00,India,	WPI Inflation YoY APR,★★,,4.40%,3.88%
 14 May,18:00,USA,Initial Jobless Claims MAY/09,★★,,205K,200K
@@ -24,4 +24,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 20 May,23:30,USA,FOMC Minutes,★★★,,,
 21 May,18:00,USA,Housing Starts APR,★★,,,1.502M
 21 May,18:00,USA,Initial Jobless Claims MAY/16,★★,,,
-,,,,,,Update Time:,12-May 17:00
+,,,,,,Update Time:,12-May 17:11
