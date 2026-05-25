@@ -1,5 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-08 May,18:00,USA,Non Farm Payrolls APR,★★,115K,62K,185K
 11 May,19:30,USA,Existing Home Sales APR,★★,4.02M,4.05M,4.01M
 12 May,16:00,India,Inflation Rate YoY APR,★★,3.48%,3.80%,3.40%
 12 May,18:00,USA,Inflation Rate YoY APR,★★,3.80%,3.70%,3.3%
@@ -12,11 +11,13 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 21 May,18:00,USA,Housing Starts APR,★★,1.465M,1.41M,1.507M
 21 May,18:00,USA,Initial Jobless Claims MAY/16,★★,209K,210K,212K
 28 May,00:00,India,Market Holiday - Bakri Eid,★,,,
-28 May,16:00,India,Industrial Production YoY APR,★★,,,4.1%
-28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,,,
-28 May,19:30,USA,New Home Sales APR,★★,,,0.682M
+28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,,212K,
+28 May,19:30,USA,New Home Sales APR,★★,,0.67M,0.682M
 31 May,07:00,China,NBS Manufacturing PMI MAY,★,,,50.3
+01 Jun,16:00,India,Industrial Production YoY APR,★★,,,4.1%
+04 Jun,18:00,USA,Initial Jobless Claims MAY/30,★★,,,
 05 Jun,10:00,India,RBI Interest Rate Decision,★★★,,,5.25%
 05 Jun,16:00,India,GDP Growth Rate YoY Q4,★★★,,,7.8%
 05 Jun,18:00,USA,Non Farm Payrolls MAY,★★,,,115K
-,,,,,,Update Time:,23-May 06:57
+09 Jun,19:30,USA,Existing Home Sales MAY,★★,,,4.02M
+,,,,,,Update Time:,25-May 06:00
