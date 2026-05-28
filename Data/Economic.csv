@@ -8,7 +8,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 21 May,18:00,USA,Housing Starts APR,★★,1.465M,1.41M,1.507M
 21 May,18:00,USA,Initial Jobless Claims MAY/16,★★,209K,210K,212K
 28 May,00:00,India,Market Holiday - Bakri Eid,★,,,
-28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,,212K,
+28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,215K,211K,210K
 28 May,19:30,USA,New Home Sales APR,★★,,0.67M,0.682M
 31 May,07:00,China,NBS Manufacturing PMI MAY,★,,,50.3
 01 Jun,16:00,India,Industrial Production YoY APR,★★,,,4.1%
@@ -20,4 +20,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 10 Jun,18:00,USA,Inflation Rate YoY MAY,★★,,,3.8%
 11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,,,2.15%
 11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,,,
-,,,,,,Update Time:,28-May 19:00
+,,,,,,Update Time:,28-May 19:10
