@@ -11,7 +11,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,215K,211K,210K
 28 May,19:30,USA,New Home Sales APR,★★,0.622M,0.67M,0.663M
 31 May,07:00,China,NBS Manufacturing PMI MAY,★,,,50.3
-01 Jun,16:00,India,Industrial Production YoY APR,★★,,,4.1%
+01 Jun,16:00,India,Industrial Production YoY APR,★★,,3.80%,4.1%
 04 Jun,18:00,USA,Initial Jobless Claims MAY/30,★★,,,
 05 Jun,10:00,India,RBI Interest Rate Decision,★★★,,,5.25%
 05 Jun,16:00,India,GDP Growth Rate YoY Q4,★★★,,,7.8%
@@ -20,4 +20,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 10 Jun,18:00,USA,Inflation Rate YoY MAY,★★,,,3.8%
 11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,,,2.15%
 11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,,,
-,,,,,,Update Time:,29-May 09:00
+,,,,,,Update Time:,29-May 09:10
