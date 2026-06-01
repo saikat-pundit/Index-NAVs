@@ -1,5 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-15 May,18:45,USA,Industrial Production YoY APR,★,0.70%,0.30%,-0.30%
 18 May,07:30,China,Industrial Production YoY APR,★★,4.1%,5.9%,5.7%
 20 May,23:30,USA,FOMC Minutes,★★★,,,
 21 May,18:00,USA,Housing Starts APR,★★,1.465M,1.41M,1.507M
@@ -7,14 +6,20 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 28 May,00:00,India,Market Holiday - Bakri Eid,★,,,
 28 May,18:00,USA,Initial Jobless Claims MAY/23,★★,215K,211K,210K
 28 May,19:30,USA,New Home Sales APR,★★,0.622M,0.67M,0.663M
-31 May,07:00,China,NBS Manufacturing PMI MAY,★,,,50.3
-01 Jun,16:00,India,Industrial Production YoY APR,★★,,3.80%,4.1%
-04 Jun,18:00,USA,Initial Jobless Claims MAY/30,★★,,,
-05 Jun,10:00,India,RBI Interest Rate Decision,★★★,,,5.25%
-05 Jun,16:00,India,GDP Growth Rate YoY Q4,★★★,,,7.8%
-05 Jun,18:00,USA,Non Farm Payrolls MAY,★★,,,115K
+31 May,07:00,China,NBS Manufacturing PMI MAY,★,50,50,50.3
+01 Jun,16:00,India,Industrial Production YoY APR,★★,,3.8%,4.1%
+04 Jun,18:00,USA,Initial Jobless Claims MAY/30,★★,,,215K
+05 Jun,10:00,India,RBI Interest Rate Decision,★★★,,5.25%,5.25%
+05 Jun,16:00,India,GDP Growth Rate YoY Q4,★★★,,7.3%,7.8%
+05 Jun,18:00,USA,Non Farm Payrolls MAY,★★,,96K,115K
 09 Jun,19:30,USA,Existing Home Sales MAY,★★,,,4.02M
 10 Jun,18:00,USA,Inflation Rate YoY MAY,★★,,,3.8%
-11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,,,2.15%
+11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,,,0.0215
 11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,,,
-,,,,,,Update Time:,30-May 05:32
+12 Jun,16:00,India,Inflation Rate YoY MAY,★★,,,3.48%
+15 Jun,12:00,India,WPI Inflation YoY MAY,★★,,,8.30%
+15 Jun,18:45,USA,Industrial Production YoY MAY,★,,,1.4%
+16 Jun,07:30,China,Industrial Production YoY MAY,★★,,,4.1%
+16 Jun,08:30,Japan,BoJ Interest Rate Decision,★★,,,0.75%
+16 Jun,18:00,USA,Housing Starts MAY,★★,,,1.465M
+,,,,,,Update Time:,01-Jun 06:00
