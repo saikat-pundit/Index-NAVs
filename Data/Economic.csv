@@ -11,7 +11,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 09 Jun,19:30,USA,Existing Home Sales MAY,★★,4.17M,4.04M,4.04M
 10 Jun,18:00,USA,Inflation Rate YoY MAY,★★,4.2%,4.2%,3.8%
 11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,2.4%,2.4%,2.15%
-11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,,225K,225K
+11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,229K,219K,225K
 12 Jun,16:00,India,Inflation Rate YoY MAY,★★,,4.0%,3.48%
 15 Jun,12:00,India,WPI Inflation YoY MAY,★★,,9.1%,8.3%
 15 Jun,18:45,USA,Industrial Production YoY MAY,★,,,1.4%
@@ -23,4 +23,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 18 Jun,18:00,USA,Initial Jobless Claims JUN/13,★★,,,
 24 Jun,19:30,USA,New Home Sales MAY,★★,,,0.622M
 25 Jun,18:00,USA,Initial Jobless Claims JUN/20,★★,,,
-,,,,,,Update Time:,11-Jun 19:10
+,,,,,,Update Time:,11-Jun 19:20
