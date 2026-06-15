@@ -11,7 +11,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,229K,219K,225K
 12 Jun,16:00,India,Inflation Rate YoY MAY,★★,3.93%,4.0%,3.48%
 15 Jun,12:00,India,WPI Inflation YoY MAY,★★,9.68%,9.1%,8.3%
-15 Jun,18:45,USA,Industrial Production YoY MAY,★,,0.2%,1.4%
+15 Jun,18:45,USA,Industrial Production YoY MAY,★,1.7%,0.2%,1.37%
 16 Jun,07:30,China,Industrial Production YoY MAY,★★,,4.2%,4.1%
 16 Jun,08:30,Japan,BoJ Interest Rate Decision,★★,,1.0%,0.75%
 16 Jun,18:00,USA,Housing Starts MAY,★★,,1.44M,1.465M
@@ -22,4 +22,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 25 Jun,18:00,USA,Initial Jobless Claims JUN/20,★★,,,
 28 Jun,16:00,India,Industrial Production YoY MAY,★★,,,4.9%
 30 Jun,07:00,China,NBS Manufacturing PMI JUN,★,,,50
-,,,,,,Update Time:,15-Jun 20:10
+,,,,,,Update Time:,15-Jun 20:20
