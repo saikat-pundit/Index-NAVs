@@ -6,13 +6,13 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 05 Jun,18:00,USA,Non Farm Payrolls MAY,★★,172K,85K,179K
 09 Jun,19:30,USA,Existing Home Sales MAY,★★,4.17M,4.04M,4.04M
 10 Jun,18:00,USA,Inflation Rate YoY MAY,★★,4.2%,4.2%,3.8%
-11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,2.4%,2.4%,2.15%
 11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,229K,219K,225K
+11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,2.4%,2.4%,2.15%
 12 Jun,16:00,India,Inflation Rate YoY MAY,★★,3.93%,4.0%,3.48%
 15 Jun,12:00,India,WPI Inflation YoY MAY,★★,9.68%,9.1%,8.3%
-15 Jun,18:45,USA,Industrial Production YoY MAY,★,1.7%,0.2%,1.37%
-16 Jun,07:30,China,Industrial Production YoY MAY,★★,,4.2%,4.1%
+15 Jun,18:45,USA,Industrial Production YoY MAY,★,1.7%,0.2%,1.40%
 16 Jun,08:30,Japan,BoJ Interest Rate Decision,★★,,1.0%,0.75%
+16 Jun,07:30,China,Industrial Production YoY MAY,★★,4.50%,4.3%,4.1%
 16 Jun,18:00,USA,Housing Starts MAY,★★,,1.44M,1.465M
 17 Jun,18:00,USA,Retail Sales YoY MAY,★★,,,4.9%
 17 Jun,23:30,USA,Fed Interest Rate Decision,★★★,,3.75%,3.75%
@@ -22,4 +22,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 26 Jun,00:00,India,Market Holiday - Moharram,★,,,
 28 Jun,16:00,India,Industrial Production YoY MAY,★★,,,4.9%
 30 Jun,07:00,China,NBS Manufacturing PMI JUN,★,,,50
-,,,,,,Update Time:,16-Jun 08:10
+,,,,,,Update Time:,16-Jun 08:20
