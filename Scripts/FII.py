@@ -18,7 +18,7 @@ def get_primary_and_fallback_dates():
     """Get primary and fallback dates for fetching data."""
     today = datetime.now()
     
-    # Try to get 15th of current month
+    # Get 15th of current month
     current_month_15th = today.replace(day=15)
     
     if today <= current_month_15th:
@@ -40,29 +40,12 @@ def get_primary_and_fallback_dates():
         
     else:
         # After 15th of current month
-        # PRIMARY should be: 15th of current month IF DATA IS AVAILABLE
-        # But if today is June 23, the data for June 15 might not be published yet
-        # So we should try to get the most recent available data
-        
-        # First try: 15th of current month
+        # Primary: 15th of current month
         primary_month = today.month
         primary_year = today.year
         primary_day = 15
         
-        # But check if it's too early (data typically published in first week of next month)
-        # If current date is before the 7th of next month, data might not be ready
-        if today.day <= 7:  # Data for previous month's 15th might not be published yet
-            # Use previous month's end as primary
-            if today.month == 1:
-                primary_month = 12
-                primary_year = today.year - 1
-            else:
-                primary_month = today.month - 1
-                primary_year = today.year
-            
-            _, primary_day = calendar.monthrange(primary_year, primary_month)
-        
-        # Fallback: previous month's end (or 15th of previous month)
+        # Fallback: previous month's end
         if today.month == 1:
             fallback_month = 12
             fallback_year = today.year - 1
@@ -72,18 +55,18 @@ def get_primary_and_fallback_dates():
         
         _, fallback_day = calendar.monthrange(fallback_year, fallback_month)
     
-    # Get month abbreviations
-    primary_month_abbr = calendar.month_abbr[primary_month]
-    fallback_month_abbr = calendar.month_abbr[fallback_month]
+    # Get FULL month names (not abbreviations)
+    primary_month_name = calendar.month_name[primary_month]  # Full name: "June"
+    fallback_month_name = calendar.month_name[fallback_month]  # Full name: "May"
     
-    primary_date_str = f"{primary_day}-{primary_month_abbr}-{primary_year}"
-    fallback_date_str = f"{fallback_day}-{fallback_month_abbr}-{fallback_year}"
+    primary_date_str = f"{primary_day}-{primary_month_name}-{primary_year}"
+    fallback_date_str = f"{fallback_day}-{fallback_month_name}-{fallback_year}"
     
-    primary_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{primary_month_abbr}{primary_day}{primary_year}.html"
-    fallback_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{fallback_month_abbr}{fallback_day}{fallback_year}.html"
+    # Build URLs with FULL month names
+    primary_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{primary_month_name}{primary_day}{primary_year}.html"
+    fallback_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{fallback_month_name}{fallback_day}{fallback_year}.html"
     
     return primary_url, primary_date_str, fallback_url, fallback_date_str
-
 def fetch_url_with_retries(url, description, max_retries=3, delay=3):
     """Fetch URL with retry logic."""
     headers = {
