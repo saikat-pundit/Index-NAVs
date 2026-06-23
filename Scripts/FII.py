@@ -18,7 +18,7 @@ def get_primary_and_fallback_dates():
     """Get primary and fallback dates for fetching data."""
     today = datetime.now()
     
-    # Get 15th of current month
+    # Try to get 15th of current month
     current_month_15th = today.replace(day=15)
     
     if today <= current_month_15th:
@@ -40,12 +40,29 @@ def get_primary_and_fallback_dates():
         
     else:
         # After 15th of current month
-        # Primary: 15th of current month
+        # PRIMARY should be: 15th of current month IF DATA IS AVAILABLE
+        # But if today is June 23, the data for June 15 might not be published yet
+        # So we should try to get the most recent available data
+        
+        # First try: 15th of current month
         primary_month = today.month
         primary_year = today.year
         primary_day = 15
         
-        # Fallback: previous month's end
+        # But check if it's too early (data typically published in first week of next month)
+        # If current date is before the 7th of next month, data might not be ready
+        if today.day <= 7:  # Data for previous month's 15th might not be published yet
+            # Use previous month's end as primary
+            if today.month == 1:
+                primary_month = 12
+                primary_year = today.year - 1
+            else:
+                primary_month = today.month - 1
+                primary_year = today.year
+            
+            _, primary_day = calendar.monthrange(primary_year, primary_month)
+        
+        # Fallback: previous month's end (or 15th of previous month)
         if today.month == 1:
             fallback_month = 12
             fallback_year = today.year - 1
