@@ -1,7 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-11 Jun,17:45,Euro,ECB Interest Rate Decision,★★,2.4%,2.4%,2.15%
-11 Jun,18:00,USA,Initial Jobless Claims JUN/06,★★,229K,219K,225K
-12 Jun,16:00,India,Inflation Rate YoY MAY,★★,3.93%,4.0%,3.48%
 15 Jun,12:00,India,WPI Inflation YoY MAY,★★,9.68%,9.1%,8.26%
 15 Jun,18:45,USA,Industrial Production YoY MAY,★,1.7%,0.2%,1.4%
 16 Jun,07:30,China,Industrial Production YoY MAY,★★,4.5%,4.3%,4.1%
@@ -14,9 +11,12 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 25 Jun,18:00,USA,Initial Jobless Claims JUN/20,★★,215K,225K,227K
 26 Jun,00:00,India,Market Holiday - Moharram,★,,,
 29 Jun,16:00,India,Industrial Production YoY MAY,★★,,,4.9%
-30 Jun,07:00,China,NBS Manufacturing PMI JUN,★,,,50
-02 Jul,18:00,USA,Non Farm Payrolls JUN,★★,,,172K
-02 Jul,18:00,USA,Initial Jobless Claims JUN/27,★★,,,215K
+30 Jun,07:00,China,NBS Manufacturing PMI JUN,★,,50.1,50
+02 Jul,18:00,USA,Non Farm Payrolls JUN,★★,,114K,172K
+02 Jul,18:00,USA,Initial Jobless Claims JUN/27,★★,,220K,215K
 08 Jul,23:30,USA,FOMC Minutes,★★★,,,
 09 Jul,19:30,USA,Existing Home Sales JUN,★★,,,4.17M
-,,,,,,Update Time:,27-Jun 05:24
+13 Jul,16:00,India,Inflation Rate YoY JUN,★★,,,3.93%
+14 Jul,12:00,India,WPI Inflation YoY JUN,★★,,,9.68%
+14 Jul,18:00,USA,Inflation Rate YoY JUN,★★,,,4.2%
+,,,,,,Update Time:,29-Jun 06:00
