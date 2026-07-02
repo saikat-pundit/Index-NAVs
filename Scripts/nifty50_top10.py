@@ -70,10 +70,10 @@ for symbol in target_symbols:
         records.append(symbol_dict[symbol])
 
 # Create directory if it doesn't exist
-os.makedirs('../Data', exist_ok=True)
+os.makedirs('Data', exist_ok=True)
 
 df = pd.DataFrame(records)
-filename = '../Data/nifty50_stocks_top10.csv'  # Fixed the path
+filename = 'Data/nifty50_stocks_top10.csv'  # Fixed the path
 df.to_csv(filename, index=False)
 
 # Add timestamp row
