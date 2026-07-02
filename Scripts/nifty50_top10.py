@@ -7,7 +7,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
 }
 
-url = "https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050"
+url = "https://www.nseindia.com/api/NextApi/apiClient/marketWatchApi?functionName=getIndicesData&symbol=NIFTY%2050"
 
 response = requests.get(url, headers=headers)
 data = response.json()
