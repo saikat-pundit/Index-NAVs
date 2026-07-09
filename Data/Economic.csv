@@ -8,7 +8,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 02 Jul,18:00,USA,Initial Jobless Claims JUN/27,★★,215K,220K,216K
 08 Jul,23:30,USA,FOMC Minutes,★★★,,,
 09 Jul,18:00,USA,Initial Jobless Claims JUL/04,★★,215K,218K,217K
-09 Jul,19:30,USA,Existing Home Sales JUN,★★,,4.20M,4.17M
+09 Jul,19:30,USA,Existing Home Sales JUN,★★,4.09M,4.20M,4.19M
 13 Jul,16:00,India,Inflation Rate YoY JUN,★★,,,3.93%
 14 Jul,12:00,India,WPI Inflation YoY JUN,★★,,,9.68%
 14 Jul,18:00,USA,Inflation Rate YoY JUN,★★,,,4.2%
@@ -22,4 +22,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 23 Jul,17:45,Euro,ECB Interest Rate Decision,★★,,,
 23 Jul,18:00,USA,Initial Jobless Claims JUL/18,★★,,,
 24 Jul,19:30,USA,New Home Sales JUN,★★,,,0.58M
-,,,,,,Update Time:,09-Jul 20:20
+,,,,,,Update Time:,09-Jul 20:30
