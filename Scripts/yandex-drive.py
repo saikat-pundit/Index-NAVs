@@ -53,7 +53,8 @@ class YandexDiskFetcher:
         modified = file_item.get("modified", "")
         try:
             date_obj = datetime.fromisoformat(modified.replace('Z', '+00:00'))
-            date_str = date_obj.strftime("%d %B %Y")
+            # Format as "19 Dec 26" (day month year with 2-digit year)
+            date_str = date_obj.strftime("%d %b %y")
         except:
             date_str = modified if modified else "Unknown"
         
