@@ -3,6 +3,7 @@ import csv
 import os
 from datetime import datetime
 import pytz
+import json
 
 url = "https://oxide.sensibull.com/v1/compute/cache/fii_dii_daily"
 
@@ -26,50 +27,97 @@ headers = {
 }
 
 try:
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()  # Raise an exception for HTTP errors
-    data = response.json()
-    print("Data fetched successfully!")
+    print("Fetching data from API...")
+    response = requests.get(url, headers=headers, timeout=30)
+    
+    print(f"Response Status Code: {response.status_code}")
+    print(f"Response Headers: {dict(response.headers)}")
+    
+    # Check if response is successful
+    response.raise_for_status()
+    
+    # Try to parse JSON
+    try:
+        data = response.json()
+        print("JSON parsed successfully!")
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse JSON: {e}")
+        print(f"Response text (first 500 chars): {response.text[:500]}")
+        exit(1)
+        
 except requests.exceptions.RequestException as e:
     print(f"Error fetching data: {e}")
-    exit(1)
-except ValueError as e:
-    print(f"Error parsing JSON: {e}")
-    print(f"Response text: {response.text[:200]}...")  # Print first 200 chars of response
+    if hasattr(e, 'response') and e.response:
+        print(f"Response status: {e.response.status_code}")
+        print(f"Response text: {e.response.text[:500]}")
     exit(1)
 
+# Debug: Print the structure of the response
+print(f"Response keys: {list(data.keys())}")
+
+# Check if 'data' key exists
+if "data" not in data:
+    print("ERROR: 'data' key not found in response!")
+    print(f"Available keys: {list(data.keys())}")
+    print(f"Full response: {json.dumps(data, indent=2)[:1000]}...")
+    exit(1)
+
+# Check if 'data' is a dictionary
+if not isinstance(data["data"], dict):
+    print(f"ERROR: 'data' is not a dictionary, it's {type(data['data'])}")
+    print(f"Data: {data['data']}")
+    exit(1)
+
+print(f"Number of dates in data: {len(data['data'])}")
+print(f"Sample dates: {list(data['data'].keys())[:5]}")
+
+# Create Data directory
 os.makedirs("Data", exist_ok=True)
 
+# Write to CSV
 with open("Data/Cash.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Date", "FII Net Buy/Sell", "DII Net Buy/Sell"])
     
-    # Check if data exists in the expected format
-    if "data" not in data:
-        print("Warning: 'data' key not found in response")
-        print(f"Available keys: {list(data.keys())}")
-        sorted_dates = []
-    else:
-        sorted_dates = sorted(data["data"], reverse=True)
+    sorted_dates = sorted(data["data"].keys(), reverse=True)
+    print(f"Processing {len(sorted_dates)} dates...")
     
+    row_count = 0
     for date_str in sorted_dates:
         day = data["data"][date_str]
-        if "cash" in day:
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-                formatted_date = date_obj.strftime("%d %b %y")
-                
-                fii_val = int(day["cash"]["fii"]["buy_sell_difference"])
-                dii_val = int(day["cash"]["dii"]["buy_sell_difference"])
-                
-                writer.writerow([formatted_date, f"{fii_val} Cr.", f"{dii_val} Cr."])
-            except (KeyError, ValueError, TypeError) as e:
-                print(f"Error processing date {date_str}: {e}")
-                continue
+        
+        # Check if 'cash' data exists for this date
+        if "cash" not in day:
+            print(f"Warning: No 'cash' data for {date_str}")
+            continue
+            
+        try:
+            date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            formatted_date = date_obj.strftime("%d %b %y")
+            
+            # Extract FII and DII values
+            fii_val = int(day["cash"]["fii"]["buy_sell_difference"])
+            dii_val = int(day["cash"]["dii"]["buy_sell_difference"])
+            
+            writer.writerow([formatted_date, f"{fii_val} Cr.", f"{dii_val} Cr."])
+            row_count += 1
+            
+        except KeyError as e:
+            print(f"Error: Missing key {e} for date {date_str}")
+            print(f"Available cash keys: {list(day['cash'].keys()) if 'cash' in day else 'No cash data'}")
+            continue
+        except ValueError as e:
+            print(f"Error converting value for {date_str}: {e}")
+            continue
+        except Exception as e:
+            print(f"Unexpected error for {date_str}: {e}")
+            continue
+    
+    print(f"Successfully wrote {row_count} rows to CSV")
     
     # Add timestamp row with IST
     ist = pytz.timezone('Asia/Kolkata')
     timestamp = datetime.now(ist).strftime("%d %b %H:%M")
     writer.writerow(["", "Update Time:", timestamp])
 
-print(f"Data written to Data/Cash.csv successfully!")
+print("Data saved to Data/Cash.csv successfully!")
