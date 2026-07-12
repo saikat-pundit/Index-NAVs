@@ -98,14 +98,10 @@ class YandexDiskFetcher:
         
         return {
             "file_name": name,
-            "file_path": path,
             "file_size_mb": size_mb,
-            "file_size_bytes": size_bytes,
             "modified_date": date_str,
-            "media_type": media_type,
-            "download_link": download_link,
             "mime_type": file_item.get("mime_type", ""),
-            "created": file_item.get("created", "")
+            "download_link": download_link
         }
     
     def get_download_link(self, path: str) -> str:
@@ -157,14 +153,10 @@ def save_to_csv(files_info: List[Dict], filename: str = "Data/Yandex Drive Offic
     # Define CSV columns
     fieldnames = [
         "file_name",
-        "file_path", 
         "file_size_mb",
-        "file_size_bytes",
         "modified_date",
-        "media_type",
-        "download_link",
         "mime_type",
-        "created"
+        "download_link"
     ]
     
     try:
