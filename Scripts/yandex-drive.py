@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from typing import List, Dict, Optional
 import time
+import urllib.parse
 
 class YandexDiskFetcher:
     """Fetches file information from Yandex Disk"""
@@ -17,33 +18,38 @@ class YandexDiskFetcher:
             "Accept": "application/json"
         }
     
-    def get_files_from_folder(self, folder_path: str = "/🏢-🖨️/", limit: int = 1000) -> List[Dict]:
-        """Fetch all files from a specific folder with pagination"""
-        all_files = []
+    def get_folder_contents(self, folder_path: str = "/🏢-🖨️/", limit: int = 1000) -> List[Dict]:
+        """Fetch all files from a specific folder using the resources endpoint"""
+        all_items = []
         offset = 0
         
+        # URL encode the folder path
+        encoded_path = urllib.parse.quote(folder_path, safe='')
+        
         while True:
-            url = f"{self.base_url}/resources/files"
+            url = f"{self.base_url}/resources"
             params = {
+                "path": folder_path,
                 "limit": min(limit, 100),  # Max 100 per request
                 "offset": offset
             }
             
             try:
+                print(f"Fetching folder contents: {folder_path} (offset: {offset})")
                 response = requests.get(url, headers=self.headers, params=params)
                 response.raise_for_status()
                 data = response.json()
                 
-                items = data.get("items", [])
+                # Get the embedded items (files and folders inside this folder)
+                embedded = data.get("_embedded", {})
+                items = embedded.get("items", [])
+                
                 if not items:
                     break
                 
-                # Filter files to only those in the specified folder
-                filtered_items = [
-                    item for item in items 
-                    if item.get("path", "").startswith(folder_path)
-                ]
-                all_files.extend(filtered_items)
+                # Filter to only files (exclude folders if needed)
+                file_items = [item for item in items if item.get("type") == "file"]
+                all_items.extend(file_items)
                 
                 # Check if we have more items
                 if len(items) < params["limit"]:
@@ -53,10 +59,12 @@ class YandexDiskFetcher:
                 time.sleep(0.5)  # Rate limiting
                 
             except requests.exceptions.RequestException as e:
-                print(f"Error fetching files: {e}")
+                print(f"Error fetching folder contents: {e}")
+                if hasattr(e, 'response') and e.response:
+                    print(f"Response: {e.response.text}")
                 break
         
-        return all_files
+        return all_items
     
     def get_file_info(self, file_item: Dict) -> Dict:
         """Extract relevant file information"""
@@ -64,7 +72,7 @@ class YandexDiskFetcher:
         path = file_item.get("path", "")
         
         # Get file name from path
-        name = os.path.basename(path) if path else file_item.get("name", "")
+        name = file_item.get("name", os.path.basename(path) if path else "")
         
         # Get file size (convert to MB for readability)
         size_bytes = file_item.get("size", 0)
@@ -116,7 +124,7 @@ class YandexDiskFetcher:
     
     def fetch_files_from_folder(self, folder_path: str = "/🏢-🖨️/", limit: int = 1000) -> List[Dict]:
         """Fetch and process all files from a specific folder"""
-        files = self.get_files_from_folder(folder_path, limit)
+        files = self.get_folder_contents(folder_path, limit)
         files_info = []
         
         print(f"Found {len(files)} files in {folder_path}. Processing...")
@@ -222,8 +230,18 @@ def main():
             print("   File types:")
             for media_type, count in media_types.items():
                 print(f"     {media_type}: {count}")
+                
+            # Show first few files as preview
+            print("\n📁 Sample files:")
+            for i, f in enumerate(files_info[:5], 1):
+                print(f"   {i}. {f['file_name']} ({f['file_size_mb']} MB)")
+                
         else:
             print(f"No files found in {folder_path}")
+            print("Please check:")
+            print("1. The folder name is correct (case sensitive)")
+            print("2. The folder exists in your Yandex Disk")
+            print("3. Your token has access to this folder")
             
     except Exception as e:
         print(f"❌ An error occurred: {e}")
