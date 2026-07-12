@@ -2,8 +2,8 @@ name: Fetch Yandex Disk Files
 
 on:
   schedule:
-    - cron: '0 2 * * *'
-  workflow_dispatch:
+    - cron: '0 2 * * *'  # Runs daily at 2 AM
+  workflow_dispatch:      # Manual trigger
   push:
     branches: [ main, master ]
 
