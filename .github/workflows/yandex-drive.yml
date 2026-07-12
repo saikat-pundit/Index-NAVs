@@ -38,7 +38,7 @@ jobs:
       env:
         YANDEX_DISK_TOKEN: ${{ secrets.YANDEX_DISK_TOKEN }}
       run: |
-        python Scripts/fetch_disk_files.py
+        python Scripts/yandex-drive.py
     
     - name: Commit and push CSV files
       run: |
