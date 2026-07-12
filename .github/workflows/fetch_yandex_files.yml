@@ -1,17 +1,17 @@
-name: Generate File List CSV
+name: Fetch Yandex Disk Files
 
 on:
+  # Run on schedule (daily at 2 AM)
+  schedule:
+    - cron: '0 2 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
   # Run on push to main branch
   push:
     branches: [ main, master ]
-  # Run on schedule (optional - runs daily at midnight)
-  schedule:
-    - cron: '0 0 * * *'
-  # Allow manual trigger from GitHub UI
-  workflow_dispatch:
 
 jobs:
-  generate-csv:
+  fetch-yandex-files:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,28 +26,37 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install requests
     
     - name: Create Data directory
       run: |
         mkdir -p Data
     
-    - name: Run file list generator
+    - name: Fetch files from Yandex Disk
       run: |
-        python Scripts/generate_file_list.py --directory . --output Data/file_list.csv --sort
+        python Scripts/fetch_yandex_files.py \
+          --email "${{ secrets.YANDEX_EMAIL }}" \
+          --password "${{ secrets.YANDEX_APP_PASSWORD }}" \
+          --path "/" \
+          --output "Data/yandex_file_list.csv" \
+          --recursive
+      env:
+        YANDEX_EMAIL: ${{ secrets.YANDEX_EMAIL }}
+        YANDEX_APP_PASSWORD: ${{ secrets.YANDEX_APP_PASSWORD }}
     
     - name: Upload CSV as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: file-list-csv
-        path: Data/file_list.csv
+        name: yandex-file-list
+        path: Data/yandex_file_list.csv
         retention-days: 30
     
     - name: Commit and push CSV file
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add Data/file_list.csv
-        git diff --staged --quiet || git commit -m "Update file list CSV [skip ci]"
+        git add Data/yandex_file_list.csv
+        git diff --staged --quiet || git commit -m "Update Yandex Disk file list CSV [skip ci]"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
