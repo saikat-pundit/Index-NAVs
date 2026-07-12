@@ -65,11 +65,11 @@ class YandexDiskFetcher:
             download_link = ""
         
         return {
-            "file_name": name,
-            "file_size_mb": size_mb,
-            "modified_date": date_str,
-            "mime_type": file_item.get("mime_type", ""),
-            "download_link": download_link
+            "File Name": name,
+            "File Size": size_mb,
+            "Created Date": date_str,
+            "File Type": file_item.get("mime_type", ""),
+            "Download Link": download_link
         }
     
     def fetch_files_from_folder(self, folder_path: str = "/🏢-🖨️/") -> List[Dict]:
@@ -96,7 +96,7 @@ def save_to_csv(files_info: List[Dict], filename: str = "Data/Yandex Drive Offic
     
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     
-    fieldnames = ["file_name", "file_size_mb", "modified_date", "mime_type", "download_link"]
+    fieldnames = ["File Name", "File Size", "Created Date", "File Type", "Download Link"]
     
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
