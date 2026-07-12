@@ -69,8 +69,7 @@ class YandexDiskFetcher:
             "file_size_mb": size_mb,
             "modified_date": date_str,
             "mime_type": file_item.get("mime_type", ""),
-            "download_link": download_link,
-            "media_type": file_item.get("media_type", "unknown")  # For summary
+            "download_link": download_link
         }
     
     def fetch_files_from_folder(self, folder_path: str = "/🏢-🖨️/") -> List[Dict]:
