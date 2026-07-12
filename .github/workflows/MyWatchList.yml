@@ -35,6 +35,7 @@ jobs:
         env:
           YANDEX_EMAIL: ${{ secrets.YANDEX_EMAIL }}
           YANDEX_APP_PASSWORD: ${{ secrets.YANDEX_APP_PASSWORD }}
+          YANDEX_DISK_TOKEN: ${{ secrets.YANDEX_DISK_TOKEN }}
         run: |
           python Scripts/nseindices.py || true
           python Scripts/nifty50_top10.py || true
@@ -46,6 +47,7 @@ jobs:
           python Scripts/nifty_options.py || true
           python Scripts/fetch_emails.py || true
           python Scripts/BSE.py || true
+          python Scripts/yandex-drive.py || true
 
       - name: Commit and push if changed
         run: |
