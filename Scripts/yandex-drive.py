@@ -45,15 +45,24 @@ class YandexDiskFetcher:
         name = file_item.get("name", os.path.basename(path) if path else "")
         
         size_bytes = file_item.get("size", 0)
-        size_mb = round(size_bytes / (1024 * 1024), 2) if size_bytes else 0
+        if size_bytes >= 1024 * 1024:
+            size_str = f"{round(size_bytes / (1024 * 1024), 1)}MB"
+        else:
+            size_str = f"{round(size_bytes / 1024, 1)}KB"
         
         modified = file_item.get("modified", "")
         try:
-            date_str = datetime.fromisoformat(modified.replace('Z', '+00:00')).strftime("%Y-%m-%d %H:%M:%S")
+            date_obj = datetime.fromisoformat(modified.replace('Z', '+00:00'))
+            date_str = date_obj.strftime("%d %B %Y")
         except:
             date_str = modified if modified else "Unknown"
         
-        # Get download link
+        mime_type = file_item.get("mime_type", "")
+        if mime_type:
+            file_type = mime_type.split('/')[-1].upper()
+        else:
+            file_type = "UNKNOWN"
+        
         try:
             dl_response = requests.get(
                 f"{self.base_url}/resources/download",
@@ -66,51 +75,37 @@ class YandexDiskFetcher:
         
         return {
             "File Name": name,
-            "File Size": size_mb,
+            "File Size": size_str,
             "Created Date": date_str,
-            "File Type": file_item.get("mime_type", ""),
+            "File Type": file_type,
             "Download Link": download_link
         }
     
     def fetch_files_from_folder(self, folder_path: str = "/🏢-🖨️/") -> List[Dict]:
         files = self.get_folder_contents(folder_path)
-        print(f"Found {len(files)} files. Processing...")
-        
         files_info = []
-        for i, file_item in enumerate(files, 1):
+        for file_item in files:
             try:
                 files_info.append(self.get_file_info(file_item))
-                if i % 10 == 0:
-                    print(f"Processed {i}/{len(files)} files")
-            except Exception as e:
-                print(f"Error processing file {i}: {e}")
-        
-        print(f"Successfully processed {len(files_info)} files")
+            except:
+                pass
         return files_info
 
 
 def save_to_csv(files_info: List[Dict], filename: str = "Data/Yandex Drive Office.csv"):
     if not files_info:
-        print("No files to save")
         return
     
     os.makedirs(os.path.dirname(filename), exist_ok=True)
-    
     fieldnames = ["File Name", "File Size", "Created Date", "File Type", "Download Link"]
     
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(files_info)
-    
-    print(f"✅ Saved {len(files_info)} files to {filename}")
 
 
 def main():
-    print("=" * 60)
-    print("Yandex Disk File Lister - Office Folder")
-    print("=" * 60)
-    
     token = os.environ.get("YANDEX_DISK_TOKEN")
     if not token:
         print("❌ Error: YANDEX_DISK_TOKEN not set")
@@ -119,31 +114,12 @@ def main():
     try:
         fetcher = YandexDiskFetcher(token)
         folder_path = "/🏢-🖨️/"
-        
-        print(f"Fetching files from {folder_path}...")
         files_info = fetcher.fetch_files_from_folder(folder_path)
         
         if files_info:
             filename = "Data/Yandex Drive Office.csv"
             save_to_csv(files_info, filename)
-            
-            # Summary
-            print(f"\n📊 Summary:")
-            print(f"   Total files: {len(files_info)}")
-            print(f"   Total size: {sum(f['file_size_mb'] for f in files_info):.2f} MB")
-            
-            # File types
-            media_types = {}
-            for f in files_info:
-                media_types[f["media_type"]] = media_types.get(f["media_type"], 0) + 1
-            print("   File types:")
-            for media_type, count in media_types.items():
-                print(f"     {media_type}: {count}")
-            
-            # Sample files
-            print("\n📁 Sample files:")
-            for i, f in enumerate(files_info[:5], 1):
-                print(f"   {i}. {f['file_name']} ({f['file_size_mb']} MB)")
+            print(f"✅ Saved {len(files_info)} files to {filename}")
         else:
             print(f"No files found in {folder_path}")
             
