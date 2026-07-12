@@ -1,62 +1,78 @@
 name: Fetch Yandex Disk Files
 
 on:
-  # Run on schedule (daily at 2 AM)
+  # Run automatically at 2 AM daily
   schedule:
     - cron: '0 2 * * *'
-  # Allow manual trigger
+  
+  # Allow manual trigger from GitHub UI
   workflow_dispatch:
-  # Run on push to main branch
+  
+  # Run when code is pushed to main branch
   push:
     branches: [ main, master ]
 
 jobs:
-  fetch-yandex-files:
+  fetch-files:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
-    
-    - name: Create Data directory
-      run: |
-        mkdir -p Data
-    
-    - name: Fetch files from Yandex Disk
-      run: |
-        python Scripts/fetch_yandex_files.py \
-          --email "${{ secrets.YANDEX_EMAIL }}" \
-          --password "${{ secrets.YANDEX_APP_PASSWORD }}" \
-          --path "/" \
-          --output "Data/yandex_file_list.csv" \
-          --recursive
-      env:
-        YANDEX_EMAIL: ${{ secrets.YANDEX_EMAIL }}
-        YANDEX_APP_PASSWORD: ${{ secrets.YANDEX_APP_PASSWORD }}
-    
-    - name: Upload CSV as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: yandex-file-list
-        path: Data/yandex_file_list.csv
-        retention-days: 30
-    
-    - name: Commit and push CSV file
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add Data/yandex_file_list.csv
-        git diff --staged --quiet || git commit -m "Update Yandex Disk file list CSV [skip ci]"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      
+      # Step 4: Create Data directory
+      - name: Create Data directory
+        run: |
+          mkdir -p Data
+      
+      # Step 5: Fetch files from Yandex Disk
+      - name: Fetch files from Yandex Disk
+        run: |
+          python Scripts/fetch_yandex_files.py \
+            --token "${{ secrets.YANDEX_DRIVE }}" \
+            --path "/" \
+            --output "Data/yandex_file_list.csv" \
+            --limit 10000
+        env:
+          YANDEX_DRIVE: ${{ secrets.YANDEX_DRIVE }}
+      
+      # Step 6: Upload CSV as artifact (downloadable from GitHub)
+      - name: Upload CSV as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yandex-file-list
+          path: Data/yandex_file_list.csv
+          retention-days: 30
+      
+      # Step 7: Commit and push CSV back to repository
+      - name: Commit and push CSV file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Data/yandex_file_list.csv
+          git diff --staged --quiet || git commit -m "Update Yandex Disk file list [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Step 8: Show summary
+      - name: Show summary
+        run: |
+          echo "## 📊 Yandex Disk File List Updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ CSV file has been updated with the latest files from Yandex Disk" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📁 Download the CSV from the artifacts section above" >> $GITHUB_STEP_SUMMARY
