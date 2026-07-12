@@ -17,8 +17,8 @@ class YandexDiskFetcher:
             "Accept": "application/json"
         }
     
-    def get_all_files(self, limit: int = 1000) -> List[Dict]:
-        """Fetch all files from Yandex Disk with pagination"""
+    def get_files_from_folder(self, folder_path: str = "/🏢-🖨️/", limit: int = 1000) -> List[Dict]:
+        """Fetch all files from a specific folder with pagination"""
         all_files = []
         offset = 0
         
@@ -38,7 +38,12 @@ class YandexDiskFetcher:
                 if not items:
                     break
                 
-                all_files.extend(items)
+                # Filter files to only those in the specified folder
+                filtered_items = [
+                    item for item in items 
+                    if item.get("path", "").startswith(folder_path)
+                ]
+                all_files.extend(filtered_items)
                 
                 # Check if we have more items
                 if len(items) < params["limit"]:
@@ -109,12 +114,12 @@ class YandexDiskFetcher:
         except requests.exceptions.RequestException:
             return ""
     
-    def fetch_all_files_info(self, limit: int = 1000) -> List[Dict]:
-        """Fetch and process all files"""
-        files = self.get_all_files(limit)
+    def fetch_files_from_folder(self, folder_path: str = "/🏢-🖨️/", limit: int = 1000) -> List[Dict]:
+        """Fetch and process all files from a specific folder"""
+        files = self.get_files_from_folder(folder_path, limit)
         files_info = []
         
-        print(f"Found {len(files)} files. Processing...")
+        print(f"Found {len(files)} files in {folder_path}. Processing...")
         
         for i, file_item in enumerate(files, 1):
             try:
@@ -132,7 +137,7 @@ class YandexDiskFetcher:
         return files_info
 
 
-def save_to_csv(files_info: List[Dict], filename: str = "Data/yandex_disk_files_latest.csv"):
+def save_to_csv(files_info: List[Dict], filename: str = "Data/Yandex Drive Office.csv"):
     """Save file information to CSV"""
     if not files_info:
         print("No files to save")
@@ -169,7 +174,7 @@ def save_to_csv(files_info: List[Dict], filename: str = "Data/yandex_disk_files_
 def main():
     """Main function to run the script"""
     print("=" * 60)
-    print("Yandex Disk File Lister")
+    print("Yandex Disk File Lister - Office Folder")
     print("=" * 60)
     
     # Get token from environment variable (for security)
@@ -184,25 +189,25 @@ def main():
         # Initialize fetcher
         fetcher = YandexDiskFetcher(token)
         
-        # Fetch files
-        print("Fetching files from Yandex Disk...")
-        files_info = fetcher.fetch_all_files_info()
+        # Specify the folder to scan
+        folder_path = "/🏢-🖨️/"
+        
+        # Fetch files from the specific folder
+        print(f"Fetching files from {folder_path}...")
+        files_info = fetcher.fetch_files_from_folder(folder_path)
         
         # Save to CSV in Data directory
         if files_info:
             # Create Data directory if it doesn't exist
             os.makedirs("Data", exist_ok=True)
             
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"Data/yandex_disk_files_{timestamp}.csv"
+            # Save as "Yandex Drive Office.csv"
+            filename = "Data/Yandex Drive Office.csv"
             save_to_csv(files_info, filename)
-            
-            # Also save as latest in Data directory
-            save_to_csv(files_info, "Data/yandex_disk_files_latest.csv")
             
             # Print summary
             print("\n📊 Summary:")
-            print(f"   Total files: {len(files_info)}")
+            print(f"   Total files in {folder_path}: {len(files_info)}")
             
             # Calculate total size
             total_size_mb = sum(f["file_size_mb"] for f in files_info)
@@ -218,7 +223,7 @@ def main():
             for media_type, count in media_types.items():
                 print(f"     {media_type}: {count}")
         else:
-            print("No files found or error occurred")
+            print(f"No files found in {folder_path}")
             
     except Exception as e:
         print(f"❌ An error occurred: {e}")
