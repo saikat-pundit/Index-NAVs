@@ -35,7 +35,15 @@ def get_file_info(directory_path):
     
     # Walk through directory
     for root, dirs, files in os.walk(directory_path):
+        # Skip hidden directories like .git
+        if '/.git/' in root or '/.github/' in root:
+            continue
+            
         for file in files:
+            # Skip hidden files
+            if file.startswith('.'):
+                continue
+                
             file_path = Path(root) / file
             try:
                 # Get file modification time
@@ -47,9 +55,9 @@ def get_file_info(directory_path):
                 relative_path = file_path.relative_to(base_path)
                 
                 file_data.append({
-                    'date_time': mod_time.strftime('%Y-%m-%d %H:%M:%S'),
-                    'file_directory': str(file_path.parent),
-                    'file_name': file
+                    'Date-Time': mod_time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'File Directory': str(file_path.parent),
+                    'File Name': file
                 })
             except (OSError, PermissionError) as e:
                 print(f"Warning: Could not access {file_path}: {e}")
@@ -125,7 +133,7 @@ def main():
     
     # Sort by date-time if requested
     if args.sort:
-        file_data.sort(key=lambda x: x['date_time'])
+        file_data.sort(key=lambda x: x['Date-Time'])
     
     # Save to CSV
     save_to_csv(file_data, args.output)
