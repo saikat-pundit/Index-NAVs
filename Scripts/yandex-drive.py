@@ -67,42 +67,43 @@ class YandexDiskFetcher:
         return all_items
     
     def get_file_info(self, file_item: Dict) -> Dict:
-        """Extract relevant file information"""
-        # Get file path
-        path = file_item.get("path", "")
-        
-        # Get file name from path
-        name = file_item.get("name", os.path.basename(path) if path else "")
-        
-        # Get file size (convert to MB for readability)
-        size_bytes = file_item.get("size", 0)
-        size_mb = round(size_bytes / (1024 * 1024), 2) if size_bytes else 0
-        
-        # Get modification date
-        modified = file_item.get("modified", "")
-        if modified:
-            try:
-                # Parse ISO format date
-                date_obj = datetime.fromisoformat(modified.replace('Z', '+00:00'))
-                date_str = date_obj.strftime("%Y-%m-%d %H:%M:%S")
-            except:
-                date_str = modified
-        else:
-            date_str = "Unknown"
-        
-        # Get media type
-        media_type = file_item.get("media_type", "unknown")
-        
-        # Get direct download link (requires additional API call)
-        download_link = self.get_download_link(path) if path else ""
-        
-        return {
-            "file_name": name,
-            "file_size_mb": size_mb,
-            "modified_date": date_str,
-            "mime_type": file_item.get("mime_type", ""),
-            "download_link": download_link
-        }
+    """Extract relevant file information"""
+    # Get file path
+    path = file_item.get("path", "")
+    
+    # Get file name from path
+    name = file_item.get("name", os.path.basename(path) if path else "")
+    
+    # Get file size (convert to MB for readability)
+    size_bytes = file_item.get("size", 0)
+    size_mb = round(size_bytes / (1024 * 1024), 2) if size_bytes else 0
+    
+    # Get modification date
+    modified = file_item.get("modified", "")
+    if modified:
+        try:
+            # Parse ISO format date
+            date_obj = datetime.fromisoformat(modified.replace('Z', '+00:00'))
+            date_str = date_obj.strftime("%Y-%m-%d %H:%M:%S")
+        except:
+            date_str = modified
+    else:
+        date_str = "Unknown"
+    
+    # Get media type (keep this for summary)
+    media_type = file_item.get("media_type", "unknown")
+    
+    # Get direct download link (requires additional API call)
+    download_link = self.get_download_link(path) if path else ""
+    
+    return {
+        "file_name": name,
+        "file_size_mb": size_mb,
+        "modified_date": date_str,
+        "mime_type": file_item.get("mime_type", ""),
+        "download_link": download_link,
+        "media_type": media_type  # ADD THIS BACK
+    }
     
     def get_download_link(self, path: str) -> str:
         """Get direct download link for a file"""
