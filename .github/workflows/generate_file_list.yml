@@ -1,0 +1,53 @@
+name: Generate File List CSV
+
+on:
+  # Run on push to main branch
+  push:
+    branches: [ main, master ]
+  # Run on schedule (optional - runs daily at midnight)
+  schedule:
+    - cron: '0 0 * * *'
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  generate-csv:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+    
+    - name: Create Data directory
+      run: |
+        mkdir -p Data
+    
+    - name: Run file list generator
+      run: |
+        python Scripts/generate_file_list.py --directory . --output Data/file_list.csv --sort
+    
+    - name: Upload CSV as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: file-list-csv
+        path: Data/file_list.csv
+        retention-days: 30
+    
+    - name: Commit and push CSV file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add Data/file_list.csv
+        git diff --staged --quiet || git commit -m "Update file list CSV [skip ci]"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
