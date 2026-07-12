@@ -131,11 +131,15 @@ class YandexDiskFetcher:
         print(f"Successfully processed {len(files_info)} files")
         return files_info
 
-def save_to_csv(files_info: List[Dict], filename: str = "yandex_disk_files.csv"):
+
+def save_to_csv(files_info: List[Dict], filename: str = "Data/yandex_disk_files_latest.csv"):
     """Save file information to CSV"""
     if not files_info:
         print("No files to save")
         return
+    
+    # Ensure Data directory exists
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
     
     # Define CSV columns
     fieldnames = [
@@ -161,6 +165,7 @@ def save_to_csv(files_info: List[Dict], filename: str = "yandex_disk_files.csv")
     except Exception as e:
         print(f"❌ Error saving to CSV: {e}")
 
+
 def main():
     """Main function to run the script"""
     print("=" * 60)
@@ -184,16 +189,16 @@ def main():
         files_info = fetcher.fetch_all_files_info()
         
         # Save to CSV in Data directory
-if files_info:
-    # Create Data directory if it doesn't exist
-    os.makedirs("Data", exist_ok=True)
-    
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"Data/yandex_disk_files_{timestamp}.csv"
-    save_to_csv(files_info, filename)
-    
-    # Also save as latest in Data directory
-    save_to_csv(files_info, "Data/yandex_disk_files_latest.csv")
+        if files_info:
+            # Create Data directory if it doesn't exist
+            os.makedirs("Data", exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"Data/yandex_disk_files_{timestamp}.csv"
+            save_to_csv(files_info, filename)
+            
+            # Also save as latest in Data directory
+            save_to_csv(files_info, "Data/yandex_disk_files_latest.csv")
             
             # Print summary
             print("\n📊 Summary:")
@@ -212,12 +217,12 @@ if files_info:
             print("   File types:")
             for media_type, count in media_types.items():
                 print(f"     {media_type}: {count}")
-                
         else:
             print("No files found or error occurred")
             
     except Exception as e:
         print(f"❌ An error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()
