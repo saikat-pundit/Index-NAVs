@@ -183,14 +183,17 @@ def main():
         print("Fetching files from Yandex Disk...")
         files_info = fetcher.fetch_all_files_info()
         
-        # Save to CSV
-        if files_info:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"yandex_disk_files_{timestamp}.csv"
-            save_to_csv(files_info, filename)
-            
-            # Also save as latest
-            save_to_csv(files_info, "yandex_disk_files_latest.csv")
+        # Save to CSV in Data directory
+if files_info:
+    # Create Data directory if it doesn't exist
+    os.makedirs("Data", exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"Data/yandex_disk_files_{timestamp}.csv"
+    save_to_csv(files_info, filename)
+    
+    # Also save as latest in Data directory
+    save_to_csv(files_info, "Data/yandex_disk_files_latest.csv")
             
             # Print summary
             print("\n📊 Summary:")
