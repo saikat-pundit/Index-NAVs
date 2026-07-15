@@ -33,35 +33,12 @@ jobs:
           pip install selenium webdriver-manager
       
       - name: Fetch cookies from Sensibull
-        run: python Scripts/fetch_cookies.py
-      
-      - name: Display cookie string in logs
+        id: fetch_cookies
         run: |
-          if [ -f cookie_string.txt ]; then
-            echo "=== COOKIE STRING ==="
-            cat cookie_string.txt
-            echo ""
-            echo "=== END COOKIE STRING ==="
-          else
-            echo "Cookie file not found!"
-          fi
+          echo "COOKIE_OUTPUT=$(python Scripts/fetch_cookies.py)" >> $GITHUB_OUTPUT
       
-      - name: Upload cookie file as artifact (optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: cookies
-          path: |
-            cookies.json
-            cookie_string.txt
-      
-      - name: Update GitHub Secret (if needed)
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}  # You need to create this secret
+      - name: Display cookie in logs
         run: |
-          if [ -f cookie_string.txt ]; then
-            COOKIE_VALUE=$(cat cookie_string.txt)
-            # This would update the secret - but requires a PAT with proper permissions
-            # Uncomment and configure when ready
-            # echo "::add-mask::$COOKIE_VALUE"
-            # echo "SENSIBULL_COOKIE=$COOKIE_VALUE" >> $GITHUB_ENV
-          fi
+          echo "=== COMPLETE COOKIE STRING ==="
+          echo "${{ steps.fetch_cookies.outputs.COOKIE_OUTPUT }}"
+          echo "=== END COOKIE STRING ==="
