@@ -1,42 +1,74 @@
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 import json
+import os
 
-def fetch_cookies_simple():
-    """Fetch cookies using requests - simpler but may not get all cookies"""
+def fetch_sensibull_cookies():
+    """Fetch cookies from sensibull.com without login"""
     
-    session = requests.Session()
+    # Set up Chrome options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
     
-    # Headers to mimic a browser
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
-    }
+    # User agent to appear as a real browser
+    chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     
-    print("Fetching cookies with requests...")
-    response = session.get(
-        "https://web.sensibull.com/stock-market-calendar/economic-calendar",
-        headers=headers
+    print("Starting Chrome browser...")
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=chrome_options
     )
     
-    # Get cookies from the session
-    cookies = session.cookies.get_dict()
-    
-    # Format as cookie string
-    cookie_string = "; ".join([f"{key}={value}" for key, value in cookies.items()])
-    
-    print("\n=== COOKIES FOUND ===")
-    print(cookie_string)
-    print("\n" + "="*50)
-    
-    # Save to file
-    with open('cookie_string.txt', 'w') as f:
-        f.write(cookie_string)
-    
-    return cookie_string
+    try:
+        # Navigate to the website
+        print("Navigating to sensibull.com...")
+        driver.get("https://web.sensibull.com/stock-market-calendar/economic-calendar")
+        
+        # Wait for page to load and cookies to be set
+        time.sleep(5)
+        
+        # Get all cookies
+        cookies = driver.get_cookies()
+        
+        print(f"\n=== Found {len(cookies)} cookies ===\n")
+        
+        # Format cookies as a string for the header
+        cookie_string = "; ".join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
+        
+        # Print cookie string (this will appear in GitHub Actions logs)
+        print("COOKIE_STRING:")
+        print(cookie_string)
+        print("\n" + "="*50 + "\n")
+        
+        # Also print individual cookies for debugging
+        print("Individual Cookies:")
+        for cookie in cookies:
+            print(f"  {cookie['name']}: {cookie['value'][:50]}...")
+        
+        # Save to file for later use
+        with open('cookies.json', 'w') as f:
+            json.dump(cookies, f, indent=2)
+        
+        # Save the cookie string to a file
+        with open('cookie_string.txt', 'w') as f:
+            f.write(cookie_string)
+        
+        print("\nCookies saved to cookies.json and cookie_string.txt")
+        
+        return cookie_string
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+    finally:
+        driver.quit()
 
 if __name__ == "__main__":
-    fetch_cookies_simple()
+    fetch_sensibull_cookies()
