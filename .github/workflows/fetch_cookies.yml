@@ -35,10 +35,55 @@ jobs:
       - name: Fetch cookies from Sensibull
         id: fetch_cookies
         run: |
-          echo "COOKIE_OUTPUT=$(python Scripts/fetch_cookies.py)" >> $GITHUB_OUTPUT
+          COOKIE_VALUE=$(python Scripts/fetch_cookies.py)
+          echo "COOKIE_VALUE=$COOKIE_VALUE" >> $GITHUB_OUTPUT
+          echo "::add-mask::$COOKIE_VALUE"
       
-      - name: Display cookie in logs
+      - name: Update GitHub Secret
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_PAT }}
+          script: |
+            const cookieValue = '${{ steps.fetch_cookies.outputs.COOKIE_VALUE }}';
+            
+            if (!cookieValue || cookieValue.startsWith('ERROR:')) {
+              console.log('Invalid cookie value, skipping update');
+              return;
+            }
+            
+            try {
+              // Get the current public key for the repository
+              const { data: publicKey } = await github.rest.actions.getRepoPublicKey({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              
+              // Encrypt the secret using the public key
+              const crypto = require('crypto');
+              const encryptedCookie = crypto.publicEncrypt(
+                {
+                  key: publicKey.key,
+                  padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+                },
+                Buffer.from(cookieValue)
+              ).toString('base64');
+              
+              // Update the secret
+              await github.rest.actions.createOrUpdateRepoSecret({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                secret_name: 'SENSIBULL_COOKIE',
+                encrypted_value: encryptedCookie,
+                key_id: publicKey.key_id,
+              });
+              
+              console.log('Successfully updated SENSIBULL_COOKIE secret');
+            } catch (error) {
+              console.error('Failed to update secret:', error);
+              throw error;
+            }
+      
+      - name: Display cookie in logs (masked)
         run: |
-          echo "=== COMPLETE COOKIE STRING ==="
-          echo "${{ steps.fetch_cookies.outputs.COOKIE_OUTPUT }}"
-          echo "=== END COOKIE STRING ==="
+          echo "=== COOKIE UPDATED SUCCESSFULLY ==="
+          echo "Cookie value has been masked and updated in GitHub Secrets"
