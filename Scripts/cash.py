@@ -7,6 +7,12 @@ import json
 
 url = "https://oxide.sensibull.com/v1/compute/cache/fii_dii_daily"
 
+# Get cookie from environment variable (GitHub Secrets)
+COOKIE = os.environ.get('SENSIBULL_COOKIE')
+if not COOKIE:
+    print("ERROR: SENSIBULL_COOKIE environment variable not set!")
+    exit(1)
+
 headers = {
     "Host": "oxide.sensibull.com",
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0",
@@ -19,7 +25,7 @@ headers = {
     "Origin": "https://web.sensibull.com",
     "DNT": "1",
     "Connection": "keep-alive",
-    "Cookie": "sb_rudder_utm={}; rl_session=RudderEncrypt%3AU2FsdGVkX19kGEYrZWI%2F20GZ23bGjmGTn%2Bti%2FM3m2J5%2BuePDz%2B9DOyH4FkdZMLK8ZIqtW65HTH4%2Fg9Ve6cdAzXADy9HEctywCvvHU3rCXD0%2BLR6F2mvMqNvCtZ6amidBKsABVmEpFrBzL8wF1jIQHQ%3D%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BQMHqC79%2Bnant6JC%2FCxq9Xv08jbUEOa7nJY4j3lQlF2qunHpnggi%2BQRc0fP8%2FJkGImIM6fJcve4A%3D%3D; rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BfkU80g4tOtuscysP1DmlqCrSJoHksnaQR75F6v33Bu226jyZQ7iu%2F; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19R%2BM4XZBn4Z55ALmtGn0WDIQd2elaJDrxThZ2741C%2Fk%2FpdKAkkLDPU; _ga_NC7XJTRTDX=GS2.1.s1784000989$o8$g0$t1784000989$j60$l0$h0; _ga=GA1.1.673390247.1776219026; bkd_ref=umR1rSNvX7Ef8guV; access_token=pa:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODQwNzk5MDAsImF1ZCI6InVhdXRoL3BsYXRmb3JtX2Fub24ifQ.NCqboDXJmpkmUrxEuSEgbGlsVkJubQblN8GqOHER-zw; _cfuvid=nMmJPyatz36Yi1tnRUuVhG7fO2mCg0w10omVjHjBsLI-1784001056.8831244-1.0.1.1-2CJY.v7XTlnaL9RpPl3WZXO4WBJdmke0FIB5ToiYuME; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2FFr4rcwqxa9uB3Ce0OON7259vdrTesCDg%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2BrCEZ%2FDYdcj8ZAsoxXnaeOejCadzPqbcATyGZSB7FRngRnCI3YJR0c",
+    "Cookie": COOKIE,  # Using environment variable
     "Sec-Fetch-Dest": "empty",
     "Sec-Fetch-Mode": "cors",
     "Sec-Fetch-Site": "same-site",
