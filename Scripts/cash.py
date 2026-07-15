@@ -7,10 +7,15 @@ import json
 
 url = "https://oxide.sensibull.com/v1/compute/cache/fii_dii_daily"
 
-# Get cookie from environment variable (GitHub Secrets)
-COOKIE = os.environ.get('SENSIBULL_COOKIE')
-if not COOKIE:
-    print("ERROR: SENSIBULL_COOKIE environment variable not set!")
+# Get cookie from Data/cookie.txt
+try:
+    with open('Data/cookie.txt', 'r') as f:
+        COOKIE = f.read().strip()
+    if not COOKIE:
+        print("ERROR: Data/cookie.txt is empty!")
+        exit(1)
+except FileNotFoundError:
+    print("ERROR: Data/cookie.txt not found!")
     exit(1)
 
 headers = {
