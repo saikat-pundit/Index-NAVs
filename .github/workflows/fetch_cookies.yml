@@ -18,35 +18,27 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      - name: Cache Chrome
-        id: cache-chrome
-        uses: actions/cache@v4
-        with:
-          path: /usr/bin/google-chrome
-          key: chrome-latest
-      
-      - name: Install Chrome (if not cached)
-        if: steps.cache-chrome.outputs.cache-hit != 'true'
+      - name: Install Chrome
         run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
           wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
       
-      - name: Install dependencies
-        run: |
-          pip install selenium webdriver-manager
-          pip install cryptography requests
+      - name: Install Python dependencies
+        run: pip install selenium webdriver-manager
       
-      - name: Fetch cookie
-        id: fetch
+      - name: Fetch cookie and save to Data/cookie.txt
         run: |
-          COOKIE=$(python Scripts/fetch_cookies.py)
-          echo "COOKIE=$COOKIE" >> $GITHUB_OUTPUT
-          echo "::add-mask::$COOKIE"
+          mkdir -p Data
+          python Scripts/fetch_cookies.py > Data/cookie.txt
       
-      - name: Update GitHub Secret
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-          COOKIE_VALUE: ${{ steps.fetch.outputs.COOKIE }}
-        run: python Scripts/update_secret.py
+      - name: Commit and push updated cookie
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Data/cookie.txt
+          git diff --staged --quiet || git commit -m "Update cookie [skip ci]"
+          git push
