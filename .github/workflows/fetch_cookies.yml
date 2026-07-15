@@ -33,19 +33,56 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
       
-      - name: Install dependencies with cache
+      - name: Install dependencies
         run: pip install selenium webdriver-manager
       
-      - name: Fetch and update cookie
+      - name: Fetch cookie
         id: fetch
         run: |
           COOKIE=$(python Scripts/fetch_cookies.py)
           echo "COOKIE=$COOKIE" >> $GITHUB_OUTPUT
           echo "::add-mask::$COOKIE"
       
-      - name: Update secret
-        uses: azure/publish-secrets-to-github@v1
+      - name: Update GitHub Secret
+        uses: actions/github-script@v6
         with:
-          secrets: |
-            SENSIBULL_COOKIE: ${{ steps.fetch.outputs.COOKIE }}
           github-token: ${{ secrets.GH_PAT }}
+          script: |
+            const cookieValue = '${{ steps.fetch.outputs.COOKIE }}';
+            
+            if (!cookieValue || cookieValue.startsWith('ERROR:')) {
+              console.log('Invalid cookie value, skipping update');
+              return;
+            }
+            
+            try {
+              // Get the public key for encryption
+              const { data: publicKey } = await github.rest.actions.getRepoPublicKey({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              
+              // Encrypt the secret
+              const crypto = require('crypto');
+              const encryptedCookie = crypto.publicEncrypt(
+                {
+                  key: publicKey.key,
+                  padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+                },
+                Buffer.from(cookieValue)
+              ).toString('base64');
+              
+              // Update the secret
+              await github.rest.actions.createOrUpdateRepoSecret({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                secret_name: 'SENSIBULL_COOKIE',
+                encrypted_value: encryptedCookie,
+                key_id: publicKey.key_id,
+              });
+              
+              console.log('✅ Successfully updated SENSIBULL_COOKIE secret');
+            } catch (error) {
+              console.error('❌ Failed to update secret:', error.message);
+              throw error;
+            }
