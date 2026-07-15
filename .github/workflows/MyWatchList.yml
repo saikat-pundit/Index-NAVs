@@ -36,6 +36,7 @@ jobs:
           YANDEX_EMAIL: ${{ secrets.YANDEX_EMAIL }}
           YANDEX_APP_PASSWORD: ${{ secrets.YANDEX_APP_PASSWORD }}
           YANDEX_DISK_TOKEN: ${{ secrets.YANDEX_DISK_TOKEN }}
+          SENSIBULL_COOKIE: ${{ secrets.SENSIBULL_COOKIE }}
         run: |
           python Scripts/nseindices.py || true
           python Scripts/nifty50_top10.py || true
