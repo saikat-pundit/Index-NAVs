@@ -3,8 +3,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
-import json
-import os
 
 def fetch_sensibull_cookies():
     """Fetch cookies from sensibull.com without login"""
@@ -20,7 +18,6 @@ def fetch_sensibull_cookies():
     # User agent to appear as a real browser
     chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     
-    print("Starting Chrome browser...")
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=chrome_options
@@ -28,7 +25,6 @@ def fetch_sensibull_cookies():
     
     try:
         # Navigate to the website
-        print("Navigating to sensibull.com...")
         driver.get("https://web.sensibull.com/stock-market-calendar/economic-calendar")
         
         # Wait for page to load and cookies to be set
@@ -37,35 +33,19 @@ def fetch_sensibull_cookies():
         # Get all cookies
         cookies = driver.get_cookies()
         
-        print(f"\n=== Found {len(cookies)} cookies ===\n")
-        
         # Format cookies as a string for the header
         cookie_string = "; ".join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
         
-        # Print cookie string (this will appear in GitHub Actions logs)
-        print("COOKIE_STRING:")
-        print(cookie_string)
-        print("\n" + "="*50 + "\n")
+        # Add the prefix
+        final_cookie = f"sb_rudder_utm={{}}; {cookie_string}"
         
-        # Also print individual cookies for debugging
-        print("Individual Cookies:")
-        for cookie in cookies:
-            print(f"  {cookie['name']}: {cookie['value'][:50]}...")
+        # Print ONLY the final cookie string (this will appear in GitHub Actions logs)
+        print(final_cookie)
         
-        # Save to file for later use
-        with open('cookies.json', 'w') as f:
-            json.dump(cookies, f, indent=2)
-        
-        # Save the cookie string to a file
-        with open('cookie_string.txt', 'w') as f:
-            f.write(cookie_string)
-        
-        print("\nCookies saved to cookies.json and cookie_string.txt")
-        
-        return cookie_string
+        return final_cookie
         
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"ERROR: {e}")
         return None
     finally:
         driver.quit()
