@@ -1,0 +1,67 @@
+name: Fetch Sensibull Cookies
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  fetch-cookies:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install Chrome browser
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+      
+      - name: Install Python dependencies
+        run: |
+          pip install selenium webdriver-manager
+      
+      - name: Fetch cookies from Sensibull
+        run: python Scripts/fetch_cookies.py
+      
+      - name: Display cookie string in logs
+        run: |
+          if [ -f cookie_string.txt ]; then
+            echo "=== COOKIE STRING ==="
+            cat cookie_string.txt
+            echo ""
+            echo "=== END COOKIE STRING ==="
+          else
+            echo "Cookie file not found!"
+          fi
+      
+      - name: Upload cookie file as artifact (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookies
+          path: |
+            cookies.json
+            cookie_string.txt
+      
+      - name: Update GitHub Secret (if needed)
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}  # You need to create this secret
+        run: |
+          if [ -f cookie_string.txt ]; then
+            COOKIE_VALUE=$(cat cookie_string.txt)
+            # This would update the secret - but requires a PAT with proper permissions
+            # Uncomment and configure when ready
+            # echo "::add-mask::$COOKIE_VALUE"
+            # echo "SENSIBULL_COOKIE=$COOKIE_VALUE" >> $GITHUB_ENV
+          fi
