@@ -2,88 +2,50 @@ name: Fetch Sensibull Cookies
 
 on:
   schedule:
-    # Run every 6 hours
     - cron: '0 */6 * * *'
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   fetch-cookies:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip'
       
-      - name: Install Chrome browser
+      - name: Cache Chrome
+        id: cache-chrome
+        uses: actions/cache@v4
+        with:
+          path: /usr/bin/google-chrome
+          key: chrome-latest
+      
+      - name: Install Chrome (if not cached)
+        if: steps.cache-chrome.outputs.cache-hit != 'true'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg
           wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
       
-      - name: Install Python dependencies
-        run: |
-          pip install selenium webdriver-manager
+      - name: Install dependencies with cache
+        run: pip install selenium webdriver-manager
       
-      - name: Fetch cookies from Sensibull
-        id: fetch_cookies
+      - name: Fetch and update cookie
+        id: fetch
         run: |
-          COOKIE_VALUE=$(python Scripts/fetch_cookies.py)
-          echo "COOKIE_VALUE=$COOKIE_VALUE" >> $GITHUB_OUTPUT
-          echo "::add-mask::$COOKIE_VALUE"
+          COOKIE=$(python Scripts/fetch_cookies.py)
+          echo "COOKIE=$COOKIE" >> $GITHUB_OUTPUT
+          echo "::add-mask::$COOKIE"
       
-      - name: Update GitHub Secret
-        uses: actions/github-script@v7
+      - name: Update secret
+        uses: azure/publish-secrets-to-github@v1
         with:
+          secrets: |
+            SENSIBULL_COOKIE: ${{ steps.fetch.outputs.COOKIE }}
           github-token: ${{ secrets.GH_PAT }}
-          script: |
-            const cookieValue = '${{ steps.fetch_cookies.outputs.COOKIE_VALUE }}';
-            
-            if (!cookieValue || cookieValue.startsWith('ERROR:')) {
-              console.log('Invalid cookie value, skipping update');
-              return;
-            }
-            
-            try {
-              // Get the current public key for the repository
-              const { data: publicKey } = await github.rest.actions.getRepoPublicKey({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-              });
-              
-              // Encrypt the secret using the public key
-              const crypto = require('crypto');
-              const encryptedCookie = crypto.publicEncrypt(
-                {
-                  key: publicKey.key,
-                  padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-                },
-                Buffer.from(cookieValue)
-              ).toString('base64');
-              
-              // Update the secret
-              await github.rest.actions.createOrUpdateRepoSecret({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                secret_name: 'SENSIBULL_COOKIE',
-                encrypted_value: encryptedCookie,
-                key_id: publicKey.key_id,
-              });
-              
-              console.log('Successfully updated SENSIBULL_COOKIE secret');
-            } catch (error) {
-              console.error('Failed to update secret:', error);
-              throw error;
-            }
-      
-      - name: Display cookie in logs (masked)
-        run: |
-          echo "=== COOKIE UPDATED SUCCESSFULLY ==="
-          echo "Cookie value has been masked and updated in GitHub Secrets"
