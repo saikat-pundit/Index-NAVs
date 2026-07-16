@@ -13,7 +13,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 16 Jul,18:00,USA,Retail Sales YoY JUN,★★,6.7%,,7.3%
 17 Jul,18:00,USA,Housing Starts JUN,★★,,1.31M,1.177M
 17 Jul,18:45,USA,Industrial Production YoY JUN,★,,,1.7%
-23 Jul,17:45,Euro,ECB Interest Rate Decision,★★,,,
+23 Jul,17:45,Euro,ECB Interest Rate Decision,★★,,2.4%,2.4%
 23 Jul,18:00,USA,Initial Jobless Claims JUL/18,★★,,,
 24 Jul,19:30,USA,New Home Sales JUN,★★,,,0.58M
 28 Jul,16:00,India,Industrial Production YoY JUN,★★,,,5.1%
@@ -21,4 +21,4 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 30 Jul,18:00,USA,Initial Jobless Claims JUL/25,★★,,,
 31 Jul,07:00,China,NBS Manufacturing PMI JUL,★,,,50.3
 31 Jul,08:30,Japan,BoJ Interest Rate Decision,★★,,,0.75%
-,,,,,,Update Time:,16-Jul 19:20
+,,,,,,Update Time:,16-Jul 19:30
