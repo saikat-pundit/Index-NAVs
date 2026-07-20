@@ -99,39 +99,64 @@ def main():
     
     print("Fetching option chain data...")
     
-    expiry_date = get_next_tuesday()
-    data, expiry = get_option_chain(expiry=expiry_date)
-    if not data.get('records', {}).get('data'):
-        print(f"No data found for {expiry_date}. Trying the previous day...")
-        date_obj = datetime.strptime(expiry_date, '%d-%b-%Y')
-        previous_day = date_obj - timedelta(days=1)
-        expiry_date = previous_day.strftime('%d-%b-%Y').upper()
-        data, expiry = get_option_chain(expiry=expiry_date)
+    # Try multiple expiry dates
+    expiry_attempts = []
+    base_expiry = get_next_tuesday()
+    expiry_attempts.append(base_expiry)
     
-    output_file = 'Data/Option.csv'
+    # Try next few days if needed
+    date_obj = datetime.strptime(base_expiry, '%d-%b-%Y')
+    for i in range(1, 5):
+        test_date = date_obj + timedelta(days=i)
+        expiry_attempts.append(test_date.strftime('%d-%b-%Y').upper())
+    
+    data = None
+    expiry = None
+    
+    for attempt in expiry_attempts:
+        print(f"Trying expiry: {attempt}")
+        data, expiry = get_option_chain(expiry=attempt)
+        if data and data.get('records', {}).get('data'):
+            # Validate data is current
+            underlying = data['records'].get('underlyingValue', 0)
+            if underlying > 0:
+                print(f"Successfully fetched data for {attempt}")
+                break
+        data = None
+        expiry = None
     
     if data and data.get('records', {}).get('data'):
+        # Verify we have valid data
+        underlying = data['records'].get('underlyingValue', 0)
+        if underlying <= 0:
+            print("Error: Invalid underlying value")
+            return
+            
+        # Check if data has volume (indicates it's live data)
+        has_volume = False
+        for item in data['records']['data'][:20]:
+            if item.get('CE', {}).get('totalTradedVolume', 0) > 0 or item.get('PE', {}).get('totalTradedVolume', 0) > 0:
+                has_volume = True
+                break
+        
+        if not has_volume:
+            print("Warning: No trading volume detected - data might be stale")
+            # Still write it, but log warning
+        
+        # Create dataframe and save
         df = create_option_chain_dataframe(data, expiry)
         os.makedirs('Data', exist_ok=True)
         
-        # Overwrite the file with fresh data
-        df.to_csv(output_file, index=False, mode='w')
-        
-        current_time = datetime.now(ist).strftime('%d-%b %H:%M')
+        output_file = 'Data/Option.csv'
+        df.to_csv(output_file, index=False)
         
         print(f"Option chain saved to: {output_file}")
-        print(f"Timestamp: {current_time} IST")
-        print(f"Underlying: {data['records']['underlyingValue']}")
+        print(f"Underlying: {underlying}")
         print(f"Expiry: {expiry}")
         print(f"Rows: {len(df)}")
     else:
-        print("Failed to fetch option chain data - retaining existing file if present")
-        # Check if file exists and if it's from today
-        if os.path.exists(output_file):
-            file_mtime = datetime.fromtimestamp(os.path.getmtime(output_file))
-            print(f"Keeping existing file from {file_mtime.strftime('%Y-%m-%d %H:%M:%S')}")
-        else:
-            print("No existing file found")
+        print("Failed to fetch current option chain data from all expiry attempts")
+        print("Keeping existing file if present")
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
