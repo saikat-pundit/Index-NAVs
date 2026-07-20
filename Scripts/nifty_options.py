@@ -108,11 +108,13 @@ def main():
         expiry_date = previous_day.strftime('%d-%b-%Y').upper()
         data, expiry = get_option_chain(expiry=expiry_date)
     
-    if data:
+    output_file = 'Data/Option.csv'
+    
+    if data and data.get('records', {}).get('data'):
         df = create_option_chain_dataframe(data, expiry)
         os.makedirs('Data', exist_ok=True)
         
-        output_file = 'Data/Option.csv'
+        # Overwrite the file with fresh data
         df.to_csv(output_file, index=False)
         
         current_time = datetime.now(ist).strftime('%d-%b %H:%M')
@@ -123,7 +125,13 @@ def main():
         print(f"Expiry: {expiry}")
         print(f"Rows: {len(df)}")
     else:
-        print("Failed to fetch option chain data")
+        print("Failed to fetch option chain data - retaining existing file if present")
+        # Check if file exists and if it's from today
+        if os.path.exists(output_file):
+            file_mtime = datetime.fromtimestamp(os.path.getmtime(output_file))
+            print(f"Keeping existing file from {file_mtime.strftime('%Y-%m-%d %H:%M:%S')}")
+        else:
+            print("No existing file found")
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
