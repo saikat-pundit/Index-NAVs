@@ -101,7 +101,7 @@ def main():
     
     expiry_date = get_next_tuesday()
     data, expiry = get_option_chain(expiry=expiry_date)
-    if not data.get('records', {}).get('data'):
+    if data and not data.get('records', {}).get('data'):
         print(f"No data found for {expiry_date}. Trying the previous day...")
         date_obj = datetime.strptime(expiry_date, '%d-%b-%Y')
         previous_day = date_obj - timedelta(days=1)
