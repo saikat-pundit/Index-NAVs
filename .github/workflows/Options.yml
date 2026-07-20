@@ -1,0 +1,48 @@
+name: Nifty Options Update
+
+on:
+  schedule:
+    - cron: '*/15 9-15 * * 1-5'  # Runs every 15 minutes during market hours (9 AM to 3:45 PM IST)
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  update-options:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Nifty Options Script
+        run: |
+          python Scripts/nifty_options.py || true
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          
+          # Pull latest changes
+          git pull --rebase origin main || true
+          
+          # Add the updated file
+          git add Data/Option.csv || true
+          
+          # Commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update Nifty options data $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push origin main || true
+          fi
