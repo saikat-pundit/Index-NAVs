@@ -88,8 +88,8 @@ def get_market_status_message():
                 break
         return f"Market closed - {weekday}{holiday_str} (Holiday)", False
     
-    market_open = time(9, 15)
-    market_close = time(15, 40)
+    market_open = datetime.strptime('09:15', '%H:%M').time()
+    market_close = datetime.strptime('23:40', '%H:%M').time()
     current_time = ist_now.time()
     
     if current_time < market_open:
