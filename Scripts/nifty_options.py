@@ -91,29 +91,17 @@ def get_market_status_message():
     return f"Market open - {weekday}", True
 
 def get_option_chain(symbol="NIFTY", expiry=None):
-    """Fetch option chain data from NSE with cache-busting"""
+    """Fetch option chain data from NSE"""
     if expiry is None:
         expiry = get_next_tuesday()
     
-    # Add cache-busting timestamp to URL
-    cache_buster = int(datetime.now().timestamp())
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}&_={cache_buster}"
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
     
     try:
         session = requests.Session()
         session.headers.update(headers)
-        
-        # Add extra headers to prevent caching
-        session.headers.update({
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0',
-        })
-        
-        # First request to get cookies
         session.get("https://www.nseindia.com")
         
-        # Second request with fresh session
         response = session.get(url, timeout=30)
         response.raise_for_status()
         data = response.json()
