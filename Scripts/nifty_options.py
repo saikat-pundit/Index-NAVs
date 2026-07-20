@@ -8,7 +8,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from iv_calculator import CalcIvGreeks, TryMatchWith
 
-# Define holidays (same as before)
+# Define holidays
 HOLIDAYS = [
     "2025-02-26", "2025-03-14", "2025-03-31", "2025-04-10",
     "2025-04-14", "2025-04-18", "2025-05-01", "2025-08-15",
@@ -21,6 +21,13 @@ HOLIDAYS = [
 ]
 
 HOLIDAY_DATES = [datetime.strptime(holiday, "%Y-%m-%d").date() for holiday in HOLIDAYS]
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
+    'Accept': 'application/json',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Referer': 'https://www.nseindia.com/option-chain'
+}
 
 def is_market_day():
     """Check if current day is a trading day (weekday and not a holiday)"""
@@ -55,7 +62,6 @@ def get_market_status_message():
     ist = pytz.timezone('Asia/Kolkata')
     ist_now = datetime.now(ist)
     current_date = ist_now.date()
-    current_time_str = ist_now.strftime('%Y-%m-%d %H:%M:%S IST')
     weekday = ist_now.strftime('%A')
     
     if ist_now.weekday() >= 5:
@@ -84,91 +90,57 @@ def get_market_status_message():
     
     return f"Market open - {weekday}", True
 
-def main():
-    status_message, is_open = get_market_status_message()
-    ist = pytz.timezone('Asia/Kolkata')
-    current_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S IST')
+def get_option_chain(symbol="NIFTY", expiry=None):
+    """Fetch option chain data from NSE"""
+    if expiry is None:
+        expiry = get_next_tuesday()
     
-    print(f"Current time: {current_time}")
-    print(f"Status: {status_message}")
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
     
-    if not is_open:
-        print("Script not running - outside trading hours")
-        print("Exiting...")
-        return
-    
-    print("Fetching option chain data...")
-    
-    # Try multiple expiry dates
-    expiry_attempts = []
-    base_expiry = get_next_tuesday()
-    expiry_attempts.append(base_expiry)
-    
-    # Try next few days if needed
-    date_obj = datetime.strptime(base_expiry, '%d-%b-%Y')
-    for i in range(1, 5):
-        test_date = date_obj + timedelta(days=i)
-        expiry_attempts.append(test_date.strftime('%d-%b-%Y').upper())
-    
-    data = None
-    expiry = None
-    
-    for attempt in expiry_attempts:
-        print(f"Trying expiry: {attempt}")
-        data, expiry = get_option_chain(expiry=attempt)
-        if data and data.get('records', {}).get('data'):
-            # Validate data is current
-            underlying = data['records'].get('underlyingValue', 0)
-            if underlying > 0:
-                print(f"Successfully fetched data for {attempt}")
-                break
-        data = None
-        expiry = None
-    
-    # Always delete existing file before writing new one
-    output_file = 'Data/Option.csv'
-    if os.path.exists(output_file):
-        os.remove(output_file)
-        print(f"Removed existing file: {output_file}")
-    
-    if data and data.get('records', {}).get('data'):
-        # Verify we have valid data
-        underlying = data['records'].get('underlyingValue', 0)
-        if underlying <= 0:
-            print("Error: Invalid underlying value")
-            return
-            
-        # Check if data has volume (indicates it's live data)
-        has_volume = False
-        for item in data['records']['data'][:20]:
-            if item.get('CE', {}).get('totalTradedVolume', 0) > 0 or item.get('PE', {}).get('totalTradedVolume', 0) > 0:
-                has_volume = True
-                break
+    try:
+        session = requests.Session()
+        session.headers.update(headers)
+        session.get("https://www.nseindia.com")
         
-        if not has_volume:
-            print("Warning: No trading volume detected - data might be stale")
-            # Still write it, but log warning
+        response = session.get(url, timeout=30)
+        response.raise_for_status()
+        data = response.json()
         
-        # Create dataframe and save
-        df = create_option_chain_dataframe(data, expiry)
-        os.makedirs('Data', exist_ok=True)
-        
-        df.to_csv(output_file, index=False)
-        
-        print(f"Option chain saved to: {output_file}")
-        print(f"Underlying: {underlying}")
-        print(f"Expiry: {expiry}")
-        print(f"Rows: {len(df)}")
-    else:
-        print("Failed to fetch current option chain data from all expiry attempts")
-        print(f"No file created - {output_file} was deleted")
+        return data, expiry
+    except Exception as e:
+        print(f"Error fetching option chain: {e}")
+        return None, expiry
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
-    'Accept': 'application/json',
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Referer': 'https://www.nseindia.com/option-chain'
-}
+def get_next_tuesday():
+    """Get the next Tuesday expiry date"""
+    ist = pytz.timezone('Asia/Kolkata')
+    now = datetime.now(ist)
+    today = now.date()
+    
+    days_ahead = 1 - today.weekday()
+    if days_ahead < 0 or (days_ahead == 0 and now.hour >= 16):
+        days_ahead += 7
+    
+    next_tuesday_date = today + timedelta(days=days_ahead)
+    return next_tuesday_date.strftime('%d-%b-%Y').upper()
+
+def round_to_nearest_100(price):
+    return round(price / 100) * 100
+
+def get_filtered_strike_prices(data, strike_range=10):
+    """Get filtered strike prices around ATM"""
+    underlying_value = data['records']['underlyingValue']
+    rounded_strike = round_to_nearest_100(underlying_value)
+    
+    all_strikes = sorted([item['strikePrice'] for item in data['records']['data'] if item['strikePrice'] % 100 == 0])
+    
+    target_index = all_strikes.index(rounded_strike) if rounded_strike in all_strikes else \
+                   min(range(len(all_strikes)), key=lambda i: abs(all_strikes[i] - rounded_strike))
+    
+    start_index = max(0, target_index - strike_range)
+    end_index = min(len(all_strikes), target_index + strike_range + 1)
+    
+    return all_strikes[start_index:end_index], underlying_value, rounded_strike, target_index - start_index
 
 def get_future_price(symbol="NIFTY", data=None):
     """Calculate synthetic future price using ATM put-call parity with 50-multiple strikes"""
@@ -181,7 +153,6 @@ def get_future_price(symbol="NIFTY", data=None):
         all_strikes = []
         for item in data['records']['data']:
             strike = item['strikePrice']
-            # Include both 50 and 100 multiples
             if strike % 50 == 0:
                 all_strikes.append(strike)
         
@@ -229,55 +200,8 @@ def get_future_price(symbol="NIFTY", data=None):
         print(f"Error calculating synthetic future: {e}")
         return 0
 
-def get_next_tuesday():
-    """Get the next Tuesday expiry date"""
-    ist = pytz.timezone('Asia/Kolkata')
-    now = datetime.now(ist)
-    today = now.date()
-    
-    days_ahead = 1 - today.weekday()
-    if days_ahead < 0 or (days_ahead == 0 and now.hour >= 16):
-        days_ahead += 7
-    
-    next_tuesday_date = today + timedelta(days=days_ahead)
-    return next_tuesday_date.strftime('%d-%b-%Y').upper()
-
-def round_to_nearest_100(price):
-    return round(price / 100) * 100
-
-def get_filtered_strike_prices(data, strike_range=10):
-    underlying_value = data['records']['underlyingValue']
-    rounded_strike = round_to_nearest_100(underlying_value)
-    
-    all_strikes = sorted([item['strikePrice'] for item in data['records']['data'] if item['strikePrice'] % 100 == 0])
-    
-    target_index = all_strikes.index(rounded_strike) if rounded_strike in all_strikes else \
-                   min(range(len(all_strikes)), key=lambda i: abs(all_strikes[i] - rounded_strike))
-    
-    start_index = max(0, target_index - strike_range)
-    end_index = min(len(all_strikes), target_index + strike_range + 1)
-    
-    return all_strikes[start_index:end_index], underlying_value, rounded_strike, target_index - start_index
-
-def get_option_chain(symbol="NIFTY", expiry=None):
-    if expiry is None:
-        expiry = get_next_tuesday()
-    
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
-    
-    session = requests.Session()
-    session.headers.update(headers)
-    session.get("https://www.nseindia.com")
-    
-    response = session.get(url)
-    data = response.json()
-    
-    return data, expiry
-
 def find_atm_strike_and_prices(df, future_price):
-    """
-    Find ATM strike based on future price with validation
-    """
+    """Find ATM strike based on future price with validation"""
     valid_rows = []
     for _, row in df.iterrows():
         if isinstance(row['STRIKE'], (int, float)):
@@ -313,9 +237,7 @@ def find_atm_strike_and_prices(df, future_price):
     return atm_strike, calc_call_price, calc_put_price
 
 def calculate_iv_for_dataframe(df, future_price, expiry_datetime):
-    """
-    Calculate IV using Black-76 model with futures price
-    """
+    """Calculate IV using Black-76 model with futures price"""
     # Use future price for ATM selection
     atm_strike, atm_call_price, atm_put_price = find_atm_strike_and_prices(df, future_price)
     
@@ -374,6 +296,7 @@ def calculate_iv_for_dataframe(df, future_price, expiry_datetime):
     return iv_values
 
 def create_option_chain_dataframe(data, expiry_date):
+    """Create option chain dataframe from NSE data"""
     filtered_strikes, underlying_value, rounded_strike, _ = get_filtered_strike_prices(data)
     
     strike_map = {item['strikePrice']: item for item in data['records']['data'] if item['strikePrice'] % 100 == 0}
@@ -423,13 +346,13 @@ def create_option_chain_dataframe(data, expiry_date):
     df = pd.DataFrame(option_data)
     
     # Get futures price
-    future_price = get_future_price(data=data)  # Line 220-221
-
-    if future_price <= 0:  # Line 223 - FIXED INDENTATION
+    future_price = get_future_price(data=data)
+    
+    if future_price <= 0:
         print("Warning: Could not calculate synthetic future, using spot as fallback")
         future_price = underlying_value
     
-    print(f"Future Price: {future_price:.2f}, Spot: {underlying_value}")  # Line 227
+    print(f"Future Price: {future_price:.2f}, Spot: {underlying_value}")
     
     # Create expiry datetime
     expiry_datetime = datetime.strptime(expiry_date, '%d-%b-%Y')
@@ -460,6 +383,113 @@ def create_option_chain_dataframe(data, expiry_date):
     df = pd.concat([df, timestamp_row], ignore_index=True)
     
     return df
+
+def clear_and_write_csv(df, output_file):
+    """Clear the CSV file and write fresh data"""
+    try:
+        # Ensure Data directory exists
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+        
+        # Delete the file if it exists
+        if os.path.exists(output_file):
+            os.remove(output_file)
+            print(f"Removed existing file: {output_file}")
+        
+        # Write fresh data
+        df.to_csv(output_file, index=False)
+        print(f"Fresh data written to: {output_file}")
+        return True
+        
+    except Exception as e:
+        print(f"Error writing file: {e}")
+        return False
+
+def main():
+    """Main function to fetch and save option chain data"""
+    status_message, is_open = get_market_status_message()
+    ist = pytz.timezone('Asia/Kolkata')
+    current_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S IST')
+    
+    print("=" * 60)
+    print(f"Current time: {current_time}")
+    print(f"Status: {status_message}")
+    print("=" * 60)
+    
+    if not is_open:
+        print("Script not running - outside trading hours")
+        print("Exiting...")
+        return
+    
+    print("\nFetching option chain data...")
+    
+    # Try multiple expiry dates
+    expiry_attempts = []
+    base_expiry = get_next_tuesday()
+    expiry_attempts.append(base_expiry)
+    
+    # Try next few days if needed
+    date_obj = datetime.strptime(base_expiry, '%d-%b-%Y')
+    for i in range(1, 5):
+        test_date = date_obj + timedelta(days=i)
+        expiry_attempts.append(test_date.strftime('%d-%b-%Y').upper())
+    
+    data = None
+    expiry = None
+    
+    for attempt in expiry_attempts:
+        print(f"Trying expiry: {attempt}")
+        data, expiry = get_option_chain(expiry=attempt)
+        if data and data.get('records', {}).get('data'):
+            underlying = data['records'].get('underlyingValue', 0)
+            if underlying > 0:
+                print(f"✅ Successfully fetched data for {attempt}")
+                break
+        data = None
+        expiry = None
+        print(f"❌ No data for {attempt}")
+    
+    output_file = 'Data/Option.csv'
+    
+    if data and data.get('records', {}).get('data'):
+        # Verify we have valid data
+        underlying = data['records'].get('underlyingValue', 0)
+        if underlying <= 0:
+            print("❌ Error: Invalid underlying value")
+            return
+        
+        # Check if data has volume (indicates it's live data)
+        has_volume = False
+        for item in data['records']['data'][:20]:
+            if item.get('CE', {}).get('totalTradedVolume', 0) > 0 or item.get('PE', {}).get('totalTradedVolume', 0) > 0:
+                has_volume = True
+                break
+        
+        if not has_volume:
+            print("⚠️ Warning: No trading volume detected - data might be stale")
+        
+        # Create dataframe
+        df = create_option_chain_dataframe(data, expiry)
+        
+        # Clear file and write fresh data
+        print(f"\nWriting to file: {output_file}")
+        if clear_and_write_csv(df, output_file):
+            print(f"✅ Option chain saved successfully!")
+            print(f"   Underlying: {underlying}")
+            print(f"   Expiry: {expiry}")
+            print(f"   Rows: {len(df)}")
+        else:
+            print("❌ Failed to write file")
+    else:
+        print("❌ Failed to fetch current option chain data from all expiry attempts")
+        print(f"   No file created - {output_file} was cleared")
+        
+        # Clear the file if it exists (to remove stale data)
+        if os.path.exists(output_file):
+            try:
+                os.remove(output_file)
+                print(f"   Removed stale file: {output_file}")
+            except Exception as e:
+                print(f"   Error removing stale file: {e}")
 
 if __name__ == "__main__":
     main()
