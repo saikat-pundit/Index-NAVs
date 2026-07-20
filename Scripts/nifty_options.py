@@ -125,6 +125,12 @@ def main():
         data = None
         expiry = None
     
+    # Always delete existing file before writing new one
+    output_file = 'Data/Option.csv'
+    if os.path.exists(output_file):
+        os.remove(output_file)
+        print(f"Removed existing file: {output_file}")
+    
     if data and data.get('records', {}).get('data'):
         # Verify we have valid data
         underlying = data['records'].get('underlyingValue', 0)
@@ -147,7 +153,6 @@ def main():
         df = create_option_chain_dataframe(data, expiry)
         os.makedirs('Data', exist_ok=True)
         
-        output_file = 'Data/Option.csv'
         df.to_csv(output_file, index=False)
         
         print(f"Option chain saved to: {output_file}")
@@ -156,7 +161,7 @@ def main():
         print(f"Rows: {len(df)}")
     else:
         print("Failed to fetch current option chain data from all expiry attempts")
-        print("Keeping existing file if present")
+        print(f"No file created - {output_file} was deleted")
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
