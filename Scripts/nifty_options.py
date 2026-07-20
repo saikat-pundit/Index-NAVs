@@ -65,8 +65,8 @@ def is_market_hours():
         return False
     
     current_time = ist_now.time()
-    market_open = time(9, 15)
-    market_close = time(15, 40)
+    market_open = datetime.strptime('09:15', '%H:%M').time()
+    market_close = datetime.strptime('23:15', '%H:%M').time()
     
     return market_open <= current_time <= market_close
 
