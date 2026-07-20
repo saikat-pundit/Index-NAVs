@@ -225,16 +225,31 @@ def get_option_chain(symbol="NIFTY", expiry=None):
     if expiry is None:
         expiry = get_next_tuesday()
     
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
+    # Add cache-busting parameter
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}&_={int(datetime.now().timestamp())}"
     
-    session = requests.Session()
-    session.headers.update(headers)
-    session.get("https://www.nseindia.com")
-    
-    response = session.get(url)
-    data = response.json()
-    
-    return data, expiry
+    try:
+        session = requests.Session()
+        session.headers.update(headers)
+        
+        # Step 1: Visit main page to get cookies (CRITICAL!)
+        session.get("https://www.nseindia.com", timeout=10)
+        
+        # Step 2: Wait a moment for cookies to set
+        import time
+        time.sleep(0.5)
+        
+        # Step 3: Now fetch the data
+        response = session.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        
+        session.close()
+        return data, expiry
+        
+    except Exception as e:
+        print(f"Error fetching option chain: {e}")
+        return None, expiry
 
 def find_atm_strike_and_prices(df, future_price):
     """
