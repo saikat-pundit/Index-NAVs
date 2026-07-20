@@ -4,6 +4,8 @@ from datetime import datetime, timedelta, time, date
 import pytz
 import os
 import sys
+import time
+import random
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from iv_calculator import CalcIvGreeks, TryMatchWith
@@ -22,12 +24,23 @@ HOLIDAYS = [
 
 HOLIDAY_DATES = [datetime.strptime(holiday, "%Y-%m-%d").date() for holiday in HOLIDAYS]
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0',
-    'Accept': 'application/json',
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Referer': 'https://www.nseindia.com/option-chain'
-}
+def get_headers_with_cache_busting():
+    """Get headers with cache-busting parameters"""
+    return {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Referer': 'https://www.nseindia.com/option-chain',
+        'Origin': 'https://www.nseindia.com',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+    }
 
 def is_market_day():
     """Check if current day is a trading day (weekday and not a holiday)"""
@@ -76,7 +89,7 @@ def get_market_status_message():
         return f"Market closed - {weekday}{holiday_str} (Holiday)", False
     
     market_open = time(9, 15)
-    market_close = time(23, 40)
+    market_close = time(15, 40)
     current_time = ist_now.time()
     
     if current_time < market_open:
@@ -90,25 +103,68 @@ def get_market_status_message():
     
     return f"Market open - {weekday}", True
 
-def get_option_chain(symbol="NIFTY", expiry=None):
-    """Fetch option chain data from NSE"""
+def get_option_chain(symbol="NIFTY", expiry=None, retry_count=0):
+    """Fetch option chain data from NSE with aggressive cache-busting"""
     if expiry is None:
         expiry = get_next_tuesday()
     
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
+    # Add multiple cache-busting parameters
+    timestamp = int(time.time() * 1000)
+    random_num = random.randint(100000, 999999)
+    
+    # Build URL with cache-busting
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}&_={timestamp}&rnd={random_num}"
     
     try:
+        # Create a NEW session every time
         session = requests.Session()
-        session.headers.update(headers)
-        session.get("https://www.nseindia.com")
         
+        # Update headers with cache-busting
+        headers = get_headers_with_cache_busting()
+        session.headers.update(headers)
+        
+        # First request to get cookies - with cache-busting
+        print(f"  Establishing session with NSE...")
+        session.get("https://www.nseindia.com", timeout=30)
+        
+        # Small random delay to avoid rate limiting
+        time.sleep(random.uniform(0.5, 1.0))
+        
+        # Second request - fetch data with cache-busting
+        print(f"  Fetching data for {expiry}...")
         response = session.get(url, timeout=30)
         response.raise_for_status()
+        
+        # Check if response is fresh
         data = response.json()
         
+        # Verify we got real data
+        if data and data.get('records', {}).get('data'):
+            # Check if the data has any volume (indicates it's not stale)
+            has_volume = False
+            for item in data['records']['data'][:10]:
+                ce_volume = item.get('CE', {}).get('totalTradedVolume', 0)
+                pe_volume = item.get('PE', {}).get('totalTradedVolume', 0)
+                if ce_volume > 0 or pe_volume > 0:
+                    has_volume = True
+                    break
+            
+            # If no volume and we haven't retried too many times, retry
+            if not has_volume and retry_count < 3:
+                print(f"  ⚠️ No volume detected, retrying... (attempt {retry_count + 1}/3)")
+                session.close()
+                time.sleep(2)
+                return get_option_chain(symbol, expiry, retry_count + 1)
+        
+        session.close()
         return data, expiry
+        
     except Exception as e:
-        print(f"Error fetching option chain: {e}")
+        print(f"  Error fetching option chain: {e}")
+        if retry_count < 3:
+            print(f"  Retrying... (attempt {retry_count + 1}/3)")
+            time.sleep(2)
+            return get_option_chain(symbol, expiry, retry_count + 1)
         return None, expiry
 
 def get_next_tuesday():
@@ -393,15 +449,15 @@ def clear_and_write_csv(df, output_file):
         # Delete the file if it exists
         if os.path.exists(output_file):
             os.remove(output_file)
-            print(f"Removed existing file: {output_file}")
+            print(f"✅ Removed existing file: {output_file}")
         
-        # Write fresh data
-        df.to_csv(output_file, index=False)
-        print(f"Fresh data written to: {output_file}")
+        # Write fresh data with explicit encoding
+        df.to_csv(output_file, index=False, encoding='utf-8')
+        print(f"✅ Fresh data written to: {output_file}")
         return True
         
     except Exception as e:
-        print(f"Error writing file: {e}")
+        print(f"❌ Error writing file: {e}")
         return False
 
 def main():
@@ -420,7 +476,7 @@ def main():
         print("Exiting...")
         return
     
-    print("\nFetching option chain data...")
+    print("\n🔄 Fetching option chain data...")
     
     # Try multiple expiry dates
     expiry_attempts = []
@@ -437,16 +493,29 @@ def main():
     expiry = None
     
     for attempt in expiry_attempts:
-        print(f"Trying expiry: {attempt}")
+        print(f"\n📅 Trying expiry: {attempt}")
         data, expiry = get_option_chain(expiry=attempt)
         if data and data.get('records', {}).get('data'):
             underlying = data['records'].get('underlyingValue', 0)
             if underlying > 0:
-                print(f"✅ Successfully fetched data for {attempt}")
-                break
+                # Check if data has volume (indicates it's live data)
+                has_volume = False
+                for item in data['records']['data'][:20]:
+                    if item.get('CE', {}).get('totalTradedVolume', 0) > 0 or item.get('PE', {}).get('totalTradedVolume', 0) > 0:
+                        has_volume = True
+                        break
+                
+                if has_volume:
+                    print(f"✅ Successfully fetched fresh data for {attempt} with volume")
+                    break
+                else:
+                    print(f"⚠️ Data has no volume for {attempt}, trying next expiry...")
+                    data = None
+                    expiry = None
+                    continue
         data = None
         expiry = None
-        print(f"❌ No data for {attempt}")
+        print(f"❌ No fresh data for {attempt}")
     
     output_file = 'Data/Option.csv'
     
@@ -457,26 +526,20 @@ def main():
             print("❌ Error: Invalid underlying value")
             return
         
-        # Check if data has volume (indicates it's live data)
-        has_volume = False
-        for item in data['records']['data'][:20]:
-            if item.get('CE', {}).get('totalTradedVolume', 0) > 0 or item.get('PE', {}).get('totalTradedVolume', 0) > 0:
-                has_volume = True
-                break
-        
-        if not has_volume:
-            print("⚠️ Warning: No trading volume detected - data might be stale")
-        
         # Create dataframe
         df = create_option_chain_dataframe(data, expiry)
         
         # Clear file and write fresh data
-        print(f"\nWriting to file: {output_file}")
+        print(f"\n💾 Writing to file: {output_file}")
         if clear_and_write_csv(df, output_file):
             print(f"✅ Option chain saved successfully!")
-            print(f"   Underlying: {underlying}")
-            print(f"   Expiry: {expiry}")
-            print(f"   Rows: {len(df)}")
+            print(f"   📊 Underlying: {underlying}")
+            print(f"   📅 Expiry: {expiry}")
+            print(f"   📝 Rows: {len(df)}")
+            
+            # Verify the file was written with today's data
+            file_size = os.path.getsize(output_file)
+            print(f"   💾 File size: {file_size} bytes")
         else:
             print("❌ Failed to write file")
     else:
@@ -487,9 +550,9 @@ def main():
         if os.path.exists(output_file):
             try:
                 os.remove(output_file)
-                print(f"   Removed stale file: {output_file}")
+                print(f"✅ Removed stale file: {output_file}")
             except Exception as e:
-                print(f"   Error removing stale file: {e}")
+                print(f"❌ Error removing stale file: {e}")
 
 if __name__ == "__main__":
     main()
