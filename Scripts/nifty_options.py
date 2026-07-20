@@ -101,7 +101,7 @@ def main():
     
     expiry_date = get_next_tuesday()
     data, expiry = get_option_chain(expiry=expiry_date)
-    if data and not data.get('records', {}).get('data'):
+    if not data.get('records', {}).get('data'):
         print(f"No data found for {expiry_date}. Trying the previous day...")
         date_obj = datetime.strptime(expiry_date, '%d-%b-%Y')
         previous_day = date_obj - timedelta(days=1)
@@ -225,31 +225,16 @@ def get_option_chain(symbol="NIFTY", expiry=None):
     if expiry is None:
         expiry = get_next_tuesday()
     
-    # Add cache-busting parameter
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}&_={int(datetime.now().timestamp())}"
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
     
-    try:
-        session = requests.Session()
-        session.headers.update(headers)
-        
-        # Step 1: Visit main page to get cookies (CRITICAL!)
-        session.get("https://www.nseindia.com", timeout=10)
-        
-        # Step 2: Wait a moment for cookies to set
-        import time
-        time.sleep(0.5)
-        
-        # Step 3: Now fetch the data
-        response = session.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        
-        session.close()
-        return data, expiry
-        
-    except Exception as e:
-        print(f"Error fetching option chain: {e}")
-        return None, expiry
+    session = requests.Session()
+    session.headers.update(headers)
+    session.get("https://www.nseindia.com")
+    
+    response = session.get(url)
+    data = response.json()
+    
+    return data, expiry
 
 def find_atm_strike_and_prices(df, future_price):
     """
