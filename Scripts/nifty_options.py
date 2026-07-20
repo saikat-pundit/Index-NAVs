@@ -115,7 +115,7 @@ def main():
         os.makedirs('Data', exist_ok=True)
         
         # Overwrite the file with fresh data
-        df.to_csv(output_file, index=False)
+        df.to_csv(output_file, index=False, mode='w')
         
         current_time = datetime.now(ist).strftime('%d-%b %H:%M')
         
