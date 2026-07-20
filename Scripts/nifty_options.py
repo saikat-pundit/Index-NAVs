@@ -54,7 +54,7 @@ def is_market_hours():
     
     current_time = ist_now.time()
     market_open = datetime.strptime('09:15', '%H:%M').time()
-    market_close = datetime.strptime('15:40', '%H:%M').time()
+    market_close = datetime.strptime('23:40', '%H:%M').time()
     
     return market_open <= current_time <= market_close
 
@@ -72,7 +72,7 @@ def get_market_status_message():
         return f"Market closed - {weekday} (Holiday)", False
     
     market_open = datetime.strptime('09:15', '%H:%M').time()
-    market_close = datetime.strptime('15:40', '%H:%M').time()
+    market_close = datetime.strptime('23:40', '%H:%M').time()
     current_time = ist_now.time()
     
     if current_time < market_open:
