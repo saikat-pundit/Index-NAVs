@@ -45,7 +45,7 @@ def is_market_hours():
         return False
     
     current_time = ist_now.time()
-    market_open = time(9, 15)
+    market_open = time(7, 15)
     market_close = time(15, 40)
     
     return market_open <= current_time <= market_close
@@ -69,7 +69,7 @@ def get_market_status_message():
                 break
         return f"Market closed - {weekday}{holiday_str} (Holiday)", False
     
-    market_open = time(9, 15)
+    market_open = time(7, 15)
     market_close = time(15, 40)
     current_time = ist_now.time()
     
