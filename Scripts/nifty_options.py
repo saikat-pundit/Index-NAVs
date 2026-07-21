@@ -241,7 +241,7 @@ def get_option_chain(symbol="NIFTY", expiry=None):
         expiry = get_next_tuesday()
     
     # Add cache-busting timestamp
-    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}&_={int(datetime.now().timestamp())}"
+    url = f"https://www.nseindia.com/api/option-chain-v3?type=Indices&symbol={symbol}&expiry={expiry}"
     
     try:
         session = requests.Session()
