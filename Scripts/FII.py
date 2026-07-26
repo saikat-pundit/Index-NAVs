@@ -55,18 +55,19 @@ def get_primary_and_fallback_dates():
         
         _, fallback_day = calendar.monthrange(fallback_year, fallback_month)
     
-    # Get FULL month names (not abbreviations)
-    primary_month_name = calendar.month_name[primary_month]  # Full name: "June"
-    fallback_month_name = calendar.month_name[fallback_month]  # Full name: "May"
+    # Use ABBREVIATED month names (3 letters)
+    primary_month_name = calendar.month_abbr[primary_month]  # "Jul", "Jun", etc.
+    fallback_month_name = calendar.month_abbr[fallback_month]  # "Jul", "Jun", etc.
     
     primary_date_str = f"{primary_day}-{primary_month_name}-{primary_year}"
     fallback_date_str = f"{fallback_day}-{fallback_month_name}-{fallback_year}"
     
-    # Build URLs with FULL month names
+    # Build URLs with abbreviated month names
     primary_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{primary_month_name}{primary_day}{primary_year}.html"
     fallback_url = f"https://www.fpi.nsdl.co.in/web/StaticReports/Fortnightly_Sector_wise_FII_Investment_Data/FIIInvestSector_{fallback_month_name}{fallback_day}{fallback_year}.html"
     
     return primary_url, primary_date_str, fallback_url, fallback_date_str
+    
 def fetch_url_with_retries(url, description, max_retries=3, delay=3):
     """Fetch URL with retry logic."""
     headers = {
