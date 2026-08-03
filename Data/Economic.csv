@@ -1,8 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-16 Jul,18:00,USA,Initial Jobless Claims JUL/11,★★,208K,217K,216K
-16 Jul,18:00,USA,Retail Sales YoY JUN,★★,6.7%,,7.3%
-17 Jul,18:00,USA,Housing Starts JUN,★★,1.427M,1.31M,1.199M
-17 Jul,18:45,USA,Industrial Production YoY JUN,★,1.1%,,1.6%
 23 Jul,17:45,Euro,ECB Interest Rate Decision,★★,2.4%,2.4%,2.4%
 23 Jul,18:00,USA,Initial Jobless Claims JUL/18,★★,187K,212K,209K
 24 Jul,19:30,USA,New Home Sales JUN,★★,0.628M,0.61M,0.618M
@@ -20,4 +16,7 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 13 Aug,18:00,USA,Initial Jobless Claims AUG/08,★★,,,
 14 Aug,12:00,India,WPI Inflation YoY JUL,★★,,,9.87%
 14 Aug,18:00,USA,Retail Sales YoY JUL,★★,,,6.7%
-,,,,,,Update Time:,01-Aug 05:23
+17 Aug,07:30,China,Industrial Production YoY JUL,★★,,,5.3%
+18 Aug,18:00,USA,Housing Starts JUL,★★,,,1.427M
+18 Aug,18:45,USA,Industrial Production YoY JUL,★,,,1.1%
+,,,,,,Update Time:,03-Aug 06:00
