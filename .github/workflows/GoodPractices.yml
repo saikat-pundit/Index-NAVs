@@ -3,7 +3,7 @@ name: Process Good Practices Media
 on:
   workflow_dispatch:
   schedule:
-      - cron: '0 */3 * * *'
+    - cron: '0 */3 * * *'
 
 permissions:
   contents: write
@@ -25,7 +25,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           sudo apt-get update
-          sudo apt-get install -y libmagic-dev
+          sudo apt-get install -y libmagic-dev fonts-liberation
       
       - name: Run media processor
         env:
