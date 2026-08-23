@@ -52,37 +52,7 @@ def download_file(url, file_id, output_path):
     except:
         return False
 
-def add_watermark(image_path, text):
-    img = Image.open(image_path)
-    if img.mode in ('RGBA', 'LA'):
-        background = Image.new('RGB', img.size, (255, 255, 255))
-        background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
-        img = background
-    elif img.mode != 'RGB':
-        img = img.convert('RGB')
-    
-    draw = ImageDraw.Draw(img)
-    width, height = img.size
-    
-    try:
-        font_size = int(min(width, height) / 25)
-        font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
-    except:
-        font = ImageFont.load_default()
-    
-    text_width = draw.textlength(text, font=font)
-    text_height = font_size
-    x = (width - text_width) / 2
-    y = height - text_height - 20
-    
-    shadow_offset = 2
-    draw.text((x + shadow_offset, y + shadow_offset), text, fill=(0, 0, 0), font=font)
-    draw.text((x, y), text, fill=(255, 255, 255), font=font)
-    
-    img.save(image_path, 'JPEG', quality=95, optimize=True)
-    return image_path
-
-def compress_image(input_path, output_path, target_size_kb=100, watermark_text=None):
+def add_text_below_image(input_path, output_path, text):
     img = Image.open(input_path)
     if img.mode in ('RGBA', 'LA'):
         background = Image.new('RGB', img.size, (255, 255, 255))
@@ -91,24 +61,60 @@ def compress_image(input_path, output_path, target_size_kb=100, watermark_text=N
     elif img.mode != 'RGB':
         img = img.convert('RGB')
     
-    if watermark_text:
-        draw = ImageDraw.Draw(img)
+    width, height = img.size
+    
+    try:
+        font_size = int(height / 20)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
+    except:
+        font = ImageFont.load_default()
+    
+    text_width = draw.textlength(text, font=font)
+    text_height = font_size
+    
+    new_height = height + text_height + 40
+    new_img = Image.new('RGB', (width, new_height), (255, 255, 255))
+    new_img.paste(img, (0, 0))
+    
+    draw = ImageDraw.Draw(new_img)
+    x = (width - text_width) / 2
+    y = height + 20
+    draw.text((x, y), text, fill=(0, 0, 0), font=font)
+    
+    new_img.save(output_path, 'JPEG', quality=95, optimize=True)
+    return output_path
+
+def compress_image(input_path, output_path, target_size_kb=100, text_below=None):
+    img = Image.open(input_path)
+    if img.mode in ('RGBA', 'LA'):
+        background = Image.new('RGB', img.size, (255, 255, 255))
+        background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
+        img = background
+    elif img.mode != 'RGB':
+        img = img.convert('RGB')
+    
+    if text_below:
         width, height = img.size
         
         try:
-            font_size = int(min(width, height) / 25)
+            font_size = int(height / 20)
             font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
         except:
             font = ImageFont.load_default()
         
-        text_width = draw.textlength(watermark_text, font=font)
+        draw = ImageDraw.Draw(img)
+        text_width = draw.textlength(text_below, font=font)
         text_height = font_size
-        x = (width - text_width) / 2
-        y = height - text_height - 20
         
-        shadow_offset = 2
-        draw.text((x + shadow_offset, y + shadow_offset), watermark_text, fill=(0, 0, 0), font=font)
-        draw.text((x, y), watermark_text, fill=(255, 255, 255), font=font)
+        new_height = height + text_height + 40
+        new_img = Image.new('RGB', (width, new_height), (255, 255, 255))
+        new_img.paste(img, (0, 0))
+        
+        draw = ImageDraw.Draw(new_img)
+        x = (width - text_width) / 2
+        y = height + 20
+        draw.text((x, y), text_below, fill=(0, 0, 0), font=font)
+        img = new_img
     
     quality = 95
     while quality > 10:
@@ -167,7 +173,7 @@ def process_media():
                 
                 mime = magic.from_file(temp_file, mime=True)
                 base_name = f"{item['name']}_{category}_{col_num}"
-                watermark_text = f"{item['name']}_{category}"
+                text_below = f"{item['name']}_{category}"
                 
                 if mime and mime.startswith('video'):
                     ext = '.mp4'
@@ -177,13 +183,13 @@ def process_media():
                 elif mime and (mime.startswith('image') or 'webp' in mime.lower()):
                     if mime == 'image/webp' or temp_file.lower().endswith('.webp'):
                         output_file = os.path.join(category_dir, f"{base_name}.jpg")
-                        compress_image(temp_file, output_file, 100, watermark_text)
+                        compress_image(temp_file, output_file, 100, text_below)
                         os.remove(temp_file)
                         processed_files.append(output_file)
                     else:
                         ext = '.jpg'
                         output_file = os.path.join(category_dir, f"{base_name}{ext}")
-                        compress_image(temp_file, output_file, 100, watermark_text)
+                        compress_image(temp_file, output_file, 100, text_below)
                         os.remove(temp_file)
                         processed_files.append(output_file)
                 else:
