@@ -117,7 +117,7 @@ def process_media():
                     continue
                 
                 mime = magic.from_file(temp_file, mime=True)
-                base_name = f"{item['name']}_{col_num}"
+                base_name = f"{item['name']}_{category}_{idx}"
                 
                 if mime and mime.startswith('video'):
                     ext = '.mp4'
