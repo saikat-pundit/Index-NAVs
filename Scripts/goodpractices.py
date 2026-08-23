@@ -141,20 +141,20 @@ def process_media():
                     os.remove(temp_file)
         
         if processed_files:
-    zip_path = os.path.join(temp_dir, f"{category}.zip")
-    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        seen_names = set()
-        for file_path in processed_files:
-            base_name = os.path.basename(file_path)
-            if base_name in seen_names:
-                name, ext = os.path.splitext(base_name)
-                counter = 1
-                while f"{name}_{counter}{ext}" in seen_names:
-                    counter += 1
-                base_name = f"{name}_{counter}{ext}"
-            seen_names.add(base_name)
-            zipf.write(file_path, base_name)
-    zip_files.append(zip_path)
+            zip_path = os.path.join(temp_dir, f"{category}.zip")
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                seen_names = set()
+                for file_path in processed_files:
+                    base_name = os.path.basename(file_path)
+                    if base_name in seen_names:
+                        name, ext = os.path.splitext(base_name)
+                        counter = 1
+                        while f"{name}_{counter}{ext}" in seen_names:
+                            counter += 1
+                        base_name = f"{name}_{counter}{ext}"
+                    seen_names.add(base_name)
+                    zipf.write(file_path, base_name)
+            zip_files.append(zip_path)
     
     if zip_files and GITHUB_TOKEN:
         g = Github(GITHUB_TOKEN)
@@ -166,9 +166,9 @@ def process_media():
                 asset.delete_asset()
         except GithubException:
             release = repo.create_git_release(
-                RELEASE_NAME,
-                tag_name=RELEASE_NAME.replace(' ', '-').lower(),
+                tag=RELEASE_NAME.replace(' ', '-').lower(),
                 name=RELEASE_NAME,
+                message=f"Release {RELEASE_NAME}",
                 draft=False,
                 prerelease=False
             )
