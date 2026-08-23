@@ -11,6 +11,7 @@ import gdown
 from github import Github
 from github.GithubException import GithubException
 import re
+import textwrap
 
 GIST_URL = "https://gist.githubusercontent.com/saikat-pundit/8d3eda26f337ec08ea54c8e41f936b96/raw/GoodPractices.csv"
 RELEASE_NAME = "Good Practices"
@@ -52,37 +53,60 @@ def download_file(url, file_id, output_path):
     except:
         return False
 
-def add_text_below_image(input_path, output_path, text):
-    img = Image.open(input_path)
-    if img.mode in ('RGBA', 'LA'):
-        background = Image.new('RGB', img.size, (255, 255, 255))
-        background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
-        img = background
-    elif img.mode != 'RGB':
-        img = img.convert('RGB')
-    
+def add_text_below_image(img, text):
     width, height = img.size
+    max_width = int(width * 0.9)
     
     try:
-        font_size = int(height / 20)
+        font_size = int(height / 25)
         font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
     except:
         font = ImageFont.load_default()
+        font_size = 12
     
-    text_width = draw.textlength(text, font=font)
-    text_height = font_size
+    wrapped_text = []
+    for line in text.split('_'):
+        if line:
+            wrapped_text.append(line.strip())
+    if not wrapped_text:
+        wrapped_text = [text]
     
-    new_height = height + text_height + 40
+    lines = []
+    for line in wrapped_text:
+        if font.getlength(line) <= max_width:
+            lines.append(line)
+        else:
+            words = line.split()
+            current_line = []
+            for word in words:
+                test_line = ' '.join(current_line + [word])
+                if font.getlength(test_line) <= max_width:
+                    current_line.append(word)
+                else:
+                    if current_line:
+                        lines.append(' '.join(current_line))
+                    current_line = [word]
+            if current_line:
+                lines.append(' '.join(current_line))
+    
+    line_height = font_size + 5
+    total_text_height = len(lines) * line_height + 20
+    padding = 20
+    
+    new_height = height + total_text_height + padding
     new_img = Image.new('RGB', (width, new_height), (255, 255, 255))
     new_img.paste(img, (0, 0))
     
     draw = ImageDraw.Draw(new_img)
-    x = (width - text_width) / 2
-    y = height + 20
-    draw.text((x, y), text, fill=(0, 0, 0), font=font)
+    y = height + 10
     
-    new_img.save(output_path, 'JPEG', quality=95, optimize=True)
-    return output_path
+    for line in lines:
+        text_width = font.getlength(line)
+        x = (width - text_width) / 2
+        draw.text((x, y), line, fill=(0, 0, 0), font=font)
+        y += line_height
+    
+    return new_img
 
 def compress_image(input_path, output_path, target_size_kb=100, text_below=None):
     img = Image.open(input_path)
@@ -94,41 +118,19 @@ def compress_image(input_path, output_path, target_size_kb=100, text_below=None)
         img = img.convert('RGB')
     
     if text_below:
-        width, height = img.size
-        
-        try:
-            font_size = int(height / 20)
-            font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
-        except:
-            font = ImageFont.load_default()
-        
-        draw = ImageDraw.Draw(img)
-        text_width = draw.textlength(text_below, font=font)
-        text_height = font_size
-        
-        new_height = height + text_height + 40
-        new_img = Image.new('RGB', (width, new_height), (255, 255, 255))
-        new_img.paste(img, (0, 0))
-        
-        draw = ImageDraw.Draw(new_img)
-        x = (width - text_width) / 2
-        y = height + 20
-        draw.text((x, y), text_below, fill=(0, 0, 0), font=font)
-        img = new_img
+        img = add_text_below_image(img, text_below)
     
     quality = 95
     while quality > 10:
         buffer = BytesIO()
         img.save(buffer, format='JPEG', quality=quality, optimize=True)
-        size_kb = len(buffer.getvalue()) / 1024
-        if size_kb <= target_size_kb:
+        if len(buffer.getvalue()) / 1024 <= target_size_kb:
             with open(output_path, 'wb') as f:
                 f.write(buffer.getvalue())
             return True
         quality -= 5
     
-    if quality <= 10:
-        img.save(output_path, format='JPEG', quality=10, optimize=True)
+    img.save(output_path, format='JPEG', quality=10, optimize=True)
     return True
 
 def process_media():
@@ -176,22 +178,14 @@ def process_media():
                 text_below = f"{item['name']}_{category}"
                 
                 if mime and mime.startswith('video'):
-                    ext = '.mp4'
-                    output_file = os.path.join(category_dir, f"{base_name}{ext}")
+                    output_file = os.path.join(category_dir, f"{base_name}.mp4")
                     shutil.move(temp_file, output_file)
                     processed_files.append(output_file)
                 elif mime and (mime.startswith('image') or 'webp' in mime.lower()):
-                    if mime == 'image/webp' or temp_file.lower().endswith('.webp'):
-                        output_file = os.path.join(category_dir, f"{base_name}.jpg")
-                        compress_image(temp_file, output_file, 100, text_below)
-                        os.remove(temp_file)
-                        processed_files.append(output_file)
-                    else:
-                        ext = '.jpg'
-                        output_file = os.path.join(category_dir, f"{base_name}{ext}")
-                        compress_image(temp_file, output_file, 100, text_below)
-                        os.remove(temp_file)
-                        processed_files.append(output_file)
+                    output_file = os.path.join(category_dir, f"{base_name}.jpg")
+                    compress_image(temp_file, output_file, 100, text_below)
+                    os.remove(temp_file)
+                    processed_files.append(output_file)
                 else:
                     os.remove(temp_file)
         
@@ -214,7 +208,6 @@ def process_media():
     if zip_files and GITHUB_TOKEN:
         g = Github(GITHUB_TOKEN)
         repo = g.get_repo(os.environ.get('GITHUB_REPOSITORY', ''))
-        
         tag_name = RELEASE_NAME.replace(' ', '-').lower()
         
         try:
