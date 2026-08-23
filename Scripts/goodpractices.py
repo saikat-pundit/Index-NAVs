@@ -89,9 +89,9 @@ def process_media():
                     categories[category] = []
                 categories[category].append({
                     'name': row[1].strip(),
-                    'col5': row[5].strip() if len(row) > 5 else '',
-                    'col6': row[6].strip() if len(row) > 6 else '',
-                    'col7': row[7].strip() if len(row) > 7 else ''
+                    'col1': row[5].strip() if len(row) > 5 else '',
+                    'col2': row[6].strip() if len(row) > 6 else '',
+                    'col3': row[7].strip() if len(row) > 7 else ''
                 })
     
     zip_files = []
@@ -103,7 +103,7 @@ def process_media():
         processed_files = []
         
         for idx, item in enumerate(items, start=1):
-            col_map = {5: item['col5'], 6: item['col6'], 7: item['col7']}
+            col_map = {1: item['col1'], 2: item['col2'], 3: item['col3']}
             for col_num, url in col_map.items():
                 if not url:
                     continue
@@ -117,7 +117,7 @@ def process_media():
                     continue
                 
                 mime = magic.from_file(temp_file, mime=True)
-                base_name = f"{item['name']}_{category}_{idx}"
+                base_name = f"{item['name']}_{category}_{col_num}"
                 
                 if mime and mime.startswith('video'):
                     ext = '.mp4'
