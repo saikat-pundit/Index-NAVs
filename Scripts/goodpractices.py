@@ -11,7 +11,6 @@ import gdown
 from github import Github
 from github.GithubException import GithubException
 import re
-from pathlib import Path
 
 GIST_URL = "https://gist.githubusercontent.com/saikat-pundit/8d3eda26f337ec08ea54c8e41f936b96/raw/GoodPractices.csv"
 RELEASE_NAME = "Good Practices"
@@ -160,13 +159,15 @@ def process_media():
         g = Github(GITHUB_TOKEN)
         repo = g.get_repo(os.environ.get('GITHUB_REPOSITORY', ''))
         
+        tag_name = RELEASE_NAME.replace(' ', '-').lower()
+        
         try:
-            release = repo.get_release(RELEASE_NAME)
+            release = repo.get_release(tag_name)
             for asset in release.get_assets():
                 asset.delete_asset()
         except GithubException:
             release = repo.create_git_release(
-                tag=RELEASE_NAME.replace(' ', '-').lower(),
+                tag=tag_name,
                 name=RELEASE_NAME,
                 message=f"Release {RELEASE_NAME}",
                 draft=False,
