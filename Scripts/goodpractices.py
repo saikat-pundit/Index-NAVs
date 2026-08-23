@@ -83,16 +83,16 @@ def process_media():
     categories = {}
     
     for row in reader:
-        if len(row) >= 7:
-            category = row[1].strip()
+        if len(row) >= 8:
+            category = row[2].strip()
             if category:
                 if category not in categories:
                     categories[category] = []
                 categories[category].append({
-                    'name': row[0].strip(),
-                    'col5': row[4].strip() if len(row) > 4 else '',
-                    'col6': row[5].strip() if len(row) > 5 else '',
-                    'col7': row[6].strip() if len(row) > 6 else ''
+                    'name': row[1].strip(),
+                    'col5': row[5].strip() if len(row) > 5 else '',
+                    'col6': row[6].strip() if len(row) > 6 else '',
+                    'col7': row[7].strip() if len(row) > 7 else ''
                 })
     
     zip_files = []
@@ -118,7 +118,7 @@ def process_media():
                     continue
                 
                 mime = magic.from_file(temp_file, mime=True)
-                base_name = f"{item['name']}_{category}_{col_num}"
+                base_name = f"{item['name']}_{col_num}"
                 
                 if mime and mime.startswith('video'):
                     ext = '.mp4'
