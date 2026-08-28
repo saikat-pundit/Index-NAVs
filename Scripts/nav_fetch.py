@@ -22,7 +22,7 @@ target_funds = [
     "Axis Large & Mid Cap Fund - Direct Plan - Growth",
     "Axis Large Cap Fund - Direct Plan - Growth",
     "Axis Small Cap Fund - Direct Plan - Growth",
-    "ICICI Prudential Banking and PSU Debt Fund - Direct Plan -  Growth",
+    "ICICI Prudential Banking and PSU Debt Fund - Direct Plan - Growth",
     "ICICI Prudential Corporate Bond Fund - Direct Plan - Growth",
     "ICICI Prudential Gilt Fund - Direct Plan - Growth",
     "ICICI Prudential Nifty 50 Index Fund - Direct Plan Cumulative Option",
