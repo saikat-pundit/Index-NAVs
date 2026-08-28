@@ -1,6 +1,4 @@
 Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
-12 Aug,16:00,India,Inflation Rate YoY JUL,★★,4.45%,4.5%,4.38%
-12 Aug,18:00,USA,Inflation Rate YoY JUL,★★,3.4%,3.4%,3.5%
 13 Aug,18:00,USA,Initial Jobless Claims AUG/08,★★,209K,202K,200K
 14 Aug,12:00,India,WPI Inflation YoY JUL,★★,9.78%,9.95%,9.87%
 14 Aug,18:00,USA,Retail Sales YoY JUL,★★,5%,,6.8%
@@ -20,4 +18,5 @@ Date,Time,Area,Title,Imp.,Actual,Exp.,Prev.
 10 Sep,18:00,USA,Initial Jobless Claims SEP/05,★★,,,
 10 Sep,19:30,USA,Existing Home Sales AUG,★★,,,4.06M
 11 Sep,18:00,USA,Inflation Rate YoY AUG,★★,,,3.4%
-,,,,,,Update Time:,28-Aug 03:43
+12 Sep,16:00,India,Inflation Rate YoY AUG,★★,,,4.45%
+,,,,,,Update Time:,28-Aug 06:00
